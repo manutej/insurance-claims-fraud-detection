@@ -1,0 +1,43 @@
+# Insurance Claims Data Ingestion Pipeline Requirements
+
+# Core dependencies
+pydantic>=1.10.0,<3.0.0       # Data validation and type safety
+pandas>=1.5.0,<3.0.0          # Data manipulation and analysis
+numpy>=1.21.0,<2.0.0          # Numerical computing
+
+# Data validation and schema
+jsonschema>=4.0.0,<5.0.0      # JSON schema validation
+
+# Machine learning and preprocessing
+scikit-learn>=1.2.0,<2.0.0    # ML preprocessing and utilities
+
+# Async file operations
+aiofiles>=0.8.0,<1.0.0        # Async file I/O
+
+# Date and time handling
+python-dateutil>=2.8.0,<3.0.0 # Date parsing utilities
+
+# Logging and monitoring
+structlog>=22.0.0,<24.0.0     # Structured logging
+
+# Development and testing dependencies
+pytest>=7.0.0,<8.0.0          # Testing framework
+pytest-asyncio>=0.20.0,<1.0.0 # Async testing support
+pytest-cov>=4.0.0,<5.0.0      # Coverage reporting
+black>=22.0.0,<24.0.0         # Code formatting
+isort>=5.10.0,<6.0.0          # Import sorting
+mypy>=1.0.0,<2.0.0            # Type checking
+flake8>=5.0.0,<7.0.0          # Linting
+
+# Optional: Enhanced data processing
+pyarrow>=10.0.0,<16.0.0       # Fast columnar data processing (optional)
+fastparquet>=0.8.0,<1.0.0     # Parquet file support (optional)
+
+# Optional: Progress bars and CLI
+tqdm>=4.60.0,<5.0.0           # Progress bars
+click>=8.0.0,<9.0.0           # CLI framework
+rich>=12.0.0,<14.0.0          # Rich terminal output
+
+# Optional: Memory profiling and optimization
+memory-profiler>=0.60.0,<1.0.0  # Memory usage profiling
+psutil>=5.8.0,<6.0.0          # System and process utilities

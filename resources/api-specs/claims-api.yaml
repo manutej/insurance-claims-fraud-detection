@@ -1,0 +1,1028 @@
+openapi: 3.0.3
+info:
+  title: Insurance Claims Fraud Detection API
+  description: |
+    RESTful API for submitting, analyzing, and managing insurance claims with
+    integrated fraud detection capabilities. This API provides endpoints for
+    claim submission, fraud analysis, alert management, and reporting.
+  version: 1.0.0
+  contact:
+    name: API Support Team
+    email: api-support@frauddetection.com
+  license:
+    name: Proprietary
+    url: https://frauddetection.com/license
+
+servers:
+  - url: https://api.frauddetection.com/v1
+    description: Production server
+  - url: https://staging-api.frauddetection.com/v1
+    description: Staging server
+  - url: http://localhost:8080/v1
+    description: Development server
+
+security:
+  - OAuth2: [read, write]
+  - ApiKeyAuth: []
+
+tags:
+  - name: Claims
+    description: Claim submission and management
+  - name: Fraud Detection
+    description: Fraud analysis and scoring
+  - name: Alerts
+    description: Fraud alert management
+  - name: Investigations
+    description: Fraud investigation tracking
+  - name: Reports
+    description: Analytics and reporting
+
+paths:
+  /claims:
+    post:
+      tags: [Claims]
+      summary: Submit a new insurance claim
+      description: Submit a new claim for processing and fraud analysis
+      operationId: submitClaim
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClaimSubmission'
+      responses:
+        '201':
+          description: Claim successfully submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClaimResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+
+    get:
+      tags: [Claims]
+      summary: List claims
+      description: Retrieve a paginated list of claims with optional filters
+      operationId: listClaims
+      parameters:
+        - $ref: '#/components/parameters/PageNumber'
+        - $ref: '#/components/parameters/PageSize'
+        - name: provider_id
+          in: query
+          schema:
+            type: string
+          description: Filter by provider ID
+        - name: patient_id
+          in: query
+          schema:
+            type: string
+          description: Filter by patient ID
+        - name: date_from
+          in: query
+          schema:
+            type: string
+            format: date
+          description: Filter claims from this date
+        - name: date_to
+          in: query
+          schema:
+            type: string
+            format: date
+          description: Filter claims up to this date
+        - name: fraud_indicator
+          in: query
+          schema:
+            type: boolean
+          description: Filter by fraud status
+      responses:
+        '200':
+          description: List of claims
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClaimList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /claims/{claimId}:
+    get:
+      tags: [Claims]
+      summary: Get claim details
+      description: Retrieve detailed information about a specific claim
+      operationId: getClaim
+      parameters:
+        - $ref: '#/components/parameters/ClaimId'
+      responses:
+        '200':
+          description: Claim details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClaimDetail'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags: [Claims]
+      summary: Update a claim
+      description: Update an existing claim's information
+      operationId: updateClaim
+      parameters:
+        - $ref: '#/components/parameters/ClaimId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClaimUpdate'
+      responses:
+        '200':
+          description: Claim updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClaimDetail'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /fraud/analyze:
+    post:
+      tags: [Fraud Detection]
+      summary: Analyze claim for fraud
+      description: Perform comprehensive fraud analysis on a claim
+      operationId: analyzeFraud
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FraudAnalysisRequest'
+      responses:
+        '200':
+          description: Fraud analysis results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FraudAnalysisResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /fraud/score/{claimId}:
+    get:
+      tags: [Fraud Detection]
+      summary: Get fraud risk score
+      description: Retrieve the fraud risk score for a specific claim
+      operationId: getFraudScore
+      parameters:
+        - $ref: '#/components/parameters/ClaimId'
+      responses:
+        '200':
+          description: Fraud risk score
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FraudScore'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /fraud/patterns:
+    get:
+      tags: [Fraud Detection]
+      summary: Get fraud patterns
+      description: Retrieve identified fraud patterns and trends
+      operationId: getFraudPatterns
+      parameters:
+        - name: pattern_type
+          in: query
+          schema:
+            type: string
+            enum: [upcoding, phantom_billing, unbundling, staged_accidents, prescription_fraud, kickback]
+          description: Filter by pattern type
+        - name: time_period
+          in: query
+          schema:
+            type: string
+            enum: [7d, 30d, 90d, 1y]
+          description: Time period for pattern analysis
+      responses:
+        '200':
+          description: Fraud patterns
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FraudPatterns'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /alerts:
+    get:
+      tags: [Alerts]
+      summary: List fraud alerts
+      description: Retrieve a list of fraud alerts with optional filters
+      operationId: listAlerts
+      parameters:
+        - $ref: '#/components/parameters/PageNumber'
+        - $ref: '#/components/parameters/PageSize'
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [open, investigating, closed, false_positive]
+          description: Filter by alert status
+        - name: severity
+          in: query
+          schema:
+            type: string
+            enum: [critical, high, medium, low]
+          description: Filter by severity level
+        - name: assigned_to
+          in: query
+          schema:
+            type: string
+          description: Filter by assigned investigator
+      responses:
+        '200':
+          description: List of alerts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+    post:
+      tags: [Alerts]
+      summary: Create fraud alert
+      description: Manually create a new fraud alert
+      operationId: createAlert
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlertCreation'
+      responses:
+        '201':
+          description: Alert created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alert'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /alerts/{alertId}:
+    get:
+      tags: [Alerts]
+      summary: Get alert details
+      description: Retrieve detailed information about a specific alert
+      operationId: getAlert
+      parameters:
+        - $ref: '#/components/parameters/AlertId'
+      responses:
+        '200':
+          description: Alert details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertDetail'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    patch:
+      tags: [Alerts]
+      summary: Update alert status
+      description: Update the status or assignment of an alert
+      operationId: updateAlert
+      parameters:
+        - $ref: '#/components/parameters/AlertId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlertUpdate'
+      responses:
+        '200':
+          description: Alert updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertDetail'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /investigations/{claimId}:
+    post:
+      tags: [Investigations]
+      summary: Start investigation
+      description: Initiate a fraud investigation for a claim
+      operationId: startInvestigation
+      parameters:
+        - $ref: '#/components/parameters/ClaimId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvestigationStart'
+      responses:
+        '201':
+          description: Investigation started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Investigation'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    get:
+      tags: [Investigations]
+      summary: Get investigation status
+      description: Retrieve the current status of an investigation
+      operationId: getInvestigation
+      parameters:
+        - $ref: '#/components/parameters/ClaimId'
+      responses:
+        '200':
+          description: Investigation details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvestigationDetail'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /reports/summary:
+    get:
+      tags: [Reports]
+      summary: Get summary report
+      description: Generate a summary report of fraud detection metrics
+      operationId: getSummaryReport
+      parameters:
+        - name: period
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [daily, weekly, monthly, quarterly, yearly]
+          description: Reporting period
+        - name: start_date
+          in: query
+          schema:
+            type: string
+            format: date
+          description: Start date for custom period
+        - name: end_date
+          in: query
+          schema:
+            type: string
+            format: date
+          description: End date for custom period
+      responses:
+        '200':
+          description: Summary report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SummaryReport'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /reports/provider/{providerId}:
+    get:
+      tags: [Reports]
+      summary: Get provider profile report
+      description: Generate a fraud risk profile for a specific provider
+      operationId: getProviderReport
+      parameters:
+        - name: providerId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Provider ID
+      responses:
+        '200':
+          description: Provider profile report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderReport'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.frauddetection.com/oauth/authorize
+          tokenUrl: https://auth.frauddetection.com/oauth/token
+          scopes:
+            read: Read access to claims and reports
+            write: Write access to claims and investigations
+            admin: Administrative access
+
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+
+  parameters:
+    ClaimId:
+      name: claimId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Unique claim identifier
+
+    AlertId:
+      name: alertId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Unique alert identifier
+
+    PageNumber:
+      name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+      description: Page number for pagination
+
+    PageSize:
+      name: page_size
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+      description: Number of items per page
+
+  schemas:
+    ClaimSubmission:
+      type: object
+      required:
+        - patient_id
+        - provider_id
+        - date_of_service
+        - diagnosis_codes
+        - procedure_codes
+        - billed_amount
+      properties:
+        patient_id:
+          type: string
+          description: Patient identifier
+        provider_id:
+          type: string
+          description: Provider identifier
+        provider_npi:
+          type: string
+          pattern: '^\d{10}$'
+          description: National Provider Identifier
+        date_of_service:
+          type: string
+          format: date
+          description: Date service was provided
+        diagnosis_codes:
+          type: array
+          items:
+            type: string
+          description: ICD-10 diagnosis codes
+        procedure_codes:
+          type: array
+          items:
+            type: string
+          description: CPT procedure codes
+        billed_amount:
+          type: number
+          format: decimal
+          minimum: 0
+          description: Amount billed for services
+        service_location:
+          type: string
+          description: Location where service was provided
+        referring_provider:
+          type: string
+          description: Referring provider NPI
+
+    ClaimResponse:
+      type: object
+      properties:
+        claim_id:
+          type: string
+          description: Unique claim identifier
+        status:
+          type: string
+          enum: [received, processing, analyzed, completed]
+        fraud_score:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: Initial fraud risk score
+        created_at:
+          type: string
+          format: date-time
+
+    ClaimDetail:
+      allOf:
+        - $ref: '#/components/schemas/ClaimSubmission'
+        - type: object
+          properties:
+            claim_id:
+              type: string
+            fraud_indicator:
+              type: boolean
+            fraud_type:
+              type: string
+              enum: [upcoding, phantom_billing, unbundling, staged_accident, prescription_fraud, kickback, none]
+            fraud_score:
+              type: number
+              format: float
+            red_flags:
+              type: array
+              items:
+                type: string
+            status:
+              type: string
+              enum: [pending, approved, denied, investigating]
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+
+    ClaimUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [pending, approved, denied, investigating]
+        notes:
+          type: string
+        resolution:
+          type: string
+
+    ClaimList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClaimDetail'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+
+    FraudAnalysisRequest:
+      type: object
+      required:
+        - claim_data
+      properties:
+        claim_data:
+          $ref: '#/components/schemas/ClaimSubmission'
+        analysis_depth:
+          type: string
+          enum: [quick, standard, comprehensive]
+          default: standard
+        include_network_analysis:
+          type: boolean
+          default: false
+        include_historical_patterns:
+          type: boolean
+          default: true
+
+    FraudAnalysisResponse:
+      type: object
+      properties:
+        claim_id:
+          type: string
+        fraud_score:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+        confidence_level:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+        fraud_indicators:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              description:
+                type: string
+              severity:
+                type: string
+                enum: [critical, high, medium, low]
+              confidence:
+                type: number
+                format: float
+        recommended_action:
+          type: string
+          enum: [approve, review, investigate, deny]
+        explanation:
+          type: string
+        similar_claims:
+          type: array
+          items:
+            type: string
+
+    FraudScore:
+      type: object
+      properties:
+        claim_id:
+          type: string
+        score:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+        model_version:
+          type: string
+        calculated_at:
+          type: string
+          format: date-time
+        factors:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              impact:
+                type: number
+                format: float
+              value:
+                type: string
+
+    FraudPatterns:
+      type: object
+      properties:
+        patterns:
+          type: array
+          items:
+            type: object
+            properties:
+              pattern_id:
+                type: string
+              pattern_type:
+                type: string
+              description:
+                type: string
+              frequency:
+                type: integer
+              providers_involved:
+                type: array
+                items:
+                  type: string
+              total_amount:
+                type: number
+                format: decimal
+              detection_date:
+                type: string
+                format: date-time
+
+    Alert:
+      type: object
+      properties:
+        alert_id:
+          type: string
+        claim_id:
+          type: string
+        severity:
+          type: string
+          enum: [critical, high, medium, low]
+        status:
+          type: string
+          enum: [open, investigating, closed, false_positive]
+        fraud_type:
+          type: string
+        risk_score:
+          type: number
+          format: float
+        created_at:
+          type: string
+          format: date-time
+
+    AlertDetail:
+      allOf:
+        - $ref: '#/components/schemas/Alert'
+        - type: object
+          properties:
+            description:
+              type: string
+            evidence:
+              type: array
+              items:
+                type: string
+            assigned_to:
+              type: string
+            investigation_notes:
+              type: string
+            resolution:
+              type: string
+            updated_at:
+              type: string
+              format: date-time
+
+    AlertCreation:
+      type: object
+      required:
+        - claim_id
+        - severity
+        - fraud_type
+      properties:
+        claim_id:
+          type: string
+        severity:
+          type: string
+          enum: [critical, high, medium, low]
+        fraud_type:
+          type: string
+        description:
+          type: string
+        evidence:
+          type: array
+          items:
+            type: string
+
+    AlertUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [open, investigating, closed, false_positive]
+        assigned_to:
+          type: string
+        investigation_notes:
+          type: string
+        resolution:
+          type: string
+
+    AlertList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Alert'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+
+    Investigation:
+      type: object
+      properties:
+        investigation_id:
+          type: string
+        claim_id:
+          type: string
+        status:
+          type: string
+          enum: [initiated, in_progress, completed, cancelled]
+        investigator:
+          type: string
+        priority:
+          type: string
+          enum: [urgent, high, normal, low]
+        started_at:
+          type: string
+          format: date-time
+
+    InvestigationStart:
+      type: object
+      required:
+        - reason
+        - priority
+      properties:
+        reason:
+          type: string
+        priority:
+          type: string
+          enum: [urgent, high, normal, low]
+        assigned_to:
+          type: string
+        notes:
+          type: string
+
+    InvestigationDetail:
+      allOf:
+        - $ref: '#/components/schemas/Investigation'
+        - type: object
+          properties:
+            findings:
+              type: array
+              items:
+                type: object
+                properties:
+                  date:
+                    type: string
+                    format: date-time
+                  description:
+                    type: string
+                  evidence:
+                    type: string
+            outcome:
+              type: string
+              enum: [fraud_confirmed, fraud_not_confirmed, inconclusive]
+            recovery_amount:
+              type: number
+              format: decimal
+            completed_at:
+              type: string
+              format: date-time
+
+    SummaryReport:
+      type: object
+      properties:
+        period:
+          type: object
+          properties:
+            start:
+              type: string
+              format: date
+            end:
+              type: string
+              format: date
+        metrics:
+          type: object
+          properties:
+            total_claims:
+              type: integer
+            flagged_claims:
+              type: integer
+            confirmed_fraud:
+              type: integer
+            false_positives:
+              type: integer
+            total_amount:
+              type: number
+              format: decimal
+            fraud_amount:
+              type: number
+              format: decimal
+            recovered_amount:
+              type: number
+              format: decimal
+        fraud_types:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              count:
+                type: integer
+              amount:
+                type: number
+                format: decimal
+        performance:
+          type: object
+          properties:
+            detection_rate:
+              type: number
+              format: float
+            false_positive_rate:
+              type: number
+              format: float
+            average_investigation_time:
+              type: number
+              description: Hours
+
+    ProviderReport:
+      type: object
+      properties:
+        provider_id:
+          type: string
+        provider_name:
+          type: string
+        npi:
+          type: string
+        risk_score:
+          type: number
+          format: float
+        risk_tier:
+          type: string
+          enum: [low, medium, high, critical]
+        statistics:
+          type: object
+          properties:
+            total_claims:
+              type: integer
+            flagged_claims:
+              type: integer
+            average_claim_amount:
+              type: number
+              format: decimal
+            billing_patterns:
+              type: array
+              items:
+                type: string
+        red_flags:
+          type: array
+          items:
+            type: string
+        peer_comparison:
+          type: object
+          properties:
+            percentile:
+              type: integer
+            deviation_from_mean:
+              type: number
+              format: float
+
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        page_size:
+          type: integer
+        total_items:
+          type: integer
+        total_pages:
+          type: integer
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            type: string
+
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    ValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

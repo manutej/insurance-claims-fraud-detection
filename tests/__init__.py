@@ -1,0 +1,1 @@
+"""Tests for insurance claims data ingestion pipeline."""
