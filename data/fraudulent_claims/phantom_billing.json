@@ -1,0 +1,114 @@
+{
+  "claims": [
+    {
+      "claim_id": "CLM-2024-F02001",
+      "patient_id": "PAT-GHOST-001",
+      "patient_ssn": "123-45-6789",
+      "provider_id": "PRV-FRAUD-004",
+      "provider_npi": "9999999004",
+      "date_of_service": "2024-03-17",
+      "day_of_week": "Sunday",
+      "diagnosis_codes": ["E11.9", "I10"],
+      "diagnosis_descriptions": ["Type 2 diabetes", "Hypertension"],
+      "procedure_codes": ["99214", "93000", "36415"],
+      "procedure_descriptions": ["Office visit", "EKG", "Venipuncture"],
+      "billed_amount": 425.00,
+      "service_location": "11",
+      "claim_type": "professional",
+      "rendering_hours": 0.75,
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Service on Sunday when office closed",
+        "Sequential SSN pattern with other patients",
+        "No corresponding appointment records",
+        "Patient address doesn't exist"
+      ],
+      "notes": "Services billed for non-existent patient on closed day"
+    },
+    {
+      "claim_id": "CLM-2024-F02002",
+      "patient_id": "PAT-GHOST-002",
+      "patient_ssn": "123-45-6790",
+      "provider_id": "PRV-FRAUD-004",
+      "provider_npi": "9999999004",
+      "date_of_service": "2024-03-17",
+      "day_of_week": "Sunday",
+      "diagnosis_codes": ["E11.65", "E78.5"],
+      "diagnosis_descriptions": ["Type 2 diabetes with hyperglycemia", "Hyperlipidemia"],
+      "procedure_codes": ["99215", "80053", "83036"],
+      "procedure_descriptions": ["Office visit, high complexity", "Comprehensive metabolic panel", "Hemoglobin A1C"],
+      "billed_amount": 525.00,
+      "service_location": "11",
+      "claim_type": "professional",
+      "rendering_hours": 1.0,
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Sequential SSN (123-45-6790)",
+        "Same Sunday service date",
+        "Provider billed 18 patients on closed day",
+        "Total hours exceed 24 for single day"
+      ],
+      "notes": "Ghost patient with sequential SSN, service never rendered"
+    },
+    {
+      "claim_id": "CLM-2024-F02003",
+      "patient_id": "PAT-GHOST-003",
+      "patient_ssn": "123-45-6791",
+      "provider_id": "PRV-FRAUD-005",
+      "provider_npi": "9999999005",
+      "date_of_service": "2024-03-18",
+      "diagnosis_codes": ["M54.5", "M79.3"],
+      "diagnosis_descriptions": ["Low back pain", "Myalgia"],
+      "procedure_codes": ["97110", "97112", "97140", "97530"],
+      "procedure_descriptions": ["Therapeutic exercises", "Neuromuscular reeducation", "Manual therapy", "Therapeutic activities"],
+      "billed_amount": 485.00,
+      "service_location": "11",
+      "claim_type": "professional",
+      "rendering_hours": 2.0,
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Provider billed 142 hours of service this week",
+        "Sequential SSN pattern continues",
+        "No patient intake forms on file",
+        "Billing address is vacant lot"
+      ],
+      "notes": "Physical therapy services for non-existent patient"
+    },
+    {
+      "claim_id": "CLM-2024-F02004",
+      "patient_id": "PAT-85001",
+      "provider_id": "PRV-FRAUD-006",
+      "provider_npi": "9999999006",
+      "date_of_service": "2024-03-19",
+      "diagnosis_codes": ["F41.1", "F32.9"],
+      "diagnosis_descriptions": ["Generalized anxiety disorder", "Major depressive disorder"],
+      "procedure_codes": ["90834", "90837"],
+      "procedure_descriptions": ["Psychotherapy, 45 minutes", "Psychotherapy, 60 minutes"],
+      "billed_amount": 450.00,
+      "service_location": "11",
+      "claim_type": "professional",
+      "rendering_hours": 1.75,
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Two psychotherapy sessions same day",
+        "Patient deceased 6 months ago",
+        "Death certificate on file",
+        "Services post-mortem"
+      ],
+      "notes": "Mental health services billed for deceased patient"
+    }
+  ],
+  "metadata": {
+    "file_type": "fraudulent_phantom_billing",
+    "generated_date": "2024-03-20",
+    "total_claims": 4,
+    "total_fraudulent_billed": 1885.00,
+    "actual_value": 0.00,
+    "fraud_amount": 1885.00,
+    "fraud_percentage": 100.0
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "claims": [
+    {
+      "claim_id": "MIX-2024-001",
+      "source": "valid",
+      "patient_id": "PAT-90001",
+      "provider_id": "PRV-50001",
+      "date_of_service": "2024-03-20",
+      "diagnosis_codes": ["J20.9"],
+      "procedure_codes": ["99213"],
+      "billed_amount": 125.00,
+      "fraud_indicator": false
+    },
+    {
+      "claim_id": "MIX-2024-002",
+      "source": "fraudulent_upcoding",
+      "patient_id": "PAT-90002",
+      "provider_id": "PRV-SUSPECT-001",
+      "date_of_service": "2024-03-20",
+      "diagnosis_codes": ["R05"],
+      "procedure_codes": ["99215", "94664"],
+      "billed_amount": 475.00,
+      "fraud_indicator": true,
+      "fraud_type": "upcoding"
+    },
+    {
+      "claim_id": "MIX-2024-003",
+      "source": "valid",
+      "patient_id": "PAT-90003",
+      "provider_id": "PRV-50002",
+      "date_of_service": "2024-03-20",
+      "diagnosis_codes": ["E11.65", "I10"],
+      "procedure_codes": ["99214", "82947"],
+      "billed_amount": 245.00,
+      "fraud_indicator": false
+    },
+    {
+      "claim_id": "MIX-2024-004",
+      "source": "fraudulent_phantom",
+      "patient_id": "PAT-GHOST-100",
+      "provider_id": "PRV-SUSPECT-002",
+      "date_of_service": "2024-03-21",
+      "day_of_week": "Sunday",
+      "diagnosis_codes": ["M79.3"],
+      "procedure_codes": ["97110", "97140"],
+      "billed_amount": 385.00,
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing"
+    },
+    {
+      "claim_id": "MIX-2024-005",
+      "source": "valid",
+      "patient_id": "PAT-90005",
+      "provider_id": "PRV-50003",
+      "date_of_service": "2024-03-20",
+      "diagnosis_codes": ["K21.9"],
+      "procedure_codes": ["99213", "74220"],
+      "billed_amount": 450.00,
+      "fraud_indicator": false
+    },
+    {
+      "claim_id": "MIX-2024-006",
+      "source": "fraudulent_unbundling",
+      "patient_id": "PAT-90006",
+      "provider_id": "PRV-SUSPECT-003",
+      "date_of_service": "2024-03-20",
+      "diagnosis_codes": ["K80.10"],
+      "procedure_codes": ["47563", "49320", "49322"],
+      "billed_amount": 12500.00,
+      "fraud_indicator": true,
+      "fraud_type": "unbundling"
+    },
+    {
+      "claim_id": "MIX-2024-007",
+      "source": "valid",
+      "patient_id": "PAT-90007",
+      "provider_id": "PRV-50004",
+      "date_of_service": "2024-03-20",
+      "diagnosis_codes": ["N39.0"],
+      "procedure_codes": ["99213", "81001"],
+      "billed_amount": 165.00,
+      "fraud_indicator": false
+    },
+    {
+      "claim_id": "MIX-2024-008",
+      "source": "fraudulent_staged",
+      "patient_id": "PAT-90008",
+      "provider_id": "PRV-SUSPECT-004",
+      "accident_date": "2024-03-19",
+      "date_of_service": "2024-03-19",
+      "diagnosis_codes": ["S13.4XXA"],
+      "procedure_codes": ["99215", "97110", "97140"],
+      "billed_amount": 625.00,
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident"
+    },
+    {
+      "claim_id": "MIX-2024-009",
+      "source": "valid",
+      "patient_id": "PAT-90009",
+      "provider_id": "PRV-50005",
+      "date_of_service": "2024-03-20",
+      "diagnosis_codes": ["M54.5"],
+      "procedure_codes": ["97110"],
+      "billed_amount": 125.00,
+      "fraud_indicator": false
+    },
+    {
+      "claim_id": "MIX-2024-010",
+      "source": "fraudulent_prescription",
+      "patient_id": "PAT-90010",
+      "prescriber_npi": "SUSPECT-RX-001",
+      "date_of_service": "2024-03-20",
+      "ndc_code": "00406-0552-01",
+      "drug_name": "Oxycodone HCL 30mg",
+      "quantity": 120,
+      "billed_amount": 450.00,
+      "fraud_indicator": true,
+      "fraud_type": "prescription_diversion"
+    }
+  ],
+  "metadata": {
+    "file_type": "mixed_test_dataset",
+    "generated_date": "2024-03-20",
+    "total_claims": 10,
+    "valid_claims": 5,
+    "fraudulent_claims": 5,
+    "fraud_types": ["upcoding", "phantom_billing", "unbundling", "staged_accident", "prescription_diversion"],
+    "total_billed": 15470.00,
+    "fraud_percentage": 50.0
+  }
+}

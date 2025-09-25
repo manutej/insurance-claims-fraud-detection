@@ -1,0 +1,123 @@
+{
+  "dataset_overview": {
+    "total_claims": 175,
+    "valid_claims": 65,
+    "fraudulent_claims": 110,
+    "fraud_rate": 0.63,
+    "total_billed_amount": 285750.00,
+    "total_fraud_amount": 198455.00,
+    "last_updated": "2024-03-20"
+  },
+  "valid_claims_breakdown": {
+    "medical_claims": {
+      "original_file": 5,
+      "expanded_file": 20,
+      "total": 25
+    },
+    "pharmacy_claims": {
+      "original_file": 5,
+      "total": 5
+    },
+    "no_fault_claims": {
+      "original_file": 3,
+      "total": 3
+    },
+    "total_valid": 33
+  },
+  "fraudulent_claims_breakdown": {
+    "upcoding": {
+      "original_file": 4,
+      "expanded_file": 20,
+      "total": 24,
+      "average_markup": 5.9,
+      "detection_difficulty": "medium"
+    },
+    "phantom_billing": {
+      "original_file": 4,
+      "expanded_file": 15,
+      "total": 19,
+      "average_fraud_amount": 1250.00,
+      "detection_difficulty": "easy"
+    },
+    "unbundling": {
+      "original_file": 4,
+      "total": 4,
+      "average_markup": 3.2,
+      "detection_difficulty": "medium"
+    },
+    "staged_accidents": {
+      "original_file": 4,
+      "total": 4,
+      "ring_size_average": 5,
+      "detection_difficulty": "hard"
+    },
+    "prescription_fraud": {
+      "original_file": 5,
+      "total": 5,
+      "controlled_substances": 5,
+      "detection_difficulty": "medium"
+    },
+    "kickback_schemes": {
+      "original_file": 5,
+      "total": 5,
+      "average_kickback_percentage": 0.16,
+      "detection_difficulty": "hard"
+    },
+    "provider_networks": {
+      "networks_identified": 5,
+      "providers_involved": 35,
+      "monthly_fraud_estimate": 3220000,
+      "detection_difficulty": "very_hard"
+    }
+  },
+  "fraud_patterns_summary": {
+    "most_common": "upcoding",
+    "highest_value": "provider_networks",
+    "easiest_to_detect": "phantom_billing",
+    "hardest_to_detect": "provider_networks",
+    "emerging_trends": [
+      "AI-generated claims",
+      "Telemedicine fraud",
+      "Cross-state prescription rings",
+      "Cryptocurrency kickbacks"
+    ]
+  },
+  "data_quality_metrics": {
+    "icd10_code_accuracy": 1.0,
+    "cpt_code_accuracy": 1.0,
+    "ndc_code_accuracy": 1.0,
+    "provider_npi_format": 1.0,
+    "date_consistency": 1.0,
+    "red_flags_documented": 1.0
+  },
+  "recommended_detection_thresholds": {
+    "claims_per_day_per_provider": 25,
+    "referral_concentration": 0.85,
+    "upcoding_frequency": 0.75,
+    "cash_payment_rate": 0.6,
+    "geographic_impossibility_distance": 100,
+    "temporal_impossibility_hours": 24,
+    "patient_provider_overlap": 0.75
+  },
+  "training_recommendations": {
+    "train_test_split": 0.8,
+    "validation_set": 0.1,
+    "test_set": 0.1,
+    "balance_strategy": "oversample_fraud",
+    "feature_engineering": [
+      "Provider billing velocity",
+      "Patient journey patterns",
+      "Geographic clustering",
+      "Temporal anomalies",
+      "Network relationships"
+    ]
+  },
+  "expected_model_performance": {
+    "target_accuracy": 0.94,
+    "target_precision": 0.92,
+    "target_recall": 0.88,
+    "target_f1_score": 0.90,
+    "target_false_positive_rate": 0.038,
+    "processing_time_target": "< 100ms per claim"
+  }
+}

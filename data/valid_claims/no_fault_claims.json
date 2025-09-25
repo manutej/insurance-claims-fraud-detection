@@ -1,0 +1,77 @@
+{
+  "claims": [
+    {
+      "claim_id": "NF-2024-001001",
+      "patient_id": "PAT-79001",
+      "provider_id": "PRV-46001",
+      "accident_date": "2024-03-10",
+      "date_of_service": "2024-03-12",
+      "police_report_number": "2024-ACC-4567",
+      "diagnosis_codes": ["S43.201A", "M79.3"],
+      "diagnosis_descriptions": ["Unspecified subluxation of right sternoclavicular joint, initial encounter", "Myalgia"],
+      "procedure_codes": ["97110", "97010"],
+      "procedure_descriptions": ["Therapeutic exercises", "Hot or cold pack application"],
+      "billed_amount": 350.00,
+      "service_location": "11",
+      "claim_type": "no-fault",
+      "vehicle_info": {
+        "vin": "1HGCM82633A123456",
+        "insurance_carrier": "State Farm",
+        "policy_number": "POL-789012"
+      },
+      "fraud_indicator": false,
+      "notes": "Legitimate MVA, rear-ended at traffic light"
+    },
+    {
+      "claim_id": "NF-2024-001002",
+      "patient_id": "PAT-79002",
+      "provider_id": "PRV-46002",
+      "accident_date": "2024-03-11",
+      "date_of_service": "2024-03-13",
+      "police_report_number": "2024-ACC-4568",
+      "diagnosis_codes": ["S13.4XXA"],
+      "diagnosis_descriptions": ["Sprain of ligaments of cervical spine, initial encounter"],
+      "procedure_codes": ["99213", "97140"],
+      "procedure_descriptions": ["Office visit", "Manual therapy"],
+      "billed_amount": 425.00,
+      "service_location": "11",
+      "claim_type": "no-fault",
+      "vehicle_info": {
+        "vin": "2T1BR32E25C123457",
+        "insurance_carrier": "Geico",
+        "policy_number": "POL-789013"
+      },
+      "fraud_indicator": false,
+      "notes": "Side-impact collision, documented injuries"
+    },
+    {
+      "claim_id": "NF-2024-001003",
+      "patient_id": "PAT-79003",
+      "provider_id": "PRV-46003",
+      "accident_date": "2024-03-12",
+      "date_of_service": "2024-03-14",
+      "police_report_number": "2024-ACC-4569",
+      "diagnosis_codes": ["S06.0X0A"],
+      "diagnosis_descriptions": ["Concussion without loss of consciousness, initial encounter"],
+      "procedure_codes": ["99285", "70450"],
+      "procedure_descriptions": ["Emergency department visit", "CT head without contrast"],
+      "billed_amount": 2850.00,
+      "service_location": "23",
+      "claim_type": "no-fault",
+      "vehicle_info": {
+        "vin": "3VWLL7AJ9BM123458",
+        "insurance_carrier": "Allstate",
+        "policy_number": "POL-789014"
+      },
+      "fraud_indicator": false,
+      "notes": "Head injury from airbag deployment, ER visit"
+    }
+  ],
+  "metadata": {
+    "file_type": "valid_no_fault_claims",
+    "generated_date": "2024-03-20",
+    "total_claims": 3,
+    "total_billed": 3625.00,
+    "average_claim": 1208.33
+  }
+}

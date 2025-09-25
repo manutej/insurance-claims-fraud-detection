@@ -1,0 +1,133 @@
+{
+  "claims": [
+    {
+      "claim_id": "RX-2024-F05001",
+      "patient_id": "PAT-88001",
+      "prescriber_npi": "9999999014",
+      "pharmacy_npi": "8888888001",
+      "date_of_service": "2024-03-15",
+      "ndc_code": "00406-0552-01",
+      "drug_name": "Oxycodone HCL 30mg",
+      "quantity": 120,
+      "days_supply": 30,
+      "diagnosis_codes": ["M54.5"],
+      "billed_amount": 450.00,
+      "refill_number": 0,
+      "fraud_indicator": true,
+      "fraud_type": "prescription_diversion",
+      "red_flags": [
+        "5 different prescribers in 30 days",
+        "Traveled 150 miles between pharmacies",
+        "Cash payment only",
+        "Early refill attempts at multiple locations",
+        "No prior history of chronic pain"
+      ],
+      "related_claims": ["RX-2024-F05002", "RX-2024-F05003", "RX-2024-F05004", "RX-2024-F05005"],
+      "notes": "Doctor shopping for opioids - prescription 1 of 5"
+    },
+    {
+      "claim_id": "RX-2024-F05002",
+      "patient_id": "PAT-88001",
+      "prescriber_npi": "9999999015",
+      "pharmacy_npi": "8888888002",
+      "date_of_service": "2024-03-17",
+      "ndc_code": "00406-0552-01",
+      "drug_name": "Oxycodone HCL 30mg",
+      "quantity": 90,
+      "days_supply": 30,
+      "diagnosis_codes": ["M79.3"],
+      "billed_amount": 385.00,
+      "refill_number": 0,
+      "fraud_indicator": true,
+      "fraud_type": "prescription_diversion",
+      "red_flags": [
+        "Second opioid prescription in 3 days",
+        "Different prescriber",
+        "Different pharmacy 75 miles away",
+        "Overlapping days supply"
+      ],
+      "notes": "Doctor shopping for opioids - prescription 2 of 5"
+    },
+    {
+      "claim_id": "RX-2024-F05006",
+      "patient_id": "PAT-88002",
+      "prescriber_npi": "9999999016",
+      "pharmacy_npi": "8888888003",
+      "date_of_service": "2024-03-18",
+      "ndc_code": "00228-3003-11",
+      "drug_name": "Alprazolam 2mg",
+      "quantity": 180,
+      "days_supply": 30,
+      "diagnosis_codes": ["F41.1"],
+      "billed_amount": 275.00,
+      "refill_number": 0,
+      "fraud_indicator": true,
+      "fraud_type": "prescription_diversion",
+      "red_flags": [
+        "Excessive quantity for initial prescription",
+        "6 tablets per day unusual dosing",
+        "Multiple benzos from different doctors",
+        "Pattern of lost medication claims",
+        "Sells on street for $5-10 per pill"
+      ],
+      "notes": "Benzodiazepine diversion scheme"
+    },
+    {
+      "claim_id": "RX-2024-F05007",
+      "patient_id": "PAT-88003",
+      "prescriber_npi": "9999999017",
+      "pharmacy_npi": "8888888004",
+      "date_of_service": "2024-03-19",
+      "ndc_code": "00378-4022-01",
+      "drug_name": "Promethazine with Codeine",
+      "quantity": 480,
+      "days_supply": 10,
+      "diagnosis_codes": ["J06.9"],
+      "billed_amount": 185.00,
+      "refill_number": 0,
+      "fraud_indicator": true,
+      "fraud_type": "prescription_diversion",
+      "red_flags": [
+        "Excessive quantity for cough syrup",
+        "Known street drug (Purple Drank/Lean)",
+        "Multiple prescriptions same month",
+        "Telemedicine prescriber never saw patient",
+        "High street value"
+      ],
+      "notes": "Cough syrup diversion for illicit use"
+    },
+    {
+      "claim_id": "RX-2024-F05008",
+      "patient_id": "PAT-88004",
+      "prescriber_npi": "9999999018",
+      "pharmacy_npi": "8888888005",
+      "date_of_service": "2024-03-20",
+      "ndc_code": "00054-0177-25",
+      "drug_name": "Adderall XR 30mg",
+      "quantity": 90,
+      "days_supply": 30,
+      "diagnosis_codes": ["F90.2"],
+      "billed_amount": 425.00,
+      "refill_number": 0,
+      "fraud_indicator": true,
+      "fraud_type": "prescription_diversion",
+      "red_flags": [
+        "Adult onset ADHD diagnosed via telemedicine",
+        "No prior psychiatric history",
+        "Multiple stimulant prescriptions",
+        "College campus address",
+        "High resale value to students"
+      ],
+      "notes": "Stimulant diversion for resale or performance enhancement"
+    }
+  ],
+  "metadata": {
+    "file_type": "fraudulent_prescription_diversion",
+    "generated_date": "2024-03-20",
+    "total_claims": 5,
+    "total_fraudulent_billed": 1720.00,
+    "street_value_estimate": 15000.00,
+    "controlled_substances": 5,
+    "schedule_II_drugs": 3
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "claims": [
+    {
+      "claim_id": "RX-2024-001001",
+      "patient_id": "PAT-78901",
+      "prescriber_npi": "1234567890",
+      "pharmacy_npi": "9876543210",
+      "date_of_service": "2024-03-15",
+      "ndc_code": "00002-3214-30",
+      "drug_name": "Metformin HCL 1000mg",
+      "quantity": 60,
+      "days_supply": 30,
+      "diagnosis_codes": ["E11.9"],
+      "billed_amount": 45.00,
+      "refill_number": 2,
+      "fraud_indicator": false,
+      "notes": "Regular diabetes medication refill"
+    },
+    {
+      "claim_id": "RX-2024-001002",
+      "patient_id": "PAT-78902",
+      "prescriber_npi": "1234567891",
+      "pharmacy_npi": "9876543211",
+      "date_of_service": "2024-03-16",
+      "ndc_code": "00006-0749-61",
+      "drug_name": "Lisinopril 10mg",
+      "quantity": 30,
+      "days_supply": 30,
+      "diagnosis_codes": ["I10"],
+      "billed_amount": 25.00,
+      "refill_number": 0,
+      "fraud_indicator": false,
+      "notes": "New prescription for hypertension"
+    },
+    {
+      "claim_id": "RX-2024-001003",
+      "patient_id": "PAT-78903",
+      "prescriber_npi": "1234567892",
+      "pharmacy_npi": "9876543212",
+      "date_of_service": "2024-03-17",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 20,
+      "days_supply": 10,
+      "diagnosis_codes": ["J18.9"],
+      "billed_amount": 15.00,
+      "refill_number": 0,
+      "fraud_indicator": false,
+      "notes": "Antibiotic for pneumonia treatment"
+    },
+    {
+      "claim_id": "RX-2024-001004",
+      "patient_id": "PAT-78904",
+      "prescriber_npi": "1234567893",
+      "pharmacy_npi": "9876543213",
+      "date_of_service": "2024-03-18",
+      "ndc_code": "00378-0180-01",
+      "drug_name": "Omeprazole 20mg",
+      "quantity": 30,
+      "days_supply": 30,
+      "diagnosis_codes": ["K21.9"],
+      "billed_amount": 35.00,
+      "refill_number": 1,
+      "fraud_indicator": false,
+      "notes": "GERD medication refill"
+    },
+    {
+      "claim_id": "RX-2024-001005",
+      "patient_id": "PAT-78905",
+      "prescriber_npi": "1234567894",
+      "pharmacy_npi": "9876543214",
+      "date_of_service": "2024-03-19",
+      "ndc_code": "00781-1775-01",
+      "drug_name": "Ciprofloxacin 500mg",
+      "quantity": 14,
+      "days_supply": 7,
+      "diagnosis_codes": ["N39.0"],
+      "billed_amount": 30.00,
+      "refill_number": 0,
+      "fraud_indicator": false,
+      "notes": "UTI antibiotic treatment"
+    }
+  ],
+  "metadata": {
+    "file_type": "valid_pharmacy_claims",
+    "generated_date": "2024-03-20",
+    "total_claims": 5,
+    "total_billed": 150.00,
+    "average_claim": 30.00
+  }
+}

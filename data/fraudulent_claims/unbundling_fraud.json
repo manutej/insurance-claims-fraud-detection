@@ -1,0 +1,137 @@
+{
+  "claims": [
+    {
+      "claim_id": "CLM-2024-F03001",
+      "patient_id": "PAT-86001",
+      "provider_id": "PRV-FRAUD-007",
+      "provider_npi": "9999999007",
+      "date_of_service": "2024-03-15",
+      "diagnosis_codes": ["K80.10"],
+      "diagnosis_descriptions": ["Calculus of gallbladder with chronic cholecystitis"],
+      "procedure_codes": ["47563", "49320", "49322", "47579", "36561"],
+      "procedure_descriptions": [
+        "Laparoscopy, cholecystectomy",
+        "Laparoscopy, diagnostic",
+        "Laparoscopy with aspiration",
+        "Unlisted laparoscopy procedure",
+        "Central venous access"
+      ],
+      "billed_amount": 15500.00,
+      "bundled_code": "47563",
+      "bundled_amount": 5200.00,
+      "service_location": "21",
+      "claim_type": "facility",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Multiple laparoscopy codes for single procedure",
+        "Components should be included in primary code",
+        "Total exceeds bundled rate by 298%",
+        "Diagnostic laparoscopy included in therapeutic"
+      ],
+      "notes": "Gallbladder surgery unbundled into multiple separate procedures"
+    },
+    {
+      "claim_id": "CLM-2024-F03002",
+      "patient_id": "PAT-86002",
+      "provider_id": "PRV-FRAUD-008",
+      "provider_npi": "9999999008",
+      "date_of_service": "2024-03-16",
+      "diagnosis_codes": ["M51.26"],
+      "diagnosis_descriptions": ["Lumbar disc displacement"],
+      "procedure_codes": ["63030", "69990", "22830", "20930", "76000"],
+      "procedure_descriptions": [
+        "Laminotomy",
+        "Microsurgery",
+        "Exploration of spinal fusion",
+        "Allograft for spine surgery",
+        "Fluoroscopy"
+      ],
+      "billed_amount": 28750.00,
+      "bundled_code": "63030",
+      "bundled_amount": 8500.00,
+      "service_location": "21",
+      "claim_type": "facility",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Microsurgery is included in primary procedure",
+        "Fluoroscopy bundled with spine surgery",
+        "Total 338% of appropriate reimbursement",
+        "Add-on codes billed as primary"
+      ],
+      "notes": "Spine surgery components billed separately instead of bundled"
+    },
+    {
+      "claim_id": "CLM-2024-F03003",
+      "patient_id": "PAT-86003",
+      "provider_id": "PRV-FRAUD-009",
+      "provider_npi": "9999999009",
+      "date_of_service": "2024-03-17",
+      "diagnosis_codes": ["H26.9"],
+      "diagnosis_descriptions": ["Unspecified cataract"],
+      "procedure_codes": ["66984", "66982", "76519", "92136", "0191T"],
+      "procedure_descriptions": [
+        "Cataract surgery with IOL",
+        "Cataract surgery, complex",
+        "Ophthalmic biometry",
+        "OCT",
+        "IOL insertion"
+      ],
+      "billed_amount": 8950.00,
+      "bundled_code": "66984",
+      "bundled_amount": 2850.00,
+      "service_location": "24",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "IOL insertion included in cataract surgery",
+        "Biometry typically bundled",
+        "Multiple cataract codes for one eye",
+        "Total billing 314% of standard"
+      ],
+      "notes": "Cataract surgery unbundled with duplicate and included services"
+    },
+    {
+      "claim_id": "CLM-2024-F03004",
+      "patient_id": "PAT-86004",
+      "provider_id": "PRV-FRAUD-010",
+      "provider_npi": "9999999010",
+      "date_of_service": "2024-03-18",
+      "diagnosis_codes": ["I25.10"],
+      "diagnosis_descriptions": ["Atherosclerotic heart disease"],
+      "procedure_codes": ["93458", "93454", "93563", "93564", "93568"],
+      "procedure_descriptions": [
+        "Cardiac catheterization",
+        "Coronary angiography",
+        "Injection procedure",
+        "Injection procedure, bypass",
+        "Injection for pulmonary angiography"
+      ],
+      "billed_amount": 12500.00,
+      "bundled_code": "93458",
+      "bundled_amount": 4200.00,
+      "service_location": "22",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Injection procedures included in primary cath",
+        "Multiple codes for single catheterization",
+        "Add-on codes without primary procedure",
+        "Total 297% of bundled rate"
+      ],
+      "notes": "Cardiac catheterization unbundled into component parts"
+    }
+  ],
+  "metadata": {
+    "file_type": "fraudulent_unbundling",
+    "generated_date": "2024-03-20",
+    "total_claims": 4,
+    "total_fraudulent_billed": 65700.00,
+    "actual_bundled_value": 20750.00,
+    "fraud_amount": 44950.00,
+    "fraud_percentage": 68.4
+  }
+}

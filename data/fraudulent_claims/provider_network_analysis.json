@@ -1,0 +1,245 @@
+{
+  "provider_networks": [
+    {
+      "network_id": "FRAUD-RING-001",
+      "network_type": "Medical Mill",
+      "providers": [
+        {
+          "provider_id": "PRV-FRAUD-101",
+          "provider_npi": "9999999101",
+          "specialty": "Internal Medicine",
+          "role": "Referral Source",
+          "monthly_referrals": 450,
+          "referral_concentration": 0.95
+        },
+        {
+          "provider_id": "PRV-FRAUD-102",
+          "provider_npi": "9999999102",
+          "specialty": "Radiology",
+          "role": "Imaging Center",
+          "monthly_claims": 425,
+          "average_per_patient": 3.5
+        },
+        {
+          "provider_id": "PRV-FRAUD-103",
+          "provider_npi": "9999999103",
+          "specialty": "Physical Therapy",
+          "role": "Treatment Mill",
+          "monthly_claims": 850,
+          "sessions_per_patient": 48
+        },
+        {
+          "provider_id": "PRV-FRAUD-104",
+          "provider_npi": "9999999104",
+          "specialty": "Pain Management",
+          "role": "Injection Factory",
+          "monthly_procedures": 320,
+          "injection_rate": 0.98
+        }
+      ],
+      "network_patterns": {
+        "circular_referrals": true,
+        "same_day_services": true,
+        "patient_overlap": 0.92,
+        "billing_synchronization": true,
+        "shared_addresses": 3,
+        "shared_phone_numbers": 2,
+        "shared_tax_ids": 2
+      },
+      "monthly_network_billing": 485000,
+      "fraud_indicators": [
+        "95% of patients see all 4 providers",
+        "Same attorney represents all providers",
+        "Shared billing company",
+        "Synchronized vacation schedules",
+        "Identical EMR entries across providers"
+      ]
+    },
+    {
+      "network_id": "FRAUD-RING-002",
+      "network_type": "Prescription Drug Ring",
+      "providers": [
+        {
+          "provider_id": "PRV-FRAUD-105",
+          "provider_npi": "9999999105",
+          "specialty": "Telemedicine",
+          "role": "Prescription Writer",
+          "monthly_rx": 1200,
+          "controlled_substance_rate": 0.89
+        },
+        {
+          "pharmacy_id": "PHR-FRAUD-001",
+          "pharmacy_npi": "8888888101",
+          "role": "Dispensing Pharmacy",
+          "monthly_fills": 1150,
+          "cash_payment_rate": 0.78
+        },
+        {
+          "pharmacy_id": "PHR-FRAUD-002",
+          "pharmacy_npi": "8888888102",
+          "role": "Overflow Pharmacy",
+          "monthly_fills": 450,
+          "out_of_state_patients": 0.65
+        }
+      ],
+      "network_patterns": {
+        "prescription_velocity": "45 seconds per prescription",
+        "geographic_spread": "Patients from 15 states",
+        "payment_patterns": "78% cash only",
+        "drug_cocktails": ["Opioid + Benzo + Stimulant"],
+        "red_flag_combinations": true
+      },
+      "monthly_network_billing": 285000,
+      "street_value_estimate": 1250000
+    },
+    {
+      "network_id": "FRAUD-RING-003",
+      "network_type": "Staged Accident Ring",
+      "providers": [
+        {
+          "provider_id": "PRV-FRAUD-106",
+          "provider_npi": "9999999106",
+          "specialty": "Chiropractic",
+          "role": "Initial Treatment",
+          "accident_patients_only": true,
+          "treatment_duration": "Exactly 12 weeks"
+        },
+        {
+          "provider_id": "PRV-FRAUD-107",
+          "provider_npi": "9999999107",
+          "specialty": "Orthopedic Surgery",
+          "role": "Surgical Referral",
+          "unnecessary_surgery_rate": 0.72
+        },
+        {
+          "attorney_id": "ATT-FRAUD-001",
+          "role": "Legal Representative",
+          "clients": 450,
+          "settlement_average": 75000
+        },
+        {
+          "runner_id": "RUN-FRAUD-001",
+          "role": "Patient Recruiter",
+          "monthly_recruits": 25,
+          "payment_per_recruit": 2000
+        }
+      ],
+      "network_patterns": {
+        "accident_clustering": "Same intersections",
+        "witness_relationships": "All related/employed",
+        "treatment_protocols": "Identical for all patients",
+        "billing_maximization": "Always hits policy limits"
+      },
+      "monthly_network_billing": 750000
+    },
+    {
+      "network_id": "FRAUD-RING-004",
+      "network_type": "Kickback Scheme",
+      "providers": [
+        {
+          "provider_id": "PRV-FRAUD-108",
+          "provider_npi": "9999999108",
+          "specialty": "Primary Care",
+          "role": "Referral Source",
+          "kickback_per_referral": 500
+        },
+        {
+          "lab_id": "LAB-FRAUD-001",
+          "role": "Testing Facility",
+          "unnecessary_test_rate": 0.83,
+          "markup_percentage": 850
+        },
+        {
+          "imaging_id": "IMG-FRAUD-001",
+          "role": "Imaging Center",
+          "mri_rate": 0.91,
+          "cost_per_scan": 2500
+        },
+        {
+          "dme_id": "DME-FRAUD-001",
+          "role": "Equipment Supplier",
+          "products": ["Power wheelchairs", "CPAP", "Braces"],
+          "markup_percentage": 1200
+        }
+      ],
+      "financial_relationships": {
+        "ownership_stakes": true,
+        "family_relationships": true,
+        "shell_companies": 4,
+        "hidden_payments": "Consulting fees",
+        "luxury_gifts": ["Cars", "Vacations", "Jewelry"]
+      },
+      "monthly_network_billing": 920000
+    },
+    {
+      "network_id": "FRAUD-RING-005",
+      "network_type": "Home Health Fraud",
+      "providers": [
+        {
+          "provider_id": "PRV-FRAUD-109",
+          "provider_npi": "9999999109",
+          "specialty": "Home Health Agency",
+          "role": "Service Provider",
+          "ghost_visits": 0.68,
+          "patients_never_homebound": 0.74
+        },
+        {
+          "provider_id": "PRV-FRAUD-110",
+          "provider_npi": "9999999110",
+          "specialty": "Physician",
+          "role": "Certifying Doctor",
+          "never_examined_patients": 0.81,
+          "rubber_stamp_certifications": true
+        },
+        {
+          "recruiter_id": "REC-FRAUD-001",
+          "role": "Patient Recruiter",
+          "recruitment_locations": ["Senior centers", "Churches", "Clinics"],
+          "incentives_offered": ["Free groceries", "Cash", "Transportation"]
+        }
+      ],
+      "network_patterns": {
+        "visit_clustering": "All visits 9am-10am",
+        "documentation_copying": "Identical notes",
+        "impossible_geography": "200 visits per day",
+        "billing_patterns": "Maximum allowable always"
+      },
+      "monthly_network_billing": 580000
+    }
+  ],
+  "cross_network_analysis": {
+    "shared_patients": 2450,
+    "patient_shopping_rate": 0.34,
+    "provider_overlap": 18,
+    "common_attorneys": 5,
+    "common_runners": 8,
+    "total_monthly_fraud": 3220000,
+    "estimated_annual_fraud": 38640000
+  },
+  "detection_patterns": {
+    "velocity_indicators": {
+      "claims_per_patient": ">20 per month",
+      "providers_per_patient": ">8 specialists",
+      "prescriptions_per_patient": ">10 controlled substances"
+    },
+    "relationship_indicators": {
+      "referral_concentration": ">85% to single provider",
+      "patient_overlap": ">75% seeing multiple providers",
+      "billing_synchronization": "Claims within 48 hours"
+    },
+    "financial_indicators": {
+      "cash_payment_rate": ">60%",
+      "billing_at_maximum": ">90% at policy limits",
+      "unusual_wealth": "Luxury purchases on modest salary"
+    }
+  },
+  "metadata": {
+    "file_type": "provider_network_fraud_analysis",
+    "generated_date": "2024-03-20",
+    "total_networks_identified": 5,
+    "total_providers_involved": 35,
+    "estimated_monthly_fraud": 3220000,
+    "high_risk_zip_codes": ["10001", "10002", "11201", "11377", "10453"],
+    "investigation_priority": "critical"
+  }
+}

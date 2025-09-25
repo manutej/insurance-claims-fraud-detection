@@ -1,0 +1,125 @@
+{
+  "claims": [
+    {
+      "claim_id": "NF-2024-F04001",
+      "patient_id": "PAT-87001",
+      "provider_id": "PRV-FRAUD-011",
+      "provider_npi": "9999999011",
+      "accident_date": "2024-03-14",
+      "date_of_service": "2024-03-14",
+      "police_report_number": "FAKE-2024-001",
+      "diagnosis_codes": ["S13.4XXA", "M54.2"],
+      "diagnosis_descriptions": ["Sprain of cervical spine", "Cervicalgia"],
+      "procedure_codes": ["99215", "97110", "97112", "97140"],
+      "procedure_descriptions": ["Office visit, high complexity", "Therapeutic exercises", "Neuromuscular reeducation", "Manual therapy"],
+      "billed_amount": 850.00,
+      "service_location": "11",
+      "claim_type": "no-fault",
+      "vehicle_info": {
+        "vin": "STAGED-VIN-001",
+        "insurance_carrier": "Various",
+        "policy_number": "Multiple"
+      },
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Treatment began before police report filed",
+        "5 passengers, all same injuries",
+        "All treated at same clinic",
+        "Same attorney for all passengers",
+        "Damage inconsistent with injuries claimed",
+        "Witnesses are related parties"
+      ],
+      "related_claims": ["NF-2024-F04002", "NF-2024-F04003", "NF-2024-F04004", "NF-2024-F04005"],
+      "notes": "Staged accident - passenger 1 of 5"
+    },
+    {
+      "claim_id": "NF-2024-F04002",
+      "patient_id": "PAT-87002",
+      "provider_id": "PRV-FRAUD-011",
+      "provider_npi": "9999999011",
+      "accident_date": "2024-03-14",
+      "date_of_service": "2024-03-14",
+      "police_report_number": "FAKE-2024-001",
+      "diagnosis_codes": ["S13.4XXA", "M54.2"],
+      "diagnosis_descriptions": ["Sprain of cervical spine", "Cervicalgia"],
+      "procedure_codes": ["99215", "97110", "97112", "97140"],
+      "procedure_descriptions": ["Office visit, high complexity", "Therapeutic exercises", "Neuromuscular reeducation", "Manual therapy"],
+      "billed_amount": 850.00,
+      "service_location": "11",
+      "claim_type": "no-fault",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Identical injuries to passenger 1",
+        "Same treatment protocol",
+        "All patients live at same address",
+        "Provider known for staged accidents"
+      ],
+      "related_claims": ["NF-2024-F04001", "NF-2024-F04003", "NF-2024-F04004", "NF-2024-F04005"],
+      "notes": "Staged accident - passenger 2 of 5"
+    },
+    {
+      "claim_id": "NF-2024-F04006",
+      "patient_id": "PAT-87006",
+      "provider_id": "PRV-FRAUD-012",
+      "provider_npi": "9999999012",
+      "accident_date": "2024-03-15",
+      "date_of_service": "2024-03-15",
+      "police_report_number": "SUSPICIOUS-2024-002",
+      "diagnosis_codes": ["S43.409A", "M25.511"],
+      "diagnosis_descriptions": ["Sprain of shoulder", "Pain in right shoulder"],
+      "procedure_codes": ["99215", "97110", "97140", "97035"],
+      "procedure_descriptions": ["Office visit", "Therapeutic exercises", "Manual therapy", "Ultrasound therapy"],
+      "billed_amount": 925.00,
+      "service_location": "11",
+      "claim_type": "no-fault",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Pedestrian hit at low speed",
+        "No visible injuries at scene",
+        "Recruited at community center",
+        "Promised $2000 for participation",
+        "Multiple similar accidents same intersection"
+      ],
+      "notes": "Staged pedestrian accident for insurance payout"
+    },
+    {
+      "claim_id": "NF-2024-F04007",
+      "patient_id": "PAT-87007",
+      "provider_id": "PRV-FRAUD-013",
+      "provider_npi": "9999999013",
+      "accident_date": "2024-03-16",
+      "date_of_service": "2024-03-17",
+      "police_report_number": "FAKE-2024-003",
+      "diagnosis_codes": ["S06.0X0A", "G44.301"],
+      "diagnosis_descriptions": ["Concussion", "Post-traumatic headache"],
+      "procedure_codes": ["99285", "70450", "97110"],
+      "procedure_descriptions": ["Emergency visit", "CT head", "Therapy"],
+      "billed_amount": 3850.00,
+      "service_location": "23",
+      "claim_type": "no-fault",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Vehicle damage inconsistent with injuries",
+        "Witnesses appeared after accident",
+        "Driver has 8 prior accidents in 2 years",
+        "Same medical clinic as previous accidents",
+        "Police report filed 3 days later"
+      ],
+      "notes": "Professional accident stager, pattern of similar claims"
+    }
+  ],
+  "metadata": {
+    "file_type": "fraudulent_staged_accidents",
+    "generated_date": "2024-03-20",
+    "total_claims": 4,
+    "total_fraudulent_billed": 6475.00,
+    "estimated_group_fraud": 32375.00,
+    "fraud_ring_size": 7,
+    "common_providers": 3,
+    "common_attorneys": 2
+  }
+}
