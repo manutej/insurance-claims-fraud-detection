@@ -1,0 +1,373 @@
+name: CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*.*.*' ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+      force_deploy:
+        description: 'Force deployment even if tests fail'
+        required: false
+        default: false
+        type: boolean
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+  PYTHON_VERSION: "3.10"
+
+jobs:
+  build-and-push:
+    name: Build and Push Container
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      image-digest: ${{ steps.build.outputs.digest }}
+      image-tag: ${{ steps.meta.outputs.tags }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha,prefix={{branch}}-
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push Docker image
+        id: build
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            BUILDKIT_INLINE_CACHE=1
+            VERSION=${{ steps.meta.outputs.version }}
+            COMMIT_SHA=${{ github.sha }}
+            BUILD_DATE=${{ steps.meta.outputs.created }}
+
+      - name: Generate SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }}
+          format: spdx-json
+          output-file: sbom.spdx.json
+
+      - name: Upload SBOM
+        uses: actions/upload-artifact@v3
+        with:
+          name: sbom
+          path: sbom.spdx.json
+
+  security-scan:
+    name: Security Scan Container
+    runs-on: ubuntu-latest
+    needs: [build-and-push]
+    steps:
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ needs.build-and-push.outputs.image-tag }}
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: Upload Trivy scan results
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+      - name: Check for high/critical vulnerabilities
+        run: |
+          HIGH_VULNS=$(grep -c '"level": "HIGH"' trivy-results.sarif || echo "0")
+          CRITICAL_VULNS=$(grep -c '"level": "CRITICAL"' trivy-results.sarif || echo "0")
+
+          echo "High vulnerabilities: $HIGH_VULNS"
+          echo "Critical vulnerabilities: $CRITICAL_VULNS"
+
+          if [ "$CRITICAL_VULNS" -gt "0" ]; then
+            echo "❌ Critical vulnerabilities found! Blocking deployment."
+            exit 1
+          elif [ "$HIGH_VULNS" -gt "5" ]; then
+            echo "⚠️  Too many high vulnerabilities found! Review required."
+            exit 1
+          fi
+
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: [build-and-push, security-scan]
+    if: github.ref == 'refs/heads/main' || (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'staging')
+    environment:
+      name: staging
+      url: https://staging.insurance-claims.com
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest'
+
+      - name: Configure kubectl for staging
+        run: |
+          echo "${{ secrets.STAGING_KUBECONFIG }}" | base64 -d > kubeconfig
+          export KUBECONFIG=kubeconfig
+
+      - name: Deploy to staging
+        run: |
+          export KUBECONFIG=kubeconfig
+          # Update deployment with new image
+          kubectl set image deployment/insurance-claims-app \
+            app=${{ needs.build-and-push.outputs.image-tag }} \
+            -n staging
+
+          # Wait for rollout to complete
+          kubectl rollout status deployment/insurance-claims-app -n staging --timeout=300s
+
+      - name: Run smoke tests
+        run: |
+          # Wait for service to be ready
+          sleep 30
+
+          # Basic health check
+          curl -f https://staging.insurance-claims.com/health || exit 1
+
+          # API endpoint test
+          curl -f https://staging.insurance-claims.com/api/v1/claims/health || exit 1
+
+          echo "✅ Staging deployment successful and health checks passed"
+
+      - name: Run integration tests against staging
+        run: |
+          # Set staging environment variables
+          export API_BASE_URL=https://staging.insurance-claims.com
+          export ENVIRONMENT=staging
+
+          # Run integration test suite
+          pytest tests/integration/staging/ -v --tb=short
+
+  performance-test-staging:
+    name: Performance Test Staging
+    runs-on: ubuntu-latest
+    needs: [deploy-staging]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install load testing tools
+        run: |
+          pip install locust requests
+
+      - name: Run load tests
+        run: |
+          # Run Locust load tests against staging
+          locust -f tests/load/locustfile.py \
+            --host=https://staging.insurance-claims.com \
+            --users=10 \
+            --spawn-rate=2 \
+            --run-time=2m \
+            --headless \
+            --html=load-test-report.html
+
+      - name: Upload load test results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: load-test-results
+          path: load-test-report.html
+
+      - name: Check performance metrics
+        run: |
+          # Parse load test results and fail if performance degrades
+          python scripts/check_performance.py load-test-report.html
+
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [build-and-push, security-scan, deploy-staging, performance-test-staging]
+    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'production')
+    environment:
+      name: production
+      url: https://insurance-claims.com
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest'
+
+      - name: Configure kubectl for production
+        run: |
+          echo "${{ secrets.PRODUCTION_KUBECONFIG }}" | base64 -d > kubeconfig
+          export KUBECONFIG=kubeconfig
+
+      - name: Blue-Green Deployment Setup
+        run: |
+          export KUBECONFIG=kubeconfig
+
+          # Check current active deployment (blue or green)
+          CURRENT_COLOR=$(kubectl get service insurance-claims-service -o jsonpath='{.spec.selector.color}' -n production)
+          NEW_COLOR=$([ "$CURRENT_COLOR" = "blue" ] && echo "green" || echo "blue")
+
+          echo "Current deployment: $CURRENT_COLOR"
+          echo "Deploying to: $NEW_COLOR"
+          echo "NEW_COLOR=$NEW_COLOR" >> $GITHUB_ENV
+
+      - name: Deploy to inactive environment
+        run: |
+          export KUBECONFIG=kubeconfig
+
+          # Update the inactive deployment
+          kubectl set image deployment/insurance-claims-${{ env.NEW_COLOR }} \
+            app=${{ needs.build-and-push.outputs.image-tag }} \
+            -n production
+
+          # Wait for new deployment to be ready
+          kubectl rollout status deployment/insurance-claims-${{ env.NEW_COLOR }} -n production --timeout=600s
+
+      - name: Health check new deployment
+        run: |
+          export KUBECONFIG=kubeconfig
+
+          # Get the service endpoint for the new deployment
+          NEW_SERVICE_IP=$(kubectl get service insurance-claims-${{ env.NEW_COLOR }}-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}' -n production)
+
+          # Health check
+          for i in {1..30}; do
+            if curl -f http://$NEW_SERVICE_IP/health; then
+              echo "Health check passed"
+              break
+            fi
+            echo "Health check attempt $i failed, retrying..."
+            sleep 10
+          done
+
+      - name: Run production smoke tests
+        run: |
+          export KUBECONFIG=kubeconfig
+          NEW_SERVICE_IP=$(kubectl get service insurance-claims-${{ env.NEW_COLOR }}-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}' -n production)
+
+          # Run smoke tests against new deployment
+          export API_BASE_URL=http://$NEW_SERVICE_IP
+          pytest tests/smoke/ -v --tb=short
+
+      - name: Switch traffic to new deployment
+        run: |
+          export KUBECONFIG=kubeconfig
+
+          # Switch the main service to point to new deployment
+          kubectl patch service insurance-claims-service \
+            -p '{"spec":{"selector":{"color":"${{ env.NEW_COLOR }}"}}}' \
+            -n production
+
+          echo "✅ Traffic switched to ${{ env.NEW_COLOR }} deployment"
+
+      - name: Post-deployment verification
+        run: |
+          # Wait for DNS propagation
+          sleep 60
+
+          # Verify production endpoint
+          curl -f https://insurance-claims.com/health || exit 1
+          curl -f https://insurance-claims.com/api/v1/claims/health || exit 1
+
+          echo "✅ Production deployment successful"
+
+      - name: Clean up old deployment
+        run: |
+          export KUBECONFIG=kubeconfig
+          OLD_COLOR=$([ "${{ env.NEW_COLOR }}" = "blue" ] && echo "green" || echo "blue")
+
+          # Scale down old deployment (keep it for quick rollback)
+          kubectl scale deployment insurance-claims-$OLD_COLOR --replicas=1 -n production
+
+  rollback:
+    name: Rollback Production
+    runs-on: ubuntu-latest
+    if: failure() && needs.deploy-production.result == 'failure'
+    needs: [deploy-production]
+    environment:
+      name: production
+      url: https://insurance-claims.com
+    steps:
+      - name: Emergency Rollback
+        run: |
+          echo "${{ secrets.PRODUCTION_KUBECONFIG }}" | base64 -d > kubeconfig
+          export KUBECONFIG=kubeconfig
+
+          # Switch back to previous deployment
+          CURRENT_COLOR=$(kubectl get service insurance-claims-service -o jsonpath='{.spec.selector.color}' -n production)
+          OLD_COLOR=$([ "$CURRENT_COLOR" = "blue" ] && echo "green" || echo "blue")
+
+          kubectl patch service insurance-claims-service \
+            -p '{"spec":{"selector":{"color":"'$OLD_COLOR'"}}}' \
+            -n production
+
+          # Scale up old deployment
+          kubectl scale deployment insurance-claims-$OLD_COLOR --replicas=3 -n production
+
+          echo "🔄 Emergency rollback completed to $OLD_COLOR"
+
+  notify:
+    name: Deployment Notification
+    runs-on: ubuntu-latest
+    needs: [deploy-staging, deploy-production]
+    if: always()
+    steps:
+      - name: Notify success
+        if: needs.deploy-production.result == 'success'
+        run: |
+          echo "🚀 Production deployment successful!"
+          echo "Version: ${{ github.ref_name }}"
+          echo "Commit: ${{ github.sha }}"
+
+      - name: Notify failure
+        if: failure()
+        run: |
+          echo "❌ Deployment failed!"
+          echo "Please check the logs and consider rollback if necessary."

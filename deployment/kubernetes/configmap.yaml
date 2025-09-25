@@ -1,0 +1,93 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: insurance-claims-config
+  namespace: insurance-claims
+  labels:
+    app: insurance-claims
+    component: config
+data:
+  # Application configuration
+  LOG_LEVEL: "info"
+  ENVIRONMENT: "production"
+  PORT: "8000"
+  WORKERS: "4"
+  MAX_WORKERS: "8"
+  TIMEOUT: "30"
+  KEEP_ALIVE: "2"
+
+  # Feature flags
+  ENABLE_MONITORING: "true"
+  ENABLE_TRACING: "true"
+  ENABLE_CACHING: "true"
+
+  # Processing configuration
+  BATCH_SIZE: "1000"
+  MAX_RETRY_ATTEMPTS: "3"
+  RETRY_DELAY: "5"
+
+  # Model configuration
+  MODEL_VERSION: "v1.0.0"
+  FRAUD_THRESHOLD: "0.7"
+
+  # Database configuration (non-sensitive)
+  DB_POOL_SIZE: "20"
+  DB_MAX_CONNECTIONS: "100"
+  DB_TIMEOUT: "30"
+
+  # Redis configuration
+  REDIS_DB: "0"
+  REDIS_TIMEOUT: "5"
+
+  # Security settings
+  CORS_ORIGINS: "https://insurance-claims.com,https://api.insurance-claims.com"
+  MAX_REQUEST_SIZE: "10485760"  # 10MB
+  RATE_LIMIT_PER_MINUTE: "1000"
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: insurance-claims-config
+  namespace: insurance-claims-staging
+  labels:
+    app: insurance-claims
+    component: config
+    env: staging
+data:
+  # Application configuration
+  LOG_LEVEL: "debug"
+  ENVIRONMENT: "staging"
+  PORT: "8000"
+  WORKERS: "2"
+  MAX_WORKERS: "4"
+  TIMEOUT: "30"
+  KEEP_ALIVE: "2"
+
+  # Feature flags
+  ENABLE_MONITORING: "true"
+  ENABLE_TRACING: "true"
+  ENABLE_CACHING: "true"
+
+  # Processing configuration
+  BATCH_SIZE: "500"
+  MAX_RETRY_ATTEMPTS: "3"
+  RETRY_DELAY: "5"
+
+  # Model configuration
+  MODEL_VERSION: "v1.0.0"
+  FRAUD_THRESHOLD: "0.7"
+
+  # Database configuration (non-sensitive)
+  DB_POOL_SIZE: "10"
+  DB_MAX_CONNECTIONS: "50"
+  DB_TIMEOUT: "30"
+
+  # Redis configuration
+  REDIS_DB: "0"
+  REDIS_TIMEOUT: "5"
+
+  # Security settings
+  CORS_ORIGINS: "https://staging.insurance-claims.com"
+  MAX_REQUEST_SIZE: "10485760"  # 10MB
+  RATE_LIMIT_PER_MINUTE: "500"

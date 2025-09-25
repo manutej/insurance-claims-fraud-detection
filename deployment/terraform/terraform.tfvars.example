@@ -1,0 +1,97 @@
+# terraform.tfvars.example
+# Copy this file to terraform.tfvars and customize for your environment
+
+# Environment Configuration
+environment = "staging"  # or "production"
+aws_region  = "us-east-1"
+
+# Network Configuration
+vpc_cidr         = "10.0.0.0/16"
+private_subnets  = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+public_subnets   = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
+database_subnets = ["10.0.201.0/24", "10.0.202.0/24", "10.0.203.0/24"]
+
+# EKS Configuration
+kubernetes_version   = "1.28"
+node_instance_types  = ["t3.medium", "t3.large"]
+node_min_size       = 1
+node_max_size       = 10
+node_desired_size   = 3
+
+# Spot instances for cost optimization
+spot_instance_types = ["t3.medium", "t3.large", "t3.xlarge"]
+spot_max_size      = 20
+spot_desired_size  = 2
+
+# EC2 Key Pair for SSH access (optional)
+ec2_key_name = "my-key-pair"
+
+# EKS Admin Users
+eks_admin_users = [
+  {
+    userarn  = "arn:aws:iam::123456789012:user/admin-user"
+    username = "admin-user"
+    groups   = ["system:masters"]
+  }
+]
+
+# Database Configuration
+db_instance_class        = "db.t3.micro"     # For staging
+# db_instance_class      = "db.t3.medium"    # For production
+db_allocated_storage     = 20
+db_max_allocated_storage = 100
+postgresql_version       = "15.4"
+db_name                 = "claims_db"
+db_username             = "claims_user"
+
+# Redis Configuration
+redis_node_type         = "cache.t3.micro"   # For staging
+# redis_node_type       = "cache.t3.small"   # For production
+redis_num_cache_nodes   = 1                  # Set to 2+ for production
+redis_parameter_group   = "default.redis7"
+
+# Monitoring Configuration
+enable_monitoring    = true
+log_retention_days   = 14    # 30 for production
+
+# Security Configuration
+enable_waf = false           # Set to true for production
+allowed_cidr_blocks = ["0.0.0.0/0"]  # Restrict for production
+
+# Backup Configuration
+backup_retention_period        = 7    # 30 for production
+enable_point_in_time_recovery = true
+
+# Cost Optimization
+enable_cost_optimization = true
+schedule_stop_start = {
+  start_time = "08:00"
+  stop_time  = "18:00"
+  timezone   = "UTC"
+}
+
+# Feature Flags
+enable_insights     = true
+enable_encryption   = true
+enable_multi_az     = false  # Set to true for production
+
+# Application Configuration
+app_image_tag    = "latest"
+app_replicas     = 2
+worker_replicas  = 1
+
+# Domain Configuration (optional)
+# domain_name     = "staging.insurance-claims.com"
+# certificate_arn = "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012"
+
+# Disaster Recovery
+enable_cross_region_backup = false
+backup_region             = "us-west-2"
+
+# Additional Tags
+additional_tags = {
+  Owner       = "insurance-claims-team"
+  CostCenter  = "fraud-detection"
+  Department  = "engineering"
+  Project     = "claims-analysis"
+}
