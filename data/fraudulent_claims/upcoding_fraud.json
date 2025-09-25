@@ -1,0 +1,113 @@
+{
+  "claims": [
+    {
+      "claim_id": "CLM-2024-F01001",
+      "patient_id": "PAT-80001",
+      "provider_id": "PRV-FRAUD-001",
+      "provider_npi": "9999999001",
+      "date_of_service": "2024-03-15",
+      "diagnosis_codes": ["J00"],
+      "diagnosis_descriptions": ["Acute nasopharyngitis (common cold)"],
+      "procedure_codes": ["99215"],
+      "procedure_descriptions": ["Office visit, established patient, high complexity"],
+      "billed_amount": 325.00,
+      "actual_service": "99212",
+      "actual_amount": 75.00,
+      "service_location": "11",
+      "claim_type": "professional",
+      "rendering_hours": 0.75,
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis billed at highest complexity",
+        "Provider bills 90% of visits as 99215",
+        "Visit duration inconsistent with complexity"
+      ],
+      "notes": "Common cold billed as complex medical decision making"
+    },
+    {
+      "claim_id": "CLM-2024-F01002",
+      "patient_id": "PAT-80002",
+      "provider_id": "PRV-FRAUD-001",
+      "provider_npi": "9999999001",
+      "date_of_service": "2024-03-16",
+      "diagnosis_codes": ["R05"],
+      "diagnosis_descriptions": ["Cough"],
+      "procedure_codes": ["99215", "94060"],
+      "procedure_descriptions": ["Office visit, high complexity", "Bronchodilation responsiveness"],
+      "billed_amount": 425.00,
+      "actual_service": "99213",
+      "actual_amount": 125.00,
+      "service_location": "11",
+      "claim_type": "professional",
+      "rendering_hours": 0.75,
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Unnecessary pulmonary function test for simple cough",
+        "Pattern of maximum billing codes",
+        "No medical necessity for complex testing"
+      ],
+      "notes": "Simple cough visit upcoded with unnecessary testing"
+    },
+    {
+      "claim_id": "CLM-2024-F01003",
+      "patient_id": "PAT-80003",
+      "provider_id": "PRV-FRAUD-002",
+      "provider_npi": "9999999002",
+      "date_of_service": "2024-03-17",
+      "diagnosis_codes": ["M79.3"],
+      "diagnosis_descriptions": ["Myalgia"],
+      "procedure_codes": ["97140", "97110", "97112", "97530"],
+      "procedure_descriptions": ["Manual therapy", "Therapeutic exercises", "Neuromuscular reeducation", "Therapeutic activities"],
+      "billed_amount": 485.00,
+      "actual_service": "97110",
+      "actual_amount": 125.00,
+      "service_location": "11",
+      "claim_type": "professional",
+      "rendering_hours": 2.0,
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Multiple therapy codes for single session",
+        "Total time exceeds appointment duration",
+        "Simple muscle pain billed as complex therapy"
+      ],
+      "notes": "Physical therapy session upcoded with multiple unnecessary codes"
+    },
+    {
+      "claim_id": "CLM-2024-F01004",
+      "patient_id": "PAT-80004",
+      "provider_id": "PRV-FRAUD-003",
+      "provider_npi": "9999999003",
+      "date_of_service": "2024-03-18",
+      "diagnosis_codes": ["K59.00"],
+      "diagnosis_descriptions": ["Constipation, unspecified"],
+      "procedure_codes": ["45378", "45380"],
+      "procedure_descriptions": ["Colonoscopy", "Colonoscopy with biopsy"],
+      "billed_amount": 3500.00,
+      "actual_service": "99213",
+      "actual_amount": 125.00,
+      "service_location": "22",
+      "claim_type": "professional",
+      "rendering_hours": 1.5,
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Invasive procedure for simple constipation",
+        "No prior conservative treatment documented",
+        "Procedure not medically necessary"
+      ],
+      "notes": "Office visit for constipation billed as colonoscopy procedure"
+    }
+  ],
+  "metadata": {
+    "file_type": "fraudulent_upcoding_claims",
+    "generated_date": "2024-03-20",
+    "total_claims": 4,
+    "total_fraudulent_billed": 4735.00,
+    "actual_value": 450.00,
+    "fraud_amount": 4285.00,
+    "fraud_percentage": 90.5
+  }
+}

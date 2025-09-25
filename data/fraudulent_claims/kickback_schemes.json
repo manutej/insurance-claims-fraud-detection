@@ -1,0 +1,143 @@
+{
+  "claims": [
+    {
+      "claim_id": "CLM-2024-F06001",
+      "patient_id": "PAT-89001",
+      "referring_provider": "PRV-FRAUD-019",
+      "performing_provider": "PRV-FRAUD-020",
+      "provider_npi": "9999999020",
+      "date_of_service": "2024-03-15",
+      "diagnosis_codes": ["M54.5"],
+      "diagnosis_descriptions": ["Low back pain"],
+      "procedure_codes": ["72148"],
+      "procedure_descriptions": ["MRI lumbar spine without contrast"],
+      "billed_amount": 2500.00,
+      "service_location": "49",
+      "claim_type": "professional",
+      "kickback_amount": 500.00,
+      "fraud_indicator": true,
+      "fraud_type": "kickback_scheme",
+      "red_flags": [
+        "95% of provider's MRI referrals to same facility",
+        "MRI for simple back pain without conservative treatment",
+        "Provider received $500 per referral",
+        "Facility owned by referring provider's spouse",
+        "Pattern of unnecessary imaging"
+      ],
+      "notes": "Kickback for MRI referral, financial relationship hidden"
+    },
+    {
+      "claim_id": "CLM-2024-F06002",
+      "patient_id": "PAT-89002",
+      "referring_provider": "PRV-FRAUD-019",
+      "performing_provider": "PRV-FRAUD-020",
+      "provider_npi": "9999999020",
+      "date_of_service": "2024-03-16",
+      "diagnosis_codes": ["M79.3"],
+      "diagnosis_descriptions": ["Myalgia"],
+      "procedure_codes": ["72141", "72146"],
+      "procedure_descriptions": ["MRI cervical spine without contrast", "MRI thoracic spine without contrast"],
+      "billed_amount": 4500.00,
+      "service_location": "49",
+      "claim_type": "professional",
+      "kickback_amount": 900.00,
+      "fraud_indicator": true,
+      "fraud_type": "kickback_scheme",
+      "red_flags": [
+        "Multiple unnecessary MRIs same patient",
+        "Referring provider gets 20% of billing",
+        "No clinical indication for imaging",
+        "Patient recruited with gift cards"
+      ],
+      "notes": "Multiple MRI kickback, patient incentivized to participate"
+    },
+    {
+      "claim_id": "CLM-2024-F06003",
+      "patient_id": "PAT-89003",
+      "referring_provider": "PRV-FRAUD-021",
+      "performing_provider": "PRV-FRAUD-022",
+      "provider_npi": "9999999022",
+      "date_of_service": "2024-03-17",
+      "diagnosis_codes": ["E11.9", "E78.5"],
+      "diagnosis_descriptions": ["Type 2 diabetes", "Hyperlipidemia"],
+      "procedure_codes": ["80053", "83036", "80061", "84443"],
+      "procedure_descriptions": ["Comprehensive metabolic panel", "Hemoglobin A1C", "Lipid panel", "TSH"],
+      "billed_amount": 850.00,
+      "service_location": "81",
+      "claim_type": "professional",
+      "kickback_amount": 170.00,
+      "fraud_indicator": true,
+      "fraud_type": "kickback_scheme",
+      "red_flags": [
+        "Lab pays referring physician per test ordered",
+        "Monthly testing without medical necessity",
+        "98% of lab work to single facility",
+        "Sham medical director agreement",
+        "Tests repeated unnecessarily"
+      ],
+      "notes": "Laboratory kickback scheme disguised as medical director fees"
+    },
+    {
+      "claim_id": "CLM-2024-F06004",
+      "patient_id": "PAT-89004",
+      "referring_provider": "PRV-FRAUD-023",
+      "performing_provider": "PRV-FRAUD-024",
+      "provider_npi": "9999999024",
+      "date_of_service": "2024-03-18",
+      "diagnosis_codes": ["M17.11"],
+      "diagnosis_descriptions": ["Unilateral primary osteoarthritis, right knee"],
+      "procedure_codes": ["27447"],
+      "procedure_descriptions": ["Total knee arthroplasty"],
+      "billed_amount": 35000.00,
+      "service_location": "21",
+      "claim_type": "facility",
+      "kickback_amount": 5000.00,
+      "fraud_indicator": true,
+      "fraud_type": "kickback_scheme",
+      "red_flags": [
+        "Surgery not medically necessary",
+        "Conservative treatment never attempted",
+        "Surgeon receives implant company kickback",
+        "Patient recruited with free transportation",
+        "Vacation recovery package included"
+      ],
+      "notes": "Unnecessary surgery with device manufacturer kickback"
+    },
+    {
+      "claim_id": "CLM-2024-F06005",
+      "patient_id": "PAT-89005",
+      "referring_provider": "PRV-FRAUD-025",
+      "performing_provider": "PRV-FRAUD-026",
+      "provider_npi": "9999999026",
+      "date_of_service": "2024-03-19",
+      "diagnosis_codes": ["G89.29"],
+      "diagnosis_descriptions": ["Other chronic pain"],
+      "procedure_codes": ["64635", "64636", "77003"],
+      "procedure_descriptions": ["Facet joint denervation", "Add-on denervation", "Fluoroscopic guidance"],
+      "billed_amount": 8500.00,
+      "service_location": "24",
+      "claim_type": "professional",
+      "kickback_amount": 1700.00,
+      "fraud_indicator": true,
+      "fraud_type": "kickback_scheme",
+      "red_flags": [
+        "Pain clinic owns surgery center",
+        "Referring doctor is investor",
+        "100% of procedures at owned facility",
+        "Patients required to use specific facility",
+        "Revenue sharing agreement"
+      ],
+      "notes": "Self-referral to physician-owned surgery center"
+    }
+  ],
+  "metadata": {
+    "file_type": "fraudulent_kickback_schemes",
+    "generated_date": "2024-03-20",
+    "total_claims": 5,
+    "total_fraudulent_billed": 51350.00,
+    "total_kickbacks_paid": 8270.00,
+    "kickback_percentage": 16.1,
+    "providers_involved": 12,
+    "facilities_involved": 5
+  }
+}

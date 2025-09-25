@@ -1,0 +1,451 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insurance-claims-blue
+  namespace: insurance-claims
+  labels:
+    app: insurance-claims
+    component: api
+    color: blue
+    version: v1.0.0
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: insurance-claims
+      component: api
+      color: blue
+  template:
+    metadata:
+      labels:
+        app: insurance-claims
+        component: api
+        color: blue
+        version: v1.0.0
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8001"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: insurance-claims
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+      - name: app
+        image: ghcr.io/insurance-claims/fraud-detection:latest
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 8000
+          protocol: TCP
+        - name: metrics
+          containerPort: 8001
+          protocol: TCP
+        env:
+        - name: MODE
+          value: "api"
+        envFrom:
+        - configMapRef:
+            name: insurance-claims-config
+        - secretRef:
+            name: insurance-claims-secrets
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+          successThreshold: 1
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+          successThreshold: 1
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 1000
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: tmp-volume
+          mountPath: /tmp
+        - name: models-volume
+          mountPath: /app/models
+          readOnly: true
+        - name: logs-volume
+          mountPath: /app/logs
+      volumes:
+      - name: tmp-volume
+        emptyDir: {}
+      - name: logs-volume
+        emptyDir: {}
+      - name: models-volume
+        configMap:
+          name: insurance-claims-models
+          optional: true
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app: insurance-claims
+                  component: api
+              topologyKey: kubernetes.io/hostname
+      tolerations:
+      - key: "app"
+        operator: "Equal"
+        value: "insurance-claims"
+        effect: "NoSchedule"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insurance-claims-green
+  namespace: insurance-claims
+  labels:
+    app: insurance-claims
+    component: api
+    color: green
+    version: v1.0.0
+spec:
+  replicas: 0  # Initially scaled to 0 for blue-green deployment
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: insurance-claims
+      component: api
+      color: green
+  template:
+    metadata:
+      labels:
+        app: insurance-claims
+        component: api
+        color: green
+        version: v1.0.0
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8001"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: insurance-claims
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+      - name: app
+        image: ghcr.io/insurance-claims/fraud-detection:latest
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 8000
+          protocol: TCP
+        - name: metrics
+          containerPort: 8001
+          protocol: TCP
+        env:
+        - name: MODE
+          value: "api"
+        envFrom:
+        - configMapRef:
+            name: insurance-claims-config
+        - secretRef:
+            name: insurance-claims-secrets
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+          successThreshold: 1
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+          successThreshold: 1
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 1000
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: tmp-volume
+          mountPath: /tmp
+        - name: models-volume
+          mountPath: /app/models
+          readOnly: true
+        - name: logs-volume
+          mountPath: /app/logs
+      volumes:
+      - name: tmp-volume
+        emptyDir: {}
+      - name: logs-volume
+        emptyDir: {}
+      - name: models-volume
+        configMap:
+          name: insurance-claims-models
+          optional: true
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app: insurance-claims
+                  component: api
+              topologyKey: kubernetes.io/hostname
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insurance-claims-worker
+  namespace: insurance-claims
+  labels:
+    app: insurance-claims
+    component: worker
+    version: v1.0.0
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: insurance-claims
+      component: worker
+  template:
+    metadata:
+      labels:
+        app: insurance-claims
+        component: worker
+        version: v1.0.0
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8001"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: insurance-claims
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+      - name: worker
+        image: ghcr.io/insurance-claims/fraud-detection:latest
+        imagePullPolicy: Always
+        ports:
+        - name: metrics
+          containerPort: 8001
+          protocol: TCP
+        env:
+        - name: MODE
+          value: "worker"
+        envFrom:
+        - configMapRef:
+            name: insurance-claims-config
+        - secretRef:
+            name: insurance-claims-secrets
+        resources:
+          requests:
+            memory: "768Mi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "2000m"
+        livenessProbe:
+          exec:
+            command:
+            - python
+            - -c
+            - "import redis; r = redis.from_url('${REDIS_URL}'); r.ping()"
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 1000
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: tmp-volume
+          mountPath: /tmp
+        - name: models-volume
+          mountPath: /app/models
+          readOnly: true
+        - name: logs-volume
+          mountPath: /app/logs
+      volumes:
+      - name: tmp-volume
+        emptyDir: {}
+      - name: logs-volume
+        emptyDir: {}
+      - name: models-volume
+        configMap:
+          name: insurance-claims-models
+          optional: true
+
+---
+# Staging deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insurance-claims-app
+  namespace: insurance-claims-staging
+  labels:
+    app: insurance-claims
+    component: api
+    env: staging
+    version: v1.0.0
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: insurance-claims
+      component: api
+      env: staging
+  template:
+    metadata:
+      labels:
+        app: insurance-claims
+        component: api
+        env: staging
+        version: v1.0.0
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8001"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: insurance-claims
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+      - name: app
+        image: ghcr.io/insurance-claims/fraud-detection:latest
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 8000
+          protocol: TCP
+        - name: metrics
+          containerPort: 8001
+          protocol: TCP
+        env:
+        - name: MODE
+          value: "api"
+        envFrom:
+        - configMapRef:
+            name: insurance-claims-config
+        - secretRef:
+            name: insurance-claims-secrets
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "125m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 1000
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: tmp-volume
+          mountPath: /tmp
+        - name: logs-volume
+          mountPath: /app/logs
+      volumes:
+      - name: tmp-volume
+        emptyDir: {}
+      - name: logs-volume
+        emptyDir: {}

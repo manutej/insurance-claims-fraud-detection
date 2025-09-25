@@ -1,0 +1,323 @@
+{
+  "claims": [
+    {
+      "claim_id": "CLM-2024-F02001",
+      "patient_id": "PAT-GHOST-001",
+      "patient_ssn": "123-45-6789",
+      "provider_id": "PRV-FRAUD-004",
+      "provider_npi": "9999999004",
+      "date_of_service": "2024-03-17",
+      "day_of_week": "Sunday",
+      "diagnosis_codes": ["E11.9", "I10"],
+      "diagnosis_descriptions": ["Type 2 diabetes", "Hypertension"],
+      "procedure_codes": ["99214", "93000", "36415"],
+      "procedure_descriptions": ["Office visit", "EKG", "Venipuncture"],
+      "billed_amount": 425.00,
+      "service_location": "11",
+      "claim_type": "professional",
+      "rendering_hours": 0.75,
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Service on Sunday when office closed",
+        "Sequential SSN pattern",
+        "No appointment records",
+        "Patient address doesn't exist"
+      ]
+    },
+    {
+      "claim_id": "CLM-2024-F02005",
+      "patient_id": "PAT-GHOST-005",
+      "patient_ssn": "123-45-6793",
+      "provider_id": "PRV-FRAUD-004",
+      "provider_npi": "9999999004",
+      "date_of_service": "2024-03-17",
+      "day_of_week": "Sunday",
+      "diagnosis_codes": ["M54.5", "M79.3"],
+      "procedure_codes": ["99215", "97110", "97140"],
+      "billed_amount": 485.00,
+      "service_location": "11",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Sunday service batch billing",
+        "18 patients in 4 hours",
+        "Sequential SSNs continuing"
+      ]
+    },
+    {
+      "claim_id": "CLM-2024-F02006",
+      "patient_id": "PAT-DECEASED-001",
+      "provider_id": "PRV-FRAUD-020",
+      "provider_npi": "9999999020",
+      "date_of_service": "2024-03-18",
+      "date_of_death": "2023-09-15",
+      "diagnosis_codes": ["F41.1", "F32.9"],
+      "procedure_codes": ["90837", "90846"],
+      "billed_amount": 550.00,
+      "service_location": "11",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Patient deceased 6 months ago",
+        "Death certificate on file",
+        "Services billed post-mortem",
+        "Family therapy without family"
+      ]
+    },
+    {
+      "claim_id": "CLM-2024-F02007",
+      "patient_id": "PAT-DUPLICATE-001",
+      "provider_id": "PRV-FRAUD-021",
+      "provider_npi": "9999999021",
+      "date_of_service": "2024-03-19",
+      "time_of_service": "14:00",
+      "diagnosis_codes": ["J18.9"],
+      "procedure_codes": ["99285", "71046"],
+      "billed_amount": 1250.00,
+      "service_location": "23",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Patient at different ER same time",
+        "Duplicate billing different locations",
+        "Impossible to be two places at once"
+      ],
+      "related_claim": "CLM-2024-F02008"
+    },
+    {
+      "claim_id": "CLM-2024-F02008",
+      "patient_id": "PAT-DUPLICATE-001",
+      "provider_id": "PRV-FRAUD-022",
+      "provider_npi": "9999999022",
+      "date_of_service": "2024-03-19",
+      "time_of_service": "14:00",
+      "diagnosis_codes": ["S06.0X0A"],
+      "procedure_codes": ["99285", "70450"],
+      "billed_amount": 1850.00,
+      "service_location": "23",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Same patient, same time, different ER",
+        "Physically impossible",
+        "Conflicting diagnoses"
+      ],
+      "related_claim": "CLM-2024-F02007"
+    },
+    {
+      "claim_id": "CLM-2024-F02009",
+      "patient_id": "PAT-FACTORY-001",
+      "provider_id": "PRV-FRAUD-023",
+      "provider_npi": "9999999023",
+      "date_of_service": "2024-03-20",
+      "diagnosis_codes": ["E11.9"],
+      "procedure_codes": ["99214", "82947", "80053"],
+      "billed_amount": 325.00,
+      "service_location": "11",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Cookie-cutter claim pattern",
+        "100 identical claims same day",
+        "All diabetes, all same tests",
+        "Assembly line billing"
+      ]
+    },
+    {
+      "claim_id": "CLM-2024-F02010",
+      "patient_id": "PAT-NOCONSENT-001",
+      "provider_id": "PRV-FRAUD-024",
+      "provider_npi": "9999999024",
+      "date_of_service": "2024-03-21",
+      "diagnosis_codes": ["G47.33"],
+      "procedure_codes": ["95810", "95811"],
+      "billed_amount": 3500.00,
+      "service_location": "51",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Sleep study never performed",
+        "Patient never at facility",
+        "No consent forms signed",
+        "Equipment never used"
+      ]
+    },
+    {
+      "claim_id": "CLM-2024-F02011",
+      "patient_id": "PAT-DISTANCE-001",
+      "provider_id": "PRV-FRAUD-025",
+      "provider_npi": "9999999025",
+      "date_of_service": "2024-03-22",
+      "diagnosis_codes": ["M54.5"],
+      "procedure_codes": ["97110", "97140"],
+      "billed_amount": 285.00,
+      "service_location": "11",
+      "patient_location": "California",
+      "provider_location": "New York",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Patient 3000 miles away",
+        "In-person service impossible",
+        "No travel records",
+        "Patient confirmed never visited"
+      ]
+    },
+    {
+      "claim_id": "CLM-2024-F02012",
+      "patient_id": "PAT-INFANT-001",
+      "patient_age": 0.5,
+      "provider_id": "PRV-FRAUD-026",
+      "provider_npi": "9999999026",
+      "date_of_service": "2024-03-23",
+      "diagnosis_codes": ["F90.0"],
+      "procedure_codes": ["90837", "96372"],
+      "billed_amount": 425.00,
+      "service_location": "11",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "ADHD diagnosis in 6-month-old",
+        "Age-inappropriate diagnosis",
+        "Psychotherapy for infant",
+        "Medical impossibility"
+      ]
+    },
+    {
+      "claim_id": "CLM-2024-F02013",
+      "patient_id": "PAT-GHOST-100",
+      "provider_id": "PRV-FRAUD-027",
+      "provider_npi": "9999999027",
+      "date_of_service": "2024-03-24",
+      "diagnosis_codes": ["Z00.00"],
+      "procedure_codes": ["99397", "80053", "81001", "93000"],
+      "billed_amount": 485.00,
+      "service_location": "11",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Physical exam never occurred",
+        "Lab results fabricated",
+        "EKG machine broken that day",
+        "Staff confirmed patient no-show"
+      ]
+    },
+    {
+      "claim_id": "CLM-2024-F02014",
+      "patient_id": "PAT-STOLEN-001",
+      "provider_id": "PRV-FRAUD-028",
+      "provider_npi": "9999999028",
+      "date_of_service": "2024-03-25",
+      "diagnosis_codes": ["K92.1", "K92.2"],
+      "procedure_codes": ["45378", "45380", "45385"],
+      "billed_amount": 4850.00,
+      "service_location": "22",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Identity theft victim",
+        "Patient out of country",
+        "Passport stamps confirm absence",
+        "Multiple procedures impossible timeframe"
+      ]
+    },
+    {
+      "claim_id": "CLM-2024-F02015",
+      "patient_id": "PAT-ROBOT-001",
+      "provider_id": "PRV-FRAUD-029",
+      "provider_npi": "9999999029",
+      "date_of_service": "2024-03-26",
+      "diagnosis_codes": ["E11.65", "E11.40", "E11.42"],
+      "procedure_codes": ["99215", "95251", "82962"],
+      "billed_amount": 625.00,
+      "service_location": "11",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "AI-generated patient data",
+        "Conflicting diabetes codes",
+        "Impossible complication combinations",
+        "Pattern matches known bot signatures"
+      ]
+    },
+    {
+      "claim_id": "CLM-2024-F02016",
+      "patient_id": "PAT-HOLIDAY-001",
+      "provider_id": "PRV-FRAUD-030",
+      "provider_npi": "9999999030",
+      "date_of_service": "2024-12-25",
+      "diagnosis_codes": ["M79.3"],
+      "procedure_codes": ["97110", "97112", "97140"],
+      "billed_amount": 385.00,
+      "service_location": "11",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Christmas Day service",
+        "Facility confirmed closed",
+        "No emergency services offered",
+        "Batch of 50 holiday claims"
+      ]
+    },
+    {
+      "claim_id": "CLM-2024-F02017",
+      "patient_id": "PAT-TIMETRAVEL-001",
+      "provider_id": "PRV-FRAUD-031",
+      "provider_npi": "9999999031",
+      "date_of_service": "2024-03-27",
+      "admission_date": "2024-03-28",
+      "diagnosis_codes": ["J44.0"],
+      "procedure_codes": ["99223", "94640"],
+      "billed_amount": 525.00,
+      "service_location": "21",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Service before admission",
+        "Temporal impossibility",
+        "Discharge before admission",
+        "Date logic errors"
+      ]
+    },
+    {
+      "claim_id": "CLM-2024-F02018",
+      "patient_id": "PAT-MARATHON-001",
+      "provider_id": "PRV-FRAUD-032",
+      "provider_npi": "9999999032",
+      "date_of_service": "2024-03-28",
+      "total_daily_hours": 47,
+      "diagnosis_codes": ["Various"],
+      "procedure_codes": ["99215"],
+      "billed_amount": 325.00,
+      "service_location": "11",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Provider billed 47 hours in one day",
+        "Physical impossibility",
+        "188 patients in 24 hours",
+        "Each visit supposedly 15 minutes"
+      ]
+    }
+  ],
+  "metadata": {
+    "file_type": "fraudulent_phantom_billing_expanded",
+    "generated_date": "2024-03-20",
+    "total_claims": 15,
+    "total_fraudulent_billed": 18870.00,
+    "actual_value": 0.00,
+    "fraud_amount": 18870.00,
+    "fraud_percentage": 100.0,
+    "pattern_categories": {
+      "deceased_patients": 1,
+      "impossible_locations": 2,
+      "temporal_impossibilities": 3,
+      "age_inappropriate": 1,
+      "identity_theft": 1,
+      "closed_facility": 3,
+      "duplicate_billing": 2,
+      "excessive_hours": 1
+    }
+  }
+}

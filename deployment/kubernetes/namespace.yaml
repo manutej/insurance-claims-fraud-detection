@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: insurance-claims
+  labels:
+    name: insurance-claims
+    env: production
+    app: fraud-detection
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: insurance-claims-staging
+  labels:
+    name: insurance-claims-staging
+    env: staging
+    app: fraud-detection
