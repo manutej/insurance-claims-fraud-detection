@@ -11,7 +11,7 @@ Key Components:
 """
 
 from typing import Dict, List, Optional, Any
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, ConfigDict
 from datetime import datetime
 
 
@@ -22,6 +22,7 @@ class FraudSignal(BaseModel):
     A fraud signal indicates suspicious behavior that may warrant
     further investigation. Signals are scored 0.0-1.0 based on severity.
     """
+    model_config = ConfigDict(validate_assignment=True)
 
     signal_type: str = Field(..., description="Unique identifier for signal type")
     signal_name: str = Field(..., description="Human-readable signal description")
@@ -47,10 +48,6 @@ class FraudSignal(BaseModel):
         default_factory=datetime.utcnow,
         description="When this signal was generated"
     )
-
-    class Config:
-        """Pydantic configuration."""
-        validate_assignment = True
 
 
 class FraudSignalFromMissingData:
