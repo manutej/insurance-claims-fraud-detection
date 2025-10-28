@@ -10,7 +10,7 @@ long_description = (this_directory / "CLAUDE.md").read_text()
 # Read requirements
 requirements_path = this_directory / "requirements.txt"
 with open(requirements_path) as f:
-    requirements = [line.strip() for line in f if line.strip() and not line.startswith('#')]
+    requirements = [line.strip() for line in f if line.strip() and not line.startswith("#")]
 
 setup(
     name="insurance-claims-pipeline",
@@ -52,7 +52,7 @@ setup(
         "monitoring": [
             "memory-profiler>=0.60.0",
             "psutil>=5.8.0",
-        ]
+        ],
     },
     entry_points={
         "console_scripts": [

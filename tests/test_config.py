@@ -1,9 +1,11 @@
 """
 Test configuration module containing performance benchmarks and testing constants.
 """
+
 import os
 from dataclasses import dataclass
 from typing import Dict, Any
+
 
 @dataclass
 class PerformanceBenchmarks:
@@ -35,6 +37,7 @@ class PerformanceBenchmarks:
     LARGE_DATASET_SIZE: int = 10000
     STRESS_DATASET_SIZE: int = 100000
 
+
 @dataclass
 class TestConfiguration:
     """Test configuration settings."""
@@ -64,13 +67,14 @@ class TestConfiguration:
     def __post_init__(self):
         if self.FEATURE_COLUMNS is None:
             self.FEATURE_COLUMNS = [
-                'billed_amount',
-                'diagnosis_codes',
-                'procedure_codes',
-                'provider_npi',
-                'patient_age',
-                'days_between_service_and_claim'
+                "billed_amount",
+                "diagnosis_codes",
+                "procedure_codes",
+                "provider_npi",
+                "patient_age",
+                "days_between_service_and_claim",
             ]
+
 
 # Global instances
 BENCHMARKS = PerformanceBenchmarks()
@@ -78,77 +82,97 @@ CONFIG = TestConfiguration()
 
 # Test Categories
 TEST_CATEGORIES = {
-    'unit': {
-        'description': 'Fast, isolated tests for individual functions/classes',
-        'timeout': 5,
-        'parallelizable': True
+    "unit": {
+        "description": "Fast, isolated tests for individual functions/classes",
+        "timeout": 5,
+        "parallelizable": True,
     },
-    'integration': {
-        'description': 'Tests for component interactions and data flow',
-        'timeout': 30,
-        'parallelizable': False
+    "integration": {
+        "description": "Tests for component interactions and data flow",
+        "timeout": 30,
+        "parallelizable": False,
     },
-    'performance': {
-        'description': 'Latency, throughput, and resource usage tests',
-        'timeout': 300,
-        'parallelizable': False
+    "performance": {
+        "description": "Latency, throughput, and resource usage tests",
+        "timeout": 300,
+        "parallelizable": False,
     },
-    'accuracy': {
-        'description': 'Model accuracy and fraud detection rate validation',
-        'timeout': 60,
-        'parallelizable': True
+    "accuracy": {
+        "description": "Model accuracy and fraud detection rate validation",
+        "timeout": 60,
+        "parallelizable": True,
     },
-    'security': {
-        'description': 'Security vulnerability and data privacy tests',
-        'timeout': 30,
-        'parallelizable': True
-    }
+    "security": {
+        "description": "Security vulnerability and data privacy tests",
+        "timeout": 30,
+        "parallelizable": True,
+    },
 }
 
 # Test Data Generation Configuration
 TEST_DATA_CONFIG = {
-    'claim_id_pattern': 'CLM-{year}-{sequence:06d}',
-    'patient_id_pattern': 'PAT-{sequence:08d}',
-    'provider_npi_range': (1000000000, 9999999999),
-    'billed_amount_range': (50.0, 50000.0),
-    'fraud_rate_in_test_data': 0.5,  # Higher than real-world for balanced testing
-    'date_range_days': 365,
-    'diagnosis_codes': [
-        'M79.3', 'S13.4', 'M54.2', 'G44.1', 'M25.5',  # Common injury codes
-        'Z51.11', 'M17.0', 'I25.10', 'E11.9', 'F32.9'  # Common chronic conditions
+    "claim_id_pattern": "CLM-{year}-{sequence:06d}",
+    "patient_id_pattern": "PAT-{sequence:08d}",
+    "provider_npi_range": (1000000000, 9999999999),
+    "billed_amount_range": (50.0, 50000.0),
+    "fraud_rate_in_test_data": 0.5,  # Higher than real-world for balanced testing
+    "date_range_days": 365,
+    "diagnosis_codes": [
+        "M79.3",
+        "S13.4",
+        "M54.2",
+        "G44.1",
+        "M25.5",  # Common injury codes
+        "Z51.11",
+        "M17.0",
+        "I25.10",
+        "E11.9",
+        "F32.9",  # Common chronic conditions
     ],
-    'procedure_codes': [
-        '99213', '99214', '99215', '73721', '97110',  # Common procedures
-        '99283', '99284', '99285', '70553', '99281'   # Emergency procedures
-    ]
+    "procedure_codes": [
+        "99213",
+        "99214",
+        "99215",
+        "73721",
+        "97110",  # Common procedures
+        "99283",
+        "99284",
+        "99285",
+        "70553",
+        "99281",  # Emergency procedures
+    ],
 }
 
 # Error Tolerance Configuration
 ERROR_TOLERANCE = {
-    'floating_point_precision': 1e-6,
-    'percentage_tolerance': 0.01,  # 1% tolerance for percentage calculations
-    'timing_variance_percent': 0.2  # 20% variance allowed in timing tests
+    "floating_point_precision": 1e-6,
+    "percentage_tolerance": 0.01,  # 1% tolerance for percentage calculations
+    "timing_variance_percent": 0.2,  # 20% variance allowed in timing tests
 }
+
 
 def get_test_environment_info() -> Dict[str, Any]:
     """Get information about the test environment."""
     return {
-        'python_version': os.sys.version,
-        'platform': os.sys.platform,
-        'cpu_count': os.cpu_count(),
-        'test_data_dir': CONFIG.TEST_DATA_DIR,
-        'benchmarks': BENCHMARKS.__dict__,
-        'random_seed': CONFIG.RANDOM_SEED
+        "python_version": os.sys.version,
+        "platform": os.sys.platform,
+        "cpu_count": os.cpu_count(),
+        "test_data_dir": CONFIG.TEST_DATA_DIR,
+        "benchmarks": BENCHMARKS.__dict__,
+        "random_seed": CONFIG.RANDOM_SEED,
     }
+
 
 def is_performance_test_enabled() -> bool:
     """Check if performance tests should be run."""
-    return os.getenv('RUN_PERFORMANCE_TESTS', 'false').lower() == 'true'
+    return os.getenv("RUN_PERFORMANCE_TESTS", "false").lower() == "true"
+
 
 def is_slow_test_enabled() -> bool:
     """Check if slow tests should be run."""
-    return os.getenv('RUN_SLOW_TESTS', 'false').lower() == 'true'
+    return os.getenv("RUN_SLOW_TESTS", "false").lower() == "true"
+
 
 def get_parallel_worker_count() -> int:
     """Get the number of parallel workers for tests."""
-    return int(os.getenv('PYTEST_WORKERS', '4'))
+    return int(os.getenv("PYTEST_WORKERS", "4"))

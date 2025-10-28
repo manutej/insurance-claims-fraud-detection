@@ -82,9 +82,7 @@ class ConfidenceScorer:
 
         # Weighted combination
         # 50% relevance, 30% distance, 20% result count
-        score = (0.50 * avg_relevance +
-                 0.30 * distance_score +
-                 0.20 * result_bonus)
+        score = 0.50 * avg_relevance + 0.30 * distance_score + 0.20 * result_bonus
 
         return round(score, 4)
 
@@ -208,9 +206,7 @@ class ConfidenceScorer:
         return round(avg_agreement, 4)
 
     def score_regulatory_citation(
-        self,
-        has_regulatory_confirmation: bool,
-        regulatory_confidence: float = 0.0
+        self, has_regulatory_confirmation: bool, regulatory_confidence: float = 0.0
     ) -> float:
         """
         Score regulatory knowledge base confirmation.
@@ -253,11 +249,11 @@ class ConfidenceScorer:
             Weighted overall confidence [0.0, 1.0]
         """
         score = (
-            factors.get("retrieval_quality", 0.0) * self.WEIGHT_RETRIEVAL +
-            factors.get("source_diversity", 0.0) * self.WEIGHT_DIVERSITY +
-            factors.get("temporal_relevance", 0.0) * self.WEIGHT_TEMPORAL +
-            factors.get("cross_validation", 0.0) * self.WEIGHT_CROSS_VAL +
-            factors.get("regulatory_citation", 0.0) * self.WEIGHT_REGULATORY
+            factors.get("retrieval_quality", 0.0) * self.WEIGHT_RETRIEVAL
+            + factors.get("source_diversity", 0.0) * self.WEIGHT_DIVERSITY
+            + factors.get("temporal_relevance", 0.0) * self.WEIGHT_TEMPORAL
+            + factors.get("cross_validation", 0.0) * self.WEIGHT_CROSS_VAL
+            + factors.get("regulatory_citation", 0.0) * self.WEIGHT_REGULATORY
         )
 
         # Ensure bounds
@@ -296,7 +292,7 @@ class ConfidenceScorer:
         age_days: float,
         retrieved_values: Dict[str, List[Tuple[Any, KnowledgeBaseType]]],
         has_regulatory: bool = False,
-        regulatory_confidence: float = 0.0
+        regulatory_confidence: float = 0.0,
     ) -> ConfidenceFactors:
         """
         Compute all confidence factors in one call.
@@ -321,5 +317,5 @@ class ConfidenceScorer:
             cross_validation=self.score_cross_validation(retrieved_values),
             regulatory_citation=self.score_regulatory_citation(
                 has_regulatory, regulatory_confidence
-            )
+            ),
         )

@@ -3,6 +3,7 @@ Throughput performance tests for fraud detection system.
 
 Tests system throughput against 1000 claims/sec requirement.
 """
+
 import pytest
 import time
 import statistics
@@ -43,9 +44,9 @@ class TestThroughputPerformance:
             file_paths = []
 
             for i in range(0, len(large_dataset), chunk_size):
-                chunk = large_dataset[i:i + chunk_size]
+                chunk = large_dataset[i : i + chunk_size]
                 file_path = data_dir / f"batch_{i//chunk_size}.json"
-                with open(file_path, 'w') as f:
+                with open(file_path, "w") as f:
                     json.dump(chunk, f)
                 file_paths.append(file_path)
 
@@ -61,10 +62,10 @@ class TestThroughputPerformance:
         throughput = dataset_size / processing_time
 
         return {
-            'processing_time': processing_time,
-            'throughput': throughput,
-            'dataset_size': dataset_size,
-            'result': result
+            "processing_time": processing_time,
+            "throughput": throughput,
+            "dataset_size": dataset_size,
+            "result": result,
         }
 
     @pytest.mark.throughput
@@ -76,7 +77,7 @@ class TestThroughputPerformance:
         config = DataLoaderConfig(
             batch_size=1000,
             max_workers=4,
-            validate_on_load=False  # Disable validation for pure loading test
+            validate_on_load=False,  # Disable validation for pure loading test
         )
         loader = ClaimDataLoader(data_dir, config)
 
@@ -236,17 +237,21 @@ class TestThroughputPerformance:
 
         ml_manager = MLModelManager()
         X = processed_df[preprocessor.feature_columns]
-        y = processed_df['fraud_indicator'] if 'fraud_indicator' in processed_df.columns else pd.Series([0] * len(X))
+        y = (
+            processed_df["fraud_indicator"]
+            if "fraud_indicator" in processed_df.columns
+            else pd.Series([0] * len(X))
+        )
 
         # Train only random forest for speed
-        ml_manager.model_configs = {'random_forest': ml_manager.model_configs['random_forest']}
+        ml_manager.model_configs = {"random_forest": ml_manager.model_configs["random_forest"]}
         ml_manager.train_models(X, y)
 
         # Test prediction throughput
         test_X = X.head(1000) if len(X) >= 1000 else X
 
         start_time = time.perf_counter()
-        predictions = ml_manager.predict(test_X, 'random_forest')
+        predictions = ml_manager.predict(test_X, "random_forest")
         end_time = time.perf_counter()
 
         processing_time = end_time - start_time
@@ -286,10 +291,10 @@ class TestThroughputPerformance:
             end_time = time.perf_counter()
 
             return {
-                'file': file_path.name,
-                'claims_processed': len(results),
-                'processing_time': end_time - start_time,
-                'throughput': len(results) / (end_time - start_time)
+                "file": file_path.name,
+                "claims_processed": len(results),
+                "processing_time": end_time - start_time,
+                "throughput": len(results) / (end_time - start_time),
             }
 
         # Test concurrent processing
@@ -300,7 +305,7 @@ class TestThroughputPerformance:
             end_time = time.perf_counter()
 
         # Calculate overall metrics
-        total_claims = sum(r['claims_processed'] for r in results)
+        total_claims = sum(r["claims_processed"] for r in results)
         total_time = end_time - start_time
         overall_throughput = total_claims / total_time
 
@@ -310,8 +315,10 @@ class TestThroughputPerformance:
         print(f"  Total time: {total_time:.2f}s")
         print(f"  Overall throughput: {overall_throughput:.1f} claims/sec")
 
-        individual_throughputs = [r['throughput'] for r in results]
-        print(f"  Average file throughput: {statistics.mean(individual_throughputs):.1f} claims/sec")
+        individual_throughputs = [r["throughput"] for r in results]
+        print(
+            f"  Average file throughput: {statistics.mean(individual_throughputs):.1f} claims/sec"
+        )
 
         # Concurrent processing should meet throughput requirements
         assert overall_throughput >= BENCHMARKS.MIN_THROUGHPUT_CLAIMS_PER_SEC
@@ -347,7 +354,9 @@ class TestThroughputPerformance:
         print(f"  Throughput: {throughput:.1f} claims/sec")
 
         # Streaming should maintain good throughput
-        assert throughput >= BENCHMARKS.MIN_THROUGHPUT_CLAIMS_PER_SEC * 0.8  # Allow 20% reduction for streaming
+        assert (
+            throughput >= BENCHMARKS.MIN_THROUGHPUT_CLAIMS_PER_SEC * 0.8
+        )  # Allow 20% reduction for streaming
 
     @pytest.mark.throughput
     @pytest.mark.performance
@@ -370,16 +379,16 @@ class TestThroughputPerformance:
             throughput = batch.total_count / processing_time
 
             results[batch_size] = {
-                'throughput': throughput,
-                'processing_time': processing_time,
-                'claims_count': batch.total_count
+                "throughput": throughput,
+                "processing_time": processing_time,
+                "claims_count": batch.total_count,
             }
 
             print(f"Batch size {batch_size}: {throughput:.1f} claims/sec")
 
         # Find optimal batch size
-        best_batch_size = max(results.keys(), key=lambda k: results[k]['throughput'])
-        best_throughput = results[best_batch_size]['throughput']
+        best_batch_size = max(results.keys(), key=lambda k: results[k]["throughput"])
+        best_throughput = results[best_batch_size]["throughput"]
 
         print(f"Optimal batch size: {best_batch_size} ({best_throughput:.1f} claims/sec)")
 
@@ -404,7 +413,7 @@ class TestThroughputPerformance:
         start_time = time.perf_counter()
 
         for i in range(0, len(large_dataset), chunk_size):
-            chunk = large_dataset[i:i + chunk_size]
+            chunk = large_dataset[i : i + chunk_size]
 
             for claim_data in chunk:
                 rule_engine.analyze_claim(claim_data)
@@ -447,7 +456,7 @@ class TestThroughputPerformance:
         wave_results = []
 
         for wave in range(waves):
-            wave_data = large_dataset[wave * wave_size:(wave + 1) * wave_size]
+            wave_data = large_dataset[wave * wave_size : (wave + 1) * wave_size]
 
             start_time = time.perf_counter()
 
@@ -459,16 +468,14 @@ class TestThroughputPerformance:
             wave_time = end_time - start_time
             wave_throughput = len(wave_data) / wave_time
 
-            wave_results.append({
-                'wave': wave + 1,
-                'throughput': wave_throughput,
-                'time': wave_time
-            })
+            wave_results.append(
+                {"wave": wave + 1, "throughput": wave_throughput, "time": wave_time}
+            )
 
             print(f"Wave {wave + 1}: {wave_throughput:.1f} claims/sec")
 
         # Calculate statistics
-        throughputs = [r['throughput'] for r in wave_results]
+        throughputs = [r["throughput"] for r in wave_results]
         mean_throughput = statistics.mean(throughputs)
         throughput_std = statistics.stdev(throughputs)
         min_throughput = min(throughputs)
@@ -480,7 +487,9 @@ class TestThroughputPerformance:
 
         # Throughput should be sustained and not degrade significantly
         assert mean_throughput >= BENCHMARKS.MIN_THROUGHPUT_CLAIMS_PER_SEC
-        assert min_throughput >= BENCHMARKS.MIN_THROUGHPUT_CLAIMS_PER_SEC * 0.8  # No more than 20% degradation
+        assert (
+            min_throughput >= BENCHMARKS.MIN_THROUGHPUT_CLAIMS_PER_SEC * 0.8
+        )  # No more than 20% degradation
         assert throughput_std < mean_throughput * 0.2  # Standard deviation < 20% of mean
 
     @pytest.mark.throughput
@@ -499,17 +508,17 @@ class TestThroughputPerformance:
 
         # Test scenarios
         scenarios = [
-            {'name': 'No Load', 'background_threads': 0},
-            {'name': 'Light Load', 'background_threads': 1},
-            {'name': 'Medium Load', 'background_threads': 2},
-            {'name': 'Heavy Load', 'background_threads': 4}
+            {"name": "No Load", "background_threads": 0},
+            {"name": "Light Load", "background_threads": 1},
+            {"name": "Medium Load", "background_threads": 2},
+            {"name": "Heavy Load", "background_threads": 4},
         ]
 
         results = {}
 
         for scenario in scenarios:
-            scenario_name = scenario['name']
-            num_threads = scenario['background_threads']
+            scenario_name = scenario["name"]
+            num_threads = scenario["background_threads"]
 
             # Start background load
             background_threads = []
@@ -534,15 +543,17 @@ class TestThroughputPerformance:
             print(f"{scenario_name}: {throughput:.1f} claims/sec")
 
         # Throughput should degrade gracefully under load
-        no_load_throughput = results['No Load']
-        heavy_load_throughput = results['Heavy Load']
+        no_load_throughput = results["No Load"]
+        heavy_load_throughput = results["Heavy Load"]
 
         degradation = (no_load_throughput - heavy_load_throughput) / no_load_throughput
 
         print(f"Throughput degradation under heavy load: {degradation * 100:.1f}%")
 
         # Even under heavy load, should maintain minimum throughput
-        assert heavy_load_throughput >= BENCHMARKS.MIN_THROUGHPUT_CLAIMS_PER_SEC * 0.5  # 50% of baseline
+        assert (
+            heavy_load_throughput >= BENCHMARKS.MIN_THROUGHPUT_CLAIMS_PER_SEC * 0.5
+        )  # 50% of baseline
         assert degradation < 0.7  # Less than 70% degradation
 
     @pytest.mark.throughput
@@ -598,7 +609,9 @@ class TestThroughputPerformance:
 
         # End-to-end pipeline should meet throughput requirements
         # (Allow lower throughput for complete pipeline)
-        assert overall_throughput >= BENCHMARKS.MIN_THROUGHPUT_CLAIMS_PER_SEC * 0.3  # 30% of baseline
+        assert (
+            overall_throughput >= BENCHMARKS.MIN_THROUGHPUT_CLAIMS_PER_SEC * 0.3
+        )  # 30% of baseline
 
     @pytest.mark.throughput
     @pytest.mark.performance
@@ -620,15 +633,12 @@ class TestThroughputPerformance:
             processing_time = end_time - start_time
             throughput = size / processing_time
 
-            results[size] = {
-                'throughput': throughput,
-                'processing_time': processing_time
-            }
+            results[size] = {"throughput": throughput, "processing_time": processing_time}
 
             print(f"Dataset size {size}: {throughput:.1f} claims/sec")
 
         # Throughput should remain relatively stable as dataset size increases
-        throughputs = [results[size]['throughput'] for size in dataset_sizes]
+        throughputs = [results[size]["throughput"] for size in dataset_sizes]
         throughput_std = statistics.stdev(throughputs)
         mean_throughput = statistics.mean(throughputs)
 
@@ -638,4 +648,6 @@ class TestThroughputPerformance:
 
         # Throughput should be stable across different dataset sizes
         assert throughput_std < mean_throughput * 0.3  # Less than 30% variation
-        assert min(throughputs) >= BENCHMARKS.MIN_THROUGHPUT_CLAIMS_PER_SEC * 0.8  # Minimum 80% of requirement
+        assert (
+            min(throughputs) >= BENCHMARKS.MIN_THROUGHPUT_CLAIMS_PER_SEC * 0.8
+        )  # Minimum 80% of requirement

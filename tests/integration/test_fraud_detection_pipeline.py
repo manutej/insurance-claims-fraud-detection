@@ -1,6 +1,7 @@
 """
 Integration tests for the complete fraud detection pipeline.
 """
+
 import pytest
 import tempfile
 import json
@@ -37,11 +38,11 @@ class TestFraudDetectionPipeline:
 
             # Save as JSON files
             medical_file = data_dir / "medical_claims.json"
-            with open(medical_file, 'w') as f:
+            with open(medical_file, "w") as f:
                 json.dump(valid_claims[:50], f)
 
             fraud_file = data_dir / "fraud_claims.json"
-            with open(fraud_file, 'w') as f:
+            with open(fraud_file, "w") as f:
                 json.dump(valid_claims[50:], f)
 
             yield data_dir
@@ -50,12 +51,12 @@ class TestFraudDetectionPipeline:
     def pipeline_components(self):
         """Create and return pipeline components."""
         return {
-            'validator': ClaimValidator(),
-            'preprocessor': ClaimPreprocessor(),
-            'rule_engine': RuleEngine(),
-            'feature_engineer': FeatureEngineer(),
-            'ml_manager': MLModelManager(),
-            'anomaly_detector': AnomalyDetector()
+            "validator": ClaimValidator(),
+            "preprocessor": ClaimPreprocessor(),
+            "rule_engine": RuleEngine(),
+            "feature_engineer": FeatureEngineer(),
+            "ml_manager": MLModelManager(),
+            "anomaly_detector": AnomalyDetector(),
         }
 
     @pytest.mark.integration
@@ -63,22 +64,21 @@ class TestFraudDetectionPipeline:
         """Test complete pipeline from data loading to fraud detection."""
         # Step 1: Data Loading
         config = DataLoaderConfig(validate_on_load=True, batch_size=50)
-        loader = ClaimDataLoader(temp_data_dir, config,
-                                validator=pipeline_components['validator'])
+        loader = ClaimDataLoader(temp_data_dir, config, validator=pipeline_components["validator"])
 
         batch = loader.load_claims_batch()
         assert batch.total_count > 0
         print(f"✓ Loaded {batch.total_count} claims")
 
         # Step 2: Data Preprocessing
-        preprocessor = pipeline_components['preprocessor']
+        preprocessor = pipeline_components["preprocessor"]
         processed_df = preprocessor.preprocess_claims(batch.claims)
         assert len(processed_df) == batch.total_count
         assert len(preprocessor.feature_columns) > 0
         print(f"✓ Preprocessed claims with {len(preprocessor.feature_columns)} features")
 
         # Step 3: Feature Engineering
-        feature_engineer = pipeline_components['feature_engineer']
+        feature_engineer = pipeline_components["feature_engineer"]
         claims_dict = [claim.dict() for claim in batch.claims]
         feature_set = feature_engineer.extract_features(claims_dict)
         combined_features = feature_engineer.combine_features(feature_set)
@@ -86,7 +86,7 @@ class TestFraudDetectionPipeline:
         print(f"✓ Engineered {len(combined_features.columns)} features")
 
         # Step 4: Rule-based Detection
-        rule_engine = pipeline_components['rule_engine']
+        rule_engine = pipeline_components["rule_engine"]
         rule_results = []
         fraud_scores = []
 
@@ -100,7 +100,7 @@ class TestFraudDetectionPipeline:
         print(f"✓ Applied rule-based detection, avg score: {np.mean(fraud_scores):.3f}")
 
         # Step 5: Anomaly Detection
-        anomaly_detector = pipeline_components['anomaly_detector']
+        anomaly_detector = pipeline_components["anomaly_detector"]
         # Fit anomaly detector
         numeric_features = combined_features.select_dtypes(include=[np.number])
         anomaly_detector.fit(numeric_features)
@@ -110,11 +110,15 @@ class TestFraudDetectionPipeline:
         print(f"✓ Anomaly detection completed, avg score: {np.mean(anomaly_scores):.3f}")
 
         # Step 6: ML Model Training (simplified for integration test)
-        ml_manager = pipeline_components['ml_manager']
+        ml_manager = pipeline_components["ml_manager"]
 
         # Prepare training data
         X = processed_df[preprocessor.feature_columns]
-        y = processed_df['fraud_indicator'] if 'fraud_indicator' in processed_df.columns else pd.Series([0] * len(X))
+        y = (
+            processed_df["fraud_indicator"]
+            if "fraud_indicator" in processed_df.columns
+            else pd.Series([0] * len(X))
+        )
 
         # Train a simple model for testing
         if len(X) >= 10:  # Minimum samples for training
@@ -128,7 +132,7 @@ class TestFraudDetectionPipeline:
             print(f"✓ Generated predictions for test claims")
 
         # Verify pipeline meets performance requirements
-        processing_time = loader.get_statistics()['processing_time_seconds']
+        processing_time = loader.get_statistics()["processing_time_seconds"]
         claims_per_second = batch.total_count / processing_time
 
         print(f"✓ Pipeline Performance:")
@@ -143,7 +147,7 @@ class TestFraudDetectionPipeline:
         """Test pipeline accuracy against known fraud cases."""
         # Generate balanced test dataset
         test_data = generate_accuracy_test_data()
-        all_claims = test_data['valid'] + test_data['fraud']
+        all_claims = test_data["valid"] + test_data["fraud"]
 
         # Convert to claim objects
         claim_objects = []
@@ -158,7 +162,7 @@ class TestFraudDetectionPipeline:
         print(f"Testing accuracy with {len(claim_objects)} claims")
 
         # Apply rule-based detection
-        rule_engine = pipeline_components['rule_engine']
+        rule_engine = pipeline_components["rule_engine"]
         correct_predictions = 0
         total_predictions = 0
         false_positives = 0
@@ -170,7 +174,7 @@ class TestFraudDetectionPipeline:
 
             # Threshold for fraud detection
             predicted_fraud = fraud_score > 0.5
-            actual_fraud = claim_dict.get('fraud_indicator', False)
+            actual_fraud = claim_dict.get("fraud_indicator", False)
 
             total_predictions += 1
 
@@ -184,8 +188,12 @@ class TestFraudDetectionPipeline:
 
         # Calculate metrics
         accuracy = correct_predictions / total_predictions if total_predictions > 0 else 0
-        false_positive_rate = false_positives / len(test_data['valid']) if len(test_data['valid']) > 0 else 0
-        detection_rate = true_positives / len(test_data['fraud']) if len(test_data['fraud']) > 0 else 0
+        false_positive_rate = (
+            false_positives / len(test_data["valid"]) if len(test_data["valid"]) > 0 else 0
+        )
+        detection_rate = (
+            true_positives / len(test_data["fraud"]) if len(test_data["fraud"]) > 0 else 0
+        )
 
         print(f"✓ Accuracy Results:")
         print(f"  - Overall accuracy: {accuracy:.3f}")
@@ -208,16 +216,16 @@ class TestFraudDetectionPipeline:
         original_claim_ids = {claim.claim_id for claim in batch.claims}
 
         # Preprocessing
-        preprocessor = pipeline_components['preprocessor']
+        preprocessor = pipeline_components["preprocessor"]
         processed_df = preprocessor.preprocess_claims(batch.claims)
 
         # Verify no claims lost in preprocessing
         assert len(processed_df) == original_count
-        processed_claim_ids = set(processed_df['claim_id'].values)
+        processed_claim_ids = set(processed_df["claim_id"].values)
         assert processed_claim_ids == original_claim_ids
 
         # Feature engineering
-        feature_engineer = pipeline_components['feature_engineer']
+        feature_engineer = pipeline_components["feature_engineer"]
         claims_dict = [claim.dict() for claim in batch.claims]
         feature_set = feature_engineer.extract_features(claims_dict)
         combined_features = feature_engineer.combine_features(feature_set)
@@ -226,7 +234,7 @@ class TestFraudDetectionPipeline:
         assert len(combined_features) == original_count
 
         # Rule-based analysis
-        rule_engine = pipeline_components['rule_engine']
+        rule_engine = pipeline_components["rule_engine"]
         rule_results_count = 0
 
         for claim in batch.claims:
@@ -244,43 +252,44 @@ class TestFraudDetectionPipeline:
         # Create problematic data file
         problematic_claims = [
             {
-                'claim_id': 'CLM-GOOD-001',
-                'patient_id': 'PAT-001',
-                'provider_id': 'PRV-001',
-                'provider_npi': '1234567890',
-                'date_of_service': '2024-01-15',
-                'billed_amount': 250.0,
-                'fraud_indicator': False
+                "claim_id": "CLM-GOOD-001",
+                "patient_id": "PAT-001",
+                "provider_id": "PRV-001",
+                "provider_npi": "1234567890",
+                "date_of_service": "2024-01-15",
+                "billed_amount": 250.0,
+                "fraud_indicator": False,
             },
             {
-                'claim_id': 'CLM-BAD-001',
-                'billed_amount': 'invalid_amount',  # Invalid data type
-                'date_of_service': 'invalid_date',   # Invalid date
-                'fraud_indicator': False
+                "claim_id": "CLM-BAD-001",
+                "billed_amount": "invalid_amount",  # Invalid data type
+                "date_of_service": "invalid_date",  # Invalid date
+                "fraud_indicator": False,
             },
             {
                 # Missing required fields
-                'claim_id': 'CLM-INCOMPLETE-001',
-                'billed_amount': 100.0
-            }
+                "claim_id": "CLM-INCOMPLETE-001",
+                "billed_amount": 100.0,
+            },
         ]
 
         # Save problematic data
         problem_file = temp_data_dir / "problematic_claims.json"
-        with open(problem_file, 'w') as f:
+        with open(problem_file, "w") as f:
             json.dump(problematic_claims, f)
 
         # Test pipeline robustness
         config = DataLoaderConfig(validate_on_load=True)
-        loader = ClaimDataLoader(temp_data_dir, config,
-                                validator=pipeline_components['validator'])
+        loader = ClaimDataLoader(temp_data_dir, config, validator=pipeline_components["validator"])
 
         # Should handle errors gracefully
         try:
             batch = loader.load_claims_batch()
             # Should have at least the valid claim
             assert batch.total_count >= 1
-            print(f"✓ Pipeline handled problematic data, processed {batch.total_count} valid claims")
+            print(
+                f"✓ Pipeline handled problematic data, processed {batch.total_count} valid claims"
+            )
         except Exception as e:
             pytest.fail(f"Pipeline should handle errors gracefully, but failed with: {e}")
 
@@ -294,7 +303,7 @@ class TestFraudDetectionPipeline:
 
         # Save to file
         large_file = temp_data_dir / "large_claims.json"
-        with open(large_file, 'w') as f:
+        with open(large_file, "w") as f:
             json.dump(large_claims, f)
 
         # Measure pipeline performance
@@ -306,12 +315,12 @@ class TestFraudDetectionPipeline:
         load_time = time.time()
 
         # Preprocessing
-        preprocessor = pipeline_components['preprocessor']
+        preprocessor = pipeline_components["preprocessor"]
         processed_df = preprocessor.preprocess_claims(batch.claims)
         preprocess_time = time.time()
 
         # Rule-based detection (sample)
-        rule_engine = pipeline_components['rule_engine']
+        rule_engine = pipeline_components["rule_engine"]
         sample_claims = batch.claims[:100]  # Test on sample for performance
         for claim in sample_claims:
             claim_dict = claim.dict()
@@ -346,7 +355,7 @@ class TestFraudDetectionPipeline:
         for i in range(3):
             claims = generate_mixed_claims_batch(total_claims=50, fraud_rate=0.1)
             file_path = temp_data_dir / f"batch_{i}.json"
-            with open(file_path, 'w') as f:
+            with open(file_path, "w") as f:
                 json.dump(claims, f)
             file_paths.append(file_path)
 
@@ -364,9 +373,9 @@ class TestFraudDetectionPipeline:
                 processed_df = preprocessor.preprocess_claims(batch.claims)
 
                 return {
-                    'file': file_path.name,
-                    'count': len(processed_df),
-                    'thread_id': threading.current_thread().ident
+                    "file": file_path.name,
+                    "count": len(processed_df),
+                    "thread_id": threading.current_thread().ident,
                 }
             except Exception as e:
                 errors.append(f"Error processing {file_path}: {e}")
@@ -380,7 +389,7 @@ class TestFraudDetectionPipeline:
         assert len(errors) == 0, f"Concurrent processing errors: {errors}"
         assert len(results) == 3, "Should process all batches successfully"
 
-        total_processed = sum(r['count'] for r in results)
+        total_processed = sum(r["count"] for r in results)
         print(f"✓ Concurrent processing: {total_processed} claims across {len(results)} threads")
 
     @pytest.mark.integration
@@ -390,7 +399,7 @@ class TestFraudDetectionPipeline:
         configs = [
             DataLoaderConfig(validate_on_load=True, batch_size=25),
             DataLoaderConfig(validate_on_load=False, batch_size=100),
-            DataLoaderConfig(validate_on_load=True, max_workers=2)
+            DataLoaderConfig(validate_on_load=True, max_workers=2),
         ]
 
         for i, config in enumerate(configs):
@@ -401,9 +410,9 @@ class TestFraudDetectionPipeline:
 
         # Test different preprocessor configurations
         preprocess_configs = [
-            {'normalize_amounts': True, 'encoding_strategy': 'onehot'},
-            {'normalize_amounts': False, 'encoding_strategy': 'label'},
-            {'extract_temporal_features': False}
+            {"normalize_amounts": True, "encoding_strategy": "onehot"},
+            {"normalize_amounts": False, "encoding_strategy": "label"},
+            {"extract_temporal_features": False},
         ]
 
         # Use first batch for preprocessing tests
@@ -430,14 +439,14 @@ class TestFraudDetectionPipeline:
 
         # Save to file
         large_file = temp_data_dir / "memory_test_claims.json"
-        with open(large_file, 'w') as f:
+        with open(large_file, "w") as f:
             json.dump(large_claims, f)
 
         # Process through pipeline
         loader = ClaimDataLoader(temp_data_dir)
         batch = loader.load_claims_batch()
 
-        preprocessor = pipeline_components['preprocessor']
+        preprocessor = pipeline_components["preprocessor"]
         processed_df = preprocessor.preprocess_claims(batch.claims)
 
         # Check memory usage
@@ -463,57 +472,57 @@ class TestFraudDetectionPipeline:
         # Add obviously fraudulent claims
         fraud_patterns = [
             {
-                'claim_id': 'CLM-FRAUD-001',
-                'patient_id': 'PAT-FRAUD-001',
-                'provider_id': 'FRAUD-PROVIDER-001',
-                'provider_npi': '9999999999',  # Suspicious NPI
-                'date_of_service': '2024-01-15',
-                'billed_amount': 25000.0,  # Excessive amount
-                'diagnosis_codes': ['Z00.00'],  # Routine checkup
-                'procedure_codes': ['99285'],  # Emergency procedure (mismatch)
-                'fraud_indicator': True,
-                'red_flags': ['excessive_billing', 'complexity_mismatch']
+                "claim_id": "CLM-FRAUD-001",
+                "patient_id": "PAT-FRAUD-001",
+                "provider_id": "FRAUD-PROVIDER-001",
+                "provider_npi": "9999999999",  # Suspicious NPI
+                "date_of_service": "2024-01-15",
+                "billed_amount": 25000.0,  # Excessive amount
+                "diagnosis_codes": ["Z00.00"],  # Routine checkup
+                "procedure_codes": ["99285"],  # Emergency procedure (mismatch)
+                "fraud_indicator": True,
+                "red_flags": ["excessive_billing", "complexity_mismatch"],
             },
             {
-                'claim_id': 'CLM-FRAUD-002',
-                'patient_id': 'PAT-FRAUD-002',
-                'provider_id': 'PRV-002',
-                'provider_npi': '1234567890',
-                'date_of_service': '2024-01-01',  # Holiday (New Year)
-                'billed_amount': 15000.0,
-                'diagnosis_codes': ['M79.3'],
-                'procedure_codes': ['99213', '99214', '99215', '73721', '97110'],  # Many procedures
-                'fraud_indicator': True,
-                'red_flags': ['Service on Sunday when office closed', 'Multiple procedures']
-            }
+                "claim_id": "CLM-FRAUD-002",
+                "patient_id": "PAT-FRAUD-002",
+                "provider_id": "PRV-002",
+                "provider_npi": "1234567890",
+                "date_of_service": "2024-01-01",  # Holiday (New Year)
+                "billed_amount": 15000.0,
+                "diagnosis_codes": ["M79.3"],
+                "procedure_codes": ["99213", "99214", "99215", "73721", "97110"],  # Many procedures
+                "fraud_indicator": True,
+                "red_flags": ["Service on Sunday when office closed", "Multiple procedures"],
+            },
         ]
 
         # Add obviously legitimate claims
         valid_patterns = [
             {
-                'claim_id': 'CLM-VALID-001',
-                'patient_id': 'PAT-VALID-001',
-                'provider_id': 'PRV-VALID-001',
-                'provider_npi': '1234567890',
-                'date_of_service': '2024-01-15',  # Weekday
-                'billed_amount': 150.0,  # Reasonable amount
-                'diagnosis_codes': ['M79.3'],
-                'procedure_codes': ['99213'],
-                'fraud_indicator': False,
-                'red_flags': []
+                "claim_id": "CLM-VALID-001",
+                "patient_id": "PAT-VALID-001",
+                "provider_id": "PRV-VALID-001",
+                "provider_npi": "1234567890",
+                "date_of_service": "2024-01-15",  # Weekday
+                "billed_amount": 150.0,  # Reasonable amount
+                "diagnosis_codes": ["M79.3"],
+                "procedure_codes": ["99213"],
+                "fraud_indicator": False,
+                "red_flags": [],
             },
             {
-                'claim_id': 'CLM-VALID-002',
-                'patient_id': 'PAT-VALID-002',
-                'provider_id': 'PRV-VALID-002',
-                'provider_npi': '2345678901',
-                'date_of_service': '2024-01-16',
-                'billed_amount': 300.0,
-                'diagnosis_codes': ['E11.9'],
-                'procedure_codes': ['99214'],
-                'fraud_indicator': False,
-                'red_flags': []
-            }
+                "claim_id": "CLM-VALID-002",
+                "patient_id": "PAT-VALID-002",
+                "provider_id": "PRV-VALID-002",
+                "provider_npi": "2345678901",
+                "date_of_service": "2024-01-16",
+                "billed_amount": 300.0,
+                "diagnosis_codes": ["E11.9"],
+                "procedure_codes": ["99214"],
+                "fraud_indicator": False,
+                "red_flags": [],
+            },
         ]
 
         all_test_claims = fraud_patterns + valid_patterns
@@ -525,7 +534,7 @@ class TestFraudDetectionPipeline:
             claim_objects.append(claim)
 
         # Apply complete detection pipeline
-        rule_engine = pipeline_components['rule_engine']
+        rule_engine = pipeline_components["rule_engine"]
 
         correct_detections = 0
         total_claims = len(claim_objects)
@@ -536,19 +545,21 @@ class TestFraudDetectionPipeline:
 
             # Use multiple indicators for fraud detection
             rule_triggered = fraud_score > 0.5
-            has_red_flags = len(claim_dict.get('red_flags', [])) > 0
-            suspicious_amount = claim_dict.get('billed_amount', 0) > 10000
+            has_red_flags = len(claim_dict.get("red_flags", [])) > 0
+            suspicious_amount = claim_dict.get("billed_amount", 0) > 10000
 
             # Combine indicators
             detected_fraud = rule_triggered or has_red_flags or suspicious_amount
-            actual_fraud = claim_dict.get('fraud_indicator', False)
+            actual_fraud = claim_dict.get("fraud_indicator", False)
 
             if detected_fraud == actual_fraud:
                 correct_detections += 1
 
-            print(f"Claim {claim_dict['claim_id']}: "
-                  f"Actual={actual_fraud}, Detected={detected_fraud}, "
-                  f"Score={fraud_score:.3f}")
+            print(
+                f"Claim {claim_dict['claim_id']}: "
+                f"Actual={actual_fraud}, Detected={detected_fraud}, "
+                f"Score={fraud_score:.3f}"
+            )
 
         accuracy = correct_detections / total_claims
         print(f"✓ End-to-end accuracy: {accuracy:.3f} ({correct_detections}/{total_claims})")

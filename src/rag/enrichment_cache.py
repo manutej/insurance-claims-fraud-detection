@@ -54,7 +54,7 @@ class EnrichmentCache:
         redis_url: str = "redis://localhost:6379",
         default_ttl_seconds: int = 86400,  # 24 hours
         key_prefix: str = "enrichment:",
-        max_retries: int = 3
+        max_retries: int = 3,
     ):
         """
         Initialize enrichment cache.
@@ -81,7 +81,7 @@ class EnrichmentCache:
                 encoding="utf-8",
                 decode_responses=True,
                 socket_connect_timeout=5.0,
-                socket_timeout=5.0
+                socket_timeout=5.0,
             )
             # Test connection
             await self._client.ping()
@@ -140,15 +140,11 @@ class EnrichmentCache:
                 # Increment access count
                 cache_entry.access_count += 1
                 await self._client.set(
-                    cache_key,
-                    cache_entry.model_dump_json(),
-                    ex=self.default_ttl_seconds
+                    cache_key, cache_entry.model_dump_json(), ex=self.default_ttl_seconds
                 )
 
                 logger.info(
-                    "cache_hit",
-                    cache_key=cache_key[:16],
-                    access_count=cache_entry.access_count
+                    "cache_hit", cache_key=cache_key[:16], access_count=cache_entry.access_count
                 )
                 return cache_entry.enrichment_response
             else:
@@ -164,7 +160,7 @@ class EnrichmentCache:
         self,
         claim_data: Dict[str, Any],
         enrichment_response: EnrichmentResponse,
-        ttl_seconds: Optional[int] = None
+        ttl_seconds: Optional[int] = None,
     ) -> bool:
         """
         Store enrichment result in cache.
@@ -191,15 +187,11 @@ class EnrichmentCache:
                 enrichment_response=enrichment_response,
                 cached_at=datetime.utcnow(),
                 access_count=0,
-                ttl_seconds=ttl
+                ttl_seconds=ttl,
             )
 
             # Store in Redis
-            await self._client.set(
-                cache_key,
-                cache_entry.model_dump_json(),
-                ex=ttl
-            )
+            await self._client.set(cache_key, cache_entry.model_dump_json(), ex=ttl)
 
             logger.info("cache_set", cache_key=cache_key[:16], ttl_seconds=ttl)
             return True
@@ -260,9 +252,7 @@ class EnrichmentCache:
                 invalidated_count += 1
 
             logger.info(
-                "cache_kb_invalidation",
-                kb_type=kb_type,
-                invalidated_count=invalidated_count
+                "cache_kb_invalidation", kb_type=kb_type, invalidated_count=invalidated_count
             )
             return invalidated_count
 

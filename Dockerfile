@@ -40,7 +40,7 @@ RUN groupadd --gid 1000 appgroup && \
 WORKDIR /app
 
 # Copy dependency files
-COPY requirements.txt pyproject.toml setup.py ./
+COPY requirements.txt pyproject.toml setup.py CLAUDE.md ./
 
 # Create virtual environment and install dependencies
 RUN python -m venv /app/venv && \

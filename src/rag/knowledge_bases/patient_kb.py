@@ -34,15 +34,9 @@ class PatientClaimDocument(BaseModel):
     claim_sequence: List[Dict[str, Any]] = Field(
         ..., description="Chronological sequence of claims"
     )
-    patient_patterns: Dict[str, Any] = Field(
-        ..., description="Derived behavioral patterns"
-    )
-    red_flags: List[str] = Field(
-        default_factory=list, description="List of red flag indicators"
-    )
-    temporal_analysis: Dict[str, Any] = Field(
-        ..., description="Temporal pattern analysis"
-    )
+    patient_patterns: Dict[str, Any] = Field(..., description="Derived behavioral patterns")
+    red_flags: List[str] = Field(default_factory=list, description="List of red flag indicators")
+    temporal_analysis: Dict[str, Any] = Field(..., description="Temporal pattern analysis")
 
     @field_validator("patient_id")
     @classmethod
@@ -317,9 +311,7 @@ class PatientHistoryRetriever:
             qdrant_client: Qdrant client instance
             openai_api_key: OpenAI API key
         """
-        self.kb = PatientClaimHistoryKB(
-            qdrant_client=qdrant_client, openai_api_key=openai_api_key
-        )
+        self.kb = PatientClaimHistoryKB(qdrant_client=qdrant_client, openai_api_key=openai_api_key)
         self.logger = logging.getLogger(self.__class__.__name__)
 
     def index_patients(self, documents: List[PatientClaimDocument]) -> None:

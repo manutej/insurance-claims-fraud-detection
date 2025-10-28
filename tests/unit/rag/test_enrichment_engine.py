@@ -15,6 +15,7 @@ from typing import Dict, List, Optional
 # FIXTURES
 # ============================================================================
 
+
 @pytest.fixture
 def enrichment_engine():
     """Enrichment engine for testing."""
@@ -37,7 +38,7 @@ def incomplete_claim_missing_diagnosis():
         "procedure_descriptions": ["Office visit, established patient"],
         "billed_amount": Decimal("125.00"),
         "date_of_service": date.today(),
-        "service_location": "11"
+        "service_location": "11",
     }
 
 
@@ -52,7 +53,7 @@ def incomplete_claim_missing_procedure():
         "diagnosis_descriptions": ["Type 2 diabetes mellitus"],
         "billed_amount": Decimal("125.00"),
         "date_of_service": date.today(),
-        "service_location": "11"
+        "service_location": "11",
     }
 
 
@@ -66,7 +67,7 @@ def incomplete_claim_missing_descriptions():
         "diagnosis_codes": ["E11.9"],
         "procedure_codes": ["99213"],
         "billed_amount": Decimal("125.00"),
-        "date_of_service": date.today()
+        "date_of_service": date.today(),
     }
 
 
@@ -83,13 +84,14 @@ def complete_claim():
         "procedure_descriptions": ["Office visit, established patient"],
         "billed_amount": Decimal("125.00"),
         "date_of_service": date.today(),
-        "service_location": "11"
+        "service_location": "11",
     }
 
 
 # ============================================================================
 # ENRICHMENT LOGIC TESTS
 # ============================================================================
+
 
 class TestEnrichmentEngine:
     """Test claim enrichment logic."""
@@ -200,6 +202,7 @@ class TestEnrichmentEngine:
 # CONFIDENCE SCORING TESTS
 # ============================================================================
 
+
 class TestConfidenceScoring:
     """Test confidence score calculation for enrichments."""
 
@@ -293,6 +296,7 @@ class TestConfidenceScoring:
 # ENRICHMENT ACCURACY TESTS
 # ============================================================================
 
+
 class TestEnrichmentAccuracy:
     """Test accuracy of enrichment results."""
 
@@ -326,6 +330,7 @@ class TestEnrichmentAccuracy:
 # ============================================================================
 # PERFORMANCE TESTS
 # ============================================================================
+
 
 class TestEnrichmentPerformance:
     """Test enrichment performance."""
@@ -367,6 +372,7 @@ class TestEnrichmentPerformance:
 # ============================================================================
 # EDGE CASES AND ERROR HANDLING
 # ============================================================================
+
 
 class TestEnrichmentEdgeCases:
     """Test enrichment edge cases."""

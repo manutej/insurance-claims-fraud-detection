@@ -3,6 +3,7 @@ Latency performance tests for fraud detection system.
 
 Tests single claim processing latency against <100ms requirement.
 """
+
 import pytest
 import time
 import statistics
@@ -46,7 +47,7 @@ class TestLatencyPerformance:
     @pytest.fixture
     def temp_data_file(self, sample_claims):
         """Create temporary data file for testing."""
-        with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
             json.dump(sample_claims, f)
             temp_path = f.name
 
@@ -71,13 +72,13 @@ class TestLatencyPerformance:
             latencies.append(latency)
 
         return {
-            'mean': statistics.mean(latencies),
-            'median': statistics.median(latencies),
-            'min': min(latencies),
-            'max': max(latencies),
-            'std': statistics.stdev(latencies) if len(latencies) > 1 else 0,
-            'p95': sorted(latencies)[int(0.95 * len(latencies))],
-            'p99': sorted(latencies)[int(0.99 * len(latencies))]
+            "mean": statistics.mean(latencies),
+            "median": statistics.median(latencies),
+            "min": min(latencies),
+            "max": max(latencies),
+            "std": statistics.stdev(latencies) if len(latencies) > 1 else 0,
+            "p95": sorted(latencies)[int(0.95 * len(latencies))],
+            "p99": sorted(latencies)[int(0.99 * len(latencies))],
         }
 
     @pytest.mark.latency
@@ -97,8 +98,8 @@ class TestLatencyPerformance:
         print(f"  P99: {stats['p99']:.2f}ms")
 
         # Should load file within reasonable time
-        assert stats['p95'] < 50  # 95th percentile under 50ms
-        assert stats['mean'] < 20  # Mean under 20ms
+        assert stats["p95"] < 50  # 95th percentile under 50ms
+        assert stats["mean"] < 20  # Mean under 20ms
 
     @pytest.mark.latency
     @pytest.mark.performance
@@ -118,8 +119,8 @@ class TestLatencyPerformance:
         print(f"  P99: {stats['p99']:.2f}ms")
 
         # Validation should be very fast
-        assert stats['p95'] < 5   # 95th percentile under 5ms
-        assert stats['mean'] < 2  # Mean under 2ms
+        assert stats["p95"] < 5  # 95th percentile under 5ms
+        assert stats["mean"] < 2  # Mean under 2ms
 
     @pytest.mark.latency
     @pytest.mark.performance
@@ -139,8 +140,8 @@ class TestLatencyPerformance:
         print(f"  P99: {stats['p99']:.2f}ms")
 
         # Rule analysis should meet the <100ms requirement
-        assert stats['p95'] < BENCHMARKS.MAX_SINGLE_CLAIM_LATENCY_MS
-        assert stats['mean'] < BENCHMARKS.MAX_SINGLE_CLAIM_LATENCY_MS / 2
+        assert stats["p95"] < BENCHMARKS.MAX_SINGLE_CLAIM_LATENCY_MS
+        assert stats["mean"] < BENCHMARKS.MAX_SINGLE_CLAIM_LATENCY_MS / 2
 
     @pytest.mark.latency
     @pytest.mark.performance
@@ -150,6 +151,7 @@ class TestLatencyPerformance:
 
         # Convert first claim to claim object
         from src.models.claim_models import claim_factory
+
         test_claim_obj = claim_factory(sample_claims[0])
 
         def preprocess_single_claim():
@@ -163,8 +165,8 @@ class TestLatencyPerformance:
         print(f"  P99: {stats['p99']:.2f}ms")
 
         # Preprocessing should be reasonably fast
-        assert stats['p95'] < 50  # 95th percentile under 50ms
-        assert stats['mean'] < 20  # Mean under 20ms
+        assert stats["p95"] < 50  # 95th percentile under 50ms
+        assert stats["mean"] < 20  # Mean under 20ms
 
     @pytest.mark.latency
     @pytest.mark.performance
@@ -184,8 +186,8 @@ class TestLatencyPerformance:
         print(f"  P99: {stats['p99']:.2f}ms")
 
         # Feature engineering should be reasonably fast
-        assert stats['p95'] < 100  # 95th percentile under 100ms
-        assert stats['mean'] < 50   # Mean under 50ms
+        assert stats["p95"] < 100  # 95th percentile under 100ms
+        assert stats["mean"] < 50  # Mean under 50ms
 
     @pytest.mark.latency
     @pytest.mark.performance
@@ -203,17 +205,21 @@ class TestLatencyPerformance:
         # Train a simple model
         ml_manager = MLModelManager()
         X = processed_df[preprocessor.feature_columns]
-        y = processed_df['fraud_indicator'] if 'fraud_indicator' in processed_df.columns else pd.Series([0] * len(X))
+        y = (
+            processed_df["fraud_indicator"]
+            if "fraud_indicator" in processed_df.columns
+            else pd.Series([0] * len(X))
+        )
 
         # Train only random forest for speed
-        ml_manager.model_configs = {'random_forest': ml_manager.model_configs['random_forest']}
+        ml_manager.model_configs = {"random_forest": ml_manager.model_configs["random_forest"]}
         ml_manager.train_models(X, y)
 
         # Test single prediction
         single_claim = X.head(1)
 
         def predict_single_claim():
-            return ml_manager.predict(single_claim, 'random_forest')
+            return ml_manager.predict(single_claim, "random_forest")
 
         stats = self.measure_multiple_runs(predict_single_claim, runs=50)
 
@@ -223,8 +229,8 @@ class TestLatencyPerformance:
         print(f"  P99: {stats['p99']:.2f}ms")
 
         # ML prediction should meet the <100ms requirement
-        assert stats['p95'] < BENCHMARKS.MAX_SINGLE_CLAIM_LATENCY_MS
-        assert stats['mean'] < BENCHMARKS.MAX_SINGLE_CLAIM_LATENCY_MS / 2
+        assert stats["p95"] < BENCHMARKS.MAX_SINGLE_CLAIM_LATENCY_MS
+        assert stats["mean"] < BENCHMARKS.MAX_SINGLE_CLAIM_LATENCY_MS / 2
 
     @pytest.mark.latency
     @pytest.mark.performance
@@ -260,8 +266,8 @@ class TestLatencyPerformance:
         print(f"  P99: {stats['p99']:.2f}ms")
 
         # Anomaly detection should be fast
-        assert stats['p95'] < 20  # 95th percentile under 20ms
-        assert stats['mean'] < 10  # Mean under 10ms
+        assert stats["p95"] < 20  # 95th percentile under 20ms
+        assert stats["mean"] < 10  # Mean under 10ms
 
     @pytest.mark.latency
     @pytest.mark.performance
@@ -274,6 +280,7 @@ class TestLatencyPerformance:
 
         # Prepare single claim
         from src.models.claim_models import claim_factory
+
         test_claim_dict = sample_claims[0]
 
         def process_claim_end_to_end():
@@ -292,9 +299,9 @@ class TestLatencyPerformance:
             results, fraud_score = rule_engine.analyze_claim(test_claim_dict)
 
             return {
-                'processed': True,
-                'fraud_score': fraud_score,
-                'features': len(processed_df.columns)
+                "processed": True,
+                "fraud_score": fraud_score,
+                "features": len(processed_df.columns),
             }
 
         stats = self.measure_multiple_runs(process_claim_end_to_end, runs=20)
@@ -305,8 +312,8 @@ class TestLatencyPerformance:
         print(f"  P99: {stats['p99']:.2f}ms")
 
         # End-to-end processing should meet the <100ms requirement
-        assert stats['p95'] < BENCHMARKS.MAX_SINGLE_CLAIM_LATENCY_MS
-        assert stats['mean'] < BENCHMARKS.MAX_SINGLE_CLAIM_LATENCY_MS / 2
+        assert stats["p95"] < BENCHMARKS.MAX_SINGLE_CLAIM_LATENCY_MS
+        assert stats["mean"] < BENCHMARKS.MAX_SINGLE_CLAIM_LATENCY_MS / 2
 
         print(f"✓ Meets latency requirement: {BENCHMARKS.MAX_SINGLE_CLAIM_LATENCY_MS}ms")
 
@@ -330,12 +337,14 @@ class TestLatencyPerformance:
                 latency = (end_time - start_time) * 1000
                 latencies.append(latency)
 
-            results_queue.put({
-                'worker_id': worker_id,
-                'latencies': latencies,
-                'mean_latency': statistics.mean(latencies),
-                'max_latency': max(latencies)
-            })
+            results_queue.put(
+                {
+                    "worker_id": worker_id,
+                    "latencies": latencies,
+                    "mean_latency": statistics.mean(latencies),
+                    "max_latency": max(latencies),
+                }
+            )
 
         # Start multiple worker threads
         num_workers = 5
@@ -343,10 +352,7 @@ class TestLatencyPerformance:
         test_claim = sample_claims[0]
 
         for worker_id in range(num_workers):
-            thread = threading.Thread(
-                target=process_claim_worker,
-                args=(test_claim, worker_id)
-            )
+            thread = threading.Thread(target=process_claim_worker, args=(test_claim, worker_id))
             threads.append(thread)
             thread.start()
 
@@ -361,15 +367,15 @@ class TestLatencyPerformance:
         while not results_queue.empty():
             result = results_queue.get()
             worker_results.append(result)
-            all_latencies.extend(result['latencies'])
+            all_latencies.extend(result["latencies"])
 
         # Calculate overall statistics
         overall_stats = {
-            'mean': statistics.mean(all_latencies),
-            'median': statistics.median(all_latencies),
-            'p95': sorted(all_latencies)[int(0.95 * len(all_latencies))],
-            'p99': sorted(all_latencies)[int(0.99 * len(all_latencies))],
-            'max': max(all_latencies)
+            "mean": statistics.mean(all_latencies),
+            "median": statistics.median(all_latencies),
+            "p95": sorted(all_latencies)[int(0.95 * len(all_latencies))],
+            "p99": sorted(all_latencies)[int(0.99 * len(all_latencies))],
+            "max": max(all_latencies),
         }
 
         print(f"Latency Under Load ({num_workers} workers, {len(all_latencies)} total operations):")
@@ -379,8 +385,10 @@ class TestLatencyPerformance:
         print(f"  Max: {overall_stats['max']:.2f}ms")
 
         # Under load, latency should still be reasonable
-        assert overall_stats['p95'] < BENCHMARKS.MAX_SINGLE_CLAIM_LATENCY_MS * 2  # Allow 2x under load
-        assert overall_stats['mean'] < BENCHMARKS.MAX_SINGLE_CLAIM_LATENCY_MS
+        assert (
+            overall_stats["p95"] < BENCHMARKS.MAX_SINGLE_CLAIM_LATENCY_MS * 2
+        )  # Allow 2x under load
+        assert overall_stats["mean"] < BENCHMARKS.MAX_SINGLE_CLAIM_LATENCY_MS
 
     @pytest.mark.latency
     @pytest.mark.performance
@@ -391,62 +399,66 @@ class TestLatencyPerformance:
         # Create claims of different complexity
         test_cases = [
             {
-                'name': 'Simple',
-                'claim': {
-                    'claim_id': 'CLM-SIMPLE',
-                    'patient_id': 'PAT-001',
-                    'provider_id': 'PRV-001',
-                    'provider_npi': '1234567890',
-                    'date_of_service': '2024-01-15',
-                    'billed_amount': 100.0,
-                    'diagnosis_codes': ['M79.3'],
-                    'procedure_codes': ['99213'],
-                    'fraud_indicator': False,
-                    'red_flags': []
-                }
+                "name": "Simple",
+                "claim": {
+                    "claim_id": "CLM-SIMPLE",
+                    "patient_id": "PAT-001",
+                    "provider_id": "PRV-001",
+                    "provider_npi": "1234567890",
+                    "date_of_service": "2024-01-15",
+                    "billed_amount": 100.0,
+                    "diagnosis_codes": ["M79.3"],
+                    "procedure_codes": ["99213"],
+                    "fraud_indicator": False,
+                    "red_flags": [],
+                },
             },
             {
-                'name': 'Complex',
-                'claim': {
-                    'claim_id': 'CLM-COMPLEX',
-                    'patient_id': 'PAT-002',
-                    'provider_id': 'PRV-002',
-                    'provider_npi': '1234567890',
-                    'date_of_service': '2024-01-15',
-                    'billed_amount': 5000.0,
-                    'diagnosis_codes': ['M79.3', 'S13.4', 'E11.9', 'I10', 'F32.9'],
-                    'procedure_codes': ['99213', '99214', '99215', '73721', '97110'],
-                    'fraud_indicator': True,
-                    'red_flags': ['excessive_billing', 'complexity_mismatch', 'suspicious_timing'],
-                    'notes': 'Complex case with multiple procedures and diagnoses'
-                }
+                "name": "Complex",
+                "claim": {
+                    "claim_id": "CLM-COMPLEX",
+                    "patient_id": "PAT-002",
+                    "provider_id": "PRV-002",
+                    "provider_npi": "1234567890",
+                    "date_of_service": "2024-01-15",
+                    "billed_amount": 5000.0,
+                    "diagnosis_codes": ["M79.3", "S13.4", "E11.9", "I10", "F32.9"],
+                    "procedure_codes": ["99213", "99214", "99215", "73721", "97110"],
+                    "fraud_indicator": True,
+                    "red_flags": ["excessive_billing", "complexity_mismatch", "suspicious_timing"],
+                    "notes": "Complex case with multiple procedures and diagnoses",
+                },
             },
             {
-                'name': 'Very Complex',
-                'claim': {
-                    'claim_id': 'CLM-VERY-COMPLEX',
-                    'patient_id': 'PAT-003',
-                    'provider_id': 'PRV-003',
-                    'provider_npi': '1234567890',
-                    'date_of_service': '2024-01-15',
-                    'billed_amount': 15000.0,
-                    'diagnosis_codes': [f'M79.{i}' for i in range(10)],  # 10 diagnoses
-                    'procedure_codes': [f'9921{i}' for i in range(15)],  # 15 procedures
-                    'fraud_indicator': True,
-                    'red_flags': [
-                        'excessive_billing', 'complexity_mismatch', 'suspicious_timing',
-                        'pattern_matching', 'unbundling', 'phantom_billing'
+                "name": "Very Complex",
+                "claim": {
+                    "claim_id": "CLM-VERY-COMPLEX",
+                    "patient_id": "PAT-003",
+                    "provider_id": "PRV-003",
+                    "provider_npi": "1234567890",
+                    "date_of_service": "2024-01-15",
+                    "billed_amount": 15000.0,
+                    "diagnosis_codes": [f"M79.{i}" for i in range(10)],  # 10 diagnoses
+                    "procedure_codes": [f"9921{i}" for i in range(15)],  # 15 procedures
+                    "fraud_indicator": True,
+                    "red_flags": [
+                        "excessive_billing",
+                        "complexity_mismatch",
+                        "suspicious_timing",
+                        "pattern_matching",
+                        "unbundling",
+                        "phantom_billing",
                     ],
-                    'notes': 'Very complex case with many procedures, diagnoses, and red flags'
-                }
-            }
+                    "notes": "Very complex case with many procedures, diagnoses, and red flags",
+                },
+            },
         ]
 
         results = {}
 
         for test_case in test_cases:
-            claim_name = test_case['name']
-            claim_data = test_case['claim']
+            claim_name = test_case["name"]
+            claim_data = test_case["claim"]
 
             def analyze_claim():
                 return rule_engine.analyze_claim(claim_data)
@@ -460,13 +472,14 @@ class TestLatencyPerformance:
 
         # All claim types should meet latency requirements
         for claim_name, stats in results.items():
-            assert stats['p95'] < BENCHMARKS.MAX_SINGLE_CLAIM_LATENCY_MS, \
-                f"{claim_name} claim latency exceeds requirement"
+            assert (
+                stats["p95"] < BENCHMARKS.MAX_SINGLE_CLAIM_LATENCY_MS
+            ), f"{claim_name} claim latency exceeds requirement"
 
         # Complex claims should not be significantly slower
-        simple_latency = results['Simple']['mean']
-        complex_latency = results['Complex']['mean']
-        very_complex_latency = results['Very Complex']['mean']
+        simple_latency = results["Simple"]["mean"]
+        complex_latency = results["Complex"]["mean"]
+        very_complex_latency = results["Very Complex"]["mean"]
 
         # Complex claims should be at most 3x slower than simple ones
         assert complex_latency < simple_latency * 3
@@ -535,6 +548,6 @@ class TestLatencyPerformance:
         print(f"  Impact: {pressure_stats['mean'] - baseline_stats['mean']:.2f}ms")
 
         # Memory pressure should not severely impact latency
-        latency_increase = pressure_stats['mean'] - baseline_stats['mean']
+        latency_increase = pressure_stats["mean"] - baseline_stats["mean"]
         assert latency_increase < 50  # Less than 50ms increase
-        assert pressure_stats['p95'] < BENCHMARKS.MAX_SINGLE_CLAIM_LATENCY_MS * 1.5
+        assert pressure_stats["p95"] < BENCHMARKS.MAX_SINGLE_CLAIM_LATENCY_MS * 1.5

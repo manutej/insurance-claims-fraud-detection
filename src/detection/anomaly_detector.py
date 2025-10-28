@@ -33,10 +33,14 @@ try:
     import tensorflow as tf
     from tensorflow import keras
     from tensorflow.keras import layers
+
     TENSORFLOW_AVAILABLE = True
 except ImportError:
     TENSORFLOW_AVAILABLE = False
     logging.warning("TensorFlow not available. Autoencoder will not be available.")
+    # Create dummy placeholders to prevent NameError during module parsing
+    keras = None
+    layers = None
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -46,6 +50,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class AnomalyScore:
     """Anomaly detection result for a single claim."""
+
     claim_id: str
     anomaly_score: float
     is_anomaly: bool
@@ -58,6 +63,7 @@ class AnomalyScore:
 @dataclass
 class AnomalyDetectorConfig:
     """Configuration for anomaly detection algorithms."""
+
     contamination: float = 0.1  # Expected proportion of outliers
     random_state: int = 42
     n_jobs: int = -1
@@ -74,44 +80,44 @@ class StatisticalAnomalyDetector:
     def fit(self, X: pd.DataFrame) -> None:
         """Fit statistical parameters on training data."""
         # Z-score parameters
-        self.fitted_params['mean'] = X.mean()
-        self.fitted_params['std'] = X.std()
+        self.fitted_params["mean"] = X.mean()
+        self.fitted_params["std"] = X.std()
 
         # IQR parameters
         Q1 = X.quantile(0.25)
         Q3 = X.quantile(0.75)
         IQR = Q3 - Q1
-        self.fitted_params['Q1'] = Q1
-        self.fitted_params['Q3'] = Q3
-        self.fitted_params['IQR'] = IQR
+        self.fitted_params["Q1"] = Q1
+        self.fitted_params["Q3"] = Q3
+        self.fitted_params["IQR"] = IQR
 
         # Modified Z-score parameters (using median)
         median = X.median()
         mad = np.median(np.abs(X - median), axis=0)
-        self.fitted_params['median'] = median
-        self.fitted_params['mad'] = mad
+        self.fitted_params["median"] = median
+        self.fitted_params["mad"] = mad
 
         # Mahalanobis distance parameters
         try:
             cov_matrix = np.cov(X.T)
             inv_cov_matrix = np.linalg.inv(cov_matrix)
-            self.fitted_params['mean_vector'] = X.mean().values
-            self.fitted_params['inv_cov_matrix'] = inv_cov_matrix
+            self.fitted_params["mean_vector"] = X.mean().values
+            self.fitted_params["inv_cov_matrix"] = inv_cov_matrix
         except np.linalg.LinAlgError:
             logger.warning("Could not compute Mahalanobis distance parameters")
-            self.fitted_params['inv_cov_matrix'] = None
+            self.fitted_params["inv_cov_matrix"] = None
 
     def detect_zscore_anomalies(self, X: pd.DataFrame, threshold: float = 3.0) -> np.ndarray:
         """Detect anomalies using Z-score method."""
-        z_scores = np.abs((X - self.fitted_params['mean']) / self.fitted_params['std'])
+        z_scores = np.abs((X - self.fitted_params["mean"]) / self.fitted_params["std"])
         max_z_scores = z_scores.max(axis=1)
         return max_z_scores > threshold
 
     def detect_iqr_anomalies(self, X: pd.DataFrame, factor: float = 1.5) -> np.ndarray:
         """Detect anomalies using IQR method."""
-        Q1 = self.fitted_params['Q1']
-        Q3 = self.fitted_params['Q3']
-        IQR = self.fitted_params['IQR']
+        Q1 = self.fitted_params["Q1"]
+        Q3 = self.fitted_params["Q3"]
+        IQR = self.fitted_params["IQR"]
 
         lower_bound = Q1 - factor * IQR
         upper_bound = Q3 + factor * IQR
@@ -119,10 +125,12 @@ class StatisticalAnomalyDetector:
         outliers = ((X < lower_bound) | (X > upper_bound)).any(axis=1)
         return outliers.values
 
-    def detect_modified_zscore_anomalies(self, X: pd.DataFrame, threshold: float = 3.5) -> np.ndarray:
+    def detect_modified_zscore_anomalies(
+        self, X: pd.DataFrame, threshold: float = 3.5
+    ) -> np.ndarray:
         """Detect anomalies using modified Z-score (based on median)."""
-        median = self.fitted_params['median']
-        mad = self.fitted_params['mad']
+        median = self.fitted_params["median"]
+        mad = self.fitted_params["mad"]
 
         # Avoid division by zero
         mad_safe = np.where(mad == 0, 1e-8, mad)
@@ -130,14 +138,16 @@ class StatisticalAnomalyDetector:
         max_modified_z_scores = modified_z_scores.max(axis=1)
         return max_modified_z_scores > threshold
 
-    def detect_mahalanobis_anomalies(self, X: pd.DataFrame, threshold_percentile: float = 95) -> np.ndarray:
+    def detect_mahalanobis_anomalies(
+        self, X: pd.DataFrame, threshold_percentile: float = 95
+    ) -> np.ndarray:
         """Detect anomalies using Mahalanobis distance."""
-        if self.fitted_params['inv_cov_matrix'] is None:
+        if self.fitted_params["inv_cov_matrix"] is None:
             return np.zeros(len(X), dtype=bool)
 
         try:
-            mean_vector = self.fitted_params['mean_vector']
-            inv_cov_matrix = self.fitted_params['inv_cov_matrix']
+            mean_vector = self.fitted_params["mean_vector"]
+            inv_cov_matrix = self.fitted_params["inv_cov_matrix"]
 
             distances = []
             for _, row in X.iterrows():
@@ -170,18 +180,18 @@ class AutoencoderAnomalyDetector:
 
         # Encoder
         input_layer = layers.Input(shape=(input_dim,))
-        encoded = layers.Dense(encoding_dim * 2, activation='relu')(input_layer)
+        encoded = layers.Dense(encoding_dim * 2, activation="relu")(input_layer)
         encoded = layers.Dropout(0.2)(encoded)
-        encoded = layers.Dense(encoding_dim, activation='relu')(encoded)
+        encoded = layers.Dense(encoding_dim, activation="relu")(encoded)
 
         # Decoder
-        decoded = layers.Dense(encoding_dim * 2, activation='relu')(encoded)
+        decoded = layers.Dense(encoding_dim * 2, activation="relu")(encoded)
         decoded = layers.Dropout(0.2)(decoded)
-        decoded = layers.Dense(input_dim, activation='linear')(decoded)
+        decoded = layers.Dense(input_dim, activation="linear")(decoded)
 
         # Autoencoder model
         autoencoder = keras.Model(input_layer, decoded)
-        autoencoder.compile(optimizer='adam', loss='mse')
+        autoencoder.compile(optimizer="adam", loss="mse")
 
         return autoencoder
 
@@ -198,19 +208,18 @@ class AutoencoderAnomalyDetector:
 
         # Early stopping
         early_stopping = keras.callbacks.EarlyStopping(
-            monitor='val_loss',
-            patience=10,
-            restore_best_weights=True
+            monitor="val_loss", patience=10, restore_best_weights=True
         )
 
         # Train model
         history = self.model.fit(
-            X_scaled, X_scaled,
+            X_scaled,
+            X_scaled,
             epochs=100,
             batch_size=32,
             validation_split=validation_split,
             callbacks=[early_stopping],
-            verbose=0
+            verbose=0,
         )
 
         # Calculate reconstruction errors on training data to set threshold
@@ -265,39 +274,34 @@ class AnomalyDetectionSuite:
     def initialize_detectors(self, n_features: int) -> None:
         """Initialize all anomaly detection algorithms."""
         # Isolation Forest
-        self.detectors['isolation_forest'] = IsolationForest(
+        self.detectors["isolation_forest"] = IsolationForest(
             contamination=self.config.contamination,
             random_state=self.config.random_state,
-            n_jobs=self.config.n_jobs
+            n_jobs=self.config.n_jobs,
         )
 
         # Local Outlier Factor
-        self.detectors['lof'] = LocalOutlierFactor(
-            contamination=self.config.contamination,
-            n_jobs=self.config.n_jobs
+        self.detectors["lof"] = LocalOutlierFactor(
+            contamination=self.config.contamination, n_jobs=self.config.n_jobs
         )
 
         # One-Class SVM
-        self.detectors['one_class_svm'] = OneClassSVM(
-            nu=self.config.contamination,
-            gamma='scale'
-        )
+        self.detectors["one_class_svm"] = OneClassSVM(nu=self.config.contamination, gamma="scale")
 
         # Elliptic Envelope (Robust covariance)
-        self.detectors['elliptic_envelope'] = EllipticEnvelope(
-            contamination=self.config.contamination,
-            random_state=self.config.random_state
+        self.detectors["elliptic_envelope"] = EllipticEnvelope(
+            contamination=self.config.contamination, random_state=self.config.random_state
         )
 
         # DBSCAN clustering for outliers
-        self.detectors['dbscan'] = DBSCAN(eps=0.5, min_samples=5)
+        self.detectors["dbscan"] = DBSCAN(eps=0.5, min_samples=5)
 
         # Statistical methods
-        self.detectors['statistical'] = StatisticalAnomalyDetector(self.config)
+        self.detectors["statistical"] = StatisticalAnomalyDetector(self.config)
 
         # Autoencoder (if TensorFlow available)
         if TENSORFLOW_AVAILABLE:
-            self.detectors['autoencoder'] = AutoencoderAnomalyDetector(self.config)
+            self.detectors["autoencoder"] = AutoencoderAnomalyDetector(self.config)
 
         logger.info(f"Initialized {len(self.detectors)} anomaly detectors")
 
@@ -326,20 +330,20 @@ class AnomalyDetectionSuite:
             try:
                 logger.info(f"Fitting {name}")
 
-                if name == 'lof':
+                if name == "lof":
                     # LOF doesn't have separate fit method for novelty detection
                     detector.set_params(novelty=True)
                     detector.fit(X_scaled)
-                elif name == 'dbscan':
+                elif name == "dbscan":
                     # DBSCAN for outlier detection
                     labels = detector.fit_predict(X_scaled)
                     # Points labeled as -1 are outliers
                     outlier_ratio = np.sum(labels == -1) / len(labels)
                     logger.info(f"DBSCAN outlier ratio: {outlier_ratio:.3f}")
-                elif name == 'statistical':
+                elif name == "statistical":
                     # Statistical methods
                     detector.fit(X_scaled_df)
-                elif name == 'autoencoder' and TENSORFLOW_AVAILABLE:
+                elif name == "autoencoder" and TENSORFLOW_AVAILABLE:
                     # Autoencoder
                     detector.fit(X_scaled_df)
                 else:
@@ -379,58 +383,64 @@ class AnomalyDetectionSuite:
         # Apply each detector
         for name, detector in self.detectors.items():
             try:
-                if name == 'isolation_forest':
+                if name == "isolation_forest":
                     predictions = detector.predict(X_scaled)
                     scores = detector.decision_function(X_scaled)
                     anomalies = predictions == -1
                     detection_results[name] = anomalies
-                    anomaly_scores[name] = -scores  # Negative because IF uses negative scores for anomalies
+                    anomaly_scores[name] = (
+                        -scores
+                    )  # Negative because IF uses negative scores for anomalies
 
-                elif name == 'lof':
-                    predictions = detector.predict(X_scaled)
-                    scores = detector.decision_function(X_scaled)
-                    anomalies = predictions == -1
-                    detection_results[name] = anomalies
-                    anomaly_scores[name] = -scores
-
-                elif name == 'one_class_svm':
+                elif name == "lof":
                     predictions = detector.predict(X_scaled)
                     scores = detector.decision_function(X_scaled)
                     anomalies = predictions == -1
                     detection_results[name] = anomalies
                     anomaly_scores[name] = -scores
 
-                elif name == 'elliptic_envelope':
+                elif name == "one_class_svm":
+                    predictions = detector.predict(X_scaled)
+                    scores = detector.decision_function(X_scaled)
+                    anomalies = predictions == -1
+                    detection_results[name] = anomalies
+                    anomaly_scores[name] = -scores
+
+                elif name == "elliptic_envelope":
                     predictions = detector.predict(X_scaled)
                     anomalies = predictions == -1
                     detection_results[name] = anomalies
                     # Use Mahalanobis distance as score
                     anomaly_scores[name] = np.random.random(len(X))  # Placeholder
 
-                elif name == 'dbscan':
+                elif name == "dbscan":
                     labels = detector.fit_predict(X_scaled)
                     anomalies = labels == -1
                     detection_results[name] = anomalies
                     anomaly_scores[name] = np.where(anomalies, 1.0, 0.0)
 
-                elif name == 'statistical':
+                elif name == "statistical":
                     # Combine multiple statistical methods
                     zscore_anomalies = detector.detect_zscore_anomalies(X_scaled_df)
                     iqr_anomalies = detector.detect_iqr_anomalies(X_scaled_df)
-                    modified_zscore_anomalies = detector.detect_modified_zscore_anomalies(X_scaled_df)
+                    modified_zscore_anomalies = detector.detect_modified_zscore_anomalies(
+                        X_scaled_df
+                    )
                     mahalanobis_anomalies = detector.detect_mahalanobis_anomalies(X_scaled_df)
 
                     # Voting system for statistical methods
-                    vote_count = (zscore_anomalies.astype(int) +
-                                iqr_anomalies.astype(int) +
-                                modified_zscore_anomalies.astype(int) +
-                                mahalanobis_anomalies.astype(int))
+                    vote_count = (
+                        zscore_anomalies.astype(int)
+                        + iqr_anomalies.astype(int)
+                        + modified_zscore_anomalies.astype(int)
+                        + mahalanobis_anomalies.astype(int)
+                    )
 
                     anomalies = vote_count >= 2  # Majority vote
                     detection_results[name] = anomalies
                     anomaly_scores[name] = vote_count / 4.0  # Normalized vote score
 
-                elif name == 'autoencoder' and TENSORFLOW_AVAILABLE:
+                elif name == "autoencoder" and TENSORFLOW_AVAILABLE:
                     anomalies, scores = detector.detect_anomalies(X_scaled_df)
                     detection_results[name] = anomalies
                     anomaly_scores[name] = scores
@@ -444,9 +454,12 @@ class AnomalyDetectionSuite:
 
         return ensemble_results
 
-    def _ensemble_voting(self, detection_results: Dict[str, np.ndarray],
-                        anomaly_scores: Dict[str, np.ndarray],
-                        X: pd.DataFrame) -> List[AnomalyScore]:
+    def _ensemble_voting(
+        self,
+        detection_results: Dict[str, np.ndarray],
+        anomaly_scores: Dict[str, np.ndarray],
+        X: pd.DataFrame,
+    ) -> List[AnomalyScore]:
         """Combine results from multiple detectors using ensemble voting."""
         n_samples = X.shape[0]
         results = []
@@ -483,28 +496,33 @@ class AnomalyDetectionSuite:
                 )
 
                 # Get contributing features (simplified)
-                contributing_features = self._identify_contributing_features(
-                    X.iloc[i], is_anomaly
-                )
+                contributing_features = self._identify_contributing_features(X.iloc[i], is_anomaly)
 
                 # Get claim ID if available
-                claim_id = X.index[i] if hasattr(X.index[i], '__str__') else f"claim_{i}"
+                claim_id = X.index[i] if hasattr(X.index[i], "__str__") else f"claim_{i}"
 
-                results.append(AnomalyScore(
-                    claim_id=str(claim_id),
-                    anomaly_score=avg_score,
-                    is_anomaly=is_anomaly,
-                    method='ensemble',
-                    confidence=confidence,
-                    explanation=explanation,
-                    contributing_features=contributing_features
-                ))
+                results.append(
+                    AnomalyScore(
+                        claim_id=str(claim_id),
+                        anomaly_score=avg_score,
+                        is_anomaly=is_anomaly,
+                        method="ensemble",
+                        confidence=confidence,
+                        explanation=explanation,
+                        contributing_features=contributing_features,
+                    )
+                )
 
         return results
 
-    def _generate_anomaly_explanation(self, index: int, is_anomaly: bool,
-                                    vote_ratio: float, contributing_methods: List[str],
-                                    X: pd.DataFrame) -> str:
+    def _generate_anomaly_explanation(
+        self,
+        index: int,
+        is_anomaly: bool,
+        vote_ratio: float,
+        contributing_methods: List[str],
+        X: pd.DataFrame,
+    ) -> str:
         """Generate human-readable explanation for anomaly detection."""
         if is_anomaly:
             explanation = f"ANOMALY DETECTED (Confidence: {vote_ratio:.2f})"
@@ -522,7 +540,9 @@ class AnomalyDetectionSuite:
             for feature_name in self.feature_names:
                 if feature_name in sample.index:
                     feature_value = sample[feature_name]
-                    if hasattr(feature_value, '__abs__') and abs(feature_value) > 2:  # Simple threshold
+                    if (
+                        hasattr(feature_value, "__abs__") and abs(feature_value) > 2
+                    ):  # Simple threshold
                         extreme_features.append(feature_name)
 
             if extreme_features:
@@ -550,7 +570,9 @@ class AnomalyDetectionSuite:
         # Return top 5 contributing features
         return contributing_features[:5]
 
-    def get_method_performance(self, X: pd.DataFrame, y_true: np.ndarray = None) -> Dict[str, Dict[str, float]]:
+    def get_method_performance(
+        self, X: pd.DataFrame, y_true: np.ndarray = None
+    ) -> Dict[str, Dict[str, float]]:
         """
         Evaluate performance of individual detection methods.
 
@@ -580,13 +602,18 @@ class AnomalyDetectionSuite:
                 predictions = np.array(predictions)
 
                 if len(predictions) == len(y_true):
-                    from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score
+                    from sklearn.metrics import (
+                        precision_score,
+                        recall_score,
+                        f1_score,
+                        accuracy_score,
+                    )
 
                     performance[method] = {
-                        'accuracy': accuracy_score(y_true, predictions),
-                        'precision': precision_score(y_true, predictions, zero_division=0),
-                        'recall': recall_score(y_true, predictions, zero_division=0),
-                        'f1_score': f1_score(y_true, predictions, zero_division=0)
+                        "accuracy": accuracy_score(y_true, predictions),
+                        "precision": precision_score(y_true, predictions, zero_division=0),
+                        "recall": recall_score(y_true, predictions, zero_division=0),
+                        "f1_score": f1_score(y_true, predictions, zero_division=0),
                     }
 
         return performance
@@ -600,12 +627,14 @@ class AnomalyDetectionSuite:
 
         # Save individual detectors (excluding neural network)
         for name, detector in self.detectors.items():
-            if name == 'autoencoder' and TENSORFLOW_AVAILABLE:
+            if name == "autoencoder" and TENSORFLOW_AVAILABLE:
                 # Save autoencoder model and scaler separately
-                if hasattr(detector, 'model') and detector.model:
+                if hasattr(detector, "model") and detector.model:
                     detector.model.save(os.path.join(directory, f"{name}_model.h5"))
                     joblib.dump(detector.scaler, os.path.join(directory, f"{name}_scaler.pkl"))
-                    joblib.dump(detector.threshold, os.path.join(directory, f"{name}_threshold.pkl"))
+                    joblib.dump(
+                        detector.threshold, os.path.join(directory, f"{name}_threshold.pkl")
+                    )
             else:
                 joblib.dump(detector, os.path.join(directory, f"{name}.pkl"))
 
@@ -613,18 +642,19 @@ class AnomalyDetectionSuite:
         joblib.dump(self.scaler, os.path.join(directory, "scaler.pkl"))
 
         metadata = {
-            'feature_names': self.feature_names,
-            'config': {
-                'contamination': self.config.contamination,
-                'random_state': self.config.random_state,
-                'threshold_percentile': self.config.threshold_percentile
+            "feature_names": self.feature_names,
+            "config": {
+                "contamination": self.config.contamination,
+                "random_state": self.config.random_state,
+                "threshold_percentile": self.config.threshold_percentile,
             },
-            'fitted': self.fitted,
-            'timestamp': datetime.now().isoformat()
+            "fitted": self.fitted,
+            "timestamp": datetime.now().isoformat(),
         }
 
-        with open(os.path.join(directory, "metadata.json"), 'w') as f:
+        with open(os.path.join(directory, "metadata.json"), "w") as f:
             import json
+
             json.dump(metadata, f, indent=2)
 
         logger.info(f"Anomaly detectors saved to {directory}")
@@ -636,18 +666,18 @@ class AnomalyDetectionSuite:
         import pickle
 
         # Load metadata
-        with open(os.path.join(directory, "metadata.json"), 'r') as f:
+        with open(os.path.join(directory, "metadata.json"), "r") as f:
             metadata = json.load(f)
 
-        self.feature_names = metadata['feature_names']
-        self.fitted = metadata['fitted']
+        self.feature_names = metadata["feature_names"]
+        self.fitted = metadata["fitted"]
 
         # Reconstruct config
-        config_data = metadata['config']
+        config_data = metadata["config"]
         self.config = AnomalyDetectorConfig(
-            contamination=config_data['contamination'],
-            random_state=config_data['random_state'],
-            threshold_percentile=config_data['threshold_percentile']
+            contamination=config_data["contamination"],
+            random_state=config_data["random_state"],
+            threshold_percentile=config_data["threshold_percentile"],
         )
 
         # Load scaler
@@ -656,9 +686,9 @@ class AnomalyDetectionSuite:
         # Load individual detectors
         self.detectors = {}
         for filename in os.listdir(directory):
-            if filename.endswith('.pkl') and filename != 'scaler.pkl':
-                name = filename.replace('.pkl', '')
-                if not name.endswith(('_scaler', '_threshold')):
+            if filename.endswith(".pkl") and filename != "scaler.pkl":
+                name = filename.replace(".pkl", "")
+                if not name.endswith(("_scaler", "_threshold")):
                     self.detectors[name] = joblib.load(os.path.join(directory, filename))
 
         # Load autoencoder if available
@@ -667,16 +697,18 @@ class AnomalyDetectionSuite:
             autoencoder_scaler_path = os.path.join(directory, "autoencoder_scaler.pkl")
             autoencoder_threshold_path = os.path.join(directory, "autoencoder_threshold.pkl")
 
-            if (os.path.exists(autoencoder_model_path) and
-                os.path.exists(autoencoder_scaler_path) and
-                os.path.exists(autoencoder_threshold_path)):
+            if (
+                os.path.exists(autoencoder_model_path)
+                and os.path.exists(autoencoder_scaler_path)
+                and os.path.exists(autoencoder_threshold_path)
+            ):
 
                 autoencoder_detector = AutoencoderAnomalyDetector(self.config)
                 autoencoder_detector.model = keras.models.load_model(autoencoder_model_path)
                 autoencoder_detector.scaler = joblib.load(autoencoder_scaler_path)
                 autoencoder_detector.threshold = joblib.load(autoencoder_threshold_path)
 
-                self.detectors['autoencoder'] = autoencoder_detector
+                self.detectors["autoencoder"] = autoencoder_detector
 
         logger.info(f"Anomaly detectors loaded from {directory}")
 
@@ -695,8 +727,7 @@ class AnomalyDetectionSuite:
 
         # High confidence anomalies
         high_confidence_anomalies = [
-            result for result in anomaly_results
-            if result.is_anomaly and result.confidence > 0.8
+            result for result in anomaly_results if result.is_anomaly and result.confidence > 0.8
         ]
 
         if high_confidence_anomalies:

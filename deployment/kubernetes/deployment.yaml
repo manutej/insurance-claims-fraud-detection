@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -22,15 +23,15 @@ spec:
       color: blue
   template:
     metadata:
-      labels:
+        labels:
         app: insurance-claims
         component: api
         color: blue
         version: v1.0.0
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "8001"
-        prometheus.io/path: "/metrics"
+        annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '8001'
+        prometheus.io/path: /metrics
     spec:
       serviceAccountName: insurance-claims
       securityContext:
@@ -51,7 +52,7 @@ spec:
           protocol: TCP
         env:
         - name: MODE
-          value: "api"
+          value: api
         envFrom:
         - configMapRef:
             name: insurance-claims-config
@@ -59,11 +60,11 @@ spec:
             name: insurance-claims-secrets
         resources:
           requests:
-            memory: "512Mi"
-            cpu: "250m"
+            memory: 512Mi
+            cpu: 250m
           limits:
-            memory: "1Gi"
-            cpu: "1000m"
+            memory: 1Gi
+            cpu: 1000m
         livenessProbe:
           httpGet:
             path: /health
@@ -120,11 +121,10 @@ spec:
                   component: api
               topologyKey: kubernetes.io/hostname
       tolerations:
-      - key: "app"
-        operator: "Equal"
-        value: "insurance-claims"
-        effect: "NoSchedule"
-
+      - key: app
+        operator: Equal
+        value: insurance-claims
+        effect: NoSchedule
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -137,7 +137,7 @@ metadata:
     color: green
     version: v1.0.0
 spec:
-  replicas: 0  # Initially scaled to 0 for blue-green deployment
+  replicas: 0
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -150,15 +150,15 @@ spec:
       color: green
   template:
     metadata:
-      labels:
+        labels:
         app: insurance-claims
         component: api
         color: green
         version: v1.0.0
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "8001"
-        prometheus.io/path: "/metrics"
+        annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '8001'
+        prometheus.io/path: /metrics
     spec:
       serviceAccountName: insurance-claims
       securityContext:
@@ -179,7 +179,7 @@ spec:
           protocol: TCP
         env:
         - name: MODE
-          value: "api"
+          value: api
         envFrom:
         - configMapRef:
             name: insurance-claims-config
@@ -187,11 +187,11 @@ spec:
             name: insurance-claims-secrets
         resources:
           requests:
-            memory: "512Mi"
-            cpu: "250m"
+            memory: 512Mi
+            cpu: 250m
           limits:
-            memory: "1Gi"
-            cpu: "1000m"
+            memory: 1Gi
+            cpu: 1000m
         livenessProbe:
           httpGet:
             path: /health
@@ -247,7 +247,6 @@ spec:
                   app: insurance-claims
                   component: api
               topologyKey: kubernetes.io/hostname
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -271,14 +270,14 @@ spec:
       component: worker
   template:
     metadata:
-      labels:
+        labels:
         app: insurance-claims
         component: worker
         version: v1.0.0
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "8001"
-        prometheus.io/path: "/metrics"
+        annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '8001'
+        prometheus.io/path: /metrics
     spec:
       serviceAccountName: insurance-claims
       securityContext:
@@ -296,7 +295,7 @@ spec:
           protocol: TCP
         env:
         - name: MODE
-          value: "worker"
+          value: worker
         envFrom:
         - configMapRef:
             name: insurance-claims-config
@@ -304,17 +303,17 @@ spec:
             name: insurance-claims-secrets
         resources:
           requests:
-            memory: "768Mi"
-            cpu: "500m"
+            memory: 768Mi
+            cpu: 500m
           limits:
-            memory: "2Gi"
-            cpu: "2000m"
+            memory: 2Gi
+            cpu: 2000m
         livenessProbe:
           exec:
             command:
             - python
             - -c
-            - "import redis; r = redis.from_url('${REDIS_URL}'); r.ping()"
+            - import redis; r = redis.from_url('${REDIS_URL}'); r.ping()
           initialDelaySeconds: 60
           periodSeconds: 30
           timeoutSeconds: 10
@@ -344,9 +343,7 @@ spec:
         configMap:
           name: insurance-claims-models
           optional: true
-
 ---
-# Staging deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -371,15 +368,15 @@ spec:
       env: staging
   template:
     metadata:
-      labels:
+        labels:
         app: insurance-claims
         component: api
         env: staging
         version: v1.0.0
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "8001"
-        prometheus.io/path: "/metrics"
+        annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '8001'
+        prometheus.io/path: /metrics
     spec:
       serviceAccountName: insurance-claims
       securityContext:
@@ -400,7 +397,7 @@ spec:
           protocol: TCP
         env:
         - name: MODE
-          value: "api"
+          value: api
         envFrom:
         - configMapRef:
             name: insurance-claims-config
@@ -408,11 +405,11 @@ spec:
             name: insurance-claims-secrets
         resources:
           requests:
-            memory: "256Mi"
-            cpu: "125m"
+            memory: 256Mi
+            cpu: 125m
           limits:
-            memory: "512Mi"
-            cpu: "500m"
+            memory: 512Mi
+            cpu: 500m
         livenessProbe:
           httpGet:
             path: /health

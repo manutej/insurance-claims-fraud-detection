@@ -21,13 +21,23 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import (
-    train_test_split, cross_val_score, GridSearchCV,
-    StratifiedKFold, RandomizedSearchCV
+    train_test_split,
+    cross_val_score,
+    GridSearchCV,
+    StratifiedKFold,
+    RandomizedSearchCV,
 )
 from sklearn.metrics import (
-    classification_report, confusion_matrix, roc_auc_score,
-    precision_recall_curve, roc_curve, average_precision_score,
-    f1_score, precision_score, recall_score, accuracy_score
+    classification_report,
+    confusion_matrix,
+    roc_auc_score,
+    precision_recall_curve,
+    roc_curve,
+    average_precision_score,
+    f1_score,
+    precision_score,
+    recall_score,
+    accuracy_score,
 )
 from sklearn.preprocessing import StandardScaler
 from sklearn.utils.class_weight import compute_class_weight
@@ -36,6 +46,7 @@ from sklearn.pipeline import Pipeline
 # XGBoost
 try:
     import xgboost as xgb
+
     XGBOOST_AVAILABLE = True
 except ImportError:
     XGBOOST_AVAILABLE = False
@@ -46,16 +57,21 @@ try:
     import tensorflow as tf
     from tensorflow import keras
     from tensorflow.keras import layers
+
     TENSORFLOW_AVAILABLE = True
 except ImportError:
     TENSORFLOW_AVAILABLE = False
     logging.warning("TensorFlow not available. Install with: pip install tensorflow")
+    # Create dummy placeholders to prevent NameError during module parsing
+    keras = None
+    layers = None
 
 # SMOTE for handling class imbalance
 try:
     from imblearn.over_sampling import SMOTE
     from imblearn.under_sampling import RandomUnderSampler
     from imblearn.pipeline import Pipeline as ImbPipeline
+
     IMBALANCED_LEARN_AVAILABLE = True
 except ImportError:
     IMBALANCED_LEARN_AVAILABLE = False
@@ -69,6 +85,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class ModelConfig:
     """Configuration for ML models."""
+
     name: str
     algorithm: str
     hyperparameters: Dict[str, Any]
@@ -80,6 +97,7 @@ class ModelConfig:
 @dataclass
 class ModelPerformance:
     """Model performance metrics."""
+
     accuracy: float
     precision: float
     recall: float
@@ -94,6 +112,7 @@ class ModelPerformance:
 @dataclass
 class PredictionResult:
     """Result of fraud prediction."""
+
     prediction: int
     probability: float
     confidence: float
@@ -127,10 +146,10 @@ class MLModelManager:
 
         # Target metrics from requirements
         self.target_metrics = target_metrics or {
-            'accuracy': 0.94,
-            'false_positive_rate': 0.038,
-            'detection_rate_min': 0.08,
-            'detection_rate_max': 0.15
+            "accuracy": 0.94,
+            "false_positive_rate": 0.038,
+            "detection_rate_min": 0.08,
+            "detection_rate_max": 0.15,
         }
 
         self.model_configs = self._initialize_model_configs()
@@ -138,84 +157,85 @@ class MLModelManager:
     def _initialize_model_configs(self) -> Dict[str, ModelConfig]:
         """Initialize model configurations."""
         configs = {
-            'random_forest': ModelConfig(
-                name='random_forest',
-                algorithm='RandomForest',
+            "random_forest": ModelConfig(
+                name="random_forest",
+                algorithm="RandomForest",
                 hyperparameters={
-                    'n_estimators': 200,
-                    'max_depth': 15,
-                    'min_samples_split': 5,
-                    'min_samples_leaf': 2,
-                    'max_features': 'sqrt',
-                    'bootstrap': True,
-                    'random_state': 42
+                    "n_estimators": 200,
+                    "max_depth": 15,
+                    "min_samples_split": 5,
+                    "min_samples_leaf": 2,
+                    "max_features": "sqrt",
+                    "bootstrap": True,
+                    "random_state": 42,
                 },
                 use_class_weights=True,
-                scaling_required=False
+                scaling_required=False,
             ),
-            'logistic_regression': ModelConfig(
-                name='logistic_regression',
-                algorithm='LogisticRegression',
+            "logistic_regression": ModelConfig(
+                name="logistic_regression",
+                algorithm="LogisticRegression",
                 hyperparameters={
-                    'C': 1.0,
-                    'penalty': 'l2',
-                    'solver': 'liblinear',
-                    'max_iter': 1000,
-                    'random_state': 42
+                    "C": 1.0,
+                    "penalty": "l2",
+                    "solver": "liblinear",
+                    "max_iter": 1000,
+                    "random_state": 42,
                 },
                 use_class_weights=True,
-                scaling_required=True
+                scaling_required=True,
             ),
-            'svm': ModelConfig(
-                name='svm',
-                algorithm='SVM',
+            "svm": ModelConfig(
+                name="svm",
+                algorithm="SVM",
                 hyperparameters={
-                    'C': 1.0,
-                    'kernel': 'rbf',
-                    'gamma': 'scale',
-                    'probability': True,
-                    'random_state': 42
+                    "C": 1.0,
+                    "kernel": "rbf",
+                    "gamma": "scale",
+                    "probability": True,
+                    "random_state": 42,
                 },
                 use_class_weights=True,
-                scaling_required=True
+                scaling_required=True,
             ),
-            'mlp': ModelConfig(
-                name='mlp',
-                algorithm='MLP',
+            "mlp": ModelConfig(
+                name="mlp",
+                algorithm="MLP",
                 hyperparameters={
-                    'hidden_layer_sizes': (100, 50),
-                    'activation': 'relu',
-                    'solver': 'adam',
-                    'alpha': 0.001,
-                    'learning_rate': 'adaptive',
-                    'max_iter': 500,
-                    'random_state': 42
+                    "hidden_layer_sizes": (100, 50),
+                    "activation": "relu",
+                    "solver": "adam",
+                    "alpha": 0.001,
+                    "learning_rate": "adaptive",
+                    "max_iter": 500,
+                    "random_state": 42,
                 },
-                scaling_required=True
-            )
+                scaling_required=True,
+            ),
         }
 
         # Add XGBoost if available
         if XGBOOST_AVAILABLE:
-            configs['xgboost'] = ModelConfig(
-                name='xgboost',
-                algorithm='XGBoost',
+            configs["xgboost"] = ModelConfig(
+                name="xgboost",
+                algorithm="XGBoost",
                 hyperparameters={
-                    'n_estimators': 200,
-                    'max_depth': 8,
-                    'learning_rate': 0.1,
-                    'subsample': 0.8,
-                    'colsample_bytree': 0.8,
-                    'random_state': 42,
-                    'eval_metric': 'logloss'
+                    "n_estimators": 200,
+                    "max_depth": 8,
+                    "learning_rate": 0.1,
+                    "subsample": 0.8,
+                    "colsample_bytree": 0.8,
+                    "random_state": 42,
+                    "eval_metric": "logloss",
                 },
-                scaling_required=False
+                scaling_required=False,
             )
 
         return configs
 
-    def train_models(self, X: pd.DataFrame, y: pd.Series,
-                    validation_split: float = 0.2) -> Dict[str, ModelPerformance]:
+    def train_models(
+        self, X: pd.DataFrame, y: pd.Series, validation_split: float = 0.2
+    ) -> Dict[str, ModelPerformance]:
         """
         Train all configured models.
 
@@ -253,10 +273,7 @@ class MLModelManager:
                 # Create pipeline with scaling if needed
                 if config.scaling_required:
                     scaler = StandardScaler()
-                    pipeline = Pipeline([
-                        ('scaler', scaler),
-                        ('model', model)
-                    ])
+                    pipeline = Pipeline([("scaler", scaler), ("model", model)])
                     self.scalers[model_name] = scaler
                 else:
                     pipeline = model
@@ -269,10 +286,12 @@ class MLModelManager:
                 performance = self._evaluate_model(pipeline, X_val, y_val, model_name)
                 performance_results[model_name] = performance
 
-                logger.info(f"{model_name} - Accuracy: {performance.accuracy:.4f}, "
-                           f"Precision: {performance.precision:.4f}, "
-                           f"Recall: {performance.recall:.4f}, "
-                           f"F1: {performance.f1_score:.4f}")
+                logger.info(
+                    f"{model_name} - Accuracy: {performance.accuracy:.4f}, "
+                    f"Precision: {performance.precision:.4f}, "
+                    f"Recall: {performance.recall:.4f}, "
+                    f"F1: {performance.f1_score:.4f}"
+                )
 
             except Exception as e:
                 logger.error(f"Failed to train {model_name}: {e}")
@@ -285,9 +304,9 @@ class MLModelManager:
 
             if self.ensemble_model:
                 ensemble_performance = self._evaluate_model(
-                    self.ensemble_model, X_val, y_val, 'ensemble'
+                    self.ensemble_model, X_val, y_val, "ensemble"
                 )
-                performance_results['ensemble'] = ensemble_performance
+                performance_results["ensemble"] = ensemble_performance
 
         # Train neural network if TensorFlow is available
         if TENSORFLOW_AVAILABLE:
@@ -295,9 +314,9 @@ class MLModelManager:
                 logger.info("Training neural network")
                 nn_model = self._train_neural_network(X_train, y_train, X_val, y_val)
                 if nn_model:
-                    self.trained_models['neural_network'] = nn_model
+                    self.trained_models["neural_network"] = nn_model
                     nn_performance = self._evaluate_neural_network(nn_model, X_val, y_val)
-                    performance_results['neural_network'] = nn_performance
+                    performance_results["neural_network"] = nn_performance
             except Exception as e:
                 logger.error(f"Failed to train neural network: {e}")
 
@@ -310,37 +329,30 @@ class MLModelManager:
         class_weights = None
         if config.use_class_weights:
             classes = np.unique(y_train)
-            weights = compute_class_weight('balanced', classes=classes, y=y_train)
+            weights = compute_class_weight("balanced", classes=classes, y=y_train)
             class_weights = dict(zip(classes, weights))
 
         # Create model based on algorithm
-        if config.algorithm == 'RandomForest':
-            return RandomForestClassifier(
-                class_weight=class_weights,
-                **config.hyperparameters
-            )
-        elif config.algorithm == 'LogisticRegression':
-            return LogisticRegression(
-                class_weight=class_weights,
-                **config.hyperparameters
-            )
-        elif config.algorithm == 'SVM':
-            return SVC(
-                class_weight=class_weights,
-                **config.hyperparameters
-            )
-        elif config.algorithm == 'MLP':
+        if config.algorithm == "RandomForest":
+            return RandomForestClassifier(class_weight=class_weights, **config.hyperparameters)
+        elif config.algorithm == "LogisticRegression":
+            return LogisticRegression(class_weight=class_weights, **config.hyperparameters)
+        elif config.algorithm == "SVM":
+            return SVC(class_weight=class_weights, **config.hyperparameters)
+        elif config.algorithm == "MLP":
             return MLPClassifier(**config.hyperparameters)
-        elif config.algorithm == 'XGBoost' and XGBOOST_AVAILABLE:
+        elif config.algorithm == "XGBoost" and XGBOOST_AVAILABLE:
             # XGBoost handles class weights differently
             scale_pos_weight = len(y_train[y_train == 0]) / len(y_train[y_train == 1])
             params = config.hyperparameters.copy()
-            params['scale_pos_weight'] = scale_pos_weight
+            params["scale_pos_weight"] = scale_pos_weight
             return xgb.XGBClassifier(**params)
         else:
             raise ValueError(f"Unknown algorithm: {config.algorithm}")
 
-    def _handle_class_imbalance(self, X_train: pd.DataFrame, y_train: pd.Series) -> Tuple[pd.DataFrame, pd.Series]:
+    def _handle_class_imbalance(
+        self, X_train: pd.DataFrame, y_train: pd.Series
+    ) -> Tuple[pd.DataFrame, pd.Series]:
         """Handle class imbalance using SMOTE."""
         try:
             # Use SMOTE for oversampling minority class
@@ -354,16 +366,17 @@ class MLModelManager:
             logger.warning(f"SMOTE failed, using original data: {e}")
             return X_train, y_train
 
-    def _evaluate_model(self, model, X_val: pd.DataFrame, y_val: pd.Series,
-                       model_name: str) -> ModelPerformance:
+    def _evaluate_model(
+        self, model, X_val: pd.DataFrame, y_val: pd.Series, model_name: str
+    ) -> ModelPerformance:
         """Evaluate model performance."""
         # Predictions
         y_pred = model.predict(X_val)
 
         # Probabilities
-        if hasattr(model, 'predict_proba'):
+        if hasattr(model, "predict_proba"):
             y_proba = model.predict_proba(X_val)[:, 1]
-        elif hasattr(model, 'decision_function'):
+        elif hasattr(model, "decision_function"):
             y_proba = model.decision_function(X_val)
             # Convert to probabilities
             y_proba = 1 / (1 + np.exp(-y_proba))
@@ -399,24 +412,24 @@ class MLModelManager:
             average_precision=avg_precision,
             false_positive_rate=fpr,
             confusion_matrix=confusion_matrix(y_val, y_pred),
-            classification_report=report
+            classification_report=report,
         )
 
-    def _train_ensemble_model(self, X_train: pd.DataFrame, y_train: pd.Series,
-                            X_val: pd.DataFrame, y_val: pd.Series) -> None:
+    def _train_ensemble_model(
+        self, X_train: pd.DataFrame, y_train: pd.Series, X_val: pd.DataFrame, y_val: pd.Series
+    ) -> None:
         """Train ensemble model using voting classifier."""
         try:
             # Select best performing models for ensemble
             estimators = []
 
             for name, model in self.trained_models.items():
-                if name in ['random_forest', 'logistic_regression', 'xgboost']:
+                if name in ["random_forest", "logistic_regression", "xgboost"]:
                     estimators.append((name, model))
 
             if len(estimators) >= 2:
                 self.ensemble_model = VotingClassifier(
-                    estimators=estimators,
-                    voting='soft'  # Use probabilities
+                    estimators=estimators, voting="soft"  # Use probabilities
                 )
                 self.ensemble_model.fit(X_train, y_train)
                 logger.info(f"Ensemble model created with {len(estimators)} estimators")
@@ -426,58 +439,56 @@ class MLModelManager:
         except Exception as e:
             logger.error(f"Failed to create ensemble model: {e}")
 
-    def _train_neural_network(self, X_train: pd.DataFrame, y_train: pd.Series,
-                            X_val: pd.DataFrame, y_val: pd.Series):
+    def _train_neural_network(
+        self, X_train: pd.DataFrame, y_train: pd.Series, X_val: pd.DataFrame, y_val: pd.Series
+    ):
         """Train neural network using TensorFlow/Keras."""
         try:
             # Scale features
             scaler = StandardScaler()
             X_train_scaled = scaler.fit_transform(X_train)
             X_val_scaled = scaler.transform(X_val)
-            self.scalers['neural_network'] = scaler
+            self.scalers["neural_network"] = scaler
 
             # Calculate class weights
-            class_weights = compute_class_weight(
-                'balanced',
-                classes=np.unique(y_train),
-                y=y_train
-            )
+            class_weights = compute_class_weight("balanced", classes=np.unique(y_train), y=y_train)
             class_weight_dict = {i: weight for i, weight in enumerate(class_weights)}
 
             # Build model
-            model = keras.Sequential([
-                layers.Dense(128, activation='relu', input_shape=(X_train.shape[1],)),
-                layers.Dropout(0.3),
-                layers.Dense(64, activation='relu'),
-                layers.Dropout(0.3),
-                layers.Dense(32, activation='relu'),
-                layers.Dropout(0.2),
-                layers.Dense(1, activation='sigmoid')
-            ])
+            model = keras.Sequential(
+                [
+                    layers.Dense(128, activation="relu", input_shape=(X_train.shape[1],)),
+                    layers.Dropout(0.3),
+                    layers.Dense(64, activation="relu"),
+                    layers.Dropout(0.3),
+                    layers.Dense(32, activation="relu"),
+                    layers.Dropout(0.2),
+                    layers.Dense(1, activation="sigmoid"),
+                ]
+            )
 
             # Compile model
             model.compile(
-                optimizer='adam',
-                loss='binary_crossentropy',
-                metrics=['accuracy', 'precision', 'recall']
+                optimizer="adam",
+                loss="binary_crossentropy",
+                metrics=["accuracy", "precision", "recall"],
             )
 
             # Early stopping
             early_stopping = keras.callbacks.EarlyStopping(
-                monitor='val_loss',
-                patience=10,
-                restore_best_weights=True
+                monitor="val_loss", patience=10, restore_best_weights=True
             )
 
             # Train model
             history = model.fit(
-                X_train_scaled, y_train,
+                X_train_scaled,
+                y_train,
                 epochs=100,
                 batch_size=32,
                 validation_data=(X_val_scaled, y_val),
                 class_weight=class_weight_dict,
                 callbacks=[early_stopping],
-                verbose=0
+                verbose=0,
             )
 
             return model
@@ -486,10 +497,12 @@ class MLModelManager:
             logger.error(f"Neural network training failed: {e}")
             return None
 
-    def _evaluate_neural_network(self, model, X_val: pd.DataFrame, y_val: pd.Series) -> ModelPerformance:
+    def _evaluate_neural_network(
+        self, model, X_val: pd.DataFrame, y_val: pd.Series
+    ) -> ModelPerformance:
         """Evaluate neural network performance."""
         # Scale validation data
-        scaler = self.scalers['neural_network']
+        scaler = self.scalers["neural_network"]
         X_val_scaled = scaler.transform(X_val)
 
         # Predictions
@@ -517,10 +530,10 @@ class MLModelManager:
             average_precision=avg_precision,
             false_positive_rate=fpr,
             confusion_matrix=confusion_matrix(y_val, y_pred),
-            classification_report=classification_report(y_val, y_pred)
+            classification_report=classification_report(y_val, y_pred),
         )
 
-    def predict(self, X: pd.DataFrame, model_name: str = 'ensemble') -> List[PredictionResult]:
+    def predict(self, X: pd.DataFrame, model_name: str = "ensemble") -> List[PredictionResult]:
         """
         Make fraud predictions on new data.
 
@@ -531,13 +544,13 @@ class MLModelManager:
         Returns:
             List of prediction results
         """
-        if model_name not in self.trained_models and model_name != 'ensemble':
+        if model_name not in self.trained_models and model_name != "ensemble":
             raise ValueError(f"Model {model_name} not found")
 
         # Use ensemble model if available and requested
-        if model_name == 'ensemble' and self.ensemble_model:
+        if model_name == "ensemble" and self.ensemble_model:
             model = self.ensemble_model
-        elif model_name == 'ensemble':
+        elif model_name == "ensemble":
             # Fall back to best individual model
             model_name = self._get_best_model()
             model = self.trained_models[model_name]
@@ -545,14 +558,14 @@ class MLModelManager:
             model = self.trained_models[model_name]
 
         # Make predictions
-        if model_name == 'neural_network':
+        if model_name == "neural_network":
             scaler = self.scalers[model_name]
             X_scaled = scaler.transform(X)
             probabilities = model.predict(X_scaled).flatten()
             predictions = (probabilities > 0.5).astype(int)
         else:
             predictions = model.predict(X)
-            if hasattr(model, 'predict_proba'):
+            if hasattr(model, "predict_proba"):
                 probabilities = model.predict_proba(X)[:, 1]
             else:
                 probabilities = predictions.astype(float)
@@ -561,16 +574,16 @@ class MLModelManager:
         results = []
         for i, (pred, prob) in enumerate(zip(predictions, probabilities)):
             confidence = max(prob, 1 - prob)  # Distance from decision boundary
-            explanation = self._generate_prediction_explanation(
-                X.iloc[i], pred, prob, model_name
-            )
+            explanation = self._generate_prediction_explanation(X.iloc[i], pred, prob, model_name)
 
-            results.append(PredictionResult(
-                prediction=int(pred),
-                probability=float(prob),
-                confidence=float(confidence),
-                explanation=explanation
-            ))
+            results.append(
+                PredictionResult(
+                    prediction=int(pred),
+                    probability=float(prob),
+                    confidence=float(confidence),
+                    explanation=explanation,
+                )
+            )
 
         return results
 
@@ -578,15 +591,16 @@ class MLModelManager:
         """Get the name of the best performing model."""
         # This would be based on validation performance
         # For now, prefer random forest if available
-        if 'random_forest' in self.trained_models:
-            return 'random_forest'
-        elif 'xgboost' in self.trained_models:
-            return 'xgboost'
+        if "random_forest" in self.trained_models:
+            return "random_forest"
+        elif "xgboost" in self.trained_models:
+            return "xgboost"
         else:
             return list(self.trained_models.keys())[0]
 
-    def _generate_prediction_explanation(self, features: pd.Series, prediction: int,
-                                       probability: float, model_name: str) -> str:
+    def _generate_prediction_explanation(
+        self, features: pd.Series, prediction: int, probability: float, model_name: str
+    ) -> str:
         """Generate explanation for prediction."""
         if prediction == 1:
             risk_level = "HIGH" if probability > 0.8 else "MEDIUM"
@@ -599,15 +613,17 @@ class MLModelManager:
         explanation += f" [Model: {model_name}]"
 
         # Add key factors (simplified)
-        if hasattr(self, 'feature_importance') and self.feature_importance:
-            top_features = sorted(self.feature_importance.items(),
-                                key=lambda x: x[1], reverse=True)[:3]
+        if hasattr(self, "feature_importance") and self.feature_importance:
+            top_features = sorted(
+                self.feature_importance.items(), key=lambda x: x[1], reverse=True
+            )[:3]
             explanation += f" Key factors: {[f[0] for f in top_features]}"
 
         return explanation
 
-    def tune_hyperparameters(self, X: pd.DataFrame, y: pd.Series,
-                           model_name: str, cv_folds: int = 5) -> Dict[str, Any]:
+    def tune_hyperparameters(
+        self, X: pd.DataFrame, y: pd.Series, model_name: str, cv_folds: int = 5
+    ) -> Dict[str, Any]:
         """
         Tune hyperparameters for a specific model.
 
@@ -627,23 +643,27 @@ class MLModelManager:
 
         # Define parameter grids
         param_grids = {
-            'random_forest': {
-                'n_estimators': [100, 200, 300],
-                'max_depth': [10, 15, 20, None],
-                'min_samples_split': [2, 5, 10],
-                'min_samples_leaf': [1, 2, 4]
+            "random_forest": {
+                "n_estimators": [100, 200, 300],
+                "max_depth": [10, 15, 20, None],
+                "min_samples_split": [2, 5, 10],
+                "min_samples_leaf": [1, 2, 4],
             },
-            'logistic_regression': {
-                'C': [0.1, 1.0, 10.0],
-                'penalty': ['l1', 'l2'],
-                'solver': ['liblinear', 'saga']
+            "logistic_regression": {
+                "C": [0.1, 1.0, 10.0],
+                "penalty": ["l1", "l2"],
+                "solver": ["liblinear", "saga"],
             },
-            'xgboost': {
-                'n_estimators': [100, 200, 300],
-                'max_depth': [6, 8, 10],
-                'learning_rate': [0.01, 0.1, 0.2],
-                'subsample': [0.8, 0.9, 1.0]
-            } if XGBOOST_AVAILABLE else {}
+            "xgboost": (
+                {
+                    "n_estimators": [100, 200, 300],
+                    "max_depth": [6, 8, 10],
+                    "learning_rate": [0.01, 0.1, 0.2],
+                    "subsample": [0.8, 0.9, 1.0],
+                }
+                if XGBOOST_AVAILABLE
+                else {}
+            ),
         }
 
         if model_name not in param_grids:
@@ -658,12 +678,7 @@ class MLModelManager:
         cv = StratifiedKFold(n_splits=cv_folds, shuffle=True, random_state=42)
 
         grid_search = GridSearchCV(
-            base_model,
-            param_grids[model_name],
-            cv=cv,
-            scoring='roc_auc',
-            n_jobs=-1,
-            verbose=1
+            base_model, param_grids[model_name], cv=cv, scoring="roc_auc", n_jobs=-1, verbose=1
         )
 
         # Scale features if needed
@@ -682,8 +697,9 @@ class MLModelManager:
 
         return grid_search.best_params_
 
-    def cross_validate_models(self, X: pd.DataFrame, y: pd.Series,
-                            cv_folds: int = 5) -> Dict[str, Dict[str, float]]:
+    def cross_validate_models(
+        self, X: pd.DataFrame, y: pd.Series, cv_folds: int = 5
+    ) -> Dict[str, Dict[str, float]]:
         """
         Perform cross-validation on all models.
 
@@ -709,30 +725,29 @@ class MLModelManager:
 
                 # Create pipeline with scaling if needed
                 if config.scaling_required:
-                    pipeline = Pipeline([
-                        ('scaler', StandardScaler()),
-                        ('model', model)
-                    ])
+                    pipeline = Pipeline([("scaler", StandardScaler()), ("model", model)])
                 else:
                     pipeline = model
 
                 # Perform cross-validation
-                scoring_metrics = ['accuracy', 'precision', 'recall', 'f1', 'roc_auc']
+                scoring_metrics = ["accuracy", "precision", "recall", "f1", "roc_auc"]
                 scores = {}
 
                 for metric in scoring_metrics:
                     cv_scores = cross_val_score(pipeline, X, y, cv=cv, scoring=metric)
                     scores[metric] = {
-                        'mean': np.mean(cv_scores),
-                        'std': np.std(cv_scores),
-                        'scores': cv_scores.tolist()
+                        "mean": np.mean(cv_scores),
+                        "std": np.std(cv_scores),
+                        "scores": cv_scores.tolist(),
                     }
 
                 cv_results[model_name] = scores
 
-                logger.info(f"{model_name} CV results - "
-                           f"Accuracy: {scores['accuracy']['mean']:.4f} ± {scores['accuracy']['std']:.4f}, "
-                           f"F1: {scores['f1']['mean']:.4f} ± {scores['f1']['std']:.4f}")
+                logger.info(
+                    f"{model_name} CV results - "
+                    f"Accuracy: {scores['accuracy']['mean']:.4f} ± {scores['accuracy']['std']:.4f}, "
+                    f"F1: {scores['f1']['mean']:.4f} ± {scores['f1']['std']:.4f}"
+                )
 
             except Exception as e:
                 logger.error(f"Cross-validation failed for {model_name}: {e}")
@@ -756,7 +771,7 @@ class MLModelManager:
         # Use ensemble or best model if not specified
         if not model_name:
             if self.ensemble_model:
-                model_name = 'ensemble'
+                model_name = "ensemble"
             else:
                 model_name = self._get_best_model()
 
@@ -765,23 +780,27 @@ class MLModelManager:
         importance_dict = {}
 
         try:
-            if hasattr(model, 'feature_importances_'):
+            if hasattr(model, "feature_importances_"):
                 # Tree-based models
                 importances = model.feature_importances_
-            elif hasattr(model, 'coef_'):
+            elif hasattr(model, "coef_"):
                 # Linear models
                 importances = np.abs(model.coef_[0])
-            elif isinstance(model, Pipeline) and hasattr(model.named_steps['model'], 'feature_importances_'):
+            elif isinstance(model, Pipeline) and hasattr(
+                model.named_steps["model"], "feature_importances_"
+            ):
                 # Pipeline with tree-based model
-                importances = model.named_steps['model'].feature_importances_
+                importances = model.named_steps["model"].feature_importances_
             elif isinstance(model, VotingClassifier):
                 # Ensemble model - average importances
                 all_importances = []
                 for name, estimator in model.named_estimators_.items():
-                    if hasattr(estimator, 'feature_importances_'):
+                    if hasattr(estimator, "feature_importances_"):
                         all_importances.append(estimator.feature_importances_)
-                    elif isinstance(estimator, Pipeline) and hasattr(estimator.named_steps['model'], 'feature_importances_'):
-                        all_importances.append(estimator.named_steps['model'].feature_importances_)
+                    elif isinstance(estimator, Pipeline) and hasattr(
+                        estimator.named_steps["model"], "feature_importances_"
+                    ):
+                        all_importances.append(estimator.named_steps["model"].feature_importances_)
 
                 if all_importances:
                     importances = np.mean(all_importances, axis=0)
@@ -811,7 +830,7 @@ class MLModelManager:
 
         # Save individual models
         for name, model in self.trained_models.items():
-            if name == 'neural_network' and TENSORFLOW_AVAILABLE:
+            if name == "neural_network" and TENSORFLOW_AVAILABLE:
                 # Save TensorFlow model
                 model.save(os.path.join(directory, f"{name}.h5"))
             else:
@@ -828,19 +847,22 @@ class MLModelManager:
 
         # Save metadata
         metadata = {
-            'feature_names': self.feature_names,
-            'model_configs': {name: {
-                'name': config.name,
-                'algorithm': config.algorithm,
-                'hyperparameters': config.hyperparameters,
-                'use_class_weights': config.use_class_weights,
-                'scaling_required': config.scaling_required
-            } for name, config in self.model_configs.items()},
-            'target_metrics': self.target_metrics,
-            'timestamp': datetime.now().isoformat()
+            "feature_names": self.feature_names,
+            "model_configs": {
+                name: {
+                    "name": config.name,
+                    "algorithm": config.algorithm,
+                    "hyperparameters": config.hyperparameters,
+                    "use_class_weights": config.use_class_weights,
+                    "scaling_required": config.scaling_required,
+                }
+                for name, config in self.model_configs.items()
+            },
+            "target_metrics": self.target_metrics,
+            "timestamp": datetime.now().isoformat(),
         }
 
-        with open(os.path.join(directory, "metadata.json"), 'w') as f:
+        with open(os.path.join(directory, "metadata.json"), "w") as f:
             json.dump(metadata, f, indent=2)
 
         logger.info(f"Models saved to {directory}")
@@ -851,20 +873,20 @@ class MLModelManager:
         import pickle
 
         # Load metadata
-        with open(os.path.join(directory, "metadata.json"), 'r') as f:
+        with open(os.path.join(directory, "metadata.json"), "r") as f:
             metadata = json.load(f)
 
-        self.feature_names = metadata['feature_names']
-        self.target_metrics = metadata['target_metrics']
+        self.feature_names = metadata["feature_names"]
+        self.target_metrics = metadata["target_metrics"]
 
         # Reconstruct model configs
         self.model_configs = {}
-        for name, config_data in metadata['model_configs'].items():
+        for name, config_data in metadata["model_configs"].items():
             self.model_configs[name] = ModelConfig(**config_data)
 
         # Load individual models
-        for name in metadata['model_configs'].keys():
-            if name == 'neural_network':
+        for name in metadata["model_configs"].keys():
+            if name == "neural_network":
                 if TENSORFLOW_AVAILABLE and os.path.exists(os.path.join(directory, f"{name}.h5")):
                     self.trained_models[name] = keras.models.load_model(
                         os.path.join(directory, f"{name}.h5")
@@ -886,7 +908,9 @@ class MLModelManager:
 
         logger.info(f"Models loaded from {directory}")
 
-    def check_target_metrics(self, performance_results: Dict[str, ModelPerformance]) -> Dict[str, bool]:
+    def check_target_metrics(
+        self, performance_results: Dict[str, ModelPerformance]
+    ) -> Dict[str, bool]:
         """
         Check if models meet target performance metrics.
 
@@ -899,15 +923,17 @@ class MLModelManager:
         results = {}
 
         for model_name, performance in performance_results.items():
-            meets_accuracy = performance.accuracy >= self.target_metrics['accuracy']
-            meets_fpr = performance.false_positive_rate <= self.target_metrics['false_positive_rate']
+            meets_accuracy = performance.accuracy >= self.target_metrics["accuracy"]
+            meets_fpr = (
+                performance.false_positive_rate <= self.target_metrics["false_positive_rate"]
+            )
 
             results[model_name] = {
-                'meets_accuracy': meets_accuracy,
-                'meets_fpr': meets_fpr,
-                'meets_all_targets': meets_accuracy and meets_fpr,
-                'actual_accuracy': performance.accuracy,
-                'actual_fpr': performance.false_positive_rate
+                "meets_accuracy": meets_accuracy,
+                "meets_fpr": meets_fpr,
+                "meets_all_targets": meets_accuracy and meets_fpr,
+                "actual_accuracy": performance.accuracy,
+                "actual_fpr": performance.false_positive_rate,
             }
 
         return results
@@ -935,8 +961,10 @@ class MLModelManager:
             report += f"False Positive Rate: {performance.false_positive_rate:.4f} ({performance.false_positive_rate*100:.2f}%)\n"
 
             # Check if meets targets
-            meets_accuracy = performance.accuracy >= self.target_metrics['accuracy']
-            meets_fpr = performance.false_positive_rate <= self.target_metrics['false_positive_rate']
+            meets_accuracy = performance.accuracy >= self.target_metrics["accuracy"]
+            meets_fpr = (
+                performance.false_positive_rate <= self.target_metrics["false_positive_rate"]
+            )
 
             report += f"Meets Accuracy Target: {'✓' if meets_accuracy else '✗'}\n"
             report += f"Meets FPR Target: {'✓' if meets_fpr else '✗'}\n"
@@ -946,13 +974,17 @@ class MLModelManager:
         report += "RECOMMENDATIONS:\n"
         report += "-" * 20 + "\n"
 
-        best_model = max(performance_results.items(),
-                        key=lambda x: x[1].accuracy)
-        report += f"Best performing model: {best_model[0]} (Accuracy: {best_model[1].accuracy:.4f})\n"
+        best_model = max(performance_results.items(), key=lambda x: x[1].accuracy)
+        report += (
+            f"Best performing model: {best_model[0]} (Accuracy: {best_model[1].accuracy:.4f})\n"
+        )
 
-        failing_models = [name for name, perf in performance_results.items()
-                         if perf.accuracy < self.target_metrics['accuracy'] or
-                            perf.false_positive_rate > self.target_metrics['false_positive_rate']]
+        failing_models = [
+            name
+            for name, perf in performance_results.items()
+            if perf.accuracy < self.target_metrics["accuracy"]
+            or perf.false_positive_rate > self.target_metrics["false_positive_rate"]
+        ]
 
         if failing_models:
             report += f"Models needing improvement: {', '.join(failing_models)}\n"

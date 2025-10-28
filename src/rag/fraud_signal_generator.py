@@ -26,30 +26,22 @@ class FraudSignal(BaseModel):
     signal_type: str = Field(..., description="Unique identifier for signal type")
     signal_name: str = Field(..., description="Human-readable signal description")
     signal_strength: float = Field(
-        ...,
-        ge=0.0,
-        le=1.0,
-        description="Signal severity score (0.0-1.0, higher = more suspicious)"
+        ..., ge=0.0, le=1.0, description="Signal severity score (0.0-1.0, higher = more suspicious)"
     )
     evidence: Dict[str, Any] = Field(
-        default_factory=dict,
-        description="Supporting evidence for this signal"
+        default_factory=dict, description="Supporting evidence for this signal"
     )
-    recommendation: str = Field(
-        ...,
-        description="Recommended action based on this signal"
-    )
+    recommendation: str = Field(..., description="Recommended action based on this signal")
     links_to_kb: List[str] = Field(
-        default_factory=list,
-        description="Knowledge bases that identified this signal"
+        default_factory=list, description="Knowledge bases that identified this signal"
     )
     timestamp: Optional[datetime] = Field(
-        default_factory=datetime.utcnow,
-        description="When this signal was generated"
+        default_factory=datetime.utcnow, description="When this signal was generated"
     )
 
     class Config:
         """Pydantic configuration."""
+
         validate_assignment = True
 
 
@@ -88,8 +80,7 @@ class FraudSignalFromMissingData:
         # Boost if systematic (same fields always missing)
         if missing_field_types:
             systematic_count = sum(
-                1 for count in missing_field_types.values()
-                if count / claim_count > 0.50
+                1 for count in missing_field_types.values() if count / claim_count > 0.50
             )
             if systematic_count > 0:
                 signal_strength = min(1.0, signal_strength + (systematic_count * 0.10))
@@ -260,7 +251,8 @@ class FraudSignalFromMissingData:
             # Check if current procedures are rare/unseen
             total_historical = len(historical_enrichments)
             unseen_count = sum(
-                1 for proc in enriched_procedures
+                1
+                for proc in enriched_procedures
                 if historical_procedure_counts.get(proc, 0) / total_historical < 0.10
             )
 

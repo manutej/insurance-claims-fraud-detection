@@ -11,6 +11,4 @@ This module provides comprehensive model training pipeline including:
 
 from .train_models import ModelTrainingPipeline, TrainingConfig, TrainingResults
 
-__all__ = [
-    'ModelTrainingPipeline', 'TrainingConfig', 'TrainingResults'
-]
+__all__ = ["ModelTrainingPipeline", "TrainingConfig", "TrainingResults"]

@@ -37,24 +37,20 @@ class MissingFieldDetector:
         "provider_npi": 1.00,
         "patient_id": 1.00,
         "claim_id": 1.00,
-
         # Highly important fields (0.70-0.89)
         "diagnosis_descriptions": 0.80,
         "procedure_descriptions": 0.80,
         "provider_specialty": 0.75,
         "service_location": 0.75,
         "claim_type": 0.85,
-
         # Important fields (0.50-0.69)
         "treatment_type": 0.60,
         "days_supply": 0.55,  # Important for pharmacy claims
         "medical_necessity": 0.65,
         "provider_id": 0.60,
-
         # Moderately important fields (0.30-0.49)
         "service_location_desc": 0.25,
         "rendering_hours": 0.40,
-
         # Optional/supplementary fields (0.10-0.29)
         "notes": 0.15,
         "red_flags": 0.20,
@@ -192,8 +188,7 @@ class MissingFieldDetector:
         """
         # Get all important fields (criticality >= 0.50)
         important_fields = [
-            field for field, score in self.FIELD_CRITICALITY.items()
-            if score >= 0.50
+            field for field, score in self.FIELD_CRITICALITY.items() if score >= 0.50
         ]
 
         # Add required fields
@@ -226,9 +221,7 @@ class SuspiciousSubmissionPatternDetector:
     """
 
     def detect_provider_submission_pattern(
-        self,
-        provider_npi: str,
-        historical_claims: List[Dict[str, Any]]
+        self, provider_npi: str, historical_claims: List[Dict[str, Any]]
     ) -> Dict[str, Any]:
         """
         Analyzes a provider's historical submission patterns.
@@ -268,19 +261,16 @@ class SuspiciousSubmissionPatternDetector:
 
             # Count important fields checked
             total_fields_checked += len(detector.REQUIRED_FIELDS)
-            total_fields_checked += len([
-                f for f in detector.FIELD_CRITICALITY
-                if detector.FIELD_CRITICALITY[f] >= 0.50
-            ])
+            total_fields_checked += len(
+                [f for f in detector.FIELD_CRITICALITY if detector.FIELD_CRITICALITY[f] >= 0.50]
+            )
 
         # Calculate missing rate
         missing_rate = total_missing / total_fields_checked if total_fields_checked > 0 else 0.0
 
         # Calculate suspicious score based on missing rate and field types
         suspicious_score = self._calculate_provider_suspicion(
-            missing_rate,
-            missing_counter,
-            len(historical_claims)
+            missing_rate, missing_counter, len(historical_claims)
         )
 
         return {
@@ -291,9 +281,7 @@ class SuspiciousSubmissionPatternDetector:
         }
 
     def detect_patient_submission_pattern(
-        self,
-        patient_id: str,
-        historical_claims: List[Dict[str, Any]]
+        self, patient_id: str, historical_claims: List[Dict[str, Any]]
     ) -> Dict[str, Any]:
         """
         Analyzes a patient's historical submission patterns.
@@ -339,9 +327,7 @@ class SuspiciousSubmissionPatternDetector:
         }
 
     def detect_temporal_pattern(
-        self,
-        claim: Dict[str, Any],
-        similar_historical_claims: List[Dict[str, Any]]
+        self, claim: Dict[str, Any], similar_historical_claims: List[Dict[str, Any]]
     ) -> Dict[str, Any]:
         """
         Detects unusual temporal submission patterns.
@@ -401,7 +387,7 @@ class SuspiciousSubmissionPatternDetector:
         patient_id: str,
         claim: Dict[str, Any],
         provider_history: Optional[List[Dict[str, Any]]] = None,
-        patient_history: Optional[List[Dict[str, Any]]] = None
+        patient_history: Optional[List[Dict[str, Any]]] = None,
     ) -> float:
         """
         Calculates an overall submission suspicion score.
@@ -424,17 +410,13 @@ class SuspiciousSubmissionPatternDetector:
         # Analyze provider pattern
         if provider_history:
             provider_pattern = self.detect_provider_submission_pattern(
-                provider_npi,
-                provider_history
+                provider_npi, provider_history
             )
             suspicion_factors.append(provider_pattern["suspicious_score"])
 
         # Analyze patient pattern
         if patient_history:
-            patient_pattern = self.detect_patient_submission_pattern(
-                patient_id,
-                patient_history
-            )
+            patient_pattern = self.detect_patient_submission_pattern(patient_id, patient_history)
             suspicion_factors.append(patient_pattern["suspicious_score"])
 
         # Analyze current claim
@@ -470,10 +452,7 @@ class SuspiciousSubmissionPatternDetector:
         return 0.0
 
     def _calculate_provider_suspicion(
-        self,
-        missing_rate: float,
-        missing_fields_counter: Counter,
-        claim_count: int
+        self, missing_rate: float, missing_fields_counter: Counter, claim_count: int
     ) -> float:
         """
         Calculates provider suspicion score based on missing data patterns.
@@ -493,8 +472,7 @@ class SuspiciousSubmissionPatternDetector:
         if missing_fields_counter and claim_count > 0:
             # If certain fields are missing in >50% of claims, it's systematic
             systematic_count = sum(
-                1 for count in missing_fields_counter.values()
-                if count / claim_count > 0.50
+                1 for count in missing_fields_counter.values() if count / claim_count > 0.50
             )
 
             if systematic_count > 0:
@@ -503,10 +481,7 @@ class SuspiciousSubmissionPatternDetector:
 
         return base_suspicion
 
-    def _analyze_temporal_patterns(
-        self,
-        historical_claims: List[Dict[str, Any]]
-    ) -> Dict[str, Any]:
+    def _analyze_temporal_patterns(self, historical_claims: List[Dict[str, Any]]) -> Dict[str, Any]:
         """
         Analyzes temporal submission patterns across historical claims.
 

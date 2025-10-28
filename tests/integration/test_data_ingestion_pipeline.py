@@ -1,6 +1,7 @@
 """
 Integration tests for the data ingestion pipeline.
 """
+
 import pytest
 import tempfile
 import json
@@ -33,17 +34,17 @@ class TestDataIngestionPipeline:
             pharmacy_claims = []
             for i in range(50):
                 claim = {
-                    'claim_id': f'CLM-PHARM-{i:03d}',
-                    'patient_id': f'PAT-PHARM-{i:03d}',
-                    'provider_id': f'PRV-PHARM-{i % 5:02d}',
-                    'provider_npi': '1111111111',
-                    'date_of_service': '2024-01-15',
-                    'ndc_code': '12345-6789-01',
-                    'quantity': 30,
-                    'days_supply': 30,
-                    'billed_amount': 75.0,
-                    'claim_type': 'pharmacy',
-                    'fraud_indicator': i % 10 == 0  # 10% fraud rate
+                    "claim_id": f"CLM-PHARM-{i:03d}",
+                    "patient_id": f"PAT-PHARM-{i:03d}",
+                    "provider_id": f"PRV-PHARM-{i % 5:02d}",
+                    "provider_npi": "1111111111",
+                    "date_of_service": "2024-01-15",
+                    "ndc_code": "12345-6789-01",
+                    "quantity": 30,
+                    "days_supply": 30,
+                    "billed_amount": 75.0,
+                    "claim_type": "pharmacy",
+                    "fraud_indicator": i % 10 == 0,  # 10% fraud rate
                 }
                 pharmacy_claims.append(claim)
 
@@ -52,11 +53,11 @@ class TestDataIngestionPipeline:
             (data_dir / "pharmacy_claims.json").write_text(json.dumps(pharmacy_claims))
             (data_dir / "valid_claims" / "legitimate.json").parent.mkdir()
             (data_dir / "valid_claims" / "legitimate.json").write_text(
-                json.dumps([c for c in medical_claims if not c.get('fraud_indicator', False)])
+                json.dumps([c for c in medical_claims if not c.get("fraud_indicator", False)])
             )
             (data_dir / "fraudulent_claims" / "fraud.json").parent.mkdir()
             (data_dir / "fraudulent_claims" / "fraud.json").write_text(
-                json.dumps([c for c in medical_claims if c.get('fraud_indicator', False)])
+                json.dumps([c for c in medical_claims if c.get("fraud_indicator", False)])
             )
 
             # Create large file for performance testing
@@ -75,10 +76,7 @@ class TestDataIngestionPipeline:
         """Test complete data ingestion from files to processed claims."""
         # Configure ingestion pipeline
         config = DataLoaderConfig(
-            batch_size=100,
-            validate_on_load=True,
-            preprocess_on_load=False,
-            max_workers=2
+            batch_size=100, validate_on_load=True, preprocess_on_load=False, max_workers=2
         )
 
         validator = ClaimValidator()
@@ -87,9 +85,9 @@ class TestDataIngestionPipeline:
 
         # Step 1: Data Discovery
         file_summary = loader.get_file_summary()
-        assert file_summary['total_files'] > 0
-        assert 'medical' in file_summary['files_by_type']
-        assert 'pharmacy' in file_summary['files_by_type']
+        assert file_summary["total_files"] > 0
+        assert "medical" in file_summary["files_by_type"]
+        assert "pharmacy" in file_summary["files_by_type"]
         print(f"✓ Discovered {file_summary['total_files']} files")
 
         # Step 2: Batch Loading
@@ -101,22 +99,26 @@ class TestDataIngestionPipeline:
 
         # Step 3: Validation Results
         stats = loader.get_statistics()
-        assert stats['files_processed'] > 0
-        assert stats['claims_loaded'] > 0
-        print(f"✓ Processing stats: {stats['files_processed']} files, "
-              f"{stats['claims_loaded']} claims, {stats['validation_errors']} errors")
+        assert stats["files_processed"] > 0
+        assert stats["claims_loaded"] > 0
+        print(
+            f"✓ Processing stats: {stats['files_processed']} files, "
+            f"{stats['claims_loaded']} claims, {stats['validation_errors']} errors"
+        )
 
         # Step 4: Data Preprocessing
         processed_df = preprocessor.preprocess_claims(batch.claims)
         assert isinstance(processed_df, pd.DataFrame)
         assert len(processed_df) == batch.total_count
         assert len(preprocessor.feature_columns) > 0
-        print(f"✓ Preprocessed data: {len(processed_df)} rows, "
-              f"{len(preprocessor.feature_columns)} features")
+        print(
+            f"✓ Preprocessed data: {len(processed_df)} rows, "
+            f"{len(preprocessor.feature_columns)} features"
+        )
 
         # Verify data quality
-        assert processed_df['claim_id'].nunique() == len(processed_df)  # No duplicates
-        assert not processed_df['claim_id'].isnull().any()  # No missing IDs
+        assert processed_df["claim_id"].nunique() == len(processed_df)  # No duplicates
+        assert not processed_df["claim_id"].isnull().any()  # No missing IDs
 
     @pytest.mark.integration
     def test_streaming_ingestion_pipeline(self, temp_data_dir):
@@ -169,18 +171,18 @@ class TestDataIngestionPipeline:
         loader = ClaimDataLoader(temp_data_dir)
 
         # Load only medical claims
-        medical_claims = loader.load_specific_claim_type('medical')
+        medical_claims = loader.load_specific_claim_type("medical")
         assert len(medical_claims) > 0
-        assert all(hasattr(claim, 'diagnosis_codes') for claim in medical_claims)
+        assert all(hasattr(claim, "diagnosis_codes") for claim in medical_claims)
         print(f"✓ Loaded {len(medical_claims)} medical claims")
 
         # Load only pharmacy claims
-        pharmacy_claims = loader.load_specific_claim_type('pharmacy')
+        pharmacy_claims = loader.load_specific_claim_type("pharmacy")
         assert len(pharmacy_claims) > 0
         print(f"✓ Loaded {len(pharmacy_claims)} pharmacy claims")
 
         # Load from specific subdirectory
-        valid_claims = loader.load_specific_claim_type('valid', subdirectory='valid_claims')
+        valid_claims = loader.load_specific_claim_type("valid", subdirectory="valid_claims")
         assert len(valid_claims) > 0
         print(f"✓ Loaded {len(valid_claims)} valid claims from subdirectory")
 
@@ -205,7 +207,7 @@ class TestDataIngestionPipeline:
         print(f"✓ Validation integration: {stats['validation_errors']} errors found")
 
         # Test validation results
-        if stats['validation_errors'] > 0:
+        if stats["validation_errors"] > 0:
             print(f"  - Found {stats['validation_errors']} validation errors as expected")
 
         # Test without validation
@@ -228,9 +230,9 @@ class TestDataIngestionPipeline:
 
         # Test different preprocessing configurations
         configs = [
-            {'normalize_amounts': True, 'encoding_strategy': 'onehot'},
-            {'normalize_amounts': False, 'encoding_strategy': 'label'},
-            {'extract_temporal_features': False, 'handle_missing_data': False}
+            {"normalize_amounts": True, "encoding_strategy": "onehot"},
+            {"normalize_amounts": False, "encoding_strategy": "label"},
+            {"extract_temporal_features": False, "handle_missing_data": False},
         ]
 
         for i, preprocess_config in enumerate(configs):
@@ -239,7 +241,9 @@ class TestDataIngestionPipeline:
 
             assert len(processed_df) == 50
             assert len(test_preprocessor.feature_columns) > 0
-            print(f"✓ Preprocessing config {i+1}: {len(test_preprocessor.feature_columns)} features")
+            print(
+                f"✓ Preprocessing config {i+1}: {len(test_preprocessor.feature_columns)} features"
+            )
 
         # Test transform new data
         new_claims = batch.claims[50:60]
@@ -286,11 +290,7 @@ class TestDataIngestionPipeline:
         """Test ingestion pipeline performance benchmarks."""
         import time
 
-        config = DataLoaderConfig(
-            batch_size=500,
-            max_workers=4,
-            validate_on_load=True
-        )
+        config = DataLoaderConfig(batch_size=500, max_workers=4, validate_on_load=True)
         loader = ClaimDataLoader(temp_data_dir, config)
 
         # Test batch loading performance
@@ -310,7 +310,7 @@ class TestDataIngestionPipeline:
 
         # Performance assertions
         assert claims_per_second > 100  # At least 100 claims/sec
-        assert processing_time < 30     # Complete within 30 seconds
+        assert processing_time < 30  # Complete within 30 seconds
 
         # Test streaming performance
         start_time = time.time()
@@ -337,25 +337,25 @@ class TestDataIngestionPipeline:
             try:
                 loader = ClaimDataLoader(temp_data_dir)
                 if file_pattern == "medical":
-                    claims = loader.load_specific_claim_type('medical')
+                    claims = loader.load_specific_claim_type("medical")
                 elif file_pattern == "pharmacy":
-                    claims = loader.load_specific_claim_type('pharmacy')
+                    claims = loader.load_specific_claim_type("pharmacy")
                 else:
                     batch = loader.load_claims_batch()
                     claims = batch.claims
 
                 return {
-                    'thread_id': thread_id,
-                    'pattern': file_pattern,
-                    'count': len(claims),
-                    'success': True
+                    "thread_id": thread_id,
+                    "pattern": file_pattern,
+                    "count": len(claims),
+                    "success": True,
                 }
             except Exception as e:
                 return {
-                    'thread_id': thread_id,
-                    'pattern': file_pattern,
-                    'error': str(e),
-                    'success': False
+                    "thread_id": thread_id,
+                    "pattern": file_pattern,
+                    "error": str(e),
+                    "success": False,
                 }
 
         # Test concurrent loading
@@ -365,8 +365,8 @@ class TestDataIngestionPipeline:
             results = [future.result() for future in futures]
 
         # Verify all succeeded
-        successful_results = [r for r in results if r['success']]
-        failed_results = [r for r in results if not r['success']]
+        successful_results = [r for r in results if r["success"]]
+        failed_results = [r for r in results if not r["success"]]
 
         assert len(successful_results) == len(patterns), f"Failed results: {failed_results}"
         print(f"✓ Concurrent ingestion: {len(successful_results)} threads successful")
@@ -394,8 +394,8 @@ class TestDataIngestionPipeline:
         for claim in batch.claims:
             try:
                 claim_dict = claim.dict()
-                assert 'claim_id' in claim_dict
-                assert 'billed_amount' in claim_dict
+                assert "claim_id" in claim_dict
+                assert "billed_amount" in claim_dict
                 valid_claims += 1
             except Exception as e:
                 print(f"Warning: Invalid claim {claim.claim_id}: {e}")
@@ -408,9 +408,11 @@ class TestDataIngestionPipeline:
         validation_result = validator.validate_batch(claims_data)
 
         assert validation_result.processed_count > 0
-        print(f"✓ Batch validation: {validation_result.processed_count} processed, "
-              f"{validation_result.error_count} errors, "
-              f"{validation_result.warnings_count} warnings")
+        print(
+            f"✓ Batch validation: {validation_result.processed_count} processed, "
+            f"{validation_result.error_count} errors, "
+            f"{validation_result.warnings_count} warnings"
+        )
 
     @pytest.mark.integration
     def test_memory_efficient_ingestion(self, temp_data_dir):
@@ -471,8 +473,10 @@ class TestDataIngestionPipeline:
 
         assert len(progress_updates) > 0
         assert progress_updates[-1][0] == progress_updates[-1][1]  # Should end at 100%
-        print(f"✓ Progress tracking: {len(progress_updates)} updates, "
-              f"final: {progress_updates[-1]}")
+        print(
+            f"✓ Progress tracking: {len(progress_updates)} updates, "
+            f"final: {progress_updates[-1]}"
+        )
 
     @pytest.mark.integration
     def test_ingestion_statistics_and_monitoring(self, temp_data_dir):
@@ -485,18 +489,18 @@ class TestDataIngestionPipeline:
         # Reset statistics
         loader.reset_statistics()
         initial_stats = loader.get_statistics()
-        assert initial_stats['claims_loaded'] == 0
+        assert initial_stats["claims_loaded"] == 0
 
         # Load data and collect statistics
         batch = loader.load_claims_batch()
         final_stats = loader.get_statistics()
 
         # Verify statistics
-        assert final_stats['files_processed'] > 0
-        assert final_stats['claims_loaded'] > 0
-        assert final_stats['processing_time_seconds'] > 0
-        assert final_stats['claims_per_second'] > 0
-        assert final_stats['avg_claims_per_file'] > 0
+        assert final_stats["files_processed"] > 0
+        assert final_stats["claims_loaded"] > 0
+        assert final_stats["processing_time_seconds"] > 0
+        assert final_stats["claims_per_second"] > 0
+        assert final_stats["avg_claims_per_file"] > 0
 
         print(f"✓ Statistics collection:")
         for key, value in final_stats.items():
@@ -504,10 +508,12 @@ class TestDataIngestionPipeline:
 
         # Test file summary
         file_summary = loader.get_file_summary()
-        assert file_summary['total_files'] > 0
-        assert 'files_by_type' in file_summary
-        assert 'total_size_mb' in file_summary
-        assert len(file_summary['file_details']) > 0
+        assert file_summary["total_files"] > 0
+        assert "files_by_type" in file_summary
+        assert "total_size_mb" in file_summary
+        assert len(file_summary["file_details"]) > 0
 
-        print(f"✓ File summary: {file_summary['total_files']} files, "
-              f"{file_summary['total_size_mb']:.2f} MB total")
+        print(
+            f"✓ File summary: {file_summary['total_files']} files, "
+            f"{file_summary['total_size_mb']:.2f} MB total"
+        )

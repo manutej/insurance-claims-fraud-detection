@@ -68,7 +68,7 @@ class TestMissingFieldDetector:
             "procedure_descriptions": [
                 "Office visit, established patient, high",
                 "Collection of venous blood by venipuncture",
-                "Hemoglobin A1C"
+                "Hemoglobin A1C",
             ],
             "billed_amount": 202.89,
             "service_location": "11",
@@ -90,7 +90,7 @@ class TestMissingFieldDetector:
             "diagnosis_descriptions": ["Essential (primary) hypertension"],
             "procedure_descriptions": [
                 "Office visit, established patient, high",
-                "Collection of venous blood by venipuncture"
+                "Collection of venous blood by venipuncture",
             ],
             "billed_amount": 168.39,
             "service_location": "11",
@@ -251,8 +251,7 @@ class TestSuspiciousSubmissionPatternDetector:
     def test_detect_provider_high_missing_rate(self, detector, provider_claims_history):
         """Test detection of provider with high missing data rate."""
         pattern = detector.detect_provider_submission_pattern(
-            provider_npi="2234132629",
-            historical_claims=provider_claims_history
+            provider_npi="2234132629", historical_claims=provider_claims_history
         )
 
         assert "missing_rate" in pattern
@@ -265,8 +264,7 @@ class TestSuspiciousSubmissionPatternDetector:
     def test_detect_patient_submission_pattern(self, detector, patient_claims_history):
         """Test detection of patient submission patterns."""
         pattern = detector.detect_patient_submission_pattern(
-            patient_id="PAT-010266",
-            historical_claims=patient_claims_history
+            patient_id="PAT-010266", historical_claims=patient_claims_history
         )
 
         assert "missing_rate" in pattern
@@ -286,7 +284,9 @@ class TestSuspiciousSubmissionPatternDetector:
         pattern = detector.detect_temporal_pattern(claim, similar_claims)
 
         assert "is_weekend" in pattern or "temporal_anomaly" in pattern
-        assert pattern.get("suspicious", False) is True or pattern.get("temporal_anomaly") is not None
+        assert (
+            pattern.get("suspicious", False) is True or pattern.get("temporal_anomaly") is not None
+        )
 
     def test_detect_temporal_pattern_night_submission(self, detector):
         """Test detection of night-time submission pattern."""
@@ -317,7 +317,7 @@ class TestSuspiciousSubmissionPatternDetector:
             patient_id="PAT-010266",
             claim=claim,
             provider_history=provider_claims_history,
-            patient_history=[]
+            patient_history=[],
         )
 
         assert score >= 0.60  # High suspicion
@@ -365,7 +365,7 @@ class TestSuspiciousSubmissionPatternDetector:
             patient_id="PAT-010999",
             claim=claim,
             provider_history=good_history,
-            patient_history=[]
+            patient_history=[],
         )
 
         # Provider with complete history and complete claim should have reasonable suspicion

@@ -5,8 +5,12 @@ from datetime import date
 from decimal import Decimal
 
 from src.models.claim_models import (
-    MedicalClaim, PharmacyClaim, NoFaultClaim,
-    claim_factory, ClaimBatch, ValidationError
+    MedicalClaim,
+    PharmacyClaim,
+    NoFaultClaim,
+    claim_factory,
+    ClaimBatch,
+    ValidationError,
 )
 
 
@@ -28,7 +32,7 @@ class TestMedicalClaim:
             "billed_amount": 125.00,
             "service_location": "11",
             "claim_type": "professional",
-            "fraud_indicator": False
+            "fraud_indicator": False,
         }
 
         claim = MedicalClaim(**claim_data)
@@ -54,7 +58,7 @@ class TestMedicalClaim:
             "billed_amount": 125.00,
             "service_location": "11",
             "claim_type": "professional",
-            "fraud_indicator": False
+            "fraud_indicator": False,
         }
 
         with pytest.raises(ValueError):
@@ -101,7 +105,7 @@ class TestClaimFactory:
             "billed_amount": 125.00,
             "service_location": "11",
             "claim_type": "professional",
-            "fraud_indicator": False
+            "fraud_indicator": False,
         }
 
         claim = claim_factory(claim_data)
@@ -125,7 +129,7 @@ class TestClaimFactory:
             "fill_date": "2024-03-16",
             "billed_amount": 25.00,
             "claim_type": "pharmacy",
-            "fraud_indicator": False
+            "fraud_indicator": False,
         }
 
         claim = claim_factory(claim_data)
@@ -141,7 +145,7 @@ class TestClaimFactory:
             "date_of_service": "2024-03-15",
             "billed_amount": 125.00,
             "claim_type": "unknown_type",
-            "fraud_indicator": False
+            "fraud_indicator": False,
         }
 
         with pytest.raises(ValueError, match="Cannot determine claim type"):
@@ -167,7 +171,7 @@ class TestClaimBatch:
                 billed_amount=Decimal("125.00"),
                 service_location="11",
                 claim_type="professional",
-                fraud_indicator=False
+                fraud_indicator=False,
             )
         ]
 

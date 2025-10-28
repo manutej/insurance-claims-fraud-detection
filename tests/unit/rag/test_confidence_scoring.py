@@ -19,6 +19,7 @@ from src.rag.schemas import (
 # FIXTURES
 # ============================================================================
 
+
 @pytest.fixture
 def high_quality_evidence():
     """High-quality retrieval evidence."""
@@ -28,22 +29,22 @@ def high_quality_evidence():
             document_id="doc_001",
             relevance_score=0.95,
             similarity_distance=0.05,
-            content_snippet="CPT 99213 commonly associated with E11.9"
+            content_snippet="CPT 99213 commonly associated with E11.9",
         ),
         EnrichmentEvidence(
             source_kb=KnowledgeBaseType.PROVIDER_PATTERN,
             document_id="doc_002",
             relevance_score=0.92,
             similarity_distance=0.08,
-            content_snippet="Provider frequently bills 99213 with E11.9"
+            content_snippet="Provider frequently bills 99213 with E11.9",
         ),
         EnrichmentEvidence(
             source_kb=KnowledgeBaseType.PATIENT_HISTORY,
             document_id="doc_003",
             relevance_score=0.90,
             similarity_distance=0.10,
-            content_snippet="Patient history shows diabetes diagnosis"
-        )
+            content_snippet="Patient history shows diabetes diagnosis",
+        ),
     ]
 
 
@@ -56,15 +57,15 @@ def medium_quality_evidence():
             document_id="doc_004",
             relevance_score=0.78,
             similarity_distance=0.22,
-            content_snippet="CPT 99213 office visit"
+            content_snippet="CPT 99213 office visit",
         ),
         EnrichmentEvidence(
             source_kb=KnowledgeBaseType.PROVIDER_PATTERN,
             document_id="doc_005",
             relevance_score=0.75,
             similarity_distance=0.25,
-            content_snippet="Common procedure code"
-        )
+            content_snippet="Common procedure code",
+        ),
     ]
 
 
@@ -77,7 +78,7 @@ def low_quality_evidence():
             document_id="doc_006",
             relevance_score=0.55,
             similarity_distance=0.45,
-            content_snippet="General medical codes"
+            content_snippet="General medical codes",
         )
     ]
 
@@ -86,12 +87,14 @@ def low_quality_evidence():
 def confidence_scorer():
     """Confidence scorer instance."""
     from src.rag.confidence_scoring import ConfidenceScorer
+
     return ConfidenceScorer()
 
 
 # ============================================================================
 # RETRIEVAL QUALITY SCORING TESTS
 # ============================================================================
+
 
 class TestRetrievalQualityScoring:
     """Test retrieval quality factor scoring."""
@@ -125,7 +128,7 @@ class TestRetrievalQualityScoring:
                 document_id="doc_001",
                 relevance_score=0.90,
                 similarity_distance=0.10,
-                content_snippet="test"
+                content_snippet="test",
             )
         ]
         multiple_results = [
@@ -134,7 +137,7 @@ class TestRetrievalQualityScoring:
                 document_id=f"doc_{i}",
                 relevance_score=0.90,
                 similarity_distance=0.10,
-                content_snippet="test"
+                content_snippet="test",
             )
             for i in range(3)
         ]
@@ -152,7 +155,7 @@ class TestRetrievalQualityScoring:
                 document_id="doc_001",
                 relevance_score=0.90,
                 similarity_distance=0.05,
-                content_snippet="test"
+                content_snippet="test",
             )
         ]
         high_distance = [
@@ -161,7 +164,7 @@ class TestRetrievalQualityScoring:
                 document_id="doc_002",
                 relevance_score=0.90,
                 similarity_distance=0.40,
-                content_snippet="test"
+                content_snippet="test",
             )
         ]
 
@@ -175,6 +178,7 @@ class TestRetrievalQualityScoring:
 # SOURCE DIVERSITY SCORING TESTS
 # ============================================================================
 
+
 class TestSourceDiversityScoring:
     """Test source diversity factor scoring."""
 
@@ -184,7 +188,7 @@ class TestSourceDiversityScoring:
             KnowledgeBaseType.PATIENT_HISTORY,
             KnowledgeBaseType.PROVIDER_PATTERN,
             KnowledgeBaseType.MEDICAL_CODING,
-            KnowledgeBaseType.REGULATORY
+            KnowledgeBaseType.REGULATORY,
         ]
         score = confidence_scorer.score_source_diversity(sources)
         assert score == 1.0, "All 4 sources should score 1.0"
@@ -194,17 +198,14 @@ class TestSourceDiversityScoring:
         sources = [
             KnowledgeBaseType.MEDICAL_CODING,
             KnowledgeBaseType.PROVIDER_PATTERN,
-            KnowledgeBaseType.PATIENT_HISTORY
+            KnowledgeBaseType.PATIENT_HISTORY,
         ]
         score = confidence_scorer.score_source_diversity(sources)
         assert 0.70 <= score < 1.0, f"3 sources should score 0.70-1.0, got {score}"
 
     def test_two_kbs(self, confidence_scorer):
         """Should score medium with 2 different KBs."""
-        sources = [
-            KnowledgeBaseType.MEDICAL_CODING,
-            KnowledgeBaseType.PROVIDER_PATTERN
-        ]
+        sources = [KnowledgeBaseType.MEDICAL_CODING, KnowledgeBaseType.PROVIDER_PATTERN]
         score = confidence_scorer.score_source_diversity(sources)
         assert 0.40 <= score < 0.70, f"2 sources should score 0.40-0.70, got {score}"
 
@@ -224,7 +225,7 @@ class TestSourceDiversityScoring:
         sources = [
             KnowledgeBaseType.MEDICAL_CODING,
             KnowledgeBaseType.MEDICAL_CODING,
-            KnowledgeBaseType.MEDICAL_CODING
+            KnowledgeBaseType.MEDICAL_CODING,
         ]
         score = confidence_scorer.score_source_diversity(sources)
         assert score < 0.40, "Duplicates should not increase score"
@@ -233,6 +234,7 @@ class TestSourceDiversityScoring:
 # ============================================================================
 # TEMPORAL RELEVANCE SCORING TESTS
 # ============================================================================
+
 
 class TestTemporalRelevanceScoring:
     """Test temporal relevance factor scoring."""
@@ -285,6 +287,7 @@ class TestTemporalRelevanceScoring:
 # CROSS-VALIDATION SCORING TESTS
 # ============================================================================
 
+
 class TestCrossValidationScoring:
     """Test cross-validation factor scoring."""
 
@@ -294,7 +297,7 @@ class TestCrossValidationScoring:
             "diagnosis_codes": [
                 ("E11.9", KnowledgeBaseType.MEDICAL_CODING),
                 ("E11.9", KnowledgeBaseType.PROVIDER_PATTERN),
-                ("E11.9", KnowledgeBaseType.PATIENT_HISTORY)
+                ("E11.9", KnowledgeBaseType.PATIENT_HISTORY),
             ]
         }
         score = confidence_scorer.score_cross_validation(retrieved_values)
@@ -307,7 +310,7 @@ class TestCrossValidationScoring:
                 ("E11.9", KnowledgeBaseType.MEDICAL_CODING),
                 ("E11.9", KnowledgeBaseType.PROVIDER_PATTERN),
                 ("E11.9", KnowledgeBaseType.PATIENT_HISTORY),
-                ("I10", KnowledgeBaseType.REGULATORY)
+                ("I10", KnowledgeBaseType.REGULATORY),
             ]
         }
         score = confidence_scorer.score_cross_validation(retrieved_values)
@@ -320,7 +323,7 @@ class TestCrossValidationScoring:
                 ("E11.9", KnowledgeBaseType.MEDICAL_CODING),
                 ("I10", KnowledgeBaseType.PROVIDER_PATTERN),
                 ("J45.9", KnowledgeBaseType.PATIENT_HISTORY),
-                ("M79.3", KnowledgeBaseType.REGULATORY)
+                ("M79.3", KnowledgeBaseType.REGULATORY),
             ]
         }
         score = confidence_scorer.score_cross_validation(retrieved_values)
@@ -328,11 +331,7 @@ class TestCrossValidationScoring:
 
     def test_single_source(self, confidence_scorer):
         """Should score medium with only one source."""
-        retrieved_values = {
-            "diagnosis_codes": [
-                ("E11.9", KnowledgeBaseType.MEDICAL_CODING)
-            ]
-        }
+        retrieved_values = {"diagnosis_codes": [("E11.9", KnowledgeBaseType.MEDICAL_CODING)]}
         score = confidence_scorer.score_cross_validation(retrieved_values)
         assert 0.40 <= score <= 0.60, f"Single source should score 0.40-0.60, got {score}"
 
@@ -346,6 +345,7 @@ class TestCrossValidationScoring:
 # REGULATORY CITATION SCORING TESTS
 # ============================================================================
 
+
 class TestRegulatoryCitationScoring:
     """Test regulatory citation factor scoring."""
 
@@ -354,8 +354,7 @@ class TestRegulatoryCitationScoring:
         has_regulatory_confirmation = True
         regulatory_confidence = 0.95
         score = confidence_scorer.score_regulatory_citation(
-            has_regulatory_confirmation,
-            regulatory_confidence
+            has_regulatory_confirmation, regulatory_confidence
         )
         assert score >= 0.90, f"Regulatory confirmation should score >=0.90, got {score}"
 
@@ -364,8 +363,7 @@ class TestRegulatoryCitationScoring:
         has_regulatory_confirmation = False
         regulatory_confidence = 0.0
         score = confidence_scorer.score_regulatory_citation(
-            has_regulatory_confirmation,
-            regulatory_confidence
+            has_regulatory_confirmation, regulatory_confidence
         )
         assert 0.40 <= score <= 0.60, f"No regulatory data should score 0.40-0.60, got {score}"
 
@@ -374,8 +372,7 @@ class TestRegulatoryCitationScoring:
         has_regulatory_confirmation = False
         regulatory_confidence = 0.85  # High confidence but negative
         score = confidence_scorer.score_regulatory_citation(
-            has_regulatory_confirmation,
-            regulatory_confidence
+            has_regulatory_confirmation, regulatory_confidence
         )
         assert score < 0.30, f"Regulatory conflict should score <0.30, got {score}"
 
@@ -383,6 +380,7 @@ class TestRegulatoryCitationScoring:
 # ============================================================================
 # OVERALL CONFIDENCE AGGREGATION TESTS
 # ============================================================================
+
 
 class TestOverallConfidenceAggregation:
     """Test overall confidence score computation."""
@@ -394,7 +392,7 @@ class TestOverallConfidenceAggregation:
             "source_diversity": 0.80,
             "temporal_relevance": 0.70,
             "cross_validation": 0.85,
-            "regulatory_citation": 0.75
+            "regulatory_citation": 0.75,
         }
         score = confidence_scorer.compute_overall_confidence(factors)
 
@@ -409,7 +407,7 @@ class TestOverallConfidenceAggregation:
             "source_diversity": 0.90,
             "temporal_relevance": 0.92,
             "cross_validation": 0.94,
-            "regulatory_citation": 0.90
+            "regulatory_citation": 0.90,
         }
         score = confidence_scorer.compute_overall_confidence(factors)
         assert score >= 0.90, f"All high factors should produce >=0.90, got {score}"
@@ -421,7 +419,7 @@ class TestOverallConfidenceAggregation:
             "source_diversity": 0.30,
             "temporal_relevance": 0.35,
             "cross_validation": 0.40,
-            "regulatory_citation": 0.30
+            "regulatory_citation": 0.30,
         }
         score = confidence_scorer.compute_overall_confidence(factors)
         assert score < 0.50, f"All low factors should produce <0.50, got {score}"
@@ -429,12 +427,27 @@ class TestOverallConfidenceAggregation:
     def test_score_bounds(self, confidence_scorer):
         """Should always produce scores in [0.0, 1.0]."""
         test_cases = [
-            {"retrieval_quality": 0.0, "source_diversity": 0.0, "temporal_relevance": 0.0,
-             "cross_validation": 0.0, "regulatory_citation": 0.0},
-            {"retrieval_quality": 1.0, "source_diversity": 1.0, "temporal_relevance": 1.0,
-             "cross_validation": 1.0, "regulatory_citation": 1.0},
-            {"retrieval_quality": 0.50, "source_diversity": 0.60, "temporal_relevance": 0.70,
-             "cross_validation": 0.45, "regulatory_citation": 0.55}
+            {
+                "retrieval_quality": 0.0,
+                "source_diversity": 0.0,
+                "temporal_relevance": 0.0,
+                "cross_validation": 0.0,
+                "regulatory_citation": 0.0,
+            },
+            {
+                "retrieval_quality": 1.0,
+                "source_diversity": 1.0,
+                "temporal_relevance": 1.0,
+                "cross_validation": 1.0,
+                "regulatory_citation": 1.0,
+            },
+            {
+                "retrieval_quality": 0.50,
+                "source_diversity": 0.60,
+                "temporal_relevance": 0.70,
+                "cross_validation": 0.45,
+                "regulatory_citation": 0.55,
+            },
         ]
         for factors in test_cases:
             score = confidence_scorer.compute_overall_confidence(factors)
@@ -444,6 +457,7 @@ class TestOverallConfidenceAggregation:
 # ============================================================================
 # QUALITY TIER CLASSIFICATION TESTS
 # ============================================================================
+
 
 class TestQualityTierClassification:
     """Test quality tier classification."""
@@ -482,6 +496,7 @@ class TestQualityTierClassification:
 # CONFIDENCE CALIBRATION TESTS
 # ============================================================================
 
+
 class TestConfidenceCalibration:
     """Test that confidence scores match actual accuracy."""
 
@@ -502,6 +517,7 @@ class TestConfidenceCalibration:
 # INTEGRATION TESTS
 # ============================================================================
 
+
 class TestConfidenceScoringIntegration:
     """Test complete confidence scoring workflow."""
 
@@ -513,7 +529,7 @@ class TestConfidenceScoringIntegration:
         retrieved_values = {
             "diagnosis_codes": [
                 ("E11.9", KnowledgeBaseType.MEDICAL_CODING),
-                ("E11.9", KnowledgeBaseType.PROVIDER_PATTERN)
+                ("E11.9", KnowledgeBaseType.PROVIDER_PATTERN),
             ]
         }
 
@@ -530,7 +546,7 @@ class TestConfidenceScoringIntegration:
             "source_diversity": source_diversity,
             "temporal_relevance": temporal_relevance,
             "cross_validation": cross_validation,
-            "regulatory_citation": regulatory
+            "regulatory_citation": regulatory,
         }
         overall = confidence_scorer.compute_overall_confidence(factors)
         tier = confidence_scorer.compute_quality_tier(overall)

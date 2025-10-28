@@ -1,6 +1,7 @@
 """
 Factory classes for generating test insurance claims data.
 """
+
 import random
 from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional
@@ -51,35 +52,68 @@ class BaseClaim(factory.DictFactory):
     )
     claim_date = LazyAttribute(
         lambda obj: (
-            datetime.fromisoformat(obj.service_date) +
-            timedelta(days=random.randint(1, 30))
+            datetime.fromisoformat(obj.service_date) + timedelta(days=random.randint(1, 30))
         ).isoformat()
     )
     billed_amount = LazyFunction(lambda: round(random.uniform(50.0, 5000.0), 2))
     diagnosis_codes = LazyFunction(
-        lambda: random.sample([
-            'M79.3', 'S13.4', 'M54.2', 'G44.1', 'M25.5',
-            'Z51.11', 'M17.0', 'I25.10', 'E11.9', 'F32.9'
-        ], k=random.randint(1, 3))
+        lambda: random.sample(
+            [
+                "M79.3",
+                "S13.4",
+                "M54.2",
+                "G44.1",
+                "M25.5",
+                "Z51.11",
+                "M17.0",
+                "I25.10",
+                "E11.9",
+                "F32.9",
+            ],
+            k=random.randint(1, 3),
+        )
     )
     procedure_codes = LazyFunction(
-        lambda: random.sample([
-            '99213', '99214', '99215', '73721', '97110',
-            '99283', '99284', '99285', '70553', '99281'
-        ], k=random.randint(1, 2))
+        lambda: random.sample(
+            [
+                "99213",
+                "99214",
+                "99215",
+                "73721",
+                "97110",
+                "99283",
+                "99284",
+                "99285",
+                "70553",
+                "99281",
+            ],
+            k=random.randint(1, 2),
+        )
     )
     patient_age = LazyFunction(lambda: random.randint(18, 85))
     provider_specialty = LazyFunction(
-        lambda: random.choice([
-            'Internal Medicine', 'Emergency Medicine', 'Orthopedic Surgery',
-            'Physical Medicine', 'Radiology', 'Neurology', 'Cardiology'
-        ])
+        lambda: random.choice(
+            [
+                "Internal Medicine",
+                "Emergency Medicine",
+                "Orthopedic Surgery",
+                "Physical Medicine",
+                "Radiology",
+                "Neurology",
+                "Cardiology",
+            ]
+        )
     )
     service_location = LazyFunction(
-        lambda: random.choice([
-            'Office', 'Hospital Inpatient', 'Hospital Outpatient',
-            'Emergency Room', 'Ambulatory Surgery Center'
-        ])
+        lambda: random.choice(
+            [
+                "Office",
+                "Hospital Inpatient",
+                "Hospital Outpatient",
+                "Emergency Room",
+                "Ambulatory Surgery Center",
+            ]
+        )
     )
 
 
@@ -105,9 +139,7 @@ class UpcodingFraudClaim(BaseClaim):
     billed_amount = LazyFunction(lambda: round(random.uniform(3000.0, 15000.0), 2))
 
     # Higher complexity procedures
-    procedure_codes = LazyFunction(
-        lambda: random.sample(['99215', '99285', '70553'], k=1)
-    )
+    procedure_codes = LazyFunction(lambda: random.sample(["99215", "99285", "70553"], k=1))
 
 
 class PhantomBillingClaim(BaseClaim):
@@ -132,9 +164,7 @@ class UnbundlingFraudClaim(BaseClaim):
 
     # Multiple related procedures billed separately
     procedure_codes = LazyFunction(
-        lambda: random.sample([
-            '99213', '99214', '73721', '97110', '97112'
-        ], k=random.randint(3, 5))
+        lambda: random.sample(["99213", "99214", "73721", "97110", "97112"], k=random.randint(3, 5))
     )
 
 
@@ -146,9 +176,7 @@ class StagedAccidentClaim(BaseClaim):
     red_flags = ["pattern_matching", "suspicious_circumstances"]
 
     # Accident-related diagnosis codes
-    diagnosis_codes = LazyFunction(
-        lambda: random.sample(['S13.4', 'M79.3', 'G44.1'], k=2)
-    )
+    diagnosis_codes = LazyFunction(lambda: random.sample(["S13.4", "M79.3", "G44.1"], k=2))
 
     # High billed amounts for accidents
     billed_amount = LazyFunction(lambda: round(random.uniform(5000.0, 25000.0), 2))
@@ -162,14 +190,11 @@ class PrescriptionFraudClaim(BaseClaim):
     red_flags = ["drug_seeking", "doctor_shopping"]
 
     # Pain management related codes
-    diagnosis_codes = LazyFunction(
-        lambda: ['M79.3', 'G44.1']  # Pain-related diagnoses
-    )
+    diagnosis_codes = LazyFunction(lambda: ["M79.3", "G44.1"])  # Pain-related diagnoses
 
 
 def generate_mixed_claims_batch(
-    total_claims: int = 1000,
-    fraud_rate: float = 0.15
+    total_claims: int = 1000, fraud_rate: float = 0.15
 ) -> List[Dict[str, Any]]:
     """
     Generate a mixed batch of valid and fraudulent claims.
@@ -196,7 +221,7 @@ def generate_mixed_claims_batch(
         PhantomBillingClaim,
         UnbundlingFraudClaim,
         StagedAccidentClaim,
-        PrescriptionFraudClaim
+        PrescriptionFraudClaim,
     ]
 
     for _ in range(fraud_count):
@@ -230,18 +255,12 @@ def generate_accuracy_test_data() -> Dict[str, List[Dict[str, Any]]]:
         Dictionary with 'valid' and 'fraud' claim lists
     """
     return {
-        'valid': [ValidClaim() for _ in range(500)],
-        'fraud': [
-            UpcodingFraudClaim() for _ in range(100)
-        ] + [
-            PhantomBillingClaim() for _ in range(100)
-        ] + [
-            UnbundlingFraudClaim() for _ in range(100)
-        ] + [
-            StagedAccidentClaim() for _ in range(100)
-        ] + [
-            PrescriptionFraudClaim() for _ in range(100)
-        ]
+        "valid": [ValidClaim() for _ in range(500)],
+        "fraud": [UpcodingFraudClaim() for _ in range(100)]
+        + [PhantomBillingClaim() for _ in range(100)]
+        + [UnbundlingFraudClaim() for _ in range(100)]
+        + [StagedAccidentClaim() for _ in range(100)]
+        + [PrescriptionFraudClaim() for _ in range(100)],
     }
 
 
@@ -267,15 +286,15 @@ class MockClaimBatch:
 def create_high_risk_claim() -> Dict[str, Any]:
     """Create a claim with multiple fraud indicators."""
     claim = BaseClaim()
-    claim['fraud_indicator'] = True
-    claim['fraud_type'] = "multiple_indicators"
-    claim['red_flags'] = [
+    claim["fraud_indicator"] = True
+    claim["fraud_type"] = "multiple_indicators"
+    claim["red_flags"] = [
         "excessive_billing",
         "complexity_mismatch",
         "suspicious_timing",
-        "pattern_matching"
+        "pattern_matching",
     ]
-    claim['billed_amount'] = 15000.0
+    claim["billed_amount"] = 15000.0
     return claim
 
 
@@ -285,24 +304,19 @@ def create_edge_case_claims() -> List[Dict[str, Any]]:
         # Minimum values
         {
             **BaseClaim(),
-            'billed_amount': 0.01,
-            'patient_age': 0,
-            'diagnosis_codes': [],
-            'procedure_codes': []
+            "billed_amount": 0.01,
+            "patient_age": 0,
+            "diagnosis_codes": [],
+            "procedure_codes": [],
         },
         # Maximum values
         {
             **BaseClaim(),
-            'billed_amount': 999999.99,
-            'patient_age': 120,
-            'diagnosis_codes': ['M79.3'] * 10,
-            'procedure_codes': ['99213'] * 10
+            "billed_amount": 999999.99,
+            "patient_age": 120,
+            "diagnosis_codes": ["M79.3"] * 10,
+            "procedure_codes": ["99213"] * 10,
         },
         # Null/None values
-        {
-            **BaseClaim(),
-            'billed_amount': None,
-            'diagnosis_codes': None,
-            'procedure_codes': None
-        }
+        {**BaseClaim(), "billed_amount": None, "diagnosis_codes": None, "procedure_codes": None},
     ]

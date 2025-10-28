@@ -1,3 +1,4 @@
+---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
@@ -32,7 +33,7 @@ spec:
         name: http_requests_per_second
       target:
         type: AverageValue
-        averageValue: "100"
+        averageValue: '100'
   behavior:
     scaleDown:
       stabilizationWindowSeconds: 300
@@ -54,7 +55,6 @@ spec:
         value: 4
         periodSeconds: 60
       selectPolicy: Max
-
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -93,10 +93,10 @@ spec:
             queue: fraud_detection
       target:
         type: Value
-        value: "50"
+        value: '50'
   behavior:
     scaleDown:
-      stabilizationWindowSeconds: 600  # Longer stabilization for workers
+      stabilizationWindowSeconds: 600
       policies:
       - type: Percent
         value: 25
@@ -112,9 +112,7 @@ spec:
         value: 2
         periodSeconds: 60
       selectPolicy: Max
-
 ---
-# Staging HPA with more conservative scaling
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
