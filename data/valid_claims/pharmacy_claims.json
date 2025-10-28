@@ -1,91 +1,550 @@
 {
   "claims": [
     {
-      "claim_id": "RX-2024-001001",
-      "patient_id": "PAT-78901",
-      "prescriber_npi": "1234567890",
-      "pharmacy_npi": "9876543210",
-      "date_of_service": "2024-03-15",
-      "ndc_code": "00002-3214-30",
-      "drug_name": "Metformin HCL 1000mg",
-      "quantity": 60,
-      "days_supply": 30,
-      "diagnosis_codes": ["E11.9"],
-      "billed_amount": 45.00,
-      "refill_number": 2,
-      "fraud_indicator": false,
-      "notes": "Regular diabetes medication refill"
-    },
-    {
-      "claim_id": "RX-2024-001002",
-      "patient_id": "PAT-78902",
-      "prescriber_npi": "1234567891",
-      "pharmacy_npi": "9876543211",
-      "date_of_service": "2024-03-16",
+      "claim_id": "RX-2024-100050",
+      "patient_id": "PAT-010111",
+      "prescriber_npi": "3677555673",
+      "pharmacy_npi": "9876543453",
+      "date_of_service": "2024-02-10",
       "ndc_code": "00006-0749-61",
       "drug_name": "Lisinopril 10mg",
       "quantity": 30,
       "days_supply": 30,
-      "diagnosis_codes": ["I10"],
-      "billed_amount": 25.00,
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "billed_amount": 18.73,
       "refill_number": 0,
       "fraud_indicator": false,
-      "notes": "New prescription for hypertension"
+      "notes": "Regular lisinopril prescription"
     },
     {
-      "claim_id": "RX-2024-001003",
-      "patient_id": "PAT-78903",
-      "prescriber_npi": "1234567892",
-      "pharmacy_npi": "9876543212",
-      "date_of_service": "2024-03-17",
-      "ndc_code": "00093-0058-56",
-      "drug_name": "Amoxicillin 500mg",
-      "quantity": 20,
-      "days_supply": 10,
-      "diagnosis_codes": ["J18.9"],
-      "billed_amount": 15.00,
-      "refill_number": 0,
-      "fraud_indicator": false,
-      "notes": "Antibiotic for pneumonia treatment"
-    },
-    {
-      "claim_id": "RX-2024-001004",
-      "patient_id": "PAT-78904",
-      "prescriber_npi": "1234567893",
-      "pharmacy_npi": "9876543213",
-      "date_of_service": "2024-03-18",
-      "ndc_code": "00378-0180-01",
-      "drug_name": "Omeprazole 20mg",
+      "claim_id": "RX-2024-100051",
+      "patient_id": "PAT-010260",
+      "prescriber_npi": "1415843215",
+      "pharmacy_npi": "9876543546",
+      "date_of_service": "2024-01-01",
+      "ndc_code": "00006-0749-61",
+      "drug_name": "Lisinopril 10mg",
       "quantity": 30,
       "days_supply": 30,
-      "diagnosis_codes": ["K21.9"],
-      "billed_amount": 35.00,
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "billed_amount": 20.4,
       "refill_number": 1,
       "fraud_indicator": false,
-      "notes": "GERD medication refill"
+      "notes": "Regular lisinopril prescription"
     },
     {
-      "claim_id": "RX-2024-001005",
-      "patient_id": "PAT-78905",
-      "prescriber_npi": "1234567894",
-      "pharmacy_npi": "9876543214",
-      "date_of_service": "2024-03-19",
-      "ndc_code": "00781-1775-01",
-      "drug_name": "Ciprofloxacin 500mg",
-      "quantity": 14,
-      "days_supply": 7,
-      "diagnosis_codes": ["N39.0"],
-      "billed_amount": 30.00,
+      "claim_id": "RX-2024-100052",
+      "patient_id": "PAT-010071",
+      "prescriber_npi": "3954446239",
+      "pharmacy_npi": "9876543738",
+      "date_of_service": "2024-02-10",
+      "ndc_code": "00006-0749-61",
+      "drug_name": "Lisinopril 10mg",
+      "quantity": 30,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "billed_amount": 23.27,
       "refill_number": 0,
       "fraud_indicator": false,
-      "notes": "UTI antibiotic treatment"
+      "notes": "Regular lisinopril prescription"
+    },
+    {
+      "claim_id": "RX-2024-100053",
+      "patient_id": "PAT-010519",
+      "prescriber_npi": "2500799287",
+      "pharmacy_npi": "9876543518",
+      "date_of_service": "2024-02-11",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J01.90"
+      ],
+      "billed_amount": 16.04,
+      "refill_number": 2,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
+    },
+    {
+      "claim_id": "RX-2024-100054",
+      "patient_id": "PAT-010196",
+      "prescriber_npi": "2956797229",
+      "pharmacy_npi": "9876543488",
+      "date_of_service": "2024-03-27",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "billed_amount": 21.22,
+      "refill_number": 1,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
+    },
+    {
+      "claim_id": "RX-2024-100055",
+      "patient_id": "PAT-010415",
+      "prescriber_npi": "3478974224",
+      "pharmacy_npi": "9876543100",
+      "date_of_service": "2024-02-08",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J01.90"
+      ],
+      "billed_amount": 14.3,
+      "refill_number": 3,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
+    },
+    {
+      "claim_id": "RX-2024-100056",
+      "patient_id": "PAT-010476",
+      "prescriber_npi": "3043563638",
+      "pharmacy_npi": "9876543791",
+      "date_of_service": "2024-01-28",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J01.90"
+      ],
+      "billed_amount": 17.67,
+      "refill_number": 1,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
+    },
+    {
+      "claim_id": "RX-2024-100057",
+      "patient_id": "PAT-010290",
+      "prescriber_npi": "3345796101",
+      "pharmacy_npi": "9876543748",
+      "date_of_service": "2024-03-20",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "billed_amount": 15.03,
+      "refill_number": 1,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
+    },
+    {
+      "claim_id": "RX-2024-100058",
+      "patient_id": "PAT-010230",
+      "prescriber_npi": "2049254511",
+      "pharmacy_npi": "9876543125",
+      "date_of_service": "2024-01-06",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J01.90"
+      ],
+      "billed_amount": 13.67,
+      "refill_number": 3,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
+    },
+    {
+      "claim_id": "RX-2024-100059",
+      "patient_id": "PAT-010466",
+      "prescriber_npi": "2931760356",
+      "pharmacy_npi": "9876543689",
+      "date_of_service": "2024-01-25",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "billed_amount": 20.78,
+      "refill_number": 3,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
+    },
+    {
+      "claim_id": "RX-2024-100060",
+      "patient_id": "PAT-010249",
+      "prescriber_npi": "1838787926",
+      "pharmacy_npi": "9876543804",
+      "date_of_service": "2024-01-01",
+      "ndc_code": "00006-0749-61",
+      "drug_name": "Lisinopril 10mg",
+      "quantity": 30,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "billed_amount": 27.85,
+      "refill_number": 0,
+      "fraud_indicator": false,
+      "notes": "Regular lisinopril prescription"
+    },
+    {
+      "claim_id": "RX-2024-100061",
+      "patient_id": "PAT-010180",
+      "prescriber_npi": "4084643118",
+      "pharmacy_npi": "9876543575",
+      "date_of_service": "2024-01-07",
+      "ndc_code": "00006-0749-61",
+      "drug_name": "Lisinopril 10mg",
+      "quantity": 30,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "billed_amount": 21.15,
+      "refill_number": 0,
+      "fraud_indicator": false,
+      "notes": "Regular lisinopril prescription"
+    },
+    {
+      "claim_id": "RX-2024-100062",
+      "patient_id": "PAT-010820",
+      "prescriber_npi": "3137800005",
+      "pharmacy_npi": "9876543643",
+      "date_of_service": "2024-03-12",
+      "ndc_code": "00006-0749-61",
+      "drug_name": "Lisinopril 10mg",
+      "quantity": 30,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "billed_amount": 21.91,
+      "refill_number": 3,
+      "fraud_indicator": false,
+      "notes": "Regular lisinopril prescription"
+    },
+    {
+      "claim_id": "RX-2024-100063",
+      "patient_id": "PAT-010850",
+      "prescriber_npi": "3478567574",
+      "pharmacy_npi": "9876543262",
+      "date_of_service": "2024-03-01",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J01.90"
+      ],
+      "billed_amount": 16.75,
+      "refill_number": 1,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
+    },
+    {
+      "claim_id": "RX-2024-100064",
+      "patient_id": "PAT-010784",
+      "prescriber_npi": "3369608136",
+      "pharmacy_npi": "9876543741",
+      "date_of_service": "2024-01-31",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J01.90"
+      ],
+      "billed_amount": 14.12,
+      "refill_number": 0,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
+    },
+    {
+      "claim_id": "RX-2024-100065",
+      "patient_id": "PAT-010240",
+      "prescriber_npi": "2346452161",
+      "pharmacy_npi": "9876543427",
+      "date_of_service": "2024-03-10",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J01.90"
+      ],
+      "billed_amount": 11.21,
+      "refill_number": 1,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
+    },
+    {
+      "claim_id": "RX-2024-100066",
+      "patient_id": "PAT-010710",
+      "prescriber_npi": "1859840734",
+      "pharmacy_npi": "9876543319",
+      "date_of_service": "2024-01-09",
+      "ndc_code": "00002-3214-30",
+      "drug_name": "Metformin HCL 1000mg",
+      "quantity": 60,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "E11.65"
+      ],
+      "billed_amount": 29.52,
+      "refill_number": 2,
+      "fraud_indicator": false,
+      "notes": "Regular metformin prescription"
+    },
+    {
+      "claim_id": "RX-2024-100067",
+      "patient_id": "PAT-010425",
+      "prescriber_npi": "1489316881",
+      "pharmacy_npi": "9876543952",
+      "date_of_service": "2024-02-23",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J01.90"
+      ],
+      "billed_amount": 15.84,
+      "refill_number": 0,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
+    },
+    {
+      "claim_id": "RX-2024-100068",
+      "patient_id": "PAT-010488",
+      "prescriber_npi": "1258468845",
+      "pharmacy_npi": "9876543405",
+      "date_of_service": "2024-02-19",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J01.90"
+      ],
+      "billed_amount": 22.8,
+      "refill_number": 3,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
+    },
+    {
+      "claim_id": "RX-2024-100069",
+      "patient_id": "PAT-010499",
+      "prescriber_npi": "2132386193",
+      "pharmacy_npi": "9876543546",
+      "date_of_service": "2024-03-03",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "billed_amount": 10.44,
+      "refill_number": 2,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
+    },
+    {
+      "claim_id": "RX-2024-100070",
+      "patient_id": "PAT-010741",
+      "prescriber_npi": "1910981334",
+      "pharmacy_npi": "9876543578",
+      "date_of_service": "2024-01-17",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J01.90"
+      ],
+      "billed_amount": 24.71,
+      "refill_number": 0,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
+    },
+    {
+      "claim_id": "RX-2024-100071",
+      "patient_id": "PAT-010085",
+      "prescriber_npi": "3866549433",
+      "pharmacy_npi": "9876543238",
+      "date_of_service": "2024-02-29",
+      "ndc_code": "00006-0749-61",
+      "drug_name": "Lisinopril 10mg",
+      "quantity": 30,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "billed_amount": 13.63,
+      "refill_number": 2,
+      "fraud_indicator": false,
+      "notes": "Regular lisinopril prescription"
+    },
+    {
+      "claim_id": "RX-2024-100072",
+      "patient_id": "PAT-010216",
+      "prescriber_npi": "3096442722",
+      "pharmacy_npi": "9876543445",
+      "date_of_service": "2024-02-18",
+      "ndc_code": "00006-0749-61",
+      "drug_name": "Lisinopril 10mg",
+      "quantity": 30,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "billed_amount": 15.57,
+      "refill_number": 3,
+      "fraud_indicator": false,
+      "notes": "Regular lisinopril prescription"
+    },
+    {
+      "claim_id": "RX-2024-100073",
+      "patient_id": "PAT-010481",
+      "prescriber_npi": "1313885408",
+      "pharmacy_npi": "9876543652",
+      "date_of_service": "2024-01-07",
+      "ndc_code": "00006-0749-61",
+      "drug_name": "Lisinopril 10mg",
+      "quantity": 30,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "billed_amount": 30.0,
+      "refill_number": 2,
+      "fraud_indicator": false,
+      "notes": "Regular lisinopril prescription"
+    },
+    {
+      "claim_id": "RX-2024-100074",
+      "patient_id": "PAT-010799",
+      "prescriber_npi": "3903142213",
+      "pharmacy_npi": "9876543872",
+      "date_of_service": "2024-01-04",
+      "ndc_code": "00002-3214-30",
+      "drug_name": "Metformin HCL 1000mg",
+      "quantity": 60,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "billed_amount": 48.24,
+      "refill_number": 1,
+      "fraud_indicator": false,
+      "notes": "Regular metformin prescription"
+    },
+    {
+      "claim_id": "RX-2024-100075",
+      "patient_id": "PAT-010244",
+      "prescriber_npi": "1751596564",
+      "pharmacy_npi": "9876543785",
+      "date_of_service": "2024-01-15",
+      "ndc_code": "00002-3214-30",
+      "drug_name": "Metformin HCL 1000mg",
+      "quantity": 60,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "billed_amount": 34.74,
+      "refill_number": 1,
+      "fraud_indicator": false,
+      "notes": "Regular metformin prescription"
+    },
+    {
+      "claim_id": "RX-2024-100076",
+      "patient_id": "PAT-010785",
+      "prescriber_npi": "2744275939",
+      "pharmacy_npi": "9876543720",
+      "date_of_service": "2024-03-18",
+      "ndc_code": "00006-0749-61",
+      "drug_name": "Lisinopril 10mg",
+      "quantity": 30,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "billed_amount": 29.27,
+      "refill_number": 0,
+      "fraud_indicator": false,
+      "notes": "Regular lisinopril prescription"
+    },
+    {
+      "claim_id": "RX-2024-100077",
+      "patient_id": "PAT-010110",
+      "prescriber_npi": "3604126925",
+      "pharmacy_npi": "9876543419",
+      "date_of_service": "2024-03-14",
+      "ndc_code": "00002-3214-30",
+      "drug_name": "Metformin HCL 1000mg",
+      "quantity": 60,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "E11.65"
+      ],
+      "billed_amount": 38.71,
+      "refill_number": 3,
+      "fraud_indicator": false,
+      "notes": "Regular metformin prescription"
+    },
+    {
+      "claim_id": "RX-2024-100078",
+      "patient_id": "PAT-010077",
+      "prescriber_npi": "3659824161",
+      "pharmacy_npi": "9876543950",
+      "date_of_service": "2024-03-21",
+      "ndc_code": "00006-0749-61",
+      "drug_name": "Lisinopril 10mg",
+      "quantity": 30,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "billed_amount": 14.86,
+      "refill_number": 2,
+      "fraud_indicator": false,
+      "notes": "Regular lisinopril prescription"
+    },
+    {
+      "claim_id": "RX-2024-100079",
+      "patient_id": "PAT-010815",
+      "prescriber_npi": "3552920652",
+      "pharmacy_npi": "9876543142",
+      "date_of_service": "2024-02-14",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "billed_amount": 17.99,
+      "refill_number": 2,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
     }
   ],
   "metadata": {
     "file_type": "valid_pharmacy_claims",
-    "generated_date": "2024-03-20",
-    "total_claims": 5,
-    "total_billed": 150.00,
-    "average_claim": 30.00
+    "generated_date": "2025-10-28",
+    "total_claims": 30,
+    "total_billed": 640.42
   }
 }

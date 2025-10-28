@@ -1,101 +1,1318 @@
 {
   "claims": [
     {
-      "claim_id": "CLM-2024-001234",
-      "patient_id": "PAT-78901",
-      "provider_id": "PRV-45678",
-      "provider_npi": "1234567890",
+      "claim_id": "CLM-2024-100000",
+      "patient_id": "PAT-010142",
+      "provider_id": "PRV-005094",
+      "provider_npi": "3234207473",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-03-27",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 667.17,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100001",
+      "patient_id": "PAT-010095",
+      "provider_id": "PRV-005027",
+      "provider_npi": "3234343962",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-03-05",
+      "diagnosis_codes": [
+        "S06.0X0A"
+      ],
+      "diagnosis_descriptions": [
+        "Concussion without loss of consciousness, initial"
+      ],
+      "procedure_codes": [
+        "99283"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, moderate severity"
+      ],
+      "billed_amount": 265.64,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100002",
+      "patient_id": "PAT-010558",
+      "provider_id": "PRV-005053",
+      "provider_npi": "3234331148",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-02-27",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "85025"
+      ],
+      "procedure_descriptions": [
+        "Blood count, complete (CBC)"
+      ],
+      "billed_amount": 24.02,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100003",
+      "patient_id": "PAT-010432",
+      "provider_id": "PRV-005043",
+      "provider_npi": "3234391369",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-01-20",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99283"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, moderate severity"
+      ],
+      "billed_amount": 292.61,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100004",
+      "patient_id": "PAT-010867",
+      "provider_id": "PRV-005044",
+      "provider_npi": "1234733052",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-02-03",
+      "diagnosis_codes": [
+        "J00"
+      ],
+      "diagnosis_descriptions": [
+        "Acute nasopharyngitis (common cold)"
+      ],
+      "procedure_codes": [
+        "99211"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, minimal"
+      ],
+      "billed_amount": 24.01,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100005",
+      "patient_id": "PAT-010565",
+      "provider_id": "PRV-005037",
+      "provider_npi": "1234969693",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-03-21",
+      "diagnosis_codes": [
+        "N39.0"
+      ],
+      "diagnosis_descriptions": [
+        "Urinary tract infection, site not specified"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 128.79,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100006",
+      "patient_id": "PAT-010233",
+      "provider_id": "PRV-005098",
+      "provider_npi": "3234403445",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-01-11",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99284"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, high severity"
+      ],
+      "billed_amount": 393.6,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100007",
+      "patient_id": "PAT-010650",
+      "provider_id": "PRV-005021",
+      "provider_npi": "1234660086",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-02-01",
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes without complications"
+      ],
+      "procedure_codes": [
+        "82947",
+        "36415",
+        "83036"
+      ],
+      "procedure_descriptions": [
+        "Glucose, blood, quantitative",
+        "Collection of venous blood by venipuncture",
+        "Hemoglobin A1C"
+      ],
+      "billed_amount": 51.56,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100008",
+      "patient_id": "PAT-010704",
+      "provider_id": "PRV-005071",
+      "provider_npi": "1234330283",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-03-28",
+      "diagnosis_codes": [
+        "N39.0"
+      ],
+      "diagnosis_descriptions": [
+        "Urinary tract infection, site not specified"
+      ],
+      "procedure_codes": [
+        "81001"
+      ],
+      "procedure_descriptions": [
+        "Urinalysis, automated, with microscopy"
+      ],
+      "billed_amount": 19.96,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100009",
+      "patient_id": "PAT-010067",
+      "provider_id": "PRV-005027",
+      "provider_npi": "2234694731",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-02-10",
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes without complications"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 181.77,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100010",
+      "patient_id": "PAT-010146",
+      "provider_id": "PRV-005033",
+      "provider_npi": "1234246413",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-02-01",
+      "diagnosis_codes": [
+        "N39.0"
+      ],
+      "diagnosis_descriptions": [
+        "Urinary tract infection, site not specified"
+      ],
+      "procedure_codes": [
+        "81001"
+      ],
+      "procedure_descriptions": [
+        "Urinalysis, automated, with microscopy"
+      ],
+      "billed_amount": 24.87,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100011",
+      "patient_id": "PAT-010597",
+      "provider_id": "PRV-005051",
+      "provider_npi": "3234479580",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-01-29",
+      "diagnosis_codes": [
+        "S06.0X0A"
+      ],
+      "diagnosis_descriptions": [
+        "Concussion without loss of consciousness, initial"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 708.56,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100012",
+      "patient_id": "PAT-010112",
+      "provider_id": "PRV-005019",
+      "provider_npi": "1234757924",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-01-21",
+      "diagnosis_codes": [
+        "Z00.00"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for general adult medical examination without abnormal findings"
+      ],
+      "procedure_codes": [
+        "99202"
+      ],
+      "procedure_descriptions": [
+        "Office visit, new patient, low"
+      ],
+      "billed_amount": 68.74,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100013",
+      "patient_id": "PAT-010479",
+      "provider_id": "PRV-005067",
+      "provider_npi": "3234363626",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-03-11",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99283"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, moderate severity"
+      ],
+      "billed_amount": 296.78,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100014",
+      "patient_id": "PAT-010348",
+      "provider_id": "PRV-005014",
+      "provider_npi": "1234407757",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-02-25",
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes without complications"
+      ],
+      "procedure_codes": [
+        "81000"
+      ],
+      "procedure_descriptions": [
+        "Urinalysis, non-automated, without microscopy"
+      ],
+      "billed_amount": 18.92,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100015",
+      "patient_id": "PAT-010269",
+      "provider_id": "PRV-005064",
+      "provider_npi": "1234898975",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-01-23",
+      "diagnosis_codes": [
+        "N39.0"
+      ],
+      "diagnosis_descriptions": [
+        "Urinary tract infection, site not specified"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 147.65,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100016",
+      "patient_id": "PAT-010623",
+      "provider_id": "PRV-005025",
+      "provider_npi": "3234260263",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-02-17",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "85025"
+      ],
+      "procedure_descriptions": [
+        "Blood count, complete (CBC)"
+      ],
+      "billed_amount": 25.5,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100017",
+      "patient_id": "PAT-010114",
+      "provider_id": "PRV-005046",
+      "provider_npi": "1234972064",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-02-09",
+      "diagnosis_codes": [
+        "Z00.00"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for general adult medical examination without abnormal findings"
+      ],
+      "procedure_codes": [
+        "99201"
+      ],
+      "procedure_descriptions": [
+        "Office visit, new patient, minimal"
+      ],
+      "billed_amount": 64.75,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100018",
+      "patient_id": "PAT-010497",
+      "provider_id": "PRV-005008",
+      "provider_npi": "1234897549",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-03-09",
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes without complications"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 172.12,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100019",
+      "patient_id": "PAT-010621",
+      "provider_id": "PRV-005054",
+      "provider_npi": "1234322086",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-03-10",
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "diagnosis_descriptions": [
+        "Essential (primary) hypertension"
+      ],
+      "procedure_codes": [
+        "80053"
+      ],
+      "procedure_descriptions": [
+        "Comprehensive metabolic panel"
+      ],
+      "billed_amount": 43.66,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100020",
+      "patient_id": "PAT-010687",
+      "provider_id": "PRV-005083",
+      "provider_npi": "3234491559",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-02-26",
+      "diagnosis_codes": [
+        "S06.0X0A"
+      ],
+      "diagnosis_descriptions": [
+        "Concussion without loss of consciousness, initial"
+      ],
+      "procedure_codes": [
+        "99284"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, high severity"
+      ],
+      "billed_amount": 443.1,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100021",
+      "patient_id": "PAT-010021",
+      "provider_id": "PRV-005075",
+      "provider_npi": "3234680828",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-01-30",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99283"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, moderate severity"
+      ],
+      "billed_amount": 238.85,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100022",
+      "patient_id": "PAT-010234",
+      "provider_id": "PRV-005008",
+      "provider_npi": "3234132938",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-02-12",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 541.8,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100023",
+      "patient_id": "PAT-010552",
+      "provider_id": "PRV-005016",
+      "provider_npi": "1234858490",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-03-14",
+      "diagnosis_codes": [
+        "Z00.00"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for general adult medical examination without abnormal findings"
+      ],
+      "procedure_codes": [
+        "99201"
+      ],
+      "procedure_descriptions": [
+        "Office visit, new patient, minimal"
+      ],
+      "billed_amount": 56.71,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100024",
+      "patient_id": "PAT-010194",
+      "provider_id": "PRV-005012",
+      "provider_npi": "3234201639",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-03-25",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99284"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, high severity"
+      ],
+      "billed_amount": 510.84,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100025",
+      "patient_id": "PAT-010055",
+      "provider_id": "PRV-005086",
+      "provider_npi": "2234785197",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-03-23",
+      "diagnosis_codes": [
+        "E11.21"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes with diabetic neuropathy"
+      ],
+      "procedure_codes": [
+        "83036"
+      ],
+      "procedure_descriptions": [
+        "Hemoglobin A1C"
+      ],
+      "billed_amount": 36.85,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100026",
+      "patient_id": "PAT-010196",
+      "provider_id": "PRV-005024",
+      "provider_npi": "1234662336",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-02-27",
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes without complications"
+      ],
+      "procedure_codes": [
+        "82947"
+      ],
+      "procedure_descriptions": [
+        "Glucose, blood, quantitative"
+      ],
+      "billed_amount": 15.9,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100027",
+      "patient_id": "PAT-010945",
+      "provider_id": "PRV-005009",
+      "provider_npi": "1234564656",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-03-11",
+      "diagnosis_codes": [
+        "N39.0"
+      ],
+      "diagnosis_descriptions": [
+        "Urinary tract infection, site not specified"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 91.5,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100028",
+      "patient_id": "PAT-010948",
+      "provider_id": "PRV-005096",
+      "provider_npi": "1234989921",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-01-31",
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes without complications"
+      ],
+      "procedure_codes": [
+        "81000"
+      ],
+      "procedure_descriptions": [
+        "Urinalysis, non-automated, without microscopy"
+      ],
+      "billed_amount": 20.94,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100029",
+      "patient_id": "PAT-010924",
+      "provider_id": "PRV-005007",
+      "provider_npi": "1234272634",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-02-18",
+      "diagnosis_codes": [
+        "N39.0"
+      ],
+      "diagnosis_descriptions": [
+        "Urinary tract infection, site not specified"
+      ],
+      "procedure_codes": [
+        "81001"
+      ],
+      "procedure_descriptions": [
+        "Urinalysis, automated, with microscopy"
+      ],
+      "billed_amount": 21.98,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100030",
+      "patient_id": "PAT-010292",
+      "provider_id": "PRV-005054",
+      "provider_npi": "1234830429",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-03-12",
+      "diagnosis_codes": [
+        "N39.0"
+      ],
+      "diagnosis_descriptions": [
+        "Urinary tract infection, site not specified"
+      ],
+      "procedure_codes": [
+        "81001"
+      ],
+      "procedure_descriptions": [
+        "Urinalysis, automated, with microscopy"
+      ],
+      "billed_amount": 26.34,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100031",
+      "patient_id": "PAT-010991",
+      "provider_id": "PRV-005007",
+      "provider_npi": "3234707314",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-03-10",
+      "diagnosis_codes": [
+        "S06.0X0A"
+      ],
+      "diagnosis_descriptions": [
+        "Concussion without loss of consciousness, initial"
+      ],
+      "procedure_codes": [
+        "71046"
+      ],
+      "procedure_descriptions": [
+        "Chest X-ray, 2 views"
+      ],
+      "billed_amount": 81.33,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100032",
+      "patient_id": "PAT-010941",
+      "provider_id": "PRV-005067",
+      "provider_npi": "1234265080",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-01-08",
+      "diagnosis_codes": [
+        "J00"
+      ],
+      "diagnosis_descriptions": [
+        "Acute nasopharyngitis (common cold)"
+      ],
+      "procedure_codes": [
+        "99211"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, minimal"
+      ],
+      "billed_amount": 26.07,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100033",
+      "patient_id": "PAT-010882",
+      "provider_id": "PRV-005030",
+      "provider_npi": "3234523389",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-01-16",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 453.09,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100034",
+      "patient_id": "PAT-010429",
+      "provider_id": "PRV-005084",
+      "provider_npi": "3234712024",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-03-13",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "85025"
+      ],
+      "procedure_descriptions": [
+        "Blood count, complete (CBC)"
+      ],
+      "billed_amount": 29.95,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100035",
+      "patient_id": "PAT-010244",
+      "provider_id": "PRV-005033",
+      "provider_npi": "3234515011",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-01-17",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 597.68,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100036",
+      "patient_id": "PAT-010958",
+      "provider_id": "PRV-005009",
+      "provider_npi": "3234109767",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-02-28",
+      "diagnosis_codes": [
+        "S06.0X0A"
+      ],
+      "diagnosis_descriptions": [
+        "Concussion without loss of consciousness, initial"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 719.17,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100037",
+      "patient_id": "PAT-010271",
+      "provider_id": "PRV-005016",
+      "provider_npi": "3234465962",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-01-09",
+      "diagnosis_codes": [
+        "S06.0X0A"
+      ],
+      "diagnosis_descriptions": [
+        "Concussion without loss of consciousness, initial"
+      ],
+      "procedure_codes": [
+        "99283"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, moderate severity"
+      ],
+      "billed_amount": 235.18,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100038",
+      "patient_id": "PAT-010720",
+      "provider_id": "PRV-005038",
+      "provider_npi": "1234741390",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-03-24",
+      "diagnosis_codes": [
+        "J00"
+      ],
+      "diagnosis_descriptions": [
+        "Acute nasopharyngitis (common cold)"
+      ],
+      "procedure_codes": [
+        "99212"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, low"
+      ],
+      "billed_amount": 61.08,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100039",
+      "patient_id": "PAT-010679",
+      "provider_id": "PRV-005013",
+      "provider_npi": "3234240814",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-02-03",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "85025"
+      ],
+      "procedure_descriptions": [
+        "Blood count, complete (CBC)"
+      ],
+      "billed_amount": 30.32,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100040",
+      "patient_id": "PAT-010257",
+      "provider_id": "PRV-005006",
+      "provider_npi": "1234196781",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-03-22",
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes without complications"
+      ],
+      "procedure_codes": [
+        "81000",
+        "36415",
+        "83036"
+      ],
+      "procedure_descriptions": [
+        "Urinalysis, non-automated, without microscopy",
+        "Collection of venous blood by venipuncture",
+        "Hemoglobin A1C"
+      ],
+      "billed_amount": 58.81,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100041",
+      "patient_id": "PAT-010652",
+      "provider_id": "PRV-005033",
+      "provider_npi": "2234269430",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-02-26",
+      "diagnosis_codes": [
+        "E11.21"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes with diabetic neuropathy"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 92.11,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100042",
+      "patient_id": "PAT-010967",
+      "provider_id": "PRV-005088",
+      "provider_npi": "3234256294",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-03-10",
+      "diagnosis_codes": [
+        "S06.0X0A"
+      ],
+      "diagnosis_descriptions": [
+        "Concussion without loss of consciousness, initial"
+      ],
+      "procedure_codes": [
+        "71046"
+      ],
+      "procedure_descriptions": [
+        "Chest X-ray, 2 views"
+      ],
+      "billed_amount": 103.44,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100043",
+      "patient_id": "PAT-010373",
+      "provider_id": "PRV-005005",
+      "provider_npi": "1234475190",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-01-27",
+      "diagnosis_codes": [
+        "J00"
+      ],
+      "diagnosis_descriptions": [
+        "Acute nasopharyngitis (common cold)"
+      ],
+      "procedure_codes": [
+        "99211"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, minimal"
+      ],
+      "billed_amount": 30.83,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100044",
+      "patient_id": "PAT-010905",
+      "provider_id": "PRV-005052",
+      "provider_npi": "3234750810",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-01-20",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "85025"
+      ],
+      "procedure_descriptions": [
+        "Blood count, complete (CBC)"
+      ],
+      "billed_amount": 23.35,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100045",
+      "patient_id": "PAT-010340",
+      "provider_id": "PRV-005100",
+      "provider_npi": "1234531712",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-03-26",
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "diagnosis_descriptions": [
+        "Essential (primary) hypertension"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 146.31,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100046",
+      "patient_id": "PAT-010391",
+      "provider_id": "PRV-005004",
+      "provider_npi": "3234593554",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-01-29",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "71046"
+      ],
+      "procedure_descriptions": [
+        "Chest X-ray, 2 views"
+      ],
+      "billed_amount": 92.19,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100047",
+      "patient_id": "PAT-010233",
+      "provider_id": "PRV-005028",
+      "provider_npi": "1234124813",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-03-25",
+      "diagnosis_codes": [
+        "N39.0"
+      ],
+      "diagnosis_descriptions": [
+        "Urinary tract infection, site not specified"
+      ],
+      "procedure_codes": [
+        "81001"
+      ],
+      "procedure_descriptions": [
+        "Urinalysis, automated, with microscopy"
+      ],
+      "billed_amount": 19.65,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100048",
+      "patient_id": "PAT-010791",
+      "provider_id": "PRV-005035",
+      "provider_npi": "1234468203",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-03-23",
+      "diagnosis_codes": [
+        "N39.0"
+      ],
+      "diagnosis_descriptions": [
+        "Urinary tract infection, site not specified"
+      ],
+      "procedure_codes": [
+        "81001"
+      ],
+      "procedure_descriptions": [
+        "Urinalysis, automated, with microscopy"
+      ],
+      "billed_amount": 15.49,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100049",
+      "patient_id": "PAT-010993",
+      "provider_id": "PRV-005033",
+      "provider_npi": "3234287241",
+      "provider_specialty": "emergency_medicine",
       "date_of_service": "2024-03-15",
-      "diagnosis_codes": ["E11.9", "I10"],
-      "diagnosis_descriptions": ["Type 2 diabetes mellitus without complications", "Essential (primary) hypertension"],
-      "procedure_codes": ["99213"],
-      "procedure_descriptions": ["Office visit, established patient, low complexity"],
-      "billed_amount": 125.00,
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 691.56,
       "service_location": "11",
       "service_location_desc": "Office",
       "claim_type": "professional",
-      "rendering_hours": 0.25,
       "fraud_indicator": false,
-      "notes": "Routine diabetes follow-up with blood pressure check"
-    },
-    {
-      "claim_id": "CLM-2024-001235",
-      "patient_id": "PAT-78902",
-      "provider_id": "PRV-45679",
-      "provider_npi": "1234567891",
-      "date_of_service": "2024-03-16",
-      "diagnosis_codes": ["J18.9"],
-      "diagnosis_descriptions": ["Pneumonia, unspecified organism"],
-      "procedure_codes": ["99285", "71046"],
-      "procedure_descriptions": ["Emergency dept visit, high severity", "Chest X-ray, 2 views"],
-      "billed_amount": 1250.00,
-      "service_location": "23",
-      "service_location_desc": "Emergency Room",
-      "claim_type": "professional",
-      "rendering_hours": 1.5,
-      "fraud_indicator": false,
-      "notes": "Patient presented with severe respiratory symptoms, admitted for pneumonia"
-    },
-    {
-      "claim_id": "CLM-2024-001236",
-      "patient_id": "PAT-78903",
-      "provider_id": "PRV-45680",
-      "provider_npi": "1234567892",
-      "date_of_service": "2024-03-17",
-      "diagnosis_codes": ["M79.3"],
-      "diagnosis_descriptions": ["Myalgia"],
-      "procedure_codes": ["97110", "97140"],
-      "procedure_descriptions": ["Therapeutic exercises", "Manual therapy"],
-      "billed_amount": 185.00,
-      "service_location": "11",
-      "service_location_desc": "Office",
-      "claim_type": "professional",
-      "rendering_hours": 1.0,
-      "fraud_indicator": false,
-      "notes": "Physical therapy session for chronic back pain"
-    },
-    {
-      "claim_id": "CLM-2024-001237",
-      "patient_id": "PAT-78904",
-      "provider_id": "PRV-45681",
-      "provider_npi": "1234567893",
-      "date_of_service": "2024-03-18",
-      "diagnosis_codes": ["K21.9"],
-      "diagnosis_descriptions": ["Gastro-esophageal reflux disease without esophagitis"],
-      "procedure_codes": ["43239"],
-      "procedure_descriptions": ["Upper endoscopy with biopsy"],
-      "billed_amount": 2800.00,
-      "service_location": "22",
-      "service_location_desc": "Outpatient Hospital",
-      "claim_type": "professional",
-      "rendering_hours": 0.75,
-      "fraud_indicator": false,
-      "notes": "Diagnostic endoscopy for persistent GERD symptoms"
-    },
-    {
-      "claim_id": "CLM-2024-001238",
-      "patient_id": "PAT-78905",
-      "provider_id": "PRV-45682",
-      "provider_npi": "1234567894",
-      "date_of_service": "2024-03-19",
-      "diagnosis_codes": ["N39.0"],
-      "diagnosis_descriptions": ["Urinary tract infection, site not specified"],
-      "procedure_codes": ["99214", "81001"],
-      "procedure_descriptions": ["Office visit, moderate complexity", "Urinalysis"],
-      "billed_amount": 195.00,
-      "service_location": "11",
-      "service_location_desc": "Office",
-      "claim_type": "professional",
-      "rendering_hours": 0.5,
-      "fraud_indicator": false,
-      "notes": "UTI diagnosis and treatment, antibiotics prescribed"
+      "notes": "Routine emergency medicine visit"
     }
   ],
   "metadata": {
     "file_type": "valid_medical_claims",
-    "generated_date": "2024-03-20",
-    "total_claims": 5,
-    "total_billed": 4755.00,
-    "average_claim": 951.00
+    "generated_date": "2025-10-28",
+    "total_claims": 50,
+    "total_billed": 9133.1
   }
 }
