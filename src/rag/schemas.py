@@ -9,7 +9,7 @@ from datetime import datetime
 from decimal import Decimal
 from enum import Enum
 from typing import Dict, List, Optional, Any
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator, ConfigDict
 
 
 class EnrichmentStrategy(str, Enum):
@@ -39,6 +39,7 @@ class KnowledgeBaseType(str, Enum):
 
 class EnrichmentRequest(BaseModel):
     """Request model for claim enrichment."""
+    model_config = ConfigDict(use_enum_values=True)
 
     claim_data: Dict[str, Any] = Field(
         ...,
@@ -55,12 +56,10 @@ class EnrichmentRequest(BaseModel):
         description="Minimum confidence score required for enrichment"
     )
 
-    class Config:
-        use_enum_values = True
-
 
 class EnrichmentEvidence(BaseModel):
     """Evidence supporting an enrichment decision."""
+    model_config = ConfigDict(use_enum_values=True)
 
     source_kb: KnowledgeBaseType = Field(
         ...,
@@ -86,12 +85,10 @@ class EnrichmentEvidence(BaseModel):
         description="Relevant content snippet"
     )
 
-    class Config:
-        use_enum_values = True
-
 
 class EnrichmentDecision(BaseModel):
     """Decision made for enriching a specific field."""
+    model_config = ConfigDict(use_enum_values=True)
 
     field_name: str = Field(
         ...,
@@ -124,12 +121,10 @@ class EnrichmentDecision(BaseModel):
         description="Human-readable explanation of the decision"
     )
 
-    class Config:
-        use_enum_values = True
-
 
 class EnrichmentResponse(BaseModel):
     """Response model for claim enrichment."""
+    model_config = ConfigDict(use_enum_values=True)
 
     enriched_claim: Dict[str, Any] = Field(
         ...,
@@ -162,9 +157,6 @@ class EnrichmentResponse(BaseModel):
         default_factory=datetime.utcnow,
         description="Timestamp of enrichment"
     )
-
-    class Config:
-        use_enum_values = True
 
 
 class ConfidenceFactors(BaseModel):
@@ -201,7 +193,8 @@ class ConfidenceFactors(BaseModel):
         description="Regulatory validation score"
     )
 
-    @validator('*', pre=True)
+    @field_validator('*', mode='before')
+    @classmethod
     def round_to_precision(cls, v):
         """Round all scores to 4 decimal places."""
         if isinstance(v, (int, float)):
@@ -211,6 +204,7 @@ class ConfidenceFactors(BaseModel):
 
 class EnrichmentMetrics(BaseModel):
     """Metrics for enrichment quality and performance."""
+    model_config = ConfigDict(validate_assignment=True)
 
     total_enrichments: int = Field(
         default=0,
@@ -268,16 +262,13 @@ class EnrichmentMetrics(BaseModel):
         description="Accuracy per knowledge base"
     )
 
-    class Config:
-        validate_assignment = True
-
 
 class BatchEnrichmentRequest(BaseModel):
     """Request model for batch enrichment."""
 
     requests: List[EnrichmentRequest] = Field(
         ...,
-        min_items=1,
+        min_length=1,
         description="List of enrichment requests"
     )
     parallel: bool = Field(
