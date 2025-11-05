@@ -19,9 +19,14 @@ import aiofiles
 from pydantic import ValidationError as PydanticValidationError
 
 from ..models.claim_models import (
-    BaseClaim, MedicalClaim, PharmacyClaim, NoFaultClaim,
-    ClaimBatch, ProcessingResult, ValidationError,
-    claim_factory
+    BaseClaim,
+    MedicalClaim,
+    PharmacyClaim,
+    NoFaultClaim,
+    ClaimBatch,
+    ProcessingResult,
+    ValidationError,
+    claim_factory,
 )
 from .validator import ClaimValidator
 from .preprocessor import ClaimPreprocessor
@@ -40,7 +45,7 @@ class DataLoaderConfig:
         preprocess_on_load: bool = False,
         chunk_size: int = 10000,
         max_file_size_mb: int = 500,
-        supported_extensions: List[str] = None
+        supported_extensions: List[str] = None,
     ):
         """
         Initialize data loader configuration.
@@ -60,7 +65,7 @@ class DataLoaderConfig:
         self.preprocess_on_load = preprocess_on_load
         self.chunk_size = chunk_size
         self.max_file_size_mb = max_file_size_mb
-        self.supported_extensions = supported_extensions or ['.json']
+        self.supported_extensions = supported_extensions or [".json"]
 
 
 class ClaimDataLoader:
@@ -71,7 +76,7 @@ class ClaimDataLoader:
         data_directory: Union[str, Path],
         config: Optional[DataLoaderConfig] = None,
         validator: Optional[ClaimValidator] = None,
-        preprocessor: Optional[ClaimPreprocessor] = None
+        preprocessor: Optional[ClaimPreprocessor] = None,
     ):
         """
         Initialize data loader.
@@ -88,10 +93,10 @@ class ClaimDataLoader:
         self.preprocessor = preprocessor or ClaimPreprocessor()
 
         self.stats = {
-            'files_processed': 0,
-            'claims_loaded': 0,
-            'validation_errors': 0,
-            'processing_time': 0.0
+            "files_processed": 0,
+            "claims_loaded": 0,
+            "validation_errors": 0,
+            "processing_time": 0.0,
         }
 
         # Validate data directory
@@ -102,7 +107,7 @@ class ClaimDataLoader:
         self,
         file_paths: Optional[List[Union[str, Path]]] = None,
         claim_types: Optional[List[str]] = None,
-        progress_callback: Optional[Callable[[int, int], None]] = None
+        progress_callback: Optional[Callable[[int, int], None]] = None,
     ) -> ClaimBatch:
         """
         Load claims in batch mode.
@@ -154,7 +159,7 @@ class ClaimDataLoader:
                 try:
                     claims = future.result()
                     all_claims.extend(claims)
-                    self.stats['files_processed'] += 1
+                    self.stats["files_processed"] += 1
 
                     logger.debug(f"Loaded {len(claims)} claims from {file_path.name}")
 
@@ -172,26 +177,28 @@ class ClaimDataLoader:
             claims=all_claims,
             batch_id=batch_id,
             processed_at=datetime.utcnow(),
-            total_count=len(all_claims)
+            total_count=len(all_claims),
         )
 
         # Validation
         if self.config.validate_on_load:
             logger.info("Validating loaded claims")
             validation_result = self._validate_batch(batch)
-            self.stats['validation_errors'] = validation_result.error_count
+            self.stats["validation_errors"] = validation_result.error_count
 
-        self.stats['claims_loaded'] = len(all_claims)
-        self.stats['processing_time'] = time.time() - start_time
+        self.stats["claims_loaded"] = len(all_claims)
+        self.stats["processing_time"] = time.time() - start_time
 
-        logger.info(f"Batch loading complete: {len(all_claims)} claims loaded in {self.stats['processing_time']:.2f}s")
+        logger.info(
+            f"Batch loading complete: {len(all_claims)} claims loaded in {self.stats['processing_time']:.2f}s"
+        )
         return batch
 
     def stream_claims(
         self,
         file_paths: Optional[List[Union[str, Path]]] = None,
         claim_types: Optional[List[str]] = None,
-        chunk_size: Optional[int] = None
+        chunk_size: Optional[int] = None,
     ) -> Generator[List[BaseClaim], None, None]:
         """
         Stream claims in chunks.
@@ -244,7 +251,7 @@ class ClaimDataLoader:
         self,
         file_paths: Optional[List[Union[str, Path]]] = None,
         claim_types: Optional[List[str]] = None,
-        chunk_size: Optional[int] = None
+        chunk_size: Optional[int] = None,
     ) -> AsyncGenerator[List[BaseClaim], None]:
         """
         Asynchronously stream claims in chunks.
@@ -294,9 +301,7 @@ class ClaimDataLoader:
             yield current_chunk
 
     def load_specific_claim_type(
-        self,
-        claim_type: str,
-        subdirectory: Optional[str] = None
+        self, claim_type: str, subdirectory: Optional[str] = None
     ) -> List[BaseClaim]:
         """
         Load claims of a specific type.
@@ -315,11 +320,11 @@ class ClaimDataLoader:
 
         # Map claim types to file patterns
         type_patterns = {
-            'medical': ['*medical*.json', '*professional*.json'],
-            'pharmacy': ['*pharmacy*.json', '*drug*.json'],
-            'no_fault': ['*no_fault*.json', '*auto*.json'],
-            'fraud': ['*fraud*.json'],
-            'valid': ['*valid*.json']
+            "medical": ["*medical*.json", "*professional*.json"],
+            "pharmacy": ["*pharmacy*.json", "*drug*.json"],
+            "no_fault": ["*no_fault*.json", "*auto*.json"],
+            "fraud": ["*fraud*.json"],
+            "valid": ["*valid*.json"],
         }
 
         if claim_type not in type_patterns:
@@ -359,16 +364,16 @@ class ClaimDataLoader:
         if claim_types:
             patterns = []
             for claim_type in claim_types:
-                if claim_type == 'medical':
-                    patterns.extend(['*medical*.json', '*professional*.json'])
-                elif claim_type == 'pharmacy':
-                    patterns.extend(['*pharmacy*.json', '*drug*.json'])
-                elif claim_type == 'no_fault':
-                    patterns.extend(['*no_fault*.json', '*auto*.json'])
+                if claim_type == "medical":
+                    patterns.extend(["*medical*.json", "*professional*.json"])
+                elif claim_type == "pharmacy":
+                    patterns.extend(["*pharmacy*.json", "*drug*.json"])
+                elif claim_type == "no_fault":
+                    patterns.extend(["*no_fault*.json", "*auto*.json"])
                 else:
-                    patterns.append(f'*{claim_type}*.json')
+                    patterns.append(f"*{claim_type}*.json")
         else:
-            patterns = ['**/*.json']
+            patterns = ["**/*.json"]
 
         # Find files
         for pattern in patterns:
@@ -388,12 +393,12 @@ class ClaimDataLoader:
         logger.debug(f"Loading file: {file_path}")
 
         try:
-            with open(file_path, 'r', encoding='utf-8') as f:
+            with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
 
             # Handle different file structures
-            if isinstance(data, dict) and 'claims' in data:
-                claims_data = data['claims']
+            if isinstance(data, dict) and "claims" in data:
+                claims_data = data["claims"]
             elif isinstance(data, list):
                 claims_data = data
             else:
@@ -421,13 +426,13 @@ class ClaimDataLoader:
         logger.debug(f"Async loading file: {file_path}")
 
         try:
-            async with aiofiles.open(file_path, 'r', encoding='utf-8') as f:
+            async with aiofiles.open(file_path, "r", encoding="utf-8") as f:
                 content = await f.read()
                 data = json.loads(content)
 
             # Handle different file structures
-            if isinstance(data, dict) and 'claims' in data:
-                claims_data = data['claims']
+            if isinstance(data, dict) and "claims" in data:
+                claims_data = data["claims"]
             elif isinstance(data, list):
                 claims_data = data
             else:
@@ -463,76 +468,79 @@ class ClaimDataLoader:
     def get_statistics(self) -> Dict[str, Any]:
         """Get loader statistics."""
         return {
-            'files_processed': self.stats['files_processed'],
-            'claims_loaded': self.stats['claims_loaded'],
-            'validation_errors': self.stats['validation_errors'],
-            'processing_time_seconds': self.stats['processing_time'],
-            'avg_claims_per_file': (
-                self.stats['claims_loaded'] / self.stats['files_processed']
-                if self.stats['files_processed'] > 0 else 0
+            "files_processed": self.stats["files_processed"],
+            "claims_loaded": self.stats["claims_loaded"],
+            "validation_errors": self.stats["validation_errors"],
+            "processing_time_seconds": self.stats["processing_time"],
+            "avg_claims_per_file": (
+                self.stats["claims_loaded"] / self.stats["files_processed"]
+                if self.stats["files_processed"] > 0
+                else 0
             ),
-            'claims_per_second': (
-                self.stats['claims_loaded'] / self.stats['processing_time']
-                if self.stats['processing_time'] > 0 else 0
-            )
+            "claims_per_second": (
+                self.stats["claims_loaded"] / self.stats["processing_time"]
+                if self.stats["processing_time"] > 0
+                else 0
+            ),
         }
 
     def reset_statistics(self):
         """Reset loader statistics."""
         self.stats = {
-            'files_processed': 0,
-            'claims_loaded': 0,
-            'validation_errors': 0,
-            'processing_time': 0.0
+            "files_processed": 0,
+            "claims_loaded": 0,
+            "validation_errors": 0,
+            "processing_time": 0.0,
         }
 
     def get_file_summary(self) -> Dict[str, Any]:
         """Get summary of available files."""
         files = self._discover_claim_files()
         summary = {
-            'total_files': len(files),
-            'files_by_type': {},
-            'total_size_mb': 0,
-            'file_details': []
+            "total_files": len(files),
+            "files_by_type": {},
+            "total_size_mb": 0,
+            "file_details": [],
         }
 
         for file_path in files:
             size_mb = file_path.stat().st_size / (1024 * 1024)
-            summary['total_size_mb'] += size_mb
+            summary["total_size_mb"] += size_mb
 
             # Determine file type
-            file_type = 'unknown'
+            file_type = "unknown"
             name_lower = file_path.name.lower()
-            if 'medical' in name_lower or 'professional' in name_lower:
-                file_type = 'medical'
-            elif 'pharmacy' in name_lower or 'drug' in name_lower:
-                file_type = 'pharmacy'
-            elif 'no_fault' in name_lower or 'auto' in name_lower:
-                file_type = 'no_fault'
-            elif 'fraud' in name_lower:
-                file_type = 'fraud'
-            elif 'valid' in name_lower:
-                file_type = 'valid'
+            if "medical" in name_lower or "professional" in name_lower:
+                file_type = "medical"
+            elif "pharmacy" in name_lower or "drug" in name_lower:
+                file_type = "pharmacy"
+            elif "no_fault" in name_lower or "auto" in name_lower:
+                file_type = "no_fault"
+            elif "fraud" in name_lower:
+                file_type = "fraud"
+            elif "valid" in name_lower:
+                file_type = "valid"
 
-            summary['files_by_type'][file_type] = summary['files_by_type'].get(file_type, 0) + 1
+            summary["files_by_type"][file_type] = summary["files_by_type"].get(file_type, 0) + 1
 
-            summary['file_details'].append({
-                'path': str(file_path),
-                'name': file_path.name,
-                'type': file_type,
-                'size_mb': round(size_mb, 2),
-                'modified': datetime.fromtimestamp(file_path.stat().st_mtime).isoformat()
-            })
+            summary["file_details"].append(
+                {
+                    "path": str(file_path),
+                    "name": file_path.name,
+                    "type": file_type,
+                    "size_mb": round(size_mb, 2),
+                    "modified": datetime.fromtimestamp(file_path.stat().st_mtime).isoformat(),
+                }
+            )
 
         return summary
 
 
 # Convenience functions
 
+
 def load_claims_from_directory(
-    data_directory: Union[str, Path],
-    claim_types: Optional[List[str]] = None,
-    validate: bool = True
+    data_directory: Union[str, Path], claim_types: Optional[List[str]] = None, validate: bool = True
 ) -> ClaimBatch:
     """
     Convenience function to load claims from a directory.
@@ -553,7 +561,7 @@ def load_claims_from_directory(
 def stream_claims_from_directory(
     data_directory: Union[str, Path],
     chunk_size: int = 1000,
-    claim_types: Optional[List[str]] = None
+    claim_types: Optional[List[str]] = None,
 ) -> Generator[List[BaseClaim], None, None]:
     """
     Convenience function to stream claims from a directory.

@@ -13,13 +13,13 @@ import sys
 from pathlib import Path
 
 # Add src to path for imports
-sys.path.insert(0, str(Path(__file__).parent / 'src'))
+sys.path.insert(0, str(Path(__file__).parent / "src"))
 
 from detection.fraud_detector import FraudDetectorOrchestrator, DetectionConfig
 from training.train_models import ModelTrainingPipeline, TrainingConfig
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 
@@ -27,22 +27,22 @@ def load_sample_data():
     """Load sample claims data for demonstration."""
     try:
         # Load legitimate claims
-        with open('data/valid_claims/medical_claims.json', 'r') as f:
+        with open("data/valid_claims/medical_claims.json", "r") as f:
             valid_data = json.load(f)
-            valid_claims = valid_data['claims'][:50]  # Use first 50 claims
+            valid_claims = valid_data["claims"][:50]  # Use first 50 claims
 
         # Load fraudulent claims
         fraud_files = [
-            'data/fraudulent_claims/phantom_billing.json',
-            'data/fraudulent_claims/unbundling_fraud.json'
+            "data/fraudulent_claims/phantom_billing.json",
+            "data/fraudulent_claims/unbundling_fraud.json",
         ]
 
         fraud_claims = []
         for file_path in fraud_files:
             if os.path.exists(file_path):
-                with open(file_path, 'r') as f:
+                with open(file_path, "r") as f:
                     fraud_data = json.load(f)
-                    fraud_claims.extend(fraud_data['claims'][:25])  # 25 from each type
+                    fraud_claims.extend(fraud_data["claims"][:25])  # 25 from each type
 
         # Combine data
         all_claims = valid_claims + fraud_claims
@@ -65,42 +65,42 @@ def create_synthetic_claims():
     # Create 100 legitimate claims
     for i in range(100):
         claim = {
-            'claim_id': f'CLM-LEGIT-{i:04d}',
-            'patient_id': f'PAT-{i:04d}',
-            'provider_id': f'PRV-{(i % 20):03d}',
-            'provider_npi': f'123456{(i % 20):04d}',
-            'date_of_service': f'2024-{(i % 12 + 1):02d}-{(i % 28 + 1):02d}',
-            'diagnosis_codes': ['I10', 'E11.9'],
-            'procedure_codes': ['99213'],
-            'billed_amount': 125.0 + (i % 100),
-            'service_location': '11',
-            'claim_type': 'professional',
-            'fraud_indicator': False,
-            'notes': 'Routine medical visit'
+            "claim_id": f"CLM-LEGIT-{i:04d}",
+            "patient_id": f"PAT-{i:04d}",
+            "provider_id": f"PRV-{(i % 20):03d}",
+            "provider_npi": f"123456{(i % 20):04d}",
+            "date_of_service": f"2024-{(i % 12 + 1):02d}-{(i % 28 + 1):02d}",
+            "diagnosis_codes": ["I10", "E11.9"],
+            "procedure_codes": ["99213"],
+            "billed_amount": 125.0 + (i % 100),
+            "service_location": "11",
+            "claim_type": "professional",
+            "fraud_indicator": False,
+            "notes": "Routine medical visit",
         }
         legitimate_claims.append(claim)
 
     # Create 30 fraudulent claims
     for i in range(30):
         claim = {
-            'claim_id': f'CLM-FRAUD-{i:04d}',
-            'patient_id': f'PAT-GHOST-{i:03d}',
-            'provider_id': f'PRV-FRAUD-{(i % 5):03d}',
-            'provider_npi': f'999999{(i % 5):04d}',
-            'date_of_service': f'2024-{(i % 12 + 1):02d}-{(i % 28 + 1):02d}',
-            'diagnosis_codes': ['E11.9', 'I10'],
-            'procedure_codes': ['99215', '93000', '36415'],  # Upcoded procedures
-            'billed_amount': 1000.0 + (i * 50),  # Inflated amounts
-            'service_location': '11',
-            'claim_type': 'professional',
-            'fraud_indicator': True,
-            'fraud_type': 'upcoding' if i % 2 == 0 else 'phantom_billing',
-            'red_flags': [
-                'Excessive procedures for diagnosis',
-                'Unusual billing pattern',
-                'Patient address not verified'
+            "claim_id": f"CLM-FRAUD-{i:04d}",
+            "patient_id": f"PAT-GHOST-{i:03d}",
+            "provider_id": f"PRV-FRAUD-{(i % 5):03d}",
+            "provider_npi": f"999999{(i % 5):04d}",
+            "date_of_service": f"2024-{(i % 12 + 1):02d}-{(i % 28 + 1):02d}",
+            "diagnosis_codes": ["E11.9", "I10"],
+            "procedure_codes": ["99215", "93000", "36415"],  # Upcoded procedures
+            "billed_amount": 1000.0 + (i * 50),  # Inflated amounts
+            "service_location": "11",
+            "claim_type": "professional",
+            "fraud_indicator": True,
+            "fraud_type": "upcoding" if i % 2 == 0 else "phantom_billing",
+            "red_flags": [
+                "Excessive procedures for diagnosis",
+                "Unusual billing pattern",
+                "Patient address not verified",
             ],
-            'notes': 'Suspicious claim with multiple red flags'
+            "notes": "Suspicious claim with multiple red flags",
         }
         fraud_claims.append(claim)
 
@@ -109,9 +109,9 @@ def create_synthetic_claims():
 
 def demo_rule_based_detection():
     """Demonstrate rule-based fraud detection."""
-    logger.info("\n" + "="*50)
+    logger.info("\n" + "=" * 50)
     logger.info("RULE-BASED FRAUD DETECTION DEMO")
-    logger.info("="*50)
+    logger.info("=" * 50)
 
     from detection.rule_engine import RuleEngine
 
@@ -120,23 +120,23 @@ def demo_rule_based_detection():
 
     # Create a suspicious claim
     suspicious_claim = {
-        'claim_id': 'CLM-SUSPICIOUS-001',
-        'patient_id': 'PAT-GHOST-001',
-        'provider_id': 'PRV-FRAUD-001',
-        'provider_npi': '9999999001',
-        'date_of_service': '2024-12-25',  # Christmas
-        'day_of_week': 'Sunday',
-        'diagnosis_codes': ['I10'],  # Simple hypertension
-        'procedure_codes': ['99215', '93000', '36415'],  # Complex procedures
-        'billed_amount': 2500.00,  # Excessive amount
-        'service_location': '11',
-        'claim_type': 'professional',
-        'fraud_indicator': True,
-        'red_flags': [
-            'Service on holiday when office closed',
-            'Patient address doesn\'t exist',
-            'Excessive procedures for simple diagnosis'
-        ]
+        "claim_id": "CLM-SUSPICIOUS-001",
+        "patient_id": "PAT-GHOST-001",
+        "provider_id": "PRV-FRAUD-001",
+        "provider_npi": "9999999001",
+        "date_of_service": "2024-12-25",  # Christmas
+        "day_of_week": "Sunday",
+        "diagnosis_codes": ["I10"],  # Simple hypertension
+        "procedure_codes": ["99215", "93000", "36415"],  # Complex procedures
+        "billed_amount": 2500.00,  # Excessive amount
+        "service_location": "11",
+        "claim_type": "professional",
+        "fraud_indicator": True,
+        "red_flags": [
+            "Service on holiday when office closed",
+            "Patient address doesn't exist",
+            "Excessive procedures for simple diagnosis",
+        ],
     }
 
     # Analyze claim
@@ -161,9 +161,9 @@ def demo_rule_based_detection():
 
 def demo_ml_detection():
     """Demonstrate machine learning fraud detection."""
-    logger.info("\n" + "="*50)
+    logger.info("\n" + "=" * 50)
     logger.info("MACHINE LEARNING FRAUD DETECTION DEMO")
-    logger.info("="*50)
+    logger.info("=" * 50)
 
     # Get sample data
     claims_data = load_sample_data()
@@ -180,7 +180,7 @@ def demo_ml_detection():
         validation_size=0.2,
         enable_hyperparameter_tuning=False,  # Skip for demo speed
         generate_plots=False,
-        output_directory='demo_models'
+        output_directory="demo_models",
     )
 
     # Run training pipeline
@@ -200,8 +200,9 @@ def demo_ml_detection():
         # Show top features
         if results.feature_importance:
             print(f"\n🔍 TOP 5 IMPORTANT FEATURES:")
-            sorted_features = sorted(results.feature_importance.items(),
-                                   key=lambda x: x[1], reverse=True)
+            sorted_features = sorted(
+                results.feature_importance.items(), key=lambda x: x[1], reverse=True
+            )
             for i, (feature, importance) in enumerate(sorted_features[:5]):
                 print(f"   {i+1}. {feature}: {importance:.4f}")
 
@@ -214,9 +215,9 @@ def demo_ml_detection():
 
 def demo_anomaly_detection():
     """Demonstrate anomaly detection."""
-    logger.info("\n" + "="*50)
+    logger.info("\n" + "=" * 50)
     logger.info("ANOMALY DETECTION DEMO")
-    logger.info("="*50)
+    logger.info("=" * 50)
 
     from detection.anomaly_detector import AnomalyDetectionSuite
     from detection.feature_engineering import FeatureEngineer
@@ -230,10 +231,10 @@ def demo_anomaly_detection():
     # Extract features
     feature_engineer = FeatureEngineer()
     feature_set = feature_engineer.extract_features(claims_data)
-    X = feature_engineer.combine_features(feature_set, include_sets=['basic', 'temporal'])
+    X = feature_engineer.combine_features(feature_set, include_sets=["basic", "temporal"])
 
     # Use only numeric features for anomaly detection
-    X_numeric = X.select_dtypes(include=['number'])
+    X_numeric = X.select_dtypes(include=["number"])
 
     if X_numeric.empty:
         logger.warning("No numeric features available for anomaly detection")
@@ -241,7 +242,7 @@ def demo_anomaly_detection():
 
     # Split into normal and test data
     df = pd.DataFrame(claims_data)
-    normal_data = X_numeric[df['fraud_indicator'] == False]
+    normal_data = X_numeric[df["fraud_indicator"] == False]
     test_data = X_numeric
 
     if len(normal_data) == 0:
@@ -270,15 +271,16 @@ def demo_anomaly_detection():
 
         # Show some anomalous claims
         high_confidence_anomalies = [
-            r for r in anomaly_results
-            if r.is_anomaly and r.confidence > 0.8
+            r for r in anomaly_results if r.is_anomaly and r.confidence > 0.8
         ]
 
         if high_confidence_anomalies:
             print(f"\n🚨 HIGH CONFIDENCE ANOMALIES:")
             for result in high_confidence_anomalies[:3]:
-                print(f"   Claim {result.claim_id}: Score {result.anomaly_score:.3f}, "
-                      f"Confidence {result.confidence:.2%}")
+                print(
+                    f"   Claim {result.claim_id}: Score {result.anomaly_score:.3f}, "
+                    f"Confidence {result.confidence:.2%}"
+                )
                 print(f"   Explanation: {result.explanation}")
 
     except Exception as e:
@@ -287,9 +289,9 @@ def demo_anomaly_detection():
 
 def demo_full_system():
     """Demonstrate the complete fraud detection system."""
-    logger.info("\n" + "="*60)
+    logger.info("\n" + "=" * 60)
     logger.info("COMPLETE FRAUD DETECTION SYSTEM DEMO")
-    logger.info("="*60)
+    logger.info("=" * 60)
 
     # Get sample data
     claims_data = load_sample_data()
@@ -306,7 +308,7 @@ def demo_full_system():
         rule_weight=0.3,
         ml_weight=0.5,
         anomaly_weight=0.2,
-        enable_parallel_processing=False  # Disable for demo
+        enable_parallel_processing=False,  # Disable for demo
     )
 
     # Initialize orchestrator
@@ -325,8 +327,8 @@ def demo_full_system():
 
         print(f"\n🎯 TRAINING COMPLETED:")
         print(f"Training Time: {training_results['training_time_seconds']:.2f} seconds")
-        if 'overall_performance' in training_results:
-            perf = training_results['overall_performance']
+        if "overall_performance" in training_results:
+            perf = training_results["overall_performance"]
             print(f"Accuracy: {perf['accuracy']:.4f}")
             print(f"False Positive Rate: {perf['false_positive_rate']:.4f}")
 
@@ -336,7 +338,7 @@ def demo_full_system():
 
         # Analyze results
         fraud_detected = sum(1 for r in results if r.is_fraud)
-        high_risk = sum(1 for r in results if r.risk_level in ['HIGH', 'CRITICAL'])
+        high_risk = sum(1 for r in results if r.risk_level in ["HIGH", "CRITICAL"])
 
         print(f"\n📊 DETECTION RESULTS:")
         print(f"Total Claims Processed: {len(results)}")
@@ -347,8 +349,10 @@ def demo_full_system():
         print(f"\n🔍 SAMPLE DETECTION RESULTS:")
         for result in results[:5]:
             status = "🚨 FRAUD" if result.is_fraud else "✅ LEGITIMATE"
-            print(f"   {result.claim_id}: {status} - {result.risk_level} risk "
-                  f"(Score: {result.fraud_probability:.3f}, Confidence: {result.confidence_score:.2%})")
+            print(
+                f"   {result.claim_id}: {status} - {result.risk_level} risk "
+                f"(Score: {result.fraud_probability:.3f}, Confidence: {result.confidence_score:.2%})"
+            )
 
         # Generate full report
         report = orchestrator.generate_detection_report(results)
@@ -379,9 +383,9 @@ def main():
         # Demo 4: Complete system
         orchestrator = demo_full_system()
 
-        logger.info("\n" + "="*60)
+        logger.info("\n" + "=" * 60)
         logger.info("✅ ALL DEMOS COMPLETED SUCCESSFULLY!")
-        logger.info("="*60)
+        logger.info("=" * 60)
 
         print(f"\n📈 SUMMARY:")
         print(f"✅ Rule-based detection: Implemented with configurable thresholds")
@@ -391,15 +395,19 @@ def main():
         print(f"✅ Complete orchestrator: Real-time and batch processing")
         print(f"✅ Performance optimization: Targeting >94% accuracy, <3.8% FPR")
 
-        if pipeline and hasattr(pipeline, 'training_results') and pipeline.training_results:
+        if pipeline and hasattr(pipeline, "training_results") and pipeline.training_results:
             print(f"\n🎯 PERFORMANCE TARGETS:")
             results = pipeline.training_results
-            accuracy_met = results.overall_performance['accuracy'] >= 0.94
-            fpr_met = results.overall_performance['false_positive_rate'] <= 0.038
-            print(f"   Accuracy >94%: {'✅' if accuracy_met else '❌'} "
-                  f"({results.overall_performance['accuracy']:.1%})")
-            print(f"   FPR <3.8%: {'✅' if fpr_met else '❌'} "
-                  f"({results.overall_performance['false_positive_rate']:.1%})")
+            accuracy_met = results.overall_performance["accuracy"] >= 0.94
+            fpr_met = results.overall_performance["false_positive_rate"] <= 0.038
+            print(
+                f"   Accuracy >94%: {'✅' if accuracy_met else '❌'} "
+                f"({results.overall_performance['accuracy']:.1%})"
+            )
+            print(
+                f"   FPR <3.8%: {'✅' if fpr_met else '❌'} "
+                f"({results.overall_performance['false_positive_rate']:.1%})"
+            )
 
     except Exception as e:
         logger.error(f"Demo failed: {e}")

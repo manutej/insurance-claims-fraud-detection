@@ -43,12 +43,8 @@ class KBDocument(BaseModel):
     embedding: Optional[List[float]] = Field(
         default=None, description="1536-dimensional vector embedding"
     )
-    metadata: Dict[str, Any] = Field(
-        default_factory=dict, description="Document metadata"
-    )
-    created_at: datetime = Field(
-        default_factory=datetime.utcnow, description="Creation timestamp"
-    )
+    metadata: Dict[str, Any] = Field(default_factory=dict, description="Document metadata")
+    created_at: datetime = Field(default_factory=datetime.utcnow, description="Creation timestamp")
     updated_at: datetime = Field(
         default_factory=datetime.utcnow, description="Last update timestamp"
     )
@@ -101,9 +97,7 @@ class BaseKnowledgeBase(ABC):
         self._cache_hits = 0
         self._total_query_time_ms = 0.0
 
-        logger.info(
-            f"Initialized {self.__class__.__name__} with collection '{collection_name}'"
-        )
+        logger.info(f"Initialized {self.__class__.__name__} with collection '{collection_name}'")
 
     def create_collection(
         self,
@@ -139,9 +133,7 @@ class BaseKnowledgeBase(ABC):
         )
         logger.info(f"Created collection '{self.collection_name}'")
 
-    @retry(
-        stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10)
-    )
+    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
     def generate_embedding(self, text: str) -> np.ndarray:
         """
         Generate embedding for text using OpenAI API.
@@ -238,9 +230,7 @@ class BaseKnowledgeBase(ABC):
         batch_size = 100
         for i in range(0, len(points), batch_size):
             batch = points[i : i + batch_size]
-            self.qdrant_client.upsert(
-                collection_name=self.collection_name, points=batch, wait=True
-            )
+            self.qdrant_client.upsert(collection_name=self.collection_name, points=batch, wait=True)
 
         logger.info(f"Upserted {len(documents)} documents to '{self.collection_name}'")
 
@@ -313,9 +303,7 @@ class BaseKnowledgeBase(ABC):
             self._total_query_time_ms / self._query_count if self._query_count > 0 else 0.0
         )
 
-        cache_hit_rate = (
-            self._cache_hits / self._query_count if self._query_count > 0 else 0.0
-        )
+        cache_hit_rate = self._cache_hits / self._query_count if self._query_count > 0 else 0.0
 
         return KBStatistics(
             collection_name=self.collection_name,

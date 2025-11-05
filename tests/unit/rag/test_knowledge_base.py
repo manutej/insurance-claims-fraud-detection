@@ -14,6 +14,7 @@ from decimal import Decimal
 # FIXTURES
 # ============================================================================
 
+
 @pytest.fixture
 def medical_coding_kb():
     """Medical coding knowledge base for testing."""
@@ -30,18 +31,18 @@ def sample_icd10_codes():
         "E11.9": {
             "description": "Type 2 diabetes mellitus without complications",
             "category": "Endocrine",
-            "common_procedures": ["99213", "99214", "82947"]
+            "common_procedures": ["99213", "99214", "82947"],
         },
         "J00": {
             "description": "Acute nasopharyngitis (common cold)",
             "category": "Respiratory",
-            "common_procedures": ["99212", "99213"]
+            "common_procedures": ["99212", "99213"],
         },
         "J18.9": {
             "description": "Pneumonia, unspecified organism",
             "category": "Respiratory",
-            "common_procedures": ["99285", "71046", "87070"]
-        }
+            "common_procedures": ["99285", "71046", "87070"],
+        },
     }
 
 
@@ -53,26 +54,27 @@ def sample_cpt_codes():
             "description": "Office visit, established patient, low complexity",
             "complexity": "low",
             "expected_amount_range": [100, 150],
-            "common_diagnoses": ["E11.9", "I10", "Z00.00"]
+            "common_diagnoses": ["E11.9", "I10", "Z00.00"],
         },
         "99215": {
             "description": "Office visit, established patient, high complexity",
             "complexity": "high",
             "expected_amount_range": [250, 350],
-            "common_diagnoses": ["J18.9", "I50.9", "N18.9"]
+            "common_diagnoses": ["J18.9", "I50.9", "N18.9"],
         },
         "45378": {
             "description": "Colonoscopy, diagnostic",
             "complexity": "high",
             "expected_amount_range": [1500, 2500],
-            "common_diagnoses": ["K59.00", "K62.5"]
-        }
+            "common_diagnoses": ["K59.00", "K62.5"],
+        },
     }
 
 
 # ============================================================================
 # ICD-10 KNOWLEDGE BASE TESTS
 # ============================================================================
+
 
 class TestICD10KnowledgeBase:
     """Test ICD-10 diagnosis code retrieval and validation."""
@@ -126,6 +128,7 @@ class TestICD10KnowledgeBase:
 # ============================================================================
 # CPT KNOWLEDGE BASE TESTS
 # ============================================================================
+
 
 class TestCPTKnowledgeBase:
     """Test CPT procedure code retrieval and validation."""
@@ -186,6 +189,7 @@ class TestCPTKnowledgeBase:
 # DIAGNOSIS-PROCEDURE COMPATIBILITY TESTS
 # ============================================================================
 
+
 class TestDiagnosisProcedureCompatibility:
     """Test diagnosis-procedure compatibility matrix."""
 
@@ -230,6 +234,7 @@ class TestDiagnosisProcedureCompatibility:
 # ============================================================================
 # KNOWLEDGE BASE QUERY PERFORMANCE TESTS
 # ============================================================================
+
 
 class TestKnowledgeBasePerformance:
     """Test KB query performance."""
@@ -285,6 +290,7 @@ class TestKnowledgeBasePerformance:
 # KB UPDATE AND MAINTENANCE TESTS
 # ============================================================================
 
+
 class TestKnowledgeBaseUpdates:
     """Test KB update and maintenance functionality."""
 
@@ -314,6 +320,7 @@ class TestKnowledgeBaseUpdates:
 # ============================================================================
 # EDGE CASES AND ERROR HANDLING
 # ============================================================================
+
 
 class TestKnowledgeBaseEdgeCases:
     """Test KB edge cases and error handling."""

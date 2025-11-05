@@ -15,6 +15,7 @@ from typing import Dict, List
 # FIXTURES
 # ============================================================================
 
+
 @pytest.fixture
 def fraud_detector():
     """Fraud detector with upcoding rules enabled."""
@@ -41,7 +42,7 @@ def upcoding_claim_obvious():
         "procedure_descriptions": ["Office visit, established patient, high complexity"],
         "billed_amount": Decimal("325.00"),
         "service_location": "11",
-        "rendering_hours": Decimal("0.25")
+        "rendering_hours": Decimal("0.25"),
     }
 
 
@@ -59,10 +60,10 @@ def upcoding_claim_moderate():
         "procedure_codes": ["99213", "94060"],
         "procedure_descriptions": [
             "Office visit, moderate complexity",
-            "Bronchodilation responsiveness"
+            "Bronchodilation responsiveness",
         ],
         "billed_amount": Decimal("285.00"),
-        "service_location": "11"
+        "service_location": "11",
     }
 
 
@@ -78,19 +79,17 @@ def legitimate_complex_claim():
         "diagnosis_codes": ["J18.9"],
         "diagnosis_descriptions": ["Pneumonia, unspecified organism"],
         "procedure_codes": ["99285", "71046"],
-        "procedure_descriptions": [
-            "Emergency dept visit, high severity",
-            "Chest X-ray, 2 views"
-        ],
+        "procedure_descriptions": ["Emergency dept visit, high severity", "Chest X-ray, 2 views"],
         "billed_amount": Decimal("1250.00"),
         "service_location": "23",
-        "rendering_hours": Decimal("1.5")
+        "rendering_hours": Decimal("1.5"),
     }
 
 
 # ============================================================================
 # OBVIOUS UPCODING TESTS
 # ============================================================================
+
 
 class TestObviousUpcoding:
     """Test detection of obvious upcoding patterns."""
@@ -173,12 +172,11 @@ class TestObviousUpcoding:
 # MODERATE UPCODING TESTS
 # ============================================================================
 
+
 class TestModerateUpcoding:
     """Test detection of moderate upcoding patterns."""
 
-    def test_detect_unnecessary_diagnostic_test(
-        self, fraud_detector, upcoding_claim_moderate
-    ):
+    def test_detect_unnecessary_diagnostic_test(self, fraud_detector, upcoding_claim_moderate):
         """Should flag pulmonary function test for simple cough."""
         # TODO: Implement test
         # result = fraud_detector.detect(upcoding_claim_moderate)
@@ -209,6 +207,7 @@ class TestModerateUpcoding:
 # ============================================================================
 # SUBTLE UPCODING TESTS
 # ============================================================================
+
 
 class TestSubtleUpcoding:
     """Test detection of subtle upcoding patterns."""
@@ -255,12 +254,11 @@ class TestSubtleUpcoding:
 # NEGATIVE CASES (LEGITIMATE CLAIMS)
 # ============================================================================
 
+
 class TestLegitimateComplexClaims:
     """Test that legitimate high-complexity claims are not flagged."""
 
-    def test_legitimate_emergency_high_complexity(
-        self, fraud_detector, legitimate_complex_claim
-    ):
+    def test_legitimate_emergency_high_complexity(self, fraud_detector, legitimate_complex_claim):
         """Should not flag legitimate emergency high complexity visit."""
         # TODO: Implement test
         # result = fraud_detector.detect(legitimate_complex_claim)
@@ -305,6 +303,7 @@ class TestLegitimateComplexClaims:
 # RULE-SPECIFIC TESTS
 # ============================================================================
 
+
 class TestUpcodingRules:
     """Test individual upcoding detection rules."""
 
@@ -347,6 +346,7 @@ class TestUpcodingRules:
 # INTEGRATION TESTS
 # ============================================================================
 
+
 class TestUpcodingIntegration:
     """Test upcoding detection with full pipeline."""
 
@@ -384,6 +384,7 @@ class TestUpcodingIntegration:
 # PERFORMANCE TESTS
 # ============================================================================
 
+
 class TestUpcodingDetectionPerformance:
     """Test upcoding detection performance."""
 
@@ -416,6 +417,7 @@ class TestUpcodingDetectionPerformance:
 # ============================================================================
 # EDGE CASES
 # ============================================================================
+
 
 class TestUpcodingEdgeCases:
     """Test upcoding detection edge cases."""

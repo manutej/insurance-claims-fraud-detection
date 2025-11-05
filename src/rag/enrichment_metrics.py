@@ -57,7 +57,7 @@ class EnrichmentMetricsTracker:
         self,
         request: EnrichmentRequest,
         response: EnrichmentResponse,
-        actual_values: Optional[Dict[str, Any]] = None
+        actual_values: Optional[Dict[str, Any]] = None,
     ) -> None:
         """
         Track an enrichment operation.
@@ -92,7 +92,7 @@ class EnrichmentMetricsTracker:
         logger.debug(
             "enrichment_tracked",
             confidence=response.overall_confidence,
-            latency_ms=response.processing_time_ms
+            latency_ms=response.processing_time_ms,
         )
 
     def compute_accuracy_per_field(self) -> Dict[str, float]:
@@ -141,8 +141,7 @@ class EnrichmentMetricsTracker:
             response = record["response"]
             # Count fields with decisions above ACCEPTABLE quality
             enriched = sum(
-                1 for d in response.enrichment_decisions.values()
-                if d.confidence_score >= 0.70
+                1 for d in response.enrichment_decisions.values() if d.confidence_score >= 0.70
             )
             total_fields_enriched += enriched
             total_fields_requested += len(response.enrichment_decisions)
@@ -182,13 +181,11 @@ class EnrichmentMetricsTracker:
 
         avg_confidence = (
             sum(self.confidence_scores) / len(self.confidence_scores)
-            if self.confidence_scores else 0.0
+            if self.confidence_scores
+            else 0.0
         )
 
-        avg_latency = (
-            sum(self.latencies_ms) / len(self.latencies_ms)
-            if self.latencies_ms else 0.0
-        )
+        avg_latency = sum(self.latencies_ms) / len(self.latencies_ms) if self.latencies_ms else 0.0
 
         percentiles = self.compute_latency_percentiles()
 
@@ -210,7 +207,7 @@ class EnrichmentMetricsTracker:
             "metrics_computed",
             total_enrichments=metrics.total_enrichments,
             average_confidence=metrics.average_confidence,
-            p95_latency_ms=metrics.p95_latency_ms
+            p95_latency_ms=metrics.p95_latency_ms,
         )
 
         return metrics

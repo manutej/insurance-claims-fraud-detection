@@ -19,24 +19,20 @@ logger = logging.getLogger(__name__)
 
 def example_batch_loading():
     """Example of batch loading claims."""
-    print("\n" + "="*50)
+    print("\n" + "=" * 50)
     print("EXAMPLE 1: Batch Loading")
-    print("="*50)
+    print("=" * 50)
 
     # Configure data loader
     data_dir = Path("data")
-    config = DataLoaderConfig(
-        batch_size=500,
-        validate_on_load=True,
-        max_workers=2
-    )
+    config = DataLoaderConfig(batch_size=500, validate_on_load=True, max_workers=2)
 
     # Initialize loader
     loader = ClaimDataLoader(data_dir, config)
 
     try:
         # Load all medical claims
-        batch = loader.load_claims_batch(claim_types=['medical'])
+        batch = loader.load_claims_batch(claim_types=["medical"])
 
         print(f"Loaded {batch.total_count} medical claims")
         print(f"Batch ID: {batch.batch_id}")
@@ -54,9 +50,9 @@ def example_batch_loading():
 
 def example_streaming():
     """Example of streaming claims."""
-    print("\n" + "="*50)
+    print("\n" + "=" * 50)
     print("EXAMPLE 2: Streaming Claims")
-    print("="*50)
+    print("=" * 50)
 
     data_dir = Path("data")
     config = DataLoaderConfig(chunk_size=100)
@@ -84,9 +80,9 @@ def example_streaming():
 
 def example_validation():
     """Example of validation."""
-    print("\n" + "="*50)
+    print("\n" + "=" * 50)
     print("EXAMPLE 3: Claim Validation")
-    print("="*50)
+    print("=" * 50)
 
     # Create a validator
     validator = ClaimValidator()
@@ -105,7 +101,7 @@ def example_validation():
         "billed_amount": 125.00,
         "service_location": "11",
         "claim_type": "professional",
-        "fraud_indicator": False
+        "fraud_indicator": False,
     }
 
     # Example claim data (invalid)
@@ -115,7 +111,7 @@ def example_validation():
         "provider_npi": "123",  # Invalid NPI
         "date_of_service": "2025-12-31",  # Future date
         "billed_amount": -100,  # Negative amount
-        "claim_type": "professional"
+        "claim_type": "professional",
         # Missing required fields
     }
 
@@ -137,15 +133,15 @@ def example_validation():
 
 def example_preprocessing():
     """Example of preprocessing."""
-    print("\n" + "="*50)
+    print("\n" + "=" * 50)
     print("EXAMPLE 4: Data Preprocessing")
-    print("="*50)
+    print("=" * 50)
 
     try:
         # Load some claims first
         data_dir = Path("data")
         loader = ClaimDataLoader(data_dir)
-        claims = loader.load_specific_claim_type('medical')[:10]  # First 10 claims
+        claims = loader.load_specific_claim_type("medical")[:10]  # First 10 claims
 
         if not claims:
             print("No medical claims found for preprocessing example")
@@ -168,11 +164,9 @@ def example_preprocessing():
         feature_info = preprocessor.get_feature_importance_data(df)
         print(f"Total features created: {feature_info['feature_count']}")
 
-        if 'correlations' in feature_info:
+        if "correlations" in feature_info:
             top_corr = sorted(
-                feature_info['correlations'].items(),
-                key=lambda x: x[1],
-                reverse=True
+                feature_info["correlations"].items(), key=lambda x: x[1], reverse=True
             )[:5]
             print(f"\nTop correlated features with fraud:")
             for feature, corr in top_corr:
@@ -184,9 +178,9 @@ def example_preprocessing():
 
 def example_file_info():
     """Example of getting file information."""
-    print("\n" + "="*50)
+    print("\n" + "=" * 50)
     print("EXAMPLE 5: Data File Information")
-    print("="*50)
+    print("=" * 50)
 
     try:
         data_dir = Path("data")
@@ -199,12 +193,12 @@ def example_file_info():
         print(f"Total size: {summary['total_size_mb']:.1f} MB")
         print(f"\nFiles by type:")
 
-        for file_type, count in summary['files_by_type'].items():
+        for file_type, count in summary["files_by_type"].items():
             print(f"  {file_type}: {count} files")
 
         # Show file details
         print(f"\nFile details:")
-        for detail in summary['file_details'][:5]:  # First 5 files
+        for detail in summary["file_details"][:5]:  # First 5 files
             print(f"  {detail['name']} ({detail['type']}) - {detail['size_mb']:.1f} MB")
 
     except Exception as e:
@@ -213,9 +207,9 @@ def example_file_info():
 
 def example_claim_factory():
     """Example of using claim factory."""
-    print("\n" + "="*50)
+    print("\n" + "=" * 50)
     print("EXAMPLE 6: Claim Factory")
-    print("="*50)
+    print("=" * 50)
 
     # Medical claim data
     medical_data = {
@@ -231,7 +225,7 @@ def example_claim_factory():
         "billed_amount": 125.00,
         "service_location": "11",
         "claim_type": "professional",
-        "fraud_indicator": False
+        "fraud_indicator": False,
     }
 
     # Pharmacy claim data
@@ -251,7 +245,7 @@ def example_claim_factory():
         "fill_date": "2024-03-16",
         "billed_amount": 25.00,
         "claim_type": "pharmacy",
-        "fraud_indicator": False
+        "fraud_indicator": False,
     }
 
     try:
@@ -275,7 +269,7 @@ def example_claim_factory():
 
 if __name__ == "__main__":
     print("Insurance Claims Data Ingestion Pipeline - Examples")
-    print("="*60)
+    print("=" * 60)
 
     # Run examples
     example_file_info()
@@ -285,6 +279,6 @@ if __name__ == "__main__":
     example_streaming()
     example_preprocessing()
 
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("Examples completed! Check the output above.")
-    print("="*60)
+    print("=" * 60)

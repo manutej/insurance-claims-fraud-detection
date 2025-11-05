@@ -68,9 +68,7 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def build_patient_kb(
-    qdrant_client: QdrantClient, openai_api_key: str, data_dir: Path
-) -> Dict:
+def build_patient_kb(qdrant_client: QdrantClient, openai_api_key: str, data_dir: Path) -> Dict:
     """
     Build Patient Claim History KB.
 
@@ -112,9 +110,7 @@ def build_patient_kb(
     }
 
 
-def build_provider_kb(
-    qdrant_client: QdrantClient, openai_api_key: str, data_dir: Path
-) -> Dict:
+def build_provider_kb(qdrant_client: QdrantClient, openai_api_key: str, data_dir: Path) -> Dict:
     """Build Provider Behavior Pattern KB (placeholder)."""
     console.print("\n[bold cyan]Building Provider Behavior Pattern KB...[/bold cyan]")
     console.print("  ⚠️  Implementation pending (Week 1, Day 3-4)")
@@ -148,9 +144,7 @@ def build_medical_coding_kb(
     }
 
 
-def build_regulatory_kb(
-    qdrant_client: QdrantClient, openai_api_key: str, data_dir: Path
-) -> Dict:
+def build_regulatory_kb(qdrant_client: QdrantClient, openai_api_key: str, data_dir: Path) -> Dict:
     """Build Regulatory Guidance & Fraud Patterns KB (placeholder)."""
     console.print("\n[bold cyan]Building Regulatory Guidance & Fraud Patterns KB...[/bold cyan]")
     console.print("  ⚠️  Implementation pending (Week 2, Day 3-4)")
@@ -168,7 +162,9 @@ def build_regulatory_kb(
 
 def display_statistics_table(kb_stats: list) -> None:
     """Display KB statistics in a rich table."""
-    table = Table(title="Knowledge Base Build Statistics", show_header=True, header_style="bold magenta")
+    table = Table(
+        title="Knowledge Base Build Statistics", show_header=True, header_style="bold magenta"
+    )
 
     table.add_column("KB Name", style="cyan", no_wrap=True)
     table.add_column("Collection", style="green")

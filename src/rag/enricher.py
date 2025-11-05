@@ -63,7 +63,7 @@ class EnrichmentEngine:
         self,
         cache_enabled: bool = True,
         redis_url: str = "redis://localhost:6379",
-        max_parallel_requests: int = 10
+        max_parallel_requests: int = 10,
     ):
         """
         Initialize enrichment engine.
@@ -132,7 +132,7 @@ class EnrichmentEngine:
             overall_confidence=0.0,
             enrichment_quality_score="POOR",
             explanation="Enrichment engine not fully implemented yet",
-            processing_time_ms=0.0
+            processing_time_ms=0.0,
         )
 
         processing_time_ms = (time.perf_counter() - start_time) * 1000
@@ -145,14 +145,12 @@ class EnrichmentEngine:
         logger.info(
             "enrichment_completed",
             processing_time_ms=processing_time_ms,
-            overall_confidence=response.overall_confidence
+            overall_confidence=response.overall_confidence,
         )
 
         return response
 
-    async def enrich_batch(
-        self, request: BatchEnrichmentRequest
-    ) -> BatchEnrichmentResponse:
+    async def enrich_batch(self, request: BatchEnrichmentRequest) -> BatchEnrichmentResponse:
         """
         Enrich batch of claims.
 
@@ -173,8 +171,7 @@ class EnrichmentEngine:
                     return await self.enrich_claim(req)
 
             responses = await asyncio.gather(
-                *[enrich_with_semaphore(req) for req in request.requests],
-                return_exceptions=True
+                *[enrich_with_semaphore(req) for req in request.requests], return_exceptions=True
             )
         else:
             # Sequential enrichment
@@ -200,7 +197,7 @@ class EnrichmentEngine:
             successful_count=len(successful_responses),
             failed_count=failed_count,
             total_processing_time_ms=total_time_ms,
-            average_processing_time_ms=avg_time_ms
+            average_processing_time_ms=avg_time_ms,
         )
 
         logger.info(
@@ -208,7 +205,7 @@ class EnrichmentEngine:
             total_requests=batch_response.total_requests,
             successful=batch_response.successful_count,
             failed=batch_response.failed_count,
-            total_time_ms=total_time_ms
+            total_time_ms=total_time_ms,
         )
 
         return batch_response

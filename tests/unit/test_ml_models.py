@@ -1,6 +1,7 @@
 """
 Unit tests for the ML models module.
 """
+
 import pytest
 import numpy as np
 import pandas as pd
@@ -12,9 +13,7 @@ import tempfile
 import os
 import json
 
-from src.detection.ml_models import (
-    MLModelManager, ModelConfig, ModelPerformance, PredictionResult
-)
+from src.detection.ml_models import MLModelManager, ModelConfig, ModelPerformance, PredictionResult
 from tests.fixtures.claim_factories import generate_accuracy_test_data
 from tests.fixtures.mock_objects import MockMLModel
 from tests.test_config import BENCHMARKS
@@ -31,7 +30,7 @@ class TestModelConfig:
             hyperparameters={"n_estimators": 100},
             use_class_weights=True,
             use_probability=True,
-            scaling_required=False
+            scaling_required=False,
         )
 
         assert config.name == "test_model"
@@ -43,11 +42,7 @@ class TestModelConfig:
 
     def test_model_config_defaults(self):
         """Test ModelConfig with default values."""
-        config = ModelConfig(
-            name="test_model",
-            algorithm="RandomForest",
-            hyperparameters={}
-        )
+        config = ModelConfig(name="test_model", algorithm="RandomForest", hyperparameters={})
 
         assert config.use_class_weights is True
         assert config.use_probability is True
@@ -70,7 +65,7 @@ class TestModelPerformance:
             average_precision=0.94,
             false_positive_rate=0.025,
             confusion_matrix=cm,
-            classification_report="Test report"
+            classification_report="Test report",
         )
 
         assert performance.accuracy == 0.925
@@ -93,7 +88,7 @@ class TestPredictionResult:
             prediction=1,
             probability=0.85,
             confidence=0.85,
-            explanation="FRAUD DETECTED (HIGH confidence: 0.85)"
+            explanation="FRAUD DETECTED (HIGH confidence: 0.85)",
         )
 
         assert result.prediction == 1
@@ -116,20 +111,22 @@ class TestMLModelManager:
         np.random.seed(42)
         n_samples = 1000
 
-        X = pd.DataFrame({
-            'billed_amount': np.random.uniform(100, 5000, n_samples),
-            'claim_frequency': np.random.uniform(0, 1, n_samples),
-            'provider_risk_score': np.random.uniform(0, 1, n_samples),
-            'amount_zscore': np.random.normal(0, 1, n_samples),
-            'diagnosis_rarity': np.random.uniform(0, 1, n_samples)
-        })
+        X = pd.DataFrame(
+            {
+                "billed_amount": np.random.uniform(100, 5000, n_samples),
+                "claim_frequency": np.random.uniform(0, 1, n_samples),
+                "provider_risk_score": np.random.uniform(0, 1, n_samples),
+                "amount_zscore": np.random.normal(0, 1, n_samples),
+                "diagnosis_rarity": np.random.uniform(0, 1, n_samples),
+            }
+        )
 
         # Create target with some correlation to features
         fraud_probability = (
-            0.3 * (X['billed_amount'] > 3000).astype(int) +
-            0.3 * (X['amount_zscore'] > 2).astype(int) +
-            0.2 * X['provider_risk_score'] +
-            0.2 * np.random.random(n_samples)
+            0.3 * (X["billed_amount"] > 3000).astype(int)
+            + 0.3 * (X["amount_zscore"] > 2).astype(int)
+            + 0.2 * X["provider_risk_score"]
+            + 0.2 * np.random.random(n_samples)
         )
         y = pd.Series((fraud_probability > 0.5).astype(int))
 
@@ -144,12 +141,12 @@ class TestMLModelManager:
         assert len(model_manager.model_configs) > 0
 
         # Check target metrics
-        assert model_manager.target_metrics['accuracy'] == 0.94
-        assert model_manager.target_metrics['false_positive_rate'] == 0.038
+        assert model_manager.target_metrics["accuracy"] == 0.94
+        assert model_manager.target_metrics["false_positive_rate"] == 0.038
 
     def test_model_configs_initialization(self, model_manager):
         """Test that model configurations are properly initialized."""
-        expected_models = ['random_forest', 'logistic_regression', 'svm', 'mlp']
+        expected_models = ["random_forest", "logistic_regression", "svm", "mlp"]
 
         for model_name in expected_models:
             assert model_name in model_manager.model_configs
@@ -187,23 +184,23 @@ class TestMLModelManager:
     def test_create_random_forest_model(self, model_manager, sample_data):
         """Test creating a Random Forest model."""
         _, y = sample_data
-        config = model_manager.model_configs['random_forest']
+        config = model_manager.model_configs["random_forest"]
 
         model = model_manager._create_model(config, y)
 
         assert isinstance(model, RandomForestClassifier)
-        assert model.n_estimators == config.hyperparameters['n_estimators']
+        assert model.n_estimators == config.hyperparameters["n_estimators"]
         assert model.random_state == 42
 
     def test_create_logistic_regression_model(self, model_manager, sample_data):
         """Test creating a Logistic Regression model."""
         _, y = sample_data
-        config = model_manager.model_configs['logistic_regression']
+        config = model_manager.model_configs["logistic_regression"]
 
         model = model_manager._create_model(config, y)
 
         assert isinstance(model, LogisticRegression)
-        assert model.C == config.hyperparameters['C']
+        assert model.C == config.hyperparameters["C"]
         assert model.random_state == 42
 
     def test_model_with_class_weights(self, model_manager, sample_data):
@@ -213,7 +210,7 @@ class TestMLModelManager:
         # Create imbalanced dataset
         y_imbalanced = pd.Series([0] * 900 + [1] * 100)
 
-        config = model_manager.model_configs['random_forest']
+        config = model_manager.model_configs["random_forest"]
         model = model_manager._create_model(config, y_imbalanced)
 
         assert model.class_weight is not None
@@ -227,21 +224,19 @@ class TestMLModelManager:
         y_small = y.head(50)
 
         # Train logistic regression (requires scaling)
-        config = model_manager.model_configs['logistic_regression']
+        config = model_manager.model_configs["logistic_regression"]
         model = model_manager._create_model(config, y_small)
 
         from sklearn.preprocessing import StandardScaler
+
         scaler = StandardScaler()
-        pipeline = Pipeline([
-            ('scaler', scaler),
-            ('model', model)
-        ])
+        pipeline = Pipeline([("scaler", scaler), ("model", model)])
 
         pipeline.fit(X_small, y_small)
 
         assert isinstance(pipeline, Pipeline)
-        assert 'scaler' in pipeline.named_steps
-        assert 'model' in pipeline.named_steps
+        assert "scaler" in pipeline.named_steps
+        assert "model" in pipeline.named_steps
 
     @pytest.mark.unit
     def test_model_evaluation(self, model_manager, sample_data):
@@ -252,10 +247,11 @@ class TestMLModelManager:
 
         # Train a simple model
         from sklearn.ensemble import RandomForestClassifier
+
         model = RandomForestClassifier(n_estimators=10, random_state=42)
         model.fit(X_small, y_small)
 
-        performance = model_manager._evaluate_model(model, X_small, y_small, 'test_model')
+        performance = model_manager._evaluate_model(model, X_small, y_small, "test_model")
 
         assert isinstance(performance, ModelPerformance)
         assert 0.0 <= performance.accuracy <= 1.0
@@ -297,11 +293,11 @@ class TestMLModelManager:
         # Manually train some models
         rf_model = RandomForestClassifier(n_estimators=10, random_state=42)
         rf_model.fit(X_small, y_small)
-        model_manager.trained_models['random_forest'] = rf_model
+        model_manager.trained_models["random_forest"] = rf_model
 
         lr_model = LogisticRegression(random_state=42)
         lr_model.fit(X_small, y_small)
-        model_manager.trained_models['logistic_regression'] = lr_model
+        model_manager.trained_models["logistic_regression"] = lr_model
 
         # Train ensemble
         model_manager._train_ensemble_model(X_small, y_small, X_small, y_small)
@@ -310,7 +306,7 @@ class TestMLModelManager:
 
         # Test ensemble prediction
         X_test = X_small.head(5)
-        results = model_manager.predict(X_test, 'ensemble')
+        results = model_manager.predict(X_test, "ensemble")
 
         assert len(results) == len(X_test)
 
@@ -323,10 +319,10 @@ class TestMLModelManager:
         # Train a tree-based model
         rf_model = RandomForestClassifier(n_estimators=10, random_state=42)
         rf_model.fit(X_small, y_small)
-        model_manager.trained_models['random_forest'] = rf_model
+        model_manager.trained_models["random_forest"] = rf_model
         model_manager.feature_names = list(X.columns)
 
-        importance_dict = model_manager.get_feature_importance('random_forest')
+        importance_dict = model_manager.get_feature_importance("random_forest")
 
         assert isinstance(importance_dict, dict)
         assert len(importance_dict) == len(X.columns)
@@ -344,14 +340,14 @@ class TestMLModelManager:
 
         # Test tuning for random forest
         best_params = model_manager.tune_hyperparameters(
-            X_small, y_small, 'random_forest', cv_folds=3
+            X_small, y_small, "random_forest", cv_folds=3
         )
 
         assert isinstance(best_params, dict)
         assert len(best_params) > 0
 
         # Check that config was updated
-        updated_config = model_manager.model_configs['random_forest']
+        updated_config = model_manager.model_configs["random_forest"]
         for param, value in best_params.items():
             assert updated_config.hyperparameters[param] == value
 
@@ -367,23 +363,23 @@ class TestMLModelManager:
         assert len(cv_results) > 0
 
         for model_name, scores in cv_results.items():
-            assert 'accuracy' in scores
-            assert 'precision' in scores
-            assert 'recall' in scores
-            assert 'f1' in scores
-            assert 'roc_auc' in scores
+            assert "accuracy" in scores
+            assert "precision" in scores
+            assert "recall" in scores
+            assert "f1" in scores
+            assert "roc_auc" in scores
 
             for metric, score_data in scores.items():
-                assert 'mean' in score_data
-                assert 'std' in score_data
-                assert 'scores' in score_data
-                assert 0.0 <= score_data['mean'] <= 1.0
+                assert "mean" in score_data
+                assert "std" in score_data
+                assert "scores" in score_data
+                assert 0.0 <= score_data["mean"] <= 1.0
 
     def test_target_metrics_checking(self, model_manager):
         """Test checking if models meet target metrics."""
         # Create mock performance results
         performance_results = {
-            'good_model': ModelPerformance(
+            "good_model": ModelPerformance(
                 accuracy=0.95,
                 precision=0.94,
                 recall=0.92,
@@ -392,9 +388,9 @@ class TestMLModelManager:
                 average_precision=0.94,
                 false_positive_rate=0.03,
                 confusion_matrix=np.array([[90, 3], [5, 92]]),
-                classification_report="Good model report"
+                classification_report="Good model report",
             ),
-            'bad_model': ModelPerformance(
+            "bad_model": ModelPerformance(
                 accuracy=0.85,
                 precision=0.80,
                 recall=0.75,
@@ -403,24 +399,24 @@ class TestMLModelManager:
                 average_precision=0.78,
                 false_positive_rate=0.08,
                 confusion_matrix=np.array([[85, 8], [15, 82]]),
-                classification_report="Bad model report"
-            )
+                classification_report="Bad model report",
+            ),
         }
 
         results = model_manager.check_target_metrics(performance_results)
 
-        assert results['good_model']['meets_all_targets'] is True
-        assert results['good_model']['meets_accuracy'] is True
-        assert results['good_model']['meets_fpr'] is True
+        assert results["good_model"]["meets_all_targets"] is True
+        assert results["good_model"]["meets_accuracy"] is True
+        assert results["good_model"]["meets_fpr"] is True
 
-        assert results['bad_model']['meets_all_targets'] is False
-        assert results['bad_model']['meets_accuracy'] is False  # 0.85 < 0.94
-        assert results['bad_model']['meets_fpr'] is False       # 0.08 > 0.038
+        assert results["bad_model"]["meets_all_targets"] is False
+        assert results["bad_model"]["meets_accuracy"] is False  # 0.85 < 0.94
+        assert results["bad_model"]["meets_fpr"] is False  # 0.08 > 0.038
 
     def test_model_report_generation(self, model_manager):
         """Test model performance report generation."""
         performance_results = {
-            'test_model': ModelPerformance(
+            "test_model": ModelPerformance(
                 accuracy=0.95,
                 precision=0.94,
                 recall=0.92,
@@ -429,7 +425,7 @@ class TestMLModelManager:
                 average_precision=0.94,
                 false_positive_rate=0.03,
                 confusion_matrix=np.array([[90, 3], [5, 92]]),
-                classification_report="Test report"
+                classification_report="Test report",
             )
         }
 
@@ -469,15 +465,13 @@ class TestMLModelManager:
 
     def test_prediction_explanation_generation(self, model_manager):
         """Test prediction explanation generation."""
-        features = pd.Series({
-            'billed_amount': 5000.0,
-            'claim_frequency': 0.8,
-            'provider_risk_score': 0.9
-        })
+        features = pd.Series(
+            {"billed_amount": 5000.0, "claim_frequency": 0.8, "provider_risk_score": 0.9}
+        )
 
         # Test fraud prediction
         explanation = model_manager._generate_prediction_explanation(
-            features, prediction=1, probability=0.85, model_name='test_model'
+            features, prediction=1, probability=0.85, model_name="test_model"
         )
 
         assert "FRAUD DETECTED" in explanation
@@ -487,7 +481,7 @@ class TestMLModelManager:
 
         # Test legitimate prediction
         explanation = model_manager._generate_prediction_explanation(
-            features, prediction=0, probability=0.15, model_name='test_model'
+            features, prediction=0, probability=0.15, model_name="test_model"
         )
 
         assert "LEGITIMATE" in explanation
@@ -500,7 +494,7 @@ class TestMLModelManager:
         X_test = X.head(5)
 
         with pytest.raises(ValueError):
-            model_manager.predict(X_test, 'nonexistent_model')
+            model_manager.predict(X_test, "nonexistent_model")
 
     def test_error_handling_malformed_data(self, model_manager):
         """Test error handling for malformed data."""
@@ -567,7 +561,7 @@ class TestMLModelManager:
         test_data = generate_accuracy_test_data()
 
         # Combine valid and fraud claims
-        all_claims = test_data['valid'] + test_data['fraud']
+        all_claims = test_data["valid"] + test_data["fraud"]
 
         # Convert to DataFrame format expected by model
         features_list = []
@@ -575,14 +569,14 @@ class TestMLModelManager:
 
         for claim in all_claims:
             features = {
-                'billed_amount': claim.get('billed_amount', 100.0),
-                'provider_risk_score': 1.0 if claim.get('fraud_indicator', False) else 0.1,
-                'claim_frequency': 0.8 if claim.get('fraud_indicator', False) else 0.2,
-                'amount_zscore': 2.0 if claim.get('billed_amount', 100) > 1000 else 0.0,
-                'diagnosis_rarity': 0.1
+                "billed_amount": claim.get("billed_amount", 100.0),
+                "provider_risk_score": 1.0 if claim.get("fraud_indicator", False) else 0.1,
+                "claim_frequency": 0.8 if claim.get("fraud_indicator", False) else 0.2,
+                "amount_zscore": 2.0 if claim.get("billed_amount", 100) > 1000 else 0.0,
+                "diagnosis_rarity": 0.1,
             }
             features_list.append(features)
-            labels.append(int(claim.get('fraud_indicator', False)))
+            labels.append(int(claim.get("fraud_indicator", False)))
 
         X = pd.DataFrame(features_list)
         y = pd.Series(labels)
@@ -595,28 +589,23 @@ class TestMLModelManager:
 
         # At least one model should meet basic requirements
         # (Note: synthetic data may not always reach 94% accuracy)
-        meets_requirements = any(
-            result['meets_all_targets'] for result in target_check.values()
-        )
+        meets_requirements = any(result["meets_all_targets"] for result in target_check.values())
 
         # Log results for debugging
         for model_name, metrics in target_check.items():
-            print(f"{model_name}: Accuracy={metrics['actual_accuracy']:.3f}, "
-                  f"FPR={metrics['actual_fpr']:.3f}")
+            print(
+                f"{model_name}: Accuracy={metrics['actual_accuracy']:.3f}, "
+                f"FPR={metrics['actual_fpr']:.3f}"
+            )
 
         # At minimum, should have reasonable accuracy (>80%)
-        best_accuracy = max(
-            perf.accuracy for perf in performance_results.values()
-        )
+        best_accuracy = max(perf.accuracy for perf in performance_results.values())
         assert best_accuracy > 0.8
 
     def test_edge_case_single_class(self, model_manager):
         """Test handling of single-class datasets."""
         # Create dataset with only one class
-        X = pd.DataFrame({
-            'feature1': [1, 2, 3, 4, 5],
-            'feature2': [2, 4, 6, 8, 10]
-        })
+        X = pd.DataFrame({"feature1": [1, 2, 3, 4, 5], "feature2": [2, 4, 6, 8, 10]})
         y = pd.Series([0, 0, 0, 0, 0])  # All same class
 
         # Should handle gracefully without crashing
@@ -627,27 +616,27 @@ class TestMLModelManager:
             # Should be a reasonable exception, not a crash
             assert isinstance(e, (ValueError, RuntimeError))
 
-    @patch('src.detection.ml_models.XGBOOST_AVAILABLE', False)
+    @patch("src.detection.ml_models.XGBOOST_AVAILABLE", False)
     def test_missing_optional_dependencies(self, model_manager):
         """Test behavior when optional dependencies are missing."""
         # Should still have basic models available
-        assert 'random_forest' in model_manager.model_configs
-        assert 'logistic_regression' in model_manager.model_configs
+        assert "random_forest" in model_manager.model_configs
+        assert "logistic_regression" in model_manager.model_configs
 
         # XGBoost should not be available
-        assert 'xgboost' not in model_manager.model_configs
+        assert "xgboost" not in model_manager.model_configs
 
     def test_custom_target_metrics(self):
         """Test initialization with custom target metrics."""
         custom_metrics = {
-            'accuracy': 0.90,
-            'false_positive_rate': 0.05,
-            'detection_rate_min': 0.10,
-            'detection_rate_max': 0.20
+            "accuracy": 0.90,
+            "false_positive_rate": 0.05,
+            "detection_rate_min": 0.10,
+            "detection_rate_max": 0.20,
         }
 
         manager = MLModelManager(target_metrics=custom_metrics)
 
         assert manager.target_metrics == custom_metrics
-        assert manager.target_metrics['accuracy'] == 0.90
-        assert manager.target_metrics['false_positive_rate'] == 0.05
+        assert manager.target_metrics["accuracy"] == 0.90
+        assert manager.target_metrics["false_positive_rate"] == 0.05

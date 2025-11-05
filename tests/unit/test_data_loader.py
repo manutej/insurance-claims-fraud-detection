@@ -1,6 +1,7 @@
 """
 Unit tests for the data loader module.
 """
+
 import pytest
 import json
 import tempfile
@@ -11,8 +12,10 @@ import asyncio
 from datetime import datetime
 
 from src.ingestion.data_loader import (
-    ClaimDataLoader, DataLoaderConfig,
-    load_claims_from_directory, stream_claims_from_directory
+    ClaimDataLoader,
+    DataLoaderConfig,
+    load_claims_from_directory,
+    stream_claims_from_directory,
 )
 from src.models.claim_models import BaseClaim, ClaimBatch
 from tests.fixtures.claim_factories import ValidClaim, UpcodingFraudClaim
@@ -33,7 +36,7 @@ class TestDataLoaderConfig:
         assert config.preprocess_on_load is False
         assert config.chunk_size == 10000
         assert config.max_file_size_mb == 500
-        assert config.supported_extensions == ['.json']
+        assert config.supported_extensions == [".json"]
 
     def test_config_creation_with_custom_values(self):
         """Test creating config with custom values."""
@@ -44,7 +47,7 @@ class TestDataLoaderConfig:
             preprocess_on_load=True,
             chunk_size=5000,
             max_file_size_mb=1000,
-            supported_extensions=['.json', '.csv']
+            supported_extensions=[".json", ".csv"],
         )
 
         assert config.batch_size == 500
@@ -53,7 +56,7 @@ class TestDataLoaderConfig:
         assert config.preprocess_on_load is True
         assert config.chunk_size == 5000
         assert config.max_file_size_mb == 1000
-        assert config.supported_extensions == ['.json', '.csv']
+        assert config.supported_extensions == [".json", ".csv"]
 
 
 class TestClaimDataLoader:
@@ -70,25 +73,25 @@ class TestClaimDataLoader:
         """Create sample claims data for testing."""
         return [
             {
-                'claim_id': 'CLM-001',
-                'patient_id': 'PAT-001',
-                'provider_npi': '1234567890',
-                'service_date': '2024-01-15T00:00:00',
-                'billed_amount': 250.0,
-                'diagnosis_codes': ['M79.3'],
-                'procedure_codes': ['99213'],
-                'fraud_indicator': False
+                "claim_id": "CLM-001",
+                "patient_id": "PAT-001",
+                "provider_npi": "1234567890",
+                "service_date": "2024-01-15T00:00:00",
+                "billed_amount": 250.0,
+                "diagnosis_codes": ["M79.3"],
+                "procedure_codes": ["99213"],
+                "fraud_indicator": False,
             },
             {
-                'claim_id': 'CLM-002',
-                'patient_id': 'PAT-002',
-                'provider_npi': '9876543210',
-                'service_date': '2024-01-16T00:00:00',
-                'billed_amount': 5000.0,
-                'diagnosis_codes': ['S13.4'],
-                'procedure_codes': ['99285'],
-                'fraud_indicator': True
-            }
+                "claim_id": "CLM-002",
+                "patient_id": "PAT-002",
+                "provider_npi": "9876543210",
+                "service_date": "2024-01-16T00:00:00",
+                "billed_amount": 5000.0,
+                "diagnosis_codes": ["S13.4"],
+                "procedure_codes": ["99285"],
+                "fraud_indicator": True,
+            },
         ]
 
     @pytest.fixture
@@ -109,8 +112,8 @@ class TestClaimDataLoader:
         assert isinstance(loader.config, DataLoaderConfig)
         assert loader.validator is not None
         assert loader.preprocessor is not None
-        assert loader.stats['files_processed'] == 0
-        assert loader.stats['claims_loaded'] == 0
+        assert loader.stats["files_processed"] == 0
+        assert loader.stats["claims_loaded"] == 0
 
     def test_loader_initialization_with_custom_config(self, temp_data_dir):
         """Test loader initialization with custom config."""
@@ -129,12 +132,12 @@ class TestClaimDataLoader:
         """Helper method to create sample data files."""
         # Create medical claims file
         medical_file = temp_data_dir / "medical_claims.json"
-        with open(medical_file, 'w') as f:
+        with open(medical_file, "w") as f:
             json.dump(sample_claims_data, f)
 
         # Create fraud claims file
         fraud_file = temp_data_dir / "fraud_claims.json"
-        with open(fraud_file, 'w') as f:
+        with open(fraud_file, "w") as f:
             json.dump([sample_claims_data[1]], f)
 
         return [medical_file, fraud_file]
@@ -155,8 +158,8 @@ class TestClaimDataLoader:
         assert batch.total_count == len(batch.claims)
 
         # Check statistics
-        assert loader.stats['files_processed'] > 0
-        assert loader.stats['claims_loaded'] > 0
+        assert loader.stats["files_processed"] > 0
+        assert loader.stats["claims_loaded"] > 0
 
     def test_load_claims_batch_with_specific_files(self, temp_data_dir, sample_claims_data):
         """Test loading specific files."""
@@ -187,7 +190,7 @@ class TestClaimDataLoader:
     def test_load_single_file_success(self, temp_data_dir, sample_claims_data):
         """Test loading a single file."""
         test_file = temp_data_dir / "test_claims.json"
-        with open(test_file, 'w') as f:
+        with open(test_file, "w") as f:
             json.dump(sample_claims_data, f)
 
         loader = ClaimDataLoader(temp_data_dir)
@@ -199,7 +202,7 @@ class TestClaimDataLoader:
     def test_load_single_file_with_claims_wrapper(self, temp_data_dir, sample_claims_data):
         """Test loading file with claims wrapper structure."""
         test_file = temp_data_dir / "wrapped_claims.json"
-        with open(test_file, 'w') as f:
+        with open(test_file, "w") as f:
             json.dump({"claims": sample_claims_data}, f)
 
         loader = ClaimDataLoader(temp_data_dir)
@@ -210,7 +213,7 @@ class TestClaimDataLoader:
     def test_load_single_file_malformed_json(self, temp_data_dir):
         """Test loading file with malformed JSON."""
         test_file = temp_data_dir / "malformed.json"
-        with open(test_file, 'w') as f:
+        with open(test_file, "w") as f:
             f.write("{ invalid json")
 
         loader = ClaimDataLoader(temp_data_dir)
@@ -227,10 +230,10 @@ class TestClaimDataLoader:
         non_json = temp_data_dir / "readme.txt"
 
         for file in [medical_file, pharmacy_file, fraud_file]:
-            with open(file, 'w') as f:
+            with open(file, "w") as f:
                 json.dump(sample_claims_data, f)
 
-        with open(non_json, 'w') as f:
+        with open(non_json, "w") as f:
             f.write("Not a JSON file")
 
         loader = ClaimDataLoader(temp_data_dir)
@@ -238,7 +241,7 @@ class TestClaimDataLoader:
 
         # Should find JSON files but not text file
         assert len(discovered_files) == 3
-        assert all(file.suffix == '.json' for file in discovered_files)
+        assert all(file.suffix == ".json" for file in discovered_files)
 
     def test_discover_claim_files_with_type_filter(self, temp_data_dir, sample_claims_data):
         """Test file discovery with claim type filter."""
@@ -247,20 +250,20 @@ class TestClaimDataLoader:
         pharmacy_file = temp_data_dir / "pharmacy_data.json"
 
         for file in [medical_file, pharmacy_file]:
-            with open(file, 'w') as f:
+            with open(file, "w") as f:
                 json.dump(sample_claims_data, f)
 
         loader = ClaimDataLoader(temp_data_dir)
 
         # Filter for medical claims only
-        medical_files = loader._discover_claim_files(claim_types=['medical'])
+        medical_files = loader._discover_claim_files(claim_types=["medical"])
         assert len(medical_files) == 1
-        assert 'medical' in medical_files[0].name
+        assert "medical" in medical_files[0].name
 
         # Filter for pharmacy claims only
-        pharmacy_files = loader._discover_claim_files(claim_types=['pharmacy'])
+        pharmacy_files = loader._discover_claim_files(claim_types=["pharmacy"])
         assert len(pharmacy_files) == 1
-        assert 'pharmacy' in pharmacy_files[0].name
+        assert "pharmacy" in pharmacy_files[0].name
 
     def test_stream_claims_success(self, temp_data_dir, sample_claims_data):
         """Test claim streaming functionality."""
@@ -303,20 +306,20 @@ class TestClaimDataLoader:
         medical_file = temp_data_dir / "medical_claims.json"
         pharmacy_file = temp_data_dir / "pharmacy_claims.json"
 
-        with open(medical_file, 'w') as f:
+        with open(medical_file, "w") as f:
             json.dump(sample_claims_data, f)
 
-        with open(pharmacy_file, 'w') as f:
+        with open(pharmacy_file, "w") as f:
             json.dump(sample_claims_data, f)
 
         loader = ClaimDataLoader(temp_data_dir)
 
         # Load medical claims
-        medical_claims = loader.load_specific_claim_type('medical')
+        medical_claims = loader.load_specific_claim_type("medical")
         assert len(medical_claims) > 0
 
         # Load pharmacy claims
-        pharmacy_claims = loader.load_specific_claim_type('pharmacy')
+        pharmacy_claims = loader.load_specific_claim_type("pharmacy")
         assert len(pharmacy_claims) > 0
 
     def test_load_specific_claim_type_invalid(self, temp_data_dir):
@@ -324,7 +327,7 @@ class TestClaimDataLoader:
         loader = ClaimDataLoader(temp_data_dir)
 
         with pytest.raises(ValueError) as excinfo:
-            loader.load_specific_claim_type('invalid_type')
+            loader.load_specific_claim_type("invalid_type")
 
         assert "Unsupported claim type" in str(excinfo.value)
 
@@ -332,7 +335,7 @@ class TestClaimDataLoader:
         """Test loading specific type when no files exist."""
         loader = ClaimDataLoader(temp_data_dir)
 
-        claims = loader.load_specific_claim_type('medical')
+        claims = loader.load_specific_claim_type("medical")
         assert claims == []
 
     def test_get_statistics(self, temp_data_dir, sample_claims_data):
@@ -344,31 +347,31 @@ class TestClaimDataLoader:
 
         stats = loader.get_statistics()
 
-        assert 'files_processed' in stats
-        assert 'claims_loaded' in stats
-        assert 'validation_errors' in stats
-        assert 'processing_time_seconds' in stats
-        assert 'avg_claims_per_file' in stats
-        assert 'claims_per_second' in stats
+        assert "files_processed" in stats
+        assert "claims_loaded" in stats
+        assert "validation_errors" in stats
+        assert "processing_time_seconds" in stats
+        assert "avg_claims_per_file" in stats
+        assert "claims_per_second" in stats
 
-        assert stats['files_processed'] > 0
-        assert stats['claims_loaded'] > 0
-        assert stats['processing_time_seconds'] > 0
+        assert stats["files_processed"] > 0
+        assert stats["claims_loaded"] > 0
+        assert stats["processing_time_seconds"] > 0
 
     def test_reset_statistics(self, temp_data_dir):
         """Test statistics reset."""
         loader = ClaimDataLoader(temp_data_dir)
 
         # Manually set some stats
-        loader.stats['files_processed'] = 5
-        loader.stats['claims_loaded'] = 100
+        loader.stats["files_processed"] = 5
+        loader.stats["claims_loaded"] = 100
 
         loader.reset_statistics()
 
-        assert loader.stats['files_processed'] == 0
-        assert loader.stats['claims_loaded'] == 0
-        assert loader.stats['validation_errors'] == 0
-        assert loader.stats['processing_time'] == 0.0
+        assert loader.stats["files_processed"] == 0
+        assert loader.stats["claims_loaded"] == 0
+        assert loader.stats["validation_errors"] == 0
+        assert loader.stats["processing_time"] == 0.0
 
     def test_get_file_summary(self, temp_data_dir, sample_claims_data):
         """Test file summary generation."""
@@ -378,22 +381,22 @@ class TestClaimDataLoader:
         loader = ClaimDataLoader(temp_data_dir)
         summary = loader.get_file_summary()
 
-        assert 'total_files' in summary
-        assert 'files_by_type' in summary
-        assert 'total_size_mb' in summary
-        assert 'file_details' in summary
+        assert "total_files" in summary
+        assert "files_by_type" in summary
+        assert "total_size_mb" in summary
+        assert "file_details" in summary
 
-        assert summary['total_files'] > 0
-        assert isinstance(summary['files_by_type'], dict)
-        assert summary['total_size_mb'] >= 0
+        assert summary["total_files"] > 0
+        assert isinstance(summary["files_by_type"], dict)
+        assert summary["total_size_mb"] >= 0
 
         # Check file details
-        for file_detail in summary['file_details']:
-            assert 'path' in file_detail
-            assert 'name' in file_detail
-            assert 'type' in file_detail
-            assert 'size_mb' in file_detail
-            assert 'modified' in file_detail
+        for file_detail in summary["file_details"]:
+            assert "path" in file_detail
+            assert "name" in file_detail
+            assert "type" in file_detail
+            assert "size_mb" in file_detail
+            assert "modified" in file_detail
 
     def test_validation_during_load(self, temp_data_dir, sample_claims_data, mock_validator):
         """Test validation during loading."""
@@ -446,7 +449,7 @@ class TestClaimDataLoader:
         # Create a file larger than the limit
         large_file = temp_data_dir / "large_file.json"
         large_data = [ValidClaim() for _ in range(1000)]  # Should be > 0.001MB
-        with open(large_file, 'w') as f:
+        with open(large_file, "w") as f:
             json.dump(large_data, f)
 
         loader = ClaimDataLoader(temp_data_dir, config)
@@ -464,7 +467,7 @@ class TestClaimDataLoader:
         for i in range(5):
             file_path = temp_data_dir / f"claims_{i}.json"
             claims_data = [ValidClaim() for _ in range(100)]  # 100 claims per file
-            with open(file_path, 'w') as f:
+            with open(file_path, "w") as f:
                 json.dump(claims_data, f)
 
         loader = ClaimDataLoader(temp_data_dir)
@@ -481,7 +484,7 @@ class TestClaimDataLoader:
 
         # Check performance metrics
         stats = loader.get_statistics()
-        assert stats['claims_per_second'] > 50  # At least 50 claims/second
+        assert stats["claims_per_second"] > 50  # At least 50 claims/second
 
     def test_concurrent_file_processing(self, temp_data_dir):
         """Test concurrent file processing with ThreadPoolExecutor."""
@@ -489,7 +492,7 @@ class TestClaimDataLoader:
         for i in range(4):
             file_path = temp_data_dir / f"claims_{i}.json"
             claims_data = [ValidClaim() for _ in range(50)]
-            with open(file_path, 'w') as f:
+            with open(file_path, "w") as f:
                 json.dump(claims_data, f)
 
         config = DataLoaderConfig(max_workers=2)
@@ -498,18 +501,18 @@ class TestClaimDataLoader:
         batch = loader.load_claims_batch()
 
         assert len(batch.claims) == 200  # 4 files × 50 claims
-        assert loader.stats['files_processed'] == 4
+        assert loader.stats["files_processed"] == 4
 
     def test_error_handling_corrupted_file(self, temp_data_dir):
         """Test error handling for corrupted files."""
         # Create good file
         good_file = temp_data_dir / "good_claims.json"
-        with open(good_file, 'w') as f:
+        with open(good_file, "w") as f:
             json.dump([ValidClaim()], f)
 
         # Create corrupted file
         bad_file = temp_data_dir / "bad_claims.json"
-        with open(bad_file, 'w') as f:
+        with open(bad_file, "w") as f:
             f.write("{ invalid json content")
 
         loader = ClaimDataLoader(temp_data_dir)
@@ -520,18 +523,18 @@ class TestClaimDataLoader:
         # Should have claims from good file
         assert len(batch.claims) >= 1
         # Should have processed only the good file
-        assert loader.stats['files_processed'] == 1
+        assert loader.stats["files_processed"] == 1
 
     def test_edge_case_empty_files(self, temp_data_dir):
         """Test handling of empty files."""
         # Create empty file
         empty_file = temp_data_dir / "empty.json"
-        with open(empty_file, 'w') as f:
+        with open(empty_file, "w") as f:
             json.dump([], f)
 
         # Create file with claims
         claims_file = temp_data_dir / "claims.json"
-        with open(claims_file, 'w') as f:
+        with open(claims_file, "w") as f:
             json.dump([ValidClaim()], f)
 
         loader = ClaimDataLoader(temp_data_dir)
@@ -539,13 +542,13 @@ class TestClaimDataLoader:
 
         # Should handle empty file gracefully
         assert len(batch.claims) >= 1
-        assert loader.stats['files_processed'] == 2
+        assert loader.stats["files_processed"] == 2
 
     def test_edge_case_unexpected_file_structure(self, temp_data_dir):
         """Test handling of unexpected file structures."""
         # Create file with unexpected structure
         weird_file = temp_data_dir / "weird.json"
-        with open(weird_file, 'w') as f:
+        with open(weird_file, "w") as f:
             json.dump({"unexpected": "structure"}, f)
 
         loader = ClaimDataLoader(temp_data_dir)
@@ -568,7 +571,7 @@ class TestConvenienceFunctions:
         """Test convenience function for loading claims."""
         # Create test file
         test_file = temp_data_dir / "test_claims.json"
-        with open(test_file, 'w') as f:
+        with open(test_file, "w") as f:
             json.dump([ValidClaim()], f)
 
         batch = load_claims_from_directory(temp_data_dir)
@@ -580,7 +583,7 @@ class TestConvenienceFunctions:
         """Test convenience function for streaming claims."""
         # Create test file
         test_file = temp_data_dir / "test_claims.json"
-        with open(test_file, 'w') as f:
+        with open(test_file, "w") as f:
             json.dump([ValidClaim(), ValidClaim()], f)
 
         chunks = list(stream_claims_from_directory(temp_data_dir, chunk_size=1))
@@ -592,7 +595,7 @@ class TestConvenienceFunctions:
         """Test loading with validation disabled."""
         # Create test file
         test_file = temp_data_dir / "test_claims.json"
-        with open(test_file, 'w') as f:
+        with open(test_file, "w") as f:
             json.dump([ValidClaim()], f)
 
         batch = load_claims_from_directory(temp_data_dir, validate=False)
@@ -604,16 +607,16 @@ class TestConvenienceFunctions:
         """Test loading with claim type filter."""
         # Create medical claims file
         medical_file = temp_data_dir / "medical_claims.json"
-        with open(medical_file, 'w') as f:
+        with open(medical_file, "w") as f:
             json.dump([ValidClaim()], f)
 
         # Create fraud claims file
         fraud_file = temp_data_dir / "fraud_claims.json"
-        with open(fraud_file, 'w') as f:
+        with open(fraud_file, "w") as f:
             json.dump([UpcodingFraudClaim()], f)
 
         # Load only medical claims
-        batch = load_claims_from_directory(temp_data_dir, claim_types=['medical'])
+        batch = load_claims_from_directory(temp_data_dir, claim_types=["medical"])
 
         assert isinstance(batch, ClaimBatch)
         assert len(batch.claims) >= 1

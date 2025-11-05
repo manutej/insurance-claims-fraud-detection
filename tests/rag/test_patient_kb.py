@@ -95,9 +95,7 @@ def fraud_patient_data() -> Dict:
         claims.append(
             {
                 "claim_id": f"CLM-F{i:03d}",
-                "date_of_service": (base_date + timedelta(days=i * 4)).strftime(
-                    "%Y-%m-%d"
-                ),
+                "date_of_service": (base_date + timedelta(days=i * 4)).strftime("%Y-%m-%d"),
                 "provider_npi": f"NPI-{i+200}",
                 "diagnosis_codes": ["M79.3"],  # Chronic pain
                 "procedure_codes": ["99213"],
@@ -215,9 +213,7 @@ class TestPatientHistoryBuilder:
     def test_calculate_patient_patterns(self, sample_patient_data):
         """Test calculation of patient behavioral patterns."""
         builder = PatientHistoryBuilder()
-        patterns = builder.calculate_patient_patterns(
-            sample_patient_data["claim_sequence"]
-        )
+        patterns = builder.calculate_patient_patterns(sample_patient_data["claim_sequence"])
 
         assert "provider_count_30d" in patterns
         assert "avg_claim_amount" in patterns
@@ -226,9 +222,7 @@ class TestPatientHistoryBuilder:
     def test_temporal_analysis(self, sample_patient_data):
         """Test temporal pattern analysis."""
         builder = PatientHistoryBuilder()
-        temporal_data = builder.analyze_temporal_patterns(
-            sample_patient_data["claim_sequence"]
-        )
+        temporal_data = builder.analyze_temporal_patterns(sample_patient_data["claim_sequence"])
 
         assert "date_range_start" in temporal_data
         assert "date_range_end" in temporal_data
@@ -299,9 +293,7 @@ class TestPatientClaimHistoryKB:
 
     def test_kb_initialization(self, qdrant_client, openai_api_key):
         """Test KB can be initialized and collection created."""
-        kb = PatientClaimHistoryKB(
-            qdrant_client=qdrant_client, openai_api_key=openai_api_key
-        )
+        kb = PatientClaimHistoryKB(qdrant_client=qdrant_client, openai_api_key=openai_api_key)
 
         # Create collection
         kb.create_collection()
@@ -309,9 +301,7 @@ class TestPatientClaimHistoryKB:
         assert qdrant_client.collection_exists(kb.collection_name)
 
     @pytest.mark.integration
-    def test_kb_build_from_json(
-        self, qdrant_client, openai_api_key, tmp_path, sample_patient_data
-    ):
+    def test_kb_build_from_json(self, qdrant_client, openai_api_key, tmp_path, sample_patient_data):
         """Test building KB from JSON file."""
         # Skip if no API key
         if openai_api_key == "test-api-key":
@@ -322,9 +312,7 @@ class TestPatientClaimHistoryKB:
         with open(json_file, "w") as f:
             json.dump([sample_patient_data], f)
 
-        kb = PatientClaimHistoryKB(
-            qdrant_client=qdrant_client, openai_api_key=openai_api_key
-        )
+        kb = PatientClaimHistoryKB(qdrant_client=qdrant_client, openai_api_key=openai_api_key)
         kb.create_collection()
 
         # Build KB
@@ -335,17 +323,13 @@ class TestPatientClaimHistoryKB:
         assert stats.total_documents == 1
 
     @pytest.mark.integration
-    def test_kb_search_doctor_shopping(
-        self, qdrant_client, openai_api_key, fraud_patient_data
-    ):
+    def test_kb_search_doctor_shopping(self, qdrant_client, openai_api_key, fraud_patient_data):
         """Test searching for doctor shopping patterns."""
         # Skip if no API key
         if openai_api_key == "test-api-key":
             pytest.skip("Requires valid OpenAI API key")
 
-        kb = PatientClaimHistoryKB(
-            qdrant_client=qdrant_client, openai_api_key=openai_api_key
-        )
+        kb = PatientClaimHistoryKB(qdrant_client=qdrant_client, openai_api_key=openai_api_key)
         kb.create_collection()
 
         # Build patient document
@@ -365,9 +349,7 @@ class TestPatientClaimHistoryKB:
 
     def test_kb_statistics(self, qdrant_client, openai_api_key):
         """Test KB statistics generation."""
-        kb = PatientClaimHistoryKB(
-            qdrant_client=qdrant_client, openai_api_key=openai_api_key
-        )
+        kb = PatientClaimHistoryKB(qdrant_client=qdrant_client, openai_api_key=openai_api_key)
         kb.create_collection()
 
         stats = kb.get_statistics()
@@ -378,9 +360,7 @@ class TestPatientClaimHistoryKB:
 
     def test_kb_validate(self, qdrant_client, openai_api_key, sample_patient_data):
         """Test KB validation."""
-        kb = PatientClaimHistoryKB(
-            qdrant_client=qdrant_client, openai_api_key=openai_api_key
-        )
+        kb = PatientClaimHistoryKB(qdrant_client=qdrant_client, openai_api_key=openai_api_key)
         kb.create_collection()
 
         # Build patient document

@@ -1,6 +1,7 @@
 """
 Mock objects and fixtures for testing fraud detection components.
 """
+
 import json
 import tempfile
 from unittest.mock import Mock, MagicMock, patch
@@ -33,9 +34,9 @@ class MockValidator:
 
     def __init__(self, validation_results: Optional[Dict] = None):
         self.validation_results = validation_results or {
-            'is_valid': True,
-            'errors': [],
-            'warnings': []
+            "is_valid": True,
+            "errors": [],
+            "warnings": [],
         }
         self.validate_calls = []
 
@@ -64,14 +65,16 @@ class MockPreprocessor:
     def transform_features(self, claims: List[Dict[str, Any]]) -> pd.DataFrame:
         """Mock transform_features method."""
         # Return a simple DataFrame for testing
-        return pd.DataFrame([
-            {
-                'claim_id': claim.get('claim_id', 'TEST-001'),
-                'billed_amount': claim.get('billed_amount', 100.0),
-                'fraud_indicator': claim.get('fraud_indicator', False)
-            }
-            for claim in claims
-        ])
+        return pd.DataFrame(
+            [
+                {
+                    "claim_id": claim.get("claim_id", "TEST-001"),
+                    "billed_amount": claim.get("billed_amount", 100.0),
+                    "fraud_indicator": claim.get("fraud_indicator", False),
+                }
+                for claim in claims
+            ]
+        )
 
 
 class MockMLModel:
@@ -84,7 +87,7 @@ class MockMLModel:
         self.predict_calls = []
         self.is_fitted = False
 
-    def fit(self, X: Any, y: Any) -> 'MockMLModel':
+    def fit(self, X: Any, y: Any) -> "MockMLModel":
         """Mock fit method."""
         self.fit_calls.append((X, y))
         self.is_fitted = True
@@ -94,7 +97,7 @@ class MockMLModel:
         """Mock predict method."""
         self.predict_calls.append(X)
         # Return predictions based on input size
-        if hasattr(X, '__len__'):
+        if hasattr(X, "__len__"):
             size = len(X)
         else:
             size = 1
@@ -102,13 +105,13 @@ class MockMLModel:
 
     def predict_proba(self, X: Any) -> np.ndarray:
         """Mock predict_proba method."""
-        if hasattr(X, '__len__'):
+        if hasattr(X, "__len__"):
             size = len(X)
         else:
             size = 1
         probs = self.probabilities[:size]
         # Return 2D array with probabilities for both classes
-        return np.array([[1-p, p] for p in probs])
+        return np.array([[1 - p, p] for p in probs])
 
     def score(self, X: Any, y: Any) -> float:
         """Mock score method."""
@@ -120,9 +123,9 @@ class MockRuleEngine:
 
     def __init__(self, rule_results: Optional[Dict] = None):
         self.rule_results = rule_results or {
-            'triggered_rules': [],
-            'risk_score': 0.0,
-            'fraud_probability': 0.0
+            "triggered_rules": [],
+            "risk_score": 0.0,
+            "fraud_probability": 0.0,
         }
         self.evaluate_calls = []
 
@@ -133,7 +136,7 @@ class MockRuleEngine:
 
     def get_triggered_rules(self, claim: Dict[str, Any]) -> List[str]:
         """Mock get_triggered_rules method."""
-        return self.rule_results.get('triggered_rules', [])
+        return self.rule_results.get("triggered_rules", [])
 
 
 class MockAnomalyDetector:
@@ -144,7 +147,7 @@ class MockAnomalyDetector:
         self.fit_calls = []
         self.detect_calls = []
 
-    def fit(self, X: Any) -> 'MockAnomalyDetector':
+    def fit(self, X: Any) -> "MockAnomalyDetector":
         """Mock fit method."""
         self.fit_calls.append(X)
         return self
@@ -152,7 +155,7 @@ class MockAnomalyDetector:
     def detect_anomalies(self, X: Any) -> np.ndarray:
         """Mock detect_anomalies method."""
         self.detect_calls.append(X)
-        if hasattr(X, '__len__'):
+        if hasattr(X, "__len__"):
             size = len(X)
         else:
             size = 1
@@ -178,17 +181,19 @@ class MockFeatureEngineer:
             return self.engineered_features
 
         # Default mock features
-        return pd.DataFrame([
-            {
-                'claim_id': claim.get('claim_id', f'TEST-{i:03d}'),
-                'amount_zscore': np.random.normal(0, 1),
-                'provider_claim_count': np.random.randint(1, 100),
-                'patient_claim_frequency': np.random.uniform(0, 1),
-                'diagnosis_rarity_score': np.random.uniform(0, 1),
-                'time_to_claim_days': np.random.randint(1, 30)
-            }
-            for i, claim in enumerate(claims)
-        ])
+        return pd.DataFrame(
+            [
+                {
+                    "claim_id": claim.get("claim_id", f"TEST-{i:03d}"),
+                    "amount_zscore": np.random.normal(0, 1),
+                    "provider_claim_count": np.random.randint(1, 100),
+                    "patient_claim_frequency": np.random.uniform(0, 1),
+                    "diagnosis_rarity_score": np.random.uniform(0, 1),
+                    "time_to_claim_days": np.random.randint(1, 30),
+                }
+                for i, claim in enumerate(claims)
+            ]
+        )
 
 
 class MockDatabase:
@@ -205,7 +210,7 @@ class MockDatabase:
 
     def insert_claim(self, claim: Dict[str, Any]) -> str:
         """Mock claim insertion."""
-        claim_id = claim.get('claim_id', 'MOCK-001')
+        claim_id = claim.get("claim_id", "MOCK-001")
         self.data[claim_id] = claim
         return claim_id
 
@@ -219,43 +224,43 @@ def mock_claims_data():
     """Fixture providing mock claims data."""
     return [
         {
-            'claim_id': 'CLM-2024-000001',
-            'patient_id': 'PAT-00000001',
-            'provider_npi': '1234567890',
-            'service_date': '2024-01-15T00:00:00',
-            'claim_date': '2024-01-20T00:00:00',
-            'billed_amount': 250.00,
-            'diagnosis_codes': ['M79.3'],
-            'procedure_codes': ['99213'],
-            'patient_age': 45,
-            'fraud_indicator': False,
-            'fraud_type': None,
-            'red_flags': []
+            "claim_id": "CLM-2024-000001",
+            "patient_id": "PAT-00000001",
+            "provider_npi": "1234567890",
+            "service_date": "2024-01-15T00:00:00",
+            "claim_date": "2024-01-20T00:00:00",
+            "billed_amount": 250.00,
+            "diagnosis_codes": ["M79.3"],
+            "procedure_codes": ["99213"],
+            "patient_age": 45,
+            "fraud_indicator": False,
+            "fraud_type": None,
+            "red_flags": [],
         },
         {
-            'claim_id': 'CLM-2024-000002',
-            'patient_id': 'PAT-00000002',
-            'provider_npi': '9876543210',
-            'service_date': '2024-01-16T00:00:00',
-            'claim_date': '2024-01-17T00:00:00',
-            'billed_amount': 15000.00,
-            'diagnosis_codes': ['S13.4', 'M79.3'],
-            'procedure_codes': ['99285'],
-            'patient_age': 35,
-            'fraud_indicator': True,
-            'fraud_type': 'upcoding',
-            'red_flags': ['excessive_billing', 'complexity_mismatch']
-        }
+            "claim_id": "CLM-2024-000002",
+            "patient_id": "PAT-00000002",
+            "provider_npi": "9876543210",
+            "service_date": "2024-01-16T00:00:00",
+            "claim_date": "2024-01-17T00:00:00",
+            "billed_amount": 15000.00,
+            "diagnosis_codes": ["S13.4", "M79.3"],
+            "procedure_codes": ["99285"],
+            "patient_age": 35,
+            "fraud_indicator": True,
+            "fraud_type": "upcoding",
+            "red_flags": ["excessive_billing", "complexity_mismatch"],
+        },
     ]
 
 
 @pytest.fixture
 def mock_temp_file():
     """Fixture providing a temporary file for testing."""
-    with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f:
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
         test_data = [
-            {'claim_id': 'TEST-001', 'billed_amount': 100.0},
-            {'claim_id': 'TEST-002', 'billed_amount': 200.0}
+            {"claim_id": "TEST-001", "billed_amount": 100.0},
+            {"claim_id": "TEST-002", "billed_amount": 200.0},
         ]
         json.dump(test_data, f)
         temp_path = f.name
@@ -263,6 +268,7 @@ def mock_temp_file():
     yield temp_path
 
     import os
+
     try:
         os.unlink(temp_path)
     except FileNotFoundError:
@@ -335,9 +341,11 @@ class MockAPIResponse:
 
 def mock_external_api_success():
     """Context manager for mocking successful external API calls."""
-    return patch('requests.get', return_value=MockAPIResponse({'status': 'success'}))
+    return patch("requests.get", return_value=MockAPIResponse({"status": "success"}))
 
 
 def mock_external_api_failure():
     """Context manager for mocking failed external API calls."""
-    return patch('requests.get', return_value=MockAPIResponse({'error': 'Service unavailable'}, 500))
+    return patch(
+        "requests.get", return_value=MockAPIResponse({"error": "Service unavailable"}, 500)
+    )
