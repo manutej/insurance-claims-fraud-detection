@@ -1,137 +1,1012 @@
 {
   "claims": [
     {
-      "claim_id": "CLM-2024-F03001",
-      "patient_id": "PAT-86001",
-      "provider_id": "PRV-FRAUD-007",
-      "provider_npi": "9999999007",
-      "date_of_service": "2024-03-15",
-      "diagnosis_codes": ["K80.10"],
-      "diagnosis_descriptions": ["Calculus of gallbladder with chronic cholecystitis"],
-      "procedure_codes": ["47563", "49320", "49322", "47579", "36561"],
+      "claim_id": "CLM-2024-F100130",
+      "patient_id": "PAT-010133",
+      "provider_id": "PRV-FRAUD-035",
+      "provider_npi": "9999362829",
+      "date_of_service": "2024-01-23",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
       "procedure_descriptions": [
-        "Laparoscopy, cholecystectomy",
-        "Laparoscopy, diagnostic",
-        "Laparoscopy with aspiration",
-        "Unlisted laparoscopy procedure",
-        "Central venous access"
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
       ],
-      "billed_amount": 15500.00,
-      "bundled_code": "47563",
-      "bundled_amount": 5200.00,
-      "service_location": "21",
-      "claim_type": "facility",
-      "fraud_indicator": true,
-      "fraud_type": "unbundling",
-      "red_flags": [
-        "Multiple laparoscopy codes for single procedure",
-        "Components should be included in primary code",
-        "Total exceeds bundled rate by 298%",
-        "Diagnostic laparoscopy included in therapeutic"
+      "billed_amount": 20925.25,
+      "correct_procedure": [
+        "47563"
       ],
-      "notes": "Gallbladder surgery unbundled into multiple separate procedures"
-    },
-    {
-      "claim_id": "CLM-2024-F03002",
-      "patient_id": "PAT-86002",
-      "provider_id": "PRV-FRAUD-008",
-      "provider_npi": "9999999008",
-      "date_of_service": "2024-03-16",
-      "diagnosis_codes": ["M51.26"],
-      "diagnosis_descriptions": ["Lumbar disc displacement"],
-      "procedure_codes": ["63030", "69990", "22830", "20930", "76000"],
-      "procedure_descriptions": [
-        "Laminotomy",
-        "Microsurgery",
-        "Exploration of spinal fusion",
-        "Allograft for spine surgery",
-        "Fluoroscopy"
-      ],
-      "billed_amount": 28750.00,
-      "bundled_code": "63030",
-      "bundled_amount": 8500.00,
-      "service_location": "21",
-      "claim_type": "facility",
-      "fraud_indicator": true,
-      "fraud_type": "unbundling",
-      "red_flags": [
-        "Microsurgery is included in primary procedure",
-        "Fluoroscopy bundled with spine surgery",
-        "Total 338% of appropriate reimbursement",
-        "Add-on codes billed as primary"
-      ],
-      "notes": "Spine surgery components billed separately instead of bundled"
-    },
-    {
-      "claim_id": "CLM-2024-F03003",
-      "patient_id": "PAT-86003",
-      "provider_id": "PRV-FRAUD-009",
-      "provider_npi": "9999999009",
-      "date_of_service": "2024-03-17",
-      "diagnosis_codes": ["H26.9"],
-      "diagnosis_descriptions": ["Unspecified cataract"],
-      "procedure_codes": ["66984", "66982", "76519", "92136", "0191T"],
-      "procedure_descriptions": [
-        "Cataract surgery with IOL",
-        "Cataract surgery, complex",
-        "Ophthalmic biometry",
-        "OCT",
-        "IOL insertion"
-      ],
-      "billed_amount": 8950.00,
-      "bundled_code": "66984",
-      "bundled_amount": 2850.00,
-      "service_location": "24",
-      "claim_type": "professional",
-      "fraud_indicator": true,
-      "fraud_type": "unbundling",
-      "red_flags": [
-        "IOL insertion included in cataract surgery",
-        "Biometry typically bundled",
-        "Multiple cataract codes for one eye",
-        "Total billing 314% of standard"
-      ],
-      "notes": "Cataract surgery unbundled with duplicate and included services"
-    },
-    {
-      "claim_id": "CLM-2024-F03004",
-      "patient_id": "PAT-86004",
-      "provider_id": "PRV-FRAUD-010",
-      "provider_npi": "9999999010",
-      "date_of_service": "2024-03-18",
-      "diagnosis_codes": ["I25.10"],
-      "diagnosis_descriptions": ["Atherosclerotic heart disease"],
-      "procedure_codes": ["93458", "93454", "93563", "93564", "93568"],
-      "procedure_descriptions": [
-        "Cardiac catheterization",
-        "Coronary angiography",
-        "Injection procedure",
-        "Injection procedure, bypass",
-        "Injection for pulmonary angiography"
-      ],
-      "billed_amount": 12500.00,
-      "bundled_code": "93458",
-      "bundled_amount": 4200.00,
+      "correct_amount": 11384.43,
       "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
       "claim_type": "professional",
       "fraud_indicator": true,
       "fraud_type": "unbundling",
       "red_flags": [
-        "Injection procedures included in primary cath",
-        "Multiple codes for single catheterization",
-        "Add-on codes without primary procedure",
-        "Total 297% of bundled rate"
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $9540.82",
+        "No modifier 59 to justify separate billing"
       ],
-      "notes": "Cardiac catheterization unbundled into component parts"
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100131",
+      "patient_id": "PAT-010759",
+      "provider_id": "PRV-FRAUD-027",
+      "provider_npi": "9999651640",
+      "date_of_service": "2024-01-15",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 16485.37,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 7981.7,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $8503.67",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100132",
+      "patient_id": "PAT-010887",
+      "provider_id": "PRV-FRAUD-043",
+      "provider_npi": "9999646781",
+      "date_of_service": "2024-02-08",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 19695.87,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 9009.09,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $10686.78",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100133",
+      "patient_id": "PAT-010436",
+      "provider_id": "PRV-FRAUD-044",
+      "provider_npi": "9999213206",
+      "date_of_service": "2024-03-03",
+      "diagnosis_codes": [
+        "M17.11"
+      ],
+      "diagnosis_descriptions": [
+        "Unilateral primary osteoarthritis, right knee"
+      ],
+      "procedure_codes": [
+        "27447",
+        "27410",
+        "27412"
+      ],
+      "procedure_descriptions": [
+        "Total knee arthroplasty",
+        "Unknown procedure",
+        "Unknown procedure"
+      ],
+      "billed_amount": 21382.95,
+      "correct_procedure": [
+        "27447"
+      ],
+      "correct_amount": 33102.28,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $-11719.33",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100134",
+      "patient_id": "PAT-010281",
+      "provider_id": "PRV-FRAUD-040",
+      "provider_npi": "9999763829",
+      "date_of_service": "2024-03-15",
+      "diagnosis_codes": [
+        "M17.11"
+      ],
+      "diagnosis_descriptions": [
+        "Unilateral primary osteoarthritis, right knee"
+      ],
+      "procedure_codes": [
+        "27447",
+        "27410",
+        "27412"
+      ],
+      "procedure_descriptions": [
+        "Total knee arthroplasty",
+        "Unknown procedure",
+        "Unknown procedure"
+      ],
+      "billed_amount": 14277.28,
+      "correct_procedure": [
+        "27447"
+      ],
+      "correct_amount": 20981.16,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $-6703.88",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100135",
+      "patient_id": "PAT-010440",
+      "provider_id": "PRV-FRAUD-007",
+      "provider_npi": "9999931621",
+      "date_of_service": "2024-03-30",
+      "diagnosis_codes": [
+        "M17.11"
+      ],
+      "diagnosis_descriptions": [
+        "Unilateral primary osteoarthritis, right knee"
+      ],
+      "procedure_codes": [
+        "27447",
+        "27410",
+        "27412"
+      ],
+      "procedure_descriptions": [
+        "Total knee arthroplasty",
+        "Unknown procedure",
+        "Unknown procedure"
+      ],
+      "billed_amount": 21518.77,
+      "correct_procedure": [
+        "27447"
+      ],
+      "correct_amount": 19455.81,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $2062.96",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100136",
+      "patient_id": "PAT-010464",
+      "provider_id": "PRV-FRAUD-026",
+      "provider_npi": "9999536196",
+      "date_of_service": "2024-01-13",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 22655.23,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 9135.6,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $13519.63",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100137",
+      "patient_id": "PAT-010945",
+      "provider_id": "PRV-FRAUD-031",
+      "provider_npi": "9999170394",
+      "date_of_service": "2024-01-12",
+      "diagnosis_codes": [
+        "M17.11"
+      ],
+      "diagnosis_descriptions": [
+        "Unilateral primary osteoarthritis, right knee"
+      ],
+      "procedure_codes": [
+        "27447",
+        "27410",
+        "27412"
+      ],
+      "procedure_descriptions": [
+        "Total knee arthroplasty",
+        "Unknown procedure",
+        "Unknown procedure"
+      ],
+      "billed_amount": 22661.52,
+      "correct_procedure": [
+        "27447"
+      ],
+      "correct_amount": 18466.31,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $4195.21",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100138",
+      "patient_id": "PAT-010125",
+      "provider_id": "PRV-FRAUD-027",
+      "provider_npi": "9999470774",
+      "date_of_service": "2024-03-26",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 16503.14,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 11321.35,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $5181.79",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100139",
+      "patient_id": "PAT-010360",
+      "provider_id": "PRV-FRAUD-007",
+      "provider_npi": "9999705991",
+      "date_of_service": "2024-03-05",
+      "diagnosis_codes": [
+        "M17.11"
+      ],
+      "diagnosis_descriptions": [
+        "Unilateral primary osteoarthritis, right knee"
+      ],
+      "procedure_codes": [
+        "27447",
+        "27410",
+        "27412"
+      ],
+      "procedure_descriptions": [
+        "Total knee arthroplasty",
+        "Unknown procedure",
+        "Unknown procedure"
+      ],
+      "billed_amount": 30079.71,
+      "correct_procedure": [
+        "27447"
+      ],
+      "correct_amount": 30415.39,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $-335.68",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100140",
+      "patient_id": "PAT-010439",
+      "provider_id": "PRV-FRAUD-036",
+      "provider_npi": "9999904711",
+      "date_of_service": "2024-03-20",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 17080.14,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 9132.56,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $7947.58",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100141",
+      "patient_id": "PAT-010185",
+      "provider_id": "PRV-FRAUD-010",
+      "provider_npi": "9999693830",
+      "date_of_service": "2024-03-25",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 19953.1,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 13804.92,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $6148.18",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100142",
+      "patient_id": "PAT-010543",
+      "provider_id": "PRV-FRAUD-014",
+      "provider_npi": "9999494468",
+      "date_of_service": "2024-02-23",
+      "diagnosis_codes": [
+        "M17.11"
+      ],
+      "diagnosis_descriptions": [
+        "Unilateral primary osteoarthritis, right knee"
+      ],
+      "procedure_codes": [
+        "27447",
+        "27410",
+        "27412"
+      ],
+      "procedure_descriptions": [
+        "Total knee arthroplasty",
+        "Unknown procedure",
+        "Unknown procedure"
+      ],
+      "billed_amount": 17403.6,
+      "correct_procedure": [
+        "27447"
+      ],
+      "correct_amount": 25954.76,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $-8551.16",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100143",
+      "patient_id": "PAT-010581",
+      "provider_id": "PRV-FRAUD-039",
+      "provider_npi": "9999189083",
+      "date_of_service": "2024-01-07",
+      "diagnosis_codes": [
+        "M17.11"
+      ],
+      "diagnosis_descriptions": [
+        "Unilateral primary osteoarthritis, right knee"
+      ],
+      "procedure_codes": [
+        "27447",
+        "27410",
+        "27412"
+      ],
+      "procedure_descriptions": [
+        "Total knee arthroplasty",
+        "Unknown procedure",
+        "Unknown procedure"
+      ],
+      "billed_amount": 19529.34,
+      "correct_procedure": [
+        "27447"
+      ],
+      "correct_amount": 27968.64,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $-8439.3",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100144",
+      "patient_id": "PAT-010773",
+      "provider_id": "PRV-FRAUD-033",
+      "provider_npi": "9999219346",
+      "date_of_service": "2024-02-14",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 17411.77,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 10339.34,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $7072.43",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100145",
+      "patient_id": "PAT-010315",
+      "provider_id": "PRV-FRAUD-003",
+      "provider_npi": "9999331230",
+      "date_of_service": "2024-02-20",
+      "diagnosis_codes": [
+        "M17.11"
+      ],
+      "diagnosis_descriptions": [
+        "Unilateral primary osteoarthritis, right knee"
+      ],
+      "procedure_codes": [
+        "27447",
+        "27410",
+        "27412"
+      ],
+      "procedure_descriptions": [
+        "Total knee arthroplasty",
+        "Unknown procedure",
+        "Unknown procedure"
+      ],
+      "billed_amount": 17754.26,
+      "correct_procedure": [
+        "27447"
+      ],
+      "correct_amount": 24090.11,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $-6335.85",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100146",
+      "patient_id": "PAT-010179",
+      "provider_id": "PRV-FRAUD-009",
+      "provider_npi": "9999498676",
+      "date_of_service": "2024-03-09",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 13193.82,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 8650.95,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $4542.87",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100147",
+      "patient_id": "PAT-010882",
+      "provider_id": "PRV-FRAUD-021",
+      "provider_npi": "9999703727",
+      "date_of_service": "2024-02-24",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 20587.31,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 9158.56,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $11428.75",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100148",
+      "patient_id": "PAT-010332",
+      "provider_id": "PRV-FRAUD-011",
+      "provider_npi": "9999940247",
+      "date_of_service": "2024-03-20",
+      "diagnosis_codes": [
+        "M17.11"
+      ],
+      "diagnosis_descriptions": [
+        "Unilateral primary osteoarthritis, right knee"
+      ],
+      "procedure_codes": [
+        "27447",
+        "27410",
+        "27412"
+      ],
+      "procedure_descriptions": [
+        "Total knee arthroplasty",
+        "Unknown procedure",
+        "Unknown procedure"
+      ],
+      "billed_amount": 25209.33,
+      "correct_procedure": [
+        "27447"
+      ],
+      "correct_amount": 14323.12,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $10886.21",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100149",
+      "patient_id": "PAT-010249",
+      "provider_id": "PRV-FRAUD-028",
+      "provider_npi": "9999717476",
+      "date_of_service": "2024-02-21",
+      "diagnosis_codes": [
+        "M17.11"
+      ],
+      "diagnosis_descriptions": [
+        "Unilateral primary osteoarthritis, right knee"
+      ],
+      "procedure_codes": [
+        "27447",
+        "27410",
+        "27412"
+      ],
+      "procedure_descriptions": [
+        "Total knee arthroplasty",
+        "Unknown procedure",
+        "Unknown procedure"
+      ],
+      "billed_amount": 31141.02,
+      "correct_procedure": [
+        "27447"
+      ],
+      "correct_amount": 18008.74,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $13132.28",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100150",
+      "patient_id": "PAT-010927",
+      "provider_id": "PRV-FRAUD-050",
+      "provider_npi": "9999466346",
+      "date_of_service": "2024-02-14",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 16318.24,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 8824.45,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $7493.79",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100151",
+      "patient_id": "PAT-010505",
+      "provider_id": "PRV-FRAUD-030",
+      "provider_npi": "9999891093",
+      "date_of_service": "2024-03-13",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 16016.75,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 9996.36,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $6020.39",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100152",
+      "patient_id": "PAT-010330",
+      "provider_id": "PRV-FRAUD-041",
+      "provider_npi": "9999431495",
+      "date_of_service": "2024-01-20",
+      "diagnosis_codes": [
+        "M17.11"
+      ],
+      "diagnosis_descriptions": [
+        "Unilateral primary osteoarthritis, right knee"
+      ],
+      "procedure_codes": [
+        "27447",
+        "27410",
+        "27412"
+      ],
+      "procedure_descriptions": [
+        "Total knee arthroplasty",
+        "Unknown procedure",
+        "Unknown procedure"
+      ],
+      "billed_amount": 28307.23,
+      "correct_procedure": [
+        "27447"
+      ],
+      "correct_amount": 28242.03,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $65.2",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100153",
+      "patient_id": "PAT-010057",
+      "provider_id": "PRV-FRAUD-023",
+      "provider_npi": "9999631981",
+      "date_of_service": "2024-01-10",
+      "diagnosis_codes": [
+        "M17.11"
+      ],
+      "diagnosis_descriptions": [
+        "Unilateral primary osteoarthritis, right knee"
+      ],
+      "procedure_codes": [
+        "27447",
+        "27410",
+        "27412"
+      ],
+      "procedure_descriptions": [
+        "Total knee arthroplasty",
+        "Unknown procedure",
+        "Unknown procedure"
+      ],
+      "billed_amount": 15946.47,
+      "correct_procedure": [
+        "27447"
+      ],
+      "correct_amount": 18221.29,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $-2274.82",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100154",
+      "patient_id": "PAT-010660",
+      "provider_id": "PRV-FRAUD-006",
+      "provider_npi": "9999744883",
+      "date_of_service": "2024-03-17",
+      "diagnosis_codes": [
+        "M17.11"
+      ],
+      "diagnosis_descriptions": [
+        "Unilateral primary osteoarthritis, right knee"
+      ],
+      "procedure_codes": [
+        "27447",
+        "27410",
+        "27412"
+      ],
+      "procedure_descriptions": [
+        "Total knee arthroplasty",
+        "Unknown procedure",
+        "Unknown procedure"
+      ],
+      "billed_amount": 19084.59,
+      "correct_procedure": [
+        "27447"
+      ],
+      "correct_amount": 19219.6,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $-135.01",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
     }
   ],
   "metadata": {
     "file_type": "fraudulent_unbundling",
-    "generated_date": "2024-03-20",
-    "total_claims": 4,
-    "total_fraudulent_billed": 65700.00,
-    "actual_bundled_value": 20750.00,
-    "fraud_amount": 44950.00,
-    "fraud_percentage": 68.4
+    "generated_date": "2025-10-28",
+    "total_claims": 25,
+    "total_fraudulent_billed": 501122.06,
+    "correct_amount": 417188.55,
+    "fraud_amount": 83933.51
   }
 }

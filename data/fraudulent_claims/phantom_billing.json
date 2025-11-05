@@ -1,114 +1,682 @@
 {
   "claims": [
     {
-      "claim_id": "CLM-2024-F02001",
-      "patient_id": "PAT-GHOST-001",
-      "patient_ssn": "123-45-6789",
-      "provider_id": "PRV-FRAUD-004",
-      "provider_npi": "9999999004",
-      "date_of_service": "2024-03-17",
-      "day_of_week": "Sunday",
-      "diagnosis_codes": ["E11.9", "I10"],
-      "diagnosis_descriptions": ["Type 2 diabetes", "Hypertension"],
-      "procedure_codes": ["99214", "93000", "36415"],
-      "procedure_descriptions": ["Office visit", "EKG", "Venipuncture"],
-      "billed_amount": 425.00,
+      "claim_id": "CLM-2024-F100110",
+      "patient_id": "PAT-GHOST-700",
+      "provider_id": "PRV-FRAUD-016",
+      "provider_npi": "9999621841",
+      "date_of_service": "2024-03-23",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "J01.90"
+      ],
+      "diagnosis_descriptions": [
+        "Acute sinusitis, unspecified"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 98.84,
       "service_location": "11",
+      "service_location_desc": "Office",
       "claim_type": "professional",
-      "rendering_hours": 0.75,
       "fraud_indicator": true,
       "fraud_type": "phantom_billing",
       "red_flags": [
-        "Service on Sunday when office closed",
-        "Sequential SSN pattern with other patients",
-        "No corresponding appointment records",
-        "Patient address doesn't exist"
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
       ],
-      "notes": "Services billed for non-existent patient on closed day"
+      "notes": "Service billed but never rendered - office closed"
     },
     {
-      "claim_id": "CLM-2024-F02002",
-      "patient_id": "PAT-GHOST-002",
-      "patient_ssn": "123-45-6790",
-      "provider_id": "PRV-FRAUD-004",
-      "provider_npi": "9999999004",
-      "date_of_service": "2024-03-17",
-      "day_of_week": "Sunday",
-      "diagnosis_codes": ["E11.65", "E78.5"],
-      "diagnosis_descriptions": ["Type 2 diabetes with hyperglycemia", "Hyperlipidemia"],
-      "procedure_codes": ["99215", "80053", "83036"],
-      "procedure_descriptions": ["Office visit, high complexity", "Comprehensive metabolic panel", "Hemoglobin A1C"],
-      "billed_amount": 525.00,
+      "claim_id": "CLM-2024-F100111",
+      "patient_id": "PAT-GHOST-010",
+      "provider_id": "PRV-FRAUD-030",
+      "provider_npi": "9999401603",
+      "date_of_service": "2024-03-30",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "J01.90"
+      ],
+      "diagnosis_descriptions": [
+        "Acute sinusitis, unspecified"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 174.32,
       "service_location": "11",
+      "service_location_desc": "Office",
       "claim_type": "professional",
-      "rendering_hours": 1.0,
       "fraud_indicator": true,
       "fraud_type": "phantom_billing",
       "red_flags": [
-        "Sequential SSN (123-45-6790)",
-        "Same Sunday service date",
-        "Provider billed 18 patients on closed day",
-        "Total hours exceed 24 for single day"
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
       ],
-      "notes": "Ghost patient with sequential SSN, service never rendered"
+      "notes": "Service billed but never rendered - office closed"
     },
     {
-      "claim_id": "CLM-2024-F02003",
-      "patient_id": "PAT-GHOST-003",
-      "patient_ssn": "123-45-6791",
+      "claim_id": "CLM-2024-F100112",
+      "patient_id": "PAT-GHOST-307",
+      "provider_id": "PRV-FRAUD-041",
+      "provider_npi": "9999544920",
+      "date_of_service": "2024-03-16",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 102.13,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100113",
+      "patient_id": "PAT-GHOST-110",
+      "provider_id": "PRV-FRAUD-016",
+      "provider_npi": "9999499889",
+      "date_of_service": "2024-03-02",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "K59.00"
+      ],
+      "diagnosis_descriptions": [
+        "Constipation, unspecified"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 142.83,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100114",
+      "patient_id": "PAT-GHOST-886",
+      "provider_id": "PRV-FRAUD-044",
+      "provider_npi": "9999916118",
+      "date_of_service": "2024-03-16",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "N18.3"
+      ],
+      "diagnosis_descriptions": [
+        "Chronic kidney disease, stage 3"
+      ],
+      "procedure_codes": [
+        "97110",
+        "97140"
+      ],
+      "procedure_descriptions": [
+        "Therapeutic exercises",
+        "Manual therapy techniques"
+      ],
+      "billed_amount": 127.57,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100115",
+      "patient_id": "PAT-GHOST-822",
+      "provider_id": "PRV-FRAUD-023",
+      "provider_npi": "9999329642",
+      "date_of_service": "2024-03-23",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "E11.65"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes with hyperglycemia"
+      ],
+      "procedure_codes": [
+        "97110",
+        "97140"
+      ],
+      "procedure_descriptions": [
+        "Therapeutic exercises",
+        "Manual therapy techniques"
+      ],
+      "billed_amount": 132.27,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100116",
+      "patient_id": "PAT-GHOST-926",
+      "provider_id": "PRV-FRAUD-041",
+      "provider_npi": "9999777737",
+      "date_of_service": "2024-01-13",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "M25.561"
+      ],
+      "diagnosis_descriptions": [
+        "Pain in right knee"
+      ],
+      "procedure_codes": [
+        "97110",
+        "97140"
+      ],
+      "procedure_descriptions": [
+        "Therapeutic exercises",
+        "Manual therapy techniques"
+      ],
+      "billed_amount": 134.14,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100117",
+      "patient_id": "PAT-GHOST-093",
+      "provider_id": "PRV-FRAUD-019",
+      "provider_npi": "9999442589",
+      "date_of_service": "2024-01-20",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "E11.21"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes with diabetic neuropathy"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 131.61,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100118",
+      "patient_id": "PAT-GHOST-544",
+      "provider_id": "PRV-FRAUD-033",
+      "provider_npi": "9999385765",
+      "date_of_service": "2024-02-17",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "Z00.00"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for general adult medical examination without abnormal findings"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 92.69,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100119",
+      "patient_id": "PAT-GHOST-824",
+      "provider_id": "PRV-FRAUD-008",
+      "provider_npi": "9999591081",
+      "date_of_service": "2024-02-17",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "J02.9"
+      ],
+      "diagnosis_descriptions": [
+        "Acute pharyngitis, unspecified"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 185.72,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100120",
+      "patient_id": "PAT-GHOST-991",
+      "provider_id": "PRV-FRAUD-036",
+      "provider_npi": "9999483542",
+      "date_of_service": "2024-02-24",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "diagnosis_descriptions": [
+        "Essential (primary) hypertension"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 136.62,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100121",
+      "patient_id": "PAT-GHOST-689",
+      "provider_id": "PRV-FRAUD-048",
+      "provider_npi": "9999805000",
+      "date_of_service": "2024-02-17",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "I11.9"
+      ],
+      "diagnosis_descriptions": [
+        "Hypertensive heart disease without heart failure"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 87.13,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100122",
+      "patient_id": "PAT-GHOST-692",
+      "provider_id": "PRV-FRAUD-015",
+      "provider_npi": "9999594379",
+      "date_of_service": "2024-01-14",
+      "day_of_week": "Sunday",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 213.35,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Sunday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100123",
+      "patient_id": "PAT-GHOST-932",
+      "provider_id": "PRV-FRAUD-045",
+      "provider_npi": "9999416869",
+      "date_of_service": "2024-03-02",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "E11.65"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes with hyperglycemia"
+      ],
+      "procedure_codes": [
+        "97110",
+        "97140"
+      ],
+      "procedure_descriptions": [
+        "Therapeutic exercises",
+        "Manual therapy techniques"
+      ],
+      "billed_amount": 129.0,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100124",
+      "patient_id": "PAT-GHOST-119",
+      "provider_id": "PRV-FRAUD-007",
+      "provider_npi": "9999346205",
+      "date_of_service": "2024-03-09",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "Z00.00"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for general adult medical examination without abnormal findings"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 75.15,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100125",
+      "patient_id": "PAT-GHOST-969",
+      "provider_id": "PRV-FRAUD-035",
+      "provider_npi": "9999539486",
+      "date_of_service": "2024-03-30",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 172.9,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100126",
+      "patient_id": "PAT-GHOST-707",
+      "provider_id": "PRV-FRAUD-024",
+      "provider_npi": "9999327823",
+      "date_of_service": "2024-01-06",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "J06.9"
+      ],
+      "diagnosis_descriptions": [
+        "Acute upper respiratory infection, unspecified"
+      ],
+      "procedure_codes": [
+        "97110",
+        "97140"
+      ],
+      "procedure_descriptions": [
+        "Therapeutic exercises",
+        "Manual therapy techniques"
+      ],
+      "billed_amount": 120.67,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100127",
+      "patient_id": "PAT-GHOST-377",
+      "provider_id": "PRV-FRAUD-035",
+      "provider_npi": "9999776149",
+      "date_of_service": "2024-03-30",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "F32.9"
+      ],
+      "diagnosis_descriptions": [
+        "Major depressive disorder, single episode, unspecified"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 112.42,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100128",
+      "patient_id": "PAT-GHOST-094",
+      "provider_id": "PRV-FRAUD-043",
+      "provider_npi": "9999322409",
+      "date_of_service": "2024-03-02",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "N39.0"
+      ],
+      "diagnosis_descriptions": [
+        "Urinary tract infection, site not specified"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 174.41,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100129",
+      "patient_id": "PAT-GHOST-211",
       "provider_id": "PRV-FRAUD-005",
-      "provider_npi": "9999999005",
-      "date_of_service": "2024-03-18",
-      "diagnosis_codes": ["M54.5", "M79.3"],
-      "diagnosis_descriptions": ["Low back pain", "Myalgia"],
-      "procedure_codes": ["97110", "97112", "97140", "97530"],
-      "procedure_descriptions": ["Therapeutic exercises", "Neuromuscular reeducation", "Manual therapy", "Therapeutic activities"],
-      "billed_amount": 485.00,
+      "provider_npi": "9999970127",
+      "date_of_service": "2024-03-16",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "E10.9"
+      ],
+      "diagnosis_descriptions": [
+        "Type 1 diabetes without complications"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 133.91,
       "service_location": "11",
+      "service_location_desc": "Office",
       "claim_type": "professional",
-      "rendering_hours": 2.0,
       "fraud_indicator": true,
       "fraud_type": "phantom_billing",
       "red_flags": [
-        "Provider billed 142 hours of service this week",
-        "Sequential SSN pattern continues",
-        "No patient intake forms on file",
-        "Billing address is vacant lot"
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
       ],
-      "notes": "Physical therapy services for non-existent patient"
-    },
-    {
-      "claim_id": "CLM-2024-F02004",
-      "patient_id": "PAT-85001",
-      "provider_id": "PRV-FRAUD-006",
-      "provider_npi": "9999999006",
-      "date_of_service": "2024-03-19",
-      "diagnosis_codes": ["F41.1", "F32.9"],
-      "diagnosis_descriptions": ["Generalized anxiety disorder", "Major depressive disorder"],
-      "procedure_codes": ["90834", "90837"],
-      "procedure_descriptions": ["Psychotherapy, 45 minutes", "Psychotherapy, 60 minutes"],
-      "billed_amount": 450.00,
-      "service_location": "11",
-      "claim_type": "professional",
-      "rendering_hours": 1.75,
-      "fraud_indicator": true,
-      "fraud_type": "phantom_billing",
-      "red_flags": [
-        "Two psychotherapy sessions same day",
-        "Patient deceased 6 months ago",
-        "Death certificate on file",
-        "Services post-mortem"
-      ],
-      "notes": "Mental health services billed for deceased patient"
+      "notes": "Service billed but never rendered - office closed"
     }
   ],
   "metadata": {
     "file_type": "fraudulent_phantom_billing",
-    "generated_date": "2024-03-20",
-    "total_claims": 4,
-    "total_fraudulent_billed": 1885.00,
-    "actual_value": 0.00,
-    "fraud_amount": 1885.00,
-    "fraud_percentage": 100.0
+    "generated_date": "2025-10-28",
+    "total_claims": 20,
+    "total_fraudulent_billed": 2677.68,
+    "actual_value": 0.0,
+    "fraud_amount": 2677.68
   }
 }

@@ -1,125 +1,810 @@
 {
   "claims": [
     {
-      "claim_id": "NF-2024-F04001",
-      "patient_id": "PAT-87001",
-      "provider_id": "PRV-FRAUD-011",
-      "provider_npi": "9999999011",
-      "accident_date": "2024-03-14",
-      "date_of_service": "2024-03-14",
-      "police_report_number": "FAKE-2024-001",
-      "diagnosis_codes": ["S13.4XXA", "M54.2"],
-      "diagnosis_descriptions": ["Sprain of cervical spine", "Cervicalgia"],
-      "procedure_codes": ["99215", "97110", "97112", "97140"],
-      "procedure_descriptions": ["Office visit, high complexity", "Therapeutic exercises", "Neuromuscular reeducation", "Manual therapy"],
-      "billed_amount": 850.00,
+      "claim_id": "CLM-2024-F100155",
+      "patient_id": "PAT-010619",
+      "provider_id": "PRV-FRAUD-031",
+      "provider_npi": "9999625721",
+      "accident_date": "2024-02-11",
+      "date_of_service": "2024-02-11",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 487.18,
       "service_location": "11",
-      "claim_type": "no-fault",
-      "vehicle_info": {
-        "vin": "STAGED-VIN-001",
-        "insurance_carrier": "Various",
-        "policy_number": "Multiple"
-      },
+      "service_location_desc": "Office",
+      "claim_type": "professional",
       "fraud_indicator": true,
       "fraud_type": "staged_accident",
       "red_flags": [
-        "Treatment began before police report filed",
-        "5 passengers, all same injuries",
-        "All treated at same clinic",
-        "Same attorney for all passengers",
-        "Damage inconsistent with injuries claimed",
-        "Witnesses are related parties"
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
       ],
-      "related_claims": ["NF-2024-F04002", "NF-2024-F04003", "NF-2024-F04004", "NF-2024-F04005"],
-      "notes": "Staged accident - passenger 1 of 5"
+      "notes": "Fabricated auto accident - staged crash ring"
     },
     {
-      "claim_id": "NF-2024-F04002",
-      "patient_id": "PAT-87002",
-      "provider_id": "PRV-FRAUD-011",
-      "provider_npi": "9999999011",
-      "accident_date": "2024-03-14",
-      "date_of_service": "2024-03-14",
-      "police_report_number": "FAKE-2024-001",
-      "diagnosis_codes": ["S13.4XXA", "M54.2"],
-      "diagnosis_descriptions": ["Sprain of cervical spine", "Cervicalgia"],
-      "procedure_codes": ["99215", "97110", "97112", "97140"],
-      "procedure_descriptions": ["Office visit, high complexity", "Therapeutic exercises", "Neuromuscular reeducation", "Manual therapy"],
-      "billed_amount": 850.00,
+      "claim_id": "CLM-2024-F100156",
+      "patient_id": "PAT-010724",
+      "provider_id": "PRV-FRAUD-029",
+      "provider_npi": "9999560767",
+      "accident_date": "2024-02-01",
+      "date_of_service": "2024-02-01",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 371.06,
       "service_location": "11",
-      "claim_type": "no-fault",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
       "fraud_indicator": true,
       "fraud_type": "staged_accident",
       "red_flags": [
-        "Identical injuries to passenger 1",
-        "Same treatment protocol",
-        "All patients live at same address",
-        "Provider known for staged accidents"
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
       ],
-      "related_claims": ["NF-2024-F04001", "NF-2024-F04003", "NF-2024-F04004", "NF-2024-F04005"],
-      "notes": "Staged accident - passenger 2 of 5"
+      "notes": "Fabricated auto accident - staged crash ring"
     },
     {
-      "claim_id": "NF-2024-F04006",
-      "patient_id": "PAT-87006",
-      "provider_id": "PRV-FRAUD-012",
-      "provider_npi": "9999999012",
-      "accident_date": "2024-03-15",
-      "date_of_service": "2024-03-15",
-      "police_report_number": "SUSPICIOUS-2024-002",
-      "diagnosis_codes": ["S43.409A", "M25.511"],
-      "diagnosis_descriptions": ["Sprain of shoulder", "Pain in right shoulder"],
-      "procedure_codes": ["99215", "97110", "97140", "97035"],
-      "procedure_descriptions": ["Office visit", "Therapeutic exercises", "Manual therapy", "Ultrasound therapy"],
-      "billed_amount": 925.00,
+      "claim_id": "CLM-2024-F100157",
+      "patient_id": "PAT-010662",
+      "provider_id": "PRV-FRAUD-022",
+      "provider_npi": "9999169113",
+      "accident_date": "2024-03-21",
+      "date_of_service": "2024-03-21",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 476.88,
       "service_location": "11",
-      "claim_type": "no-fault",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
       "fraud_indicator": true,
       "fraud_type": "staged_accident",
       "red_flags": [
-        "Pedestrian hit at low speed",
-        "No visible injuries at scene",
-        "Recruited at community center",
-        "Promised $2000 for participation",
-        "Multiple similar accidents same intersection"
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
       ],
-      "notes": "Staged pedestrian accident for insurance payout"
+      "notes": "Fabricated auto accident - staged crash ring"
     },
     {
-      "claim_id": "NF-2024-F04007",
-      "patient_id": "PAT-87007",
-      "provider_id": "PRV-FRAUD-013",
-      "provider_npi": "9999999013",
-      "accident_date": "2024-03-16",
-      "date_of_service": "2024-03-17",
-      "police_report_number": "FAKE-2024-003",
-      "diagnosis_codes": ["S06.0X0A", "G44.301"],
-      "diagnosis_descriptions": ["Concussion", "Post-traumatic headache"],
-      "procedure_codes": ["99285", "70450", "97110"],
-      "procedure_descriptions": ["Emergency visit", "CT head", "Therapy"],
-      "billed_amount": 3850.00,
-      "service_location": "23",
-      "claim_type": "no-fault",
+      "claim_id": "CLM-2024-F100158",
+      "patient_id": "PAT-010596",
+      "provider_id": "PRV-FRAUD-043",
+      "provider_npi": "9999248298",
+      "accident_date": "2024-01-11",
+      "date_of_service": "2024-01-11",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 448.48,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
       "fraud_indicator": true,
       "fraud_type": "staged_accident",
       "red_flags": [
-        "Vehicle damage inconsistent with injuries",
-        "Witnesses appeared after accident",
-        "Driver has 8 prior accidents in 2 years",
-        "Same medical clinic as previous accidents",
-        "Police report filed 3 days later"
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
       ],
-      "notes": "Professional accident stager, pattern of similar claims"
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-F100159",
+      "patient_id": "PAT-010810",
+      "provider_id": "PRV-FRAUD-022",
+      "provider_npi": "9999952686",
+      "accident_date": "2024-03-23",
+      "date_of_service": "2024-03-23",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 497.53,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-F100160",
+      "patient_id": "PAT-010371",
+      "provider_id": "PRV-FRAUD-020",
+      "provider_npi": "9999289019",
+      "accident_date": "2024-01-03",
+      "date_of_service": "2024-01-03",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 448.04,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-F100161",
+      "patient_id": "PAT-010789",
+      "provider_id": "PRV-FRAUD-035",
+      "provider_npi": "9999975686",
+      "accident_date": "2024-03-05",
+      "date_of_service": "2024-03-05",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 518.77,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-F100162",
+      "patient_id": "PAT-010789",
+      "provider_id": "PRV-FRAUD-040",
+      "provider_npi": "9999948343",
+      "accident_date": "2024-03-29",
+      "date_of_service": "2024-03-29",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 503.39,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-F100163",
+      "patient_id": "PAT-010239",
+      "provider_id": "PRV-FRAUD-035",
+      "provider_npi": "9999350786",
+      "accident_date": "2024-02-27",
+      "date_of_service": "2024-02-27",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 554.44,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-F100164",
+      "patient_id": "PAT-010796",
+      "provider_id": "PRV-FRAUD-025",
+      "provider_npi": "9999627335",
+      "accident_date": "2024-02-06",
+      "date_of_service": "2024-02-06",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 478.06,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-F100165",
+      "patient_id": "PAT-010956",
+      "provider_id": "PRV-FRAUD-007",
+      "provider_npi": "9999845957",
+      "accident_date": "2024-03-11",
+      "date_of_service": "2024-03-11",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 517.84,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-F100166",
+      "patient_id": "PAT-010836",
+      "provider_id": "PRV-FRAUD-029",
+      "provider_npi": "9999466566",
+      "accident_date": "2024-01-29",
+      "date_of_service": "2024-01-29",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 539.37,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-F100167",
+      "patient_id": "PAT-010859",
+      "provider_id": "PRV-FRAUD-046",
+      "provider_npi": "9999781533",
+      "accident_date": "2024-01-13",
+      "date_of_service": "2024-01-13",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 493.31,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-F100168",
+      "patient_id": "PAT-010005",
+      "provider_id": "PRV-FRAUD-006",
+      "provider_npi": "9999119927",
+      "accident_date": "2024-03-19",
+      "date_of_service": "2024-03-19",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 417.34,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-F100169",
+      "patient_id": "PAT-010244",
+      "provider_id": "PRV-FRAUD-027",
+      "provider_npi": "9999769989",
+      "accident_date": "2024-01-07",
+      "date_of_service": "2024-01-07",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 440.01,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-F100170",
+      "patient_id": "PAT-010298",
+      "provider_id": "PRV-FRAUD-028",
+      "provider_npi": "9999101640",
+      "accident_date": "2024-01-19",
+      "date_of_service": "2024-01-19",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 487.69,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-F100171",
+      "patient_id": "PAT-010805",
+      "provider_id": "PRV-FRAUD-033",
+      "provider_npi": "9999681070",
+      "accident_date": "2024-03-05",
+      "date_of_service": "2024-03-05",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 444.53,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-F100172",
+      "patient_id": "PAT-010750",
+      "provider_id": "PRV-FRAUD-043",
+      "provider_npi": "9999758775",
+      "accident_date": "2024-01-31",
+      "date_of_service": "2024-01-31",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 390.15,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-F100173",
+      "patient_id": "PAT-010475",
+      "provider_id": "PRV-FRAUD-045",
+      "provider_npi": "9999601776",
+      "accident_date": "2024-03-28",
+      "date_of_service": "2024-03-28",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 410.77,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-F100174",
+      "patient_id": "PAT-010323",
+      "provider_id": "PRV-FRAUD-020",
+      "provider_npi": "9999640418",
+      "accident_date": "2024-01-06",
+      "date_of_service": "2024-01-06",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 482.28,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
     }
   ],
   "metadata": {
     "file_type": "fraudulent_staged_accidents",
-    "generated_date": "2024-03-20",
-    "total_claims": 4,
-    "total_fraudulent_billed": 6475.00,
-    "estimated_group_fraud": 32375.00,
-    "fraud_ring_size": 7,
-    "common_providers": 3,
-    "common_attorneys": 2
+    "generated_date": "2025-10-28",
+    "total_claims": 20,
+    "total_fraudulent_billed": 9407.12
   }
 }

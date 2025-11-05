@@ -1,113 +1,1040 @@
 {
   "claims": [
     {
-      "claim_id": "CLM-2024-F01001",
-      "patient_id": "PAT-80001",
-      "provider_id": "PRV-FRAUD-001",
-      "provider_npi": "9999999001",
-      "date_of_service": "2024-03-15",
-      "diagnosis_codes": ["J00"],
-      "diagnosis_descriptions": ["Acute nasopharyngitis (common cold)"],
-      "procedure_codes": ["99215"],
-      "procedure_descriptions": ["Office visit, established patient, high complexity"],
-      "billed_amount": 325.00,
+      "claim_id": "CLM-2024-F100080",
+      "patient_id": "PAT-010724",
+      "provider_id": "PRV-FRAUD-010",
+      "provider_npi": "9999556641",
+      "date_of_service": "2024-01-23",
+      "diagnosis_codes": [
+        "J00"
+      ],
+      "diagnosis_descriptions": [
+        "Acute nasopharyngitis (common cold)"
+      ],
+      "procedure_codes": [
+        "99215",
+        "94060"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Bronchodilation responsiveness, spirometry"
+      ],
+      "billed_amount": 425.36,
+      "actual_service": "99211",
+      "actual_amount": 50.71,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 8.4x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Acute nasopharyngitis (common cold) upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100081",
+      "patient_id": "PAT-010902",
+      "provider_id": "PRV-FRAUD-029",
+      "provider_npi": "9999355709",
+      "date_of_service": "2024-02-29",
+      "diagnosis_codes": [
+        "K59.00"
+      ],
+      "diagnosis_descriptions": [
+        "Constipation, unspecified"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 810.02,
       "actual_service": "99212",
-      "actual_amount": 75.00,
+      "actual_amount": 69.77,
       "service_location": "11",
+      "service_location_desc": "Office",
       "claim_type": "professional",
-      "rendering_hours": 0.75,
       "fraud_indicator": true,
       "fraud_type": "upcoding",
       "red_flags": [
-        "Simple diagnosis billed at highest complexity",
-        "Provider bills 90% of visits as 99215",
-        "Visit duration inconsistent with complexity"
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 11.6x normal",
+        "Provider bills >60% of visits at highest complexity"
       ],
-      "notes": "Common cold billed as complex medical decision making"
+      "notes": "Constipation, unspecified upcoded to high complexity"
     },
     {
-      "claim_id": "CLM-2024-F01002",
-      "patient_id": "PAT-80002",
-      "provider_id": "PRV-FRAUD-001",
-      "provider_npi": "9999999001",
-      "date_of_service": "2024-03-16",
-      "diagnosis_codes": ["R05"],
-      "diagnosis_descriptions": ["Cough"],
-      "procedure_codes": ["99215", "94060"],
-      "procedure_descriptions": ["Office visit, high complexity", "Bronchodilation responsiveness"],
-      "billed_amount": 425.00,
+      "claim_id": "CLM-2024-F100082",
+      "patient_id": "PAT-010610",
+      "provider_id": "PRV-FRAUD-045",
+      "provider_npi": "9999389688",
+      "date_of_service": "2024-03-12",
+      "diagnosis_codes": [
+        "Z00.00"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for general adult medical examination without abnormal findings"
+      ],
+      "procedure_codes": [
+        "99215",
+        "94060"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Bronchodilation responsiveness, spirometry"
+      ],
+      "billed_amount": 378.76,
+      "actual_service": "99211",
+      "actual_amount": 35.4,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 10.7x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Encounter for general adult medical examination without abnormal findings upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100083",
+      "patient_id": "PAT-010487",
+      "provider_id": "PRV-FRAUD-042",
+      "provider_npi": "9999846420",
+      "date_of_service": "2024-03-03",
+      "diagnosis_codes": [
+        "J00"
+      ],
+      "diagnosis_descriptions": [
+        "Acute nasopharyngitis (common cold)"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 614.63,
+      "actual_service": "99211",
+      "actual_amount": 30.16,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 20.4x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Acute nasopharyngitis (common cold) upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100084",
+      "patient_id": "PAT-010377",
+      "provider_id": "PRV-FRAUD-031",
+      "provider_npi": "9999680358",
+      "date_of_service": "2024-03-08",
+      "diagnosis_codes": [
+        "Z00.00"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for general adult medical examination without abnormal findings"
+      ],
+      "procedure_codes": [
+        "99215"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high"
+      ],
+      "billed_amount": 248.13,
+      "actual_service": "99211",
+      "actual_amount": 31.43,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 7.9x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Encounter for general adult medical examination without abnormal findings upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100085",
+      "patient_id": "PAT-010323",
+      "provider_id": "PRV-FRAUD-008",
+      "provider_npi": "9999878967",
+      "date_of_service": "2024-03-09",
+      "diagnosis_codes": [
+        "K59.00"
+      ],
+      "diagnosis_descriptions": [
+        "Constipation, unspecified"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 679.84,
       "actual_service": "99213",
-      "actual_amount": 125.00,
+      "actual_amount": 107.52,
       "service_location": "11",
+      "service_location_desc": "Office",
       "claim_type": "professional",
-      "rendering_hours": 0.75,
       "fraud_indicator": true,
       "fraud_type": "upcoding",
       "red_flags": [
-        "Unnecessary pulmonary function test for simple cough",
-        "Pattern of maximum billing codes",
-        "No medical necessity for complex testing"
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 6.3x normal",
+        "Provider bills >60% of visits at highest complexity"
       ],
-      "notes": "Simple cough visit upcoded with unnecessary testing"
+      "notes": "Constipation, unspecified upcoded to high complexity"
     },
     {
-      "claim_id": "CLM-2024-F01003",
-      "patient_id": "PAT-80003",
-      "provider_id": "PRV-FRAUD-002",
-      "provider_npi": "9999999002",
-      "date_of_service": "2024-03-17",
-      "diagnosis_codes": ["M79.3"],
-      "diagnosis_descriptions": ["Myalgia"],
-      "procedure_codes": ["97140", "97110", "97112", "97530"],
-      "procedure_descriptions": ["Manual therapy", "Therapeutic exercises", "Neuromuscular reeducation", "Therapeutic activities"],
-      "billed_amount": 485.00,
-      "actual_service": "97110",
-      "actual_amount": 125.00,
+      "claim_id": "CLM-2024-F100086",
+      "patient_id": "PAT-010611",
+      "provider_id": "PRV-FRAUD-019",
+      "provider_npi": "9999205409",
+      "date_of_service": "2024-01-25",
+      "diagnosis_codes": [
+        "R05"
+      ],
+      "diagnosis_descriptions": [
+        "Cough"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 729.71,
+      "actual_service": "99211",
+      "actual_amount": 40.55,
       "service_location": "11",
+      "service_location_desc": "Office",
       "claim_type": "professional",
-      "rendering_hours": 2.0,
       "fraud_indicator": true,
       "fraud_type": "upcoding",
       "red_flags": [
-        "Multiple therapy codes for single session",
-        "Total time exceeds appointment duration",
-        "Simple muscle pain billed as complex therapy"
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 18.0x normal",
+        "Provider bills >60% of visits at highest complexity"
       ],
-      "notes": "Physical therapy session upcoded with multiple unnecessary codes"
+      "notes": "Cough upcoded to high complexity"
     },
     {
-      "claim_id": "CLM-2024-F01004",
-      "patient_id": "PAT-80004",
-      "provider_id": "PRV-FRAUD-003",
-      "provider_npi": "9999999003",
-      "date_of_service": "2024-03-18",
-      "diagnosis_codes": ["K59.00"],
-      "diagnosis_descriptions": ["Constipation, unspecified"],
-      "procedure_codes": ["45378", "45380"],
-      "procedure_descriptions": ["Colonoscopy", "Colonoscopy with biopsy"],
-      "billed_amount": 3500.00,
+      "claim_id": "CLM-2024-F100087",
+      "patient_id": "PAT-010997",
+      "provider_id": "PRV-FRAUD-004",
+      "provider_npi": "9999680238",
+      "date_of_service": "2024-02-07",
+      "diagnosis_codes": [
+        "K59.00"
+      ],
+      "diagnosis_descriptions": [
+        "Constipation, unspecified"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 615.54,
+      "actual_service": "99212",
+      "actual_amount": 48.08,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 12.8x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Constipation, unspecified upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100088",
+      "patient_id": "PAT-010963",
+      "provider_id": "PRV-FRAUD-031",
+      "provider_npi": "9999219629",
+      "date_of_service": "2024-01-09",
+      "diagnosis_codes": [
+        "R05"
+      ],
+      "diagnosis_descriptions": [
+        "Cough"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 572.54,
+      "actual_service": "99211",
+      "actual_amount": 47.86,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 12.0x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Cough upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100089",
+      "patient_id": "PAT-010254",
+      "provider_id": "PRV-FRAUD-008",
+      "provider_npi": "9999685181",
+      "date_of_service": "2024-02-23",
+      "diagnosis_codes": [
+        "Z00.00"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for general adult medical examination without abnormal findings"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 841.01,
+      "actual_service": "99211",
+      "actual_amount": 41.63,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 20.2x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Encounter for general adult medical examination without abnormal findings upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100090",
+      "patient_id": "PAT-010983",
+      "provider_id": "PRV-FRAUD-048",
+      "provider_npi": "9999204053",
+      "date_of_service": "2024-01-27",
+      "diagnosis_codes": [
+        "R05"
+      ],
+      "diagnosis_descriptions": [
+        "Cough"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 714.22,
+      "actual_service": "99212",
+      "actual_amount": 76.82,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 9.3x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Cough upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100091",
+      "patient_id": "PAT-010481",
+      "provider_id": "PRV-FRAUD-019",
+      "provider_npi": "9999134225",
+      "date_of_service": "2024-01-30",
+      "diagnosis_codes": [
+        "R05"
+      ],
+      "diagnosis_descriptions": [
+        "Cough"
+      ],
+      "procedure_codes": [
+        "99215",
+        "94060"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Bronchodilation responsiveness, spirometry"
+      ],
+      "billed_amount": 402.51,
       "actual_service": "99213",
-      "actual_amount": 125.00,
-      "service_location": "22",
+      "actual_amount": 82.11,
+      "service_location": "11",
+      "service_location_desc": "Office",
       "claim_type": "professional",
-      "rendering_hours": 1.5,
       "fraud_indicator": true,
       "fraud_type": "upcoding",
       "red_flags": [
-        "Invasive procedure for simple constipation",
-        "No prior conservative treatment documented",
-        "Procedure not medically necessary"
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 4.9x normal",
+        "Provider bills >60% of visits at highest complexity"
       ],
-      "notes": "Office visit for constipation billed as colonoscopy procedure"
+      "notes": "Cough upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100092",
+      "patient_id": "PAT-010823",
+      "provider_id": "PRV-FRAUD-013",
+      "provider_npi": "9999545790",
+      "date_of_service": "2024-01-15",
+      "diagnosis_codes": [
+        "K59.00"
+      ],
+      "diagnosis_descriptions": [
+        "Constipation, unspecified"
+      ],
+      "procedure_codes": [
+        "99215",
+        "94060"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Bronchodilation responsiveness, spirometry"
+      ],
+      "billed_amount": 402.36,
+      "actual_service": "99213",
+      "actual_amount": 111.52,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 3.6x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Constipation, unspecified upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100093",
+      "patient_id": "PAT-010766",
+      "provider_id": "PRV-FRAUD-037",
+      "provider_npi": "9999402630",
+      "date_of_service": "2024-02-26",
+      "diagnosis_codes": [
+        "R05"
+      ],
+      "diagnosis_descriptions": [
+        "Cough"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 518.05,
+      "actual_service": "99212",
+      "actual_amount": 68.78,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 7.5x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Cough upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100094",
+      "patient_id": "PAT-010910",
+      "provider_id": "PRV-FRAUD-028",
+      "provider_npi": "9999870214",
+      "date_of_service": "2024-02-11",
+      "diagnosis_codes": [
+        "J00"
+      ],
+      "diagnosis_descriptions": [
+        "Acute nasopharyngitis (common cold)"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 746.55,
+      "actual_service": "99213",
+      "actual_amount": 97.27,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 7.7x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Acute nasopharyngitis (common cold) upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100095",
+      "patient_id": "PAT-010021",
+      "provider_id": "PRV-FRAUD-049",
+      "provider_npi": "9999804938",
+      "date_of_service": "2024-02-04",
+      "diagnosis_codes": [
+        "K59.00"
+      ],
+      "diagnosis_descriptions": [
+        "Constipation, unspecified"
+      ],
+      "procedure_codes": [
+        "99215"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high"
+      ],
+      "billed_amount": 337.68,
+      "actual_service": "99211",
+      "actual_amount": 32.33,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 10.4x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Constipation, unspecified upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100096",
+      "patient_id": "PAT-010446",
+      "provider_id": "PRV-FRAUD-041",
+      "provider_npi": "9999953797",
+      "date_of_service": "2024-03-03",
+      "diagnosis_codes": [
+        "J00"
+      ],
+      "diagnosis_descriptions": [
+        "Acute nasopharyngitis (common cold)"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 670.43,
+      "actual_service": "99212",
+      "actual_amount": 66.98,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 10.0x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Acute nasopharyngitis (common cold) upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100097",
+      "patient_id": "PAT-010678",
+      "provider_id": "PRV-FRAUD-026",
+      "provider_npi": "9999953085",
+      "date_of_service": "2024-03-11",
+      "diagnosis_codes": [
+        "J00"
+      ],
+      "diagnosis_descriptions": [
+        "Acute nasopharyngitis (common cold)"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 691.26,
+      "actual_service": "99212",
+      "actual_amount": 60.84,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 11.4x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Acute nasopharyngitis (common cold) upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100098",
+      "patient_id": "PAT-010673",
+      "provider_id": "PRV-FRAUD-035",
+      "provider_npi": "9999584417",
+      "date_of_service": "2024-02-22",
+      "diagnosis_codes": [
+        "J00"
+      ],
+      "diagnosis_descriptions": [
+        "Acute nasopharyngitis (common cold)"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 886.92,
+      "actual_service": "99211",
+      "actual_amount": 31.12,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 28.5x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Acute nasopharyngitis (common cold) upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100099",
+      "patient_id": "PAT-010208",
+      "provider_id": "PRV-FRAUD-018",
+      "provider_npi": "9999675898",
+      "date_of_service": "2024-01-17",
+      "diagnosis_codes": [
+        "J00"
+      ],
+      "diagnosis_descriptions": [
+        "Acute nasopharyngitis (common cold)"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 741.26,
+      "actual_service": "99213",
+      "actual_amount": 111.02,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 6.7x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Acute nasopharyngitis (common cold) upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100100",
+      "patient_id": "PAT-010014",
+      "provider_id": "PRV-FRAUD-036",
+      "provider_npi": "9999527809",
+      "date_of_service": "2024-01-12",
+      "diagnosis_codes": [
+        "K59.00"
+      ],
+      "diagnosis_descriptions": [
+        "Constipation, unspecified"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 836.83,
+      "actual_service": "99213",
+      "actual_amount": 93.8,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 8.9x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Constipation, unspecified upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100101",
+      "patient_id": "PAT-010298",
+      "provider_id": "PRV-FRAUD-033",
+      "provider_npi": "9999839677",
+      "date_of_service": "2024-02-04",
+      "diagnosis_codes": [
+        "R05"
+      ],
+      "diagnosis_descriptions": [
+        "Cough"
+      ],
+      "procedure_codes": [
+        "99215"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high"
+      ],
+      "billed_amount": 252.05,
+      "actual_service": "99212",
+      "actual_amount": 86.83,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 2.9x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Cough upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100102",
+      "patient_id": "PAT-010884",
+      "provider_id": "PRV-FRAUD-005",
+      "provider_npi": "9999389666",
+      "date_of_service": "2024-02-23",
+      "diagnosis_codes": [
+        "Z00.00"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for general adult medical examination without abnormal findings"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 852.12,
+      "actual_service": "99212",
+      "actual_amount": 59.43,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 14.3x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Encounter for general adult medical examination without abnormal findings upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100103",
+      "patient_id": "PAT-010551",
+      "provider_id": "PRV-FRAUD-031",
+      "provider_npi": "9999461888",
+      "date_of_service": "2024-02-12",
+      "diagnosis_codes": [
+        "K59.00"
+      ],
+      "diagnosis_descriptions": [
+        "Constipation, unspecified"
+      ],
+      "procedure_codes": [
+        "99215",
+        "94060"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Bronchodilation responsiveness, spirometry"
+      ],
+      "billed_amount": 464.41,
+      "actual_service": "99211",
+      "actual_amount": 30.13,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 15.4x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Constipation, unspecified upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100104",
+      "patient_id": "PAT-010325",
+      "provider_id": "PRV-FRAUD-048",
+      "provider_npi": "9999595951",
+      "date_of_service": "2024-03-31",
+      "diagnosis_codes": [
+        "Z00.00"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for general adult medical examination without abnormal findings"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 867.77,
+      "actual_service": "99212",
+      "actual_amount": 92.04,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 9.4x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Encounter for general adult medical examination without abnormal findings upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100105",
+      "patient_id": "PAT-010339",
+      "provider_id": "PRV-FRAUD-007",
+      "provider_npi": "9999986088",
+      "date_of_service": "2024-02-26",
+      "diagnosis_codes": [
+        "Z00.00"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for general adult medical examination without abnormal findings"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 678.48,
+      "actual_service": "99213",
+      "actual_amount": 130.3,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 5.2x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Encounter for general adult medical examination without abnormal findings upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100106",
+      "patient_id": "PAT-010346",
+      "provider_id": "PRV-FRAUD-040",
+      "provider_npi": "9999826353",
+      "date_of_service": "2024-02-20",
+      "diagnosis_codes": [
+        "J00"
+      ],
+      "diagnosis_descriptions": [
+        "Acute nasopharyngitis (common cold)"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 829.69,
+      "actual_service": "99211",
+      "actual_amount": 41.9,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 19.8x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Acute nasopharyngitis (common cold) upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100107",
+      "patient_id": "PAT-010036",
+      "provider_id": "PRV-FRAUD-040",
+      "provider_npi": "9999171744",
+      "date_of_service": "2024-01-31",
+      "diagnosis_codes": [
+        "J00"
+      ],
+      "diagnosis_descriptions": [
+        "Acute nasopharyngitis (common cold)"
+      ],
+      "procedure_codes": [
+        "99215",
+        "94060"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Bronchodilation responsiveness, spirometry"
+      ],
+      "billed_amount": 459.34,
+      "actual_service": "99213",
+      "actual_amount": 123.36,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 3.7x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Acute nasopharyngitis (common cold) upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100108",
+      "patient_id": "PAT-010102",
+      "provider_id": "PRV-FRAUD-029",
+      "provider_npi": "9999274446",
+      "date_of_service": "2024-03-29",
+      "diagnosis_codes": [
+        "K59.00"
+      ],
+      "diagnosis_descriptions": [
+        "Constipation, unspecified"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 772.65,
+      "actual_service": "99213",
+      "actual_amount": 102.37,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 7.5x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Constipation, unspecified upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100109",
+      "patient_id": "PAT-010250",
+      "provider_id": "PRV-FRAUD-034",
+      "provider_npi": "9999532067",
+      "date_of_service": "2024-03-13",
+      "diagnosis_codes": [
+        "K59.00"
+      ],
+      "diagnosis_descriptions": [
+        "Constipation, unspecified"
+      ],
+      "procedure_codes": [
+        "99215"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high"
+      ],
+      "billed_amount": 248.49,
+      "actual_service": "99211",
+      "actual_amount": 28.7,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 8.7x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Constipation, unspecified upcoded to high complexity"
     }
   ],
   "metadata": {
     "file_type": "fraudulent_upcoding_claims",
-    "generated_date": "2024-03-20",
-    "total_claims": 4,
-    "total_fraudulent_billed": 4735.00,
-    "actual_value": 450.00,
-    "fraud_amount": 4285.00,
-    "fraud_percentage": 90.5
+    "generated_date": "2025-10-28",
+    "total_claims": 30,
+    "total_fraudulent_billed": 18288.61,
+    "actual_value": 2030.76,
+    "fraud_amount": 16257.85
   }
 }

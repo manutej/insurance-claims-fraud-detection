@@ -1,132 +1,5978 @@
 {
   "claims": [
     {
-      "claim_id": "MIX-2024-001",
-      "source": "valid",
-      "patient_id": "PAT-90001",
-      "provider_id": "PRV-50001",
-      "date_of_service": "2024-03-20",
-      "diagnosis_codes": ["J20.9"],
-      "procedure_codes": ["99213"],
-      "billed_amount": 125.00,
-      "fraud_indicator": false
+      "claim_id": "CLM-2024-100273",
+      "patient_id": "PAT-010705",
+      "provider_id": "PRV-005092",
+      "provider_npi": "3234182237",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-03-05",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "71046"
+      ],
+      "procedure_descriptions": [
+        "Chest X-ray, 2 views"
+      ],
+      "billed_amount": 117.45,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
     },
     {
-      "claim_id": "MIX-2024-002",
-      "source": "fraudulent_upcoding",
-      "patient_id": "PAT-90002",
-      "provider_id": "PRV-SUSPECT-001",
-      "date_of_service": "2024-03-20",
-      "diagnosis_codes": ["R05"],
-      "procedure_codes": ["99215", "94664"],
-      "billed_amount": 475.00,
+      "claim_id": "CLM-2024-F100319",
+      "patient_id": "PAT-010322",
+      "provider_id": "PRV-FRAUD-009",
+      "provider_npi": "9999359822",
+      "date_of_service": "2024-02-05",
+      "diagnosis_codes": [
+        "Z00.00"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for general adult medical examination without abnormal findings"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 819.4,
+      "actual_service": "99211",
+      "actual_amount": 23.91,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
       "fraud_indicator": true,
-      "fraud_type": "upcoding"
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 34.3x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Encounter for general adult medical examination without abnormal findings upcoded to high complexity"
     },
     {
-      "claim_id": "MIX-2024-003",
-      "source": "valid",
-      "patient_id": "PAT-90003",
-      "provider_id": "PRV-50002",
-      "date_of_service": "2024-03-20",
-      "diagnosis_codes": ["E11.65", "I10"],
-      "procedure_codes": ["99214", "82947"],
-      "billed_amount": 245.00,
-      "fraud_indicator": false
+      "claim_id": "CLM-2024-F100308",
+      "patient_id": "PAT-010887",
+      "provider_id": "PRV-FRAUD-042",
+      "provider_npi": "9999233051",
+      "date_of_service": "2024-03-30",
+      "diagnosis_codes": [
+        "K59.00"
+      ],
+      "diagnosis_descriptions": [
+        "Constipation, unspecified"
+      ],
+      "procedure_codes": [
+        "99215"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high"
+      ],
+      "billed_amount": 387.73,
+      "actual_service": "99211",
+      "actual_amount": 53.27,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 7.3x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Constipation, unspecified upcoded to high complexity"
     },
     {
-      "claim_id": "MIX-2024-004",
-      "source": "fraudulent_phantom",
-      "patient_id": "PAT-GHOST-100",
-      "provider_id": "PRV-SUSPECT-002",
-      "date_of_service": "2024-03-21",
+      "claim_id": "CLM-2024-F100382",
+      "patient_id": "PAT-010181",
+      "provider_id": "PRV-FRAUD-031",
+      "provider_npi": "9999715388",
+      "accident_date": "2024-02-27",
+      "date_of_service": "2024-02-27",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 413.4,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-100254",
+      "patient_id": "PAT-010460",
+      "provider_id": "PRV-005047",
+      "provider_npi": "1234196955",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-03-09",
+      "diagnosis_codes": [
+        "J00"
+      ],
+      "diagnosis_descriptions": [
+        "Acute nasopharyngitis (common cold)"
+      ],
+      "procedure_codes": [
+        "99211"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, minimal"
+      ],
+      "billed_amount": 29.06,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100349",
+      "patient_id": "PAT-GHOST-931",
+      "provider_id": "PRV-FRAUD-012",
+      "provider_npi": "9999388339",
+      "date_of_service": "2024-01-28",
       "day_of_week": "Sunday",
-      "diagnosis_codes": ["M79.3"],
-      "procedure_codes": ["97110", "97140"],
-      "billed_amount": 385.00,
+      "diagnosis_codes": [
+        "F41.1"
+      ],
+      "diagnosis_descriptions": [
+        "Generalized anxiety disorder"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 161.8,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
       "fraud_indicator": true,
-      "fraud_type": "phantom_billing"
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Sunday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
     },
     {
-      "claim_id": "MIX-2024-005",
-      "source": "valid",
-      "patient_id": "PAT-90005",
-      "provider_id": "PRV-50003",
-      "date_of_service": "2024-03-20",
-      "diagnosis_codes": ["K21.9"],
-      "procedure_codes": ["99213", "74220"],
-      "billed_amount": 450.00,
-      "fraud_indicator": false
-    },
-    {
-      "claim_id": "MIX-2024-006",
-      "source": "fraudulent_unbundling",
-      "patient_id": "PAT-90006",
-      "provider_id": "PRV-SUSPECT-003",
-      "date_of_service": "2024-03-20",
-      "diagnosis_codes": ["K80.10"],
-      "procedure_codes": ["47563", "49320", "49322"],
-      "billed_amount": 12500.00,
+      "claim_id": "CLM-2024-F100375",
+      "patient_id": "PAT-010153",
+      "provider_id": "PRV-FRAUD-010",
+      "provider_npi": "9999694116",
+      "accident_date": "2024-02-23",
+      "date_of_service": "2024-02-23",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 434.33,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
       "fraud_indicator": true,
-      "fraud_type": "unbundling"
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
     },
     {
-      "claim_id": "MIX-2024-007",
-      "source": "valid",
-      "patient_id": "PAT-90007",
-      "provider_id": "PRV-50004",
-      "date_of_service": "2024-03-20",
-      "diagnosis_codes": ["N39.0"],
-      "procedure_codes": ["99213", "81001"],
-      "billed_amount": 165.00,
-      "fraud_indicator": false
+      "claim_id": "RX-2024-100258",
+      "patient_id": "PAT-010794",
+      "prescriber_npi": "2393499152",
+      "pharmacy_npi": "9876543577",
+      "date_of_service": "2024-03-09",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J01.90"
+      ],
+      "billed_amount": 19.73,
+      "refill_number": 2,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
     },
     {
-      "claim_id": "MIX-2024-008",
-      "source": "fraudulent_staged",
-      "patient_id": "PAT-90008",
-      "provider_id": "PRV-SUSPECT-004",
-      "accident_date": "2024-03-19",
-      "date_of_service": "2024-03-19",
-      "diagnosis_codes": ["S13.4XXA"],
-      "procedure_codes": ["99215", "97110", "97140"],
-      "billed_amount": 625.00,
+      "claim_id": "RX-2024-100255",
+      "patient_id": "PAT-010274",
+      "prescriber_npi": "2778806396",
+      "pharmacy_npi": "9876543719",
+      "date_of_service": "2024-03-18",
+      "ndc_code": "00002-3214-30",
+      "drug_name": "Metformin HCL 1000mg",
+      "quantity": 60,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "billed_amount": 16.38,
+      "refill_number": 0,
+      "fraud_indicator": false,
+      "notes": "Regular metformin prescription"
+    },
+    {
+      "claim_id": "CLM-2024-100252",
+      "patient_id": "PAT-010550",
+      "provider_id": "PRV-005060",
+      "provider_npi": "2234352673",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-01-29",
+      "diagnosis_codes": [
+        "N18.3"
+      ],
+      "diagnosis_descriptions": [
+        "Chronic kidney disease, stage 3"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 139.84,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "RX-2024-100250",
+      "patient_id": "PAT-010423",
+      "prescriber_npi": "2464388519",
+      "pharmacy_npi": "9876543162",
+      "date_of_service": "2024-03-12",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "billed_amount": 24.23,
+      "refill_number": 1,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
+    },
+    {
+      "claim_id": "CLM-2024-F100332",
+      "patient_id": "PAT-GHOST-977",
+      "provider_id": "PRV-FRAUD-026",
+      "provider_npi": "9999172274",
+      "date_of_service": "2024-01-06",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "N39.0"
+      ],
+      "diagnosis_descriptions": [
+        "Urinary tract infection, site not specified"
+      ],
+      "procedure_codes": [
+        "97110",
+        "97140"
+      ],
+      "procedure_descriptions": [
+        "Therapeutic exercises",
+        "Manual therapy techniques"
+      ],
+      "billed_amount": 113.7,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
       "fraud_indicator": true,
-      "fraud_type": "staged_accident"
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
     },
     {
-      "claim_id": "MIX-2024-009",
-      "source": "valid",
-      "patient_id": "PAT-90009",
-      "provider_id": "PRV-50005",
-      "date_of_service": "2024-03-20",
-      "diagnosis_codes": ["M54.5"],
-      "procedure_codes": ["97110"],
-      "billed_amount": 125.00,
-      "fraud_indicator": false
+      "claim_id": "RX-2024-100241",
+      "patient_id": "PAT-010464",
+      "prescriber_npi": "1774638179",
+      "pharmacy_npi": "9876543525",
+      "date_of_service": "2024-02-28",
+      "ndc_code": "00006-0749-61",
+      "drug_name": "Lisinopril 10mg",
+      "quantity": 30,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "billed_amount": 21.28,
+      "refill_number": 3,
+      "fraud_indicator": false,
+      "notes": "Regular lisinopril prescription"
     },
     {
-      "claim_id": "MIX-2024-010",
-      "source": "fraudulent_prescription",
-      "patient_id": "PAT-90010",
-      "prescriber_npi": "SUSPECT-RX-001",
-      "date_of_service": "2024-03-20",
+      "claim_id": "CLM-2024-F100354",
+      "patient_id": "PAT-010363",
+      "provider_id": "PRV-FRAUD-012",
+      "provider_npi": "9999284654",
+      "date_of_service": "2024-01-31",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 19443.97,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 15167.93,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $4276.04",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "RX-2024-100272",
+      "patient_id": "PAT-010951",
+      "prescriber_npi": "1549413814",
+      "pharmacy_npi": "9876543266",
+      "date_of_service": "2024-03-13",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J01.90"
+      ],
+      "billed_amount": 13.61,
+      "refill_number": 3,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
+    },
+    {
+      "claim_id": "CLM-2024-100237",
+      "patient_id": "PAT-010382",
+      "provider_id": "PRV-005053",
+      "provider_npi": "1234836038",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-03-11",
+      "diagnosis_codes": [
+        "N39.0"
+      ],
+      "diagnosis_descriptions": [
+        "Urinary tract infection, site not specified"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 123.55,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100223",
+      "patient_id": "PAT-010353",
+      "provider_id": "PRV-005098",
+      "provider_npi": "3234943700",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-01-19",
+      "diagnosis_codes": [
+        "S06.0X0A"
+      ],
+      "diagnosis_descriptions": [
+        "Concussion without loss of consciousness, initial"
+      ],
+      "procedure_codes": [
+        "71046"
+      ],
+      "procedure_descriptions": [
+        "Chest X-ray, 2 views"
+      ],
+      "billed_amount": 137.68,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100247",
+      "patient_id": "PAT-010049",
+      "provider_id": "PRV-005031",
+      "provider_npi": "3234876513",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-01-06",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "71046"
+      ],
+      "procedure_descriptions": [
+        "Chest X-ray, 2 views"
+      ],
+      "billed_amount": 127.14,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100329",
+      "patient_id": "PAT-010758",
+      "provider_id": "PRV-FRAUD-033",
+      "provider_npi": "9999102693",
+      "date_of_service": "2024-01-06",
+      "diagnosis_codes": [
+        "K59.00"
+      ],
+      "diagnosis_descriptions": [
+        "Constipation, unspecified"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 621.2,
+      "actual_service": "99212",
+      "actual_amount": 86.18,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 7.2x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Constipation, unspecified upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100339",
+      "patient_id": "PAT-GHOST-872",
+      "provider_id": "PRV-FRAUD-021",
+      "provider_npi": "9999939717",
+      "date_of_service": "2024-02-03",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "Z00.00"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for general adult medical examination without abnormal findings"
+      ],
+      "procedure_codes": [
+        "97110",
+        "97140"
+      ],
+      "procedure_descriptions": [
+        "Therapeutic exercises",
+        "Manual therapy techniques"
+      ],
+      "billed_amount": 131.19,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100378",
+      "patient_id": "PAT-010878",
+      "provider_id": "PRV-FRAUD-045",
+      "provider_npi": "9999818119",
+      "accident_date": "2024-03-03",
+      "date_of_service": "2024-03-03",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 443.82,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-100224",
+      "patient_id": "PAT-010219",
+      "provider_id": "PRV-005025",
+      "provider_npi": "2234968170",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-03-09",
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes without complications"
+      ],
+      "procedure_codes": [
+        "80053"
+      ],
+      "procedure_descriptions": [
+        "Comprehensive metabolic panel"
+      ],
+      "billed_amount": 57.06,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100302",
+      "patient_id": "PAT-010425",
+      "provider_id": "PRV-FRAUD-046",
+      "provider_npi": "9999980690",
+      "date_of_service": "2024-02-26",
+      "diagnosis_codes": [
+        "R05"
+      ],
+      "diagnosis_descriptions": [
+        "Cough"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 684.42,
+      "actual_service": "99212",
+      "actual_amount": 83.87,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 8.2x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Cough upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100356",
+      "patient_id": "PAT-010238",
+      "provider_id": "PRV-FRAUD-039",
+      "provider_npi": "9999329437",
+      "date_of_service": "2024-01-03",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 20285.17,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 10027.67,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $10257.5",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100342",
+      "patient_id": "PAT-GHOST-162",
+      "provider_id": "PRV-FRAUD-044",
+      "provider_npi": "9999418992",
+      "date_of_service": "2024-01-13",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "M17.11"
+      ],
+      "diagnosis_descriptions": [
+        "Unilateral primary osteoarthritis, right knee"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 182.58,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100318",
+      "patient_id": "PAT-010739",
+      "provider_id": "PRV-FRAUD-014",
+      "provider_npi": "9999758589",
+      "date_of_service": "2024-01-20",
+      "diagnosis_codes": [
+        "R05"
+      ],
+      "diagnosis_descriptions": [
+        "Cough"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 682.52,
+      "actual_service": "99211",
+      "actual_amount": 32.62,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 20.9x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Cough upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-100208",
+      "patient_id": "PAT-010023",
+      "provider_id": "PRV-005011",
+      "provider_npi": "1234512344",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-03-05",
+      "diagnosis_codes": [
+        "N39.0"
+      ],
+      "diagnosis_descriptions": [
+        "Urinary tract infection, site not specified"
+      ],
+      "procedure_codes": [
+        "81001"
+      ],
+      "procedure_descriptions": [
+        "Urinalysis, automated, with microscopy"
+      ],
+      "billed_amount": 18.84,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100262",
+      "patient_id": "PAT-010989",
+      "provider_id": "PRV-005092",
+      "provider_npi": "3234772865",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-03-03",
+      "diagnosis_codes": [
+        "S06.0X0A"
+      ],
+      "diagnosis_descriptions": [
+        "Concussion without loss of consciousness, initial"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 632.88,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100337",
+      "patient_id": "PAT-GHOST-729",
+      "provider_id": "PRV-FRAUD-018",
+      "provider_npi": "9999197545",
+      "date_of_service": "2024-01-20",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "M17.11"
+      ],
+      "diagnosis_descriptions": [
+        "Unilateral primary osteoarthritis, right knee"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 225.47,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-100239",
+      "patient_id": "PAT-010063",
+      "provider_id": "PRV-005070",
+      "provider_npi": "3234630041",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-01-26",
+      "diagnosis_codes": [
+        "S06.0X0A"
+      ],
+      "diagnosis_descriptions": [
+        "Concussion without loss of consciousness, initial"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 533.51,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "RX-2024-F100387",
+      "patient_id": "PAT-010693",
+      "prescriber_npi": "FRAUD-RX-034",
+      "pharmacy_npi": "PHARM-7506",
+      "date_of_service": "2024-03-02",
+      "last_fill_date": "2024-02-08",
+      "days_since_last_fill": 23,
       "ndc_code": "00406-0552-01",
       "drug_name": "Oxycodone HCL 30mg",
+      "controlled_substance": true,
+      "dea_schedule": "II",
       "quantity": 120,
-      "billed_amount": 450.00,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "M79.3"
+      ],
+      "billed_amount": 400,
+      "refill_number": 7,
       "fraud_indicator": true,
-      "fraud_type": "prescription_diversion"
+      "fraud_type": "prescription_fraud",
+      "red_flags": [
+        "Early refill (7 days before due)",
+        "Quantity double normal prescription",
+        "Patient has 6 prescribers in last 30 days (doctor shopping)",
+        "Patient has filled at 4 different pharmacies (pharmacy hopping)",
+        "Daily MME 6 exceeds CDC guideline of 90"
+      ],
+      "notes": "Controlled substance abuse pattern - doctor shopping detected"
+    },
+    {
+      "claim_id": "CLM-2024-100259",
+      "patient_id": "PAT-010480",
+      "provider_id": "PRV-005097",
+      "provider_npi": "3234980521",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-02-10",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "71046"
+      ],
+      "procedure_descriptions": [
+        "Chest X-ray, 2 views"
+      ],
+      "billed_amount": 94.29,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "RX-2024-100290",
+      "patient_id": "PAT-010108",
+      "prescriber_npi": "1277203396",
+      "pharmacy_npi": "9876543364",
+      "date_of_service": "2024-01-29",
+      "ndc_code": "00006-0749-61",
+      "drug_name": "Lisinopril 10mg",
+      "quantity": 30,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "billed_amount": 20.21,
+      "refill_number": 1,
+      "fraud_indicator": false,
+      "notes": "Regular lisinopril prescription"
+    },
+    {
+      "claim_id": "RX-2024-F100394",
+      "patient_id": "PAT-010307",
+      "prescriber_npi": "FRAUD-RX-011",
+      "pharmacy_npi": "PHARM-3967",
+      "date_of_service": "2024-03-28",
+      "last_fill_date": "2024-03-05",
+      "days_since_last_fill": 23,
+      "ndc_code": "00406-0365-01",
+      "drug_name": "Hydrocodone-Acetaminophen 10-325mg",
+      "controlled_substance": true,
+      "dea_schedule": "II",
+      "quantity": 120,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "M54.5"
+      ],
+      "billed_amount": 240,
+      "refill_number": 5,
+      "fraud_indicator": true,
+      "fraud_type": "prescription_fraud",
+      "red_flags": [
+        "Early refill (7 days before due)",
+        "Quantity double normal prescription",
+        "Patient has 6 prescribers in last 30 days (doctor shopping)",
+        "Patient has filled at 4 different pharmacies (pharmacy hopping)",
+        "Daily MME 4 exceeds CDC guideline of 90"
+      ],
+      "notes": "Controlled substance abuse pattern - doctor shopping detected"
+    },
+    {
+      "claim_id": "CLM-2024-F100355",
+      "patient_id": "PAT-010717",
+      "provider_id": "PRV-FRAUD-023",
+      "provider_npi": "9999695225",
+      "date_of_service": "2024-03-13",
+      "diagnosis_codes": [
+        "M17.11"
+      ],
+      "diagnosis_descriptions": [
+        "Unilateral primary osteoarthritis, right knee"
+      ],
+      "procedure_codes": [
+        "27447",
+        "27410",
+        "27412"
+      ],
+      "procedure_descriptions": [
+        "Total knee arthroplasty",
+        "Unknown procedure",
+        "Unknown procedure"
+      ],
+      "billed_amount": 28899.45,
+      "correct_procedure": [
+        "27447"
+      ],
+      "correct_amount": 24646.19,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $4253.26",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100373",
+      "patient_id": "PAT-010433",
+      "provider_id": "PRV-FRAUD-006",
+      "provider_npi": "9999816308",
+      "accident_date": "2024-01-06",
+      "date_of_service": "2024-01-06",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 499.83,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-F100360",
+      "patient_id": "PAT-010705",
+      "provider_id": "PRV-FRAUD-019",
+      "provider_npi": "9999233534",
+      "date_of_service": "2024-01-23",
+      "diagnosis_codes": [
+        "M17.11"
+      ],
+      "diagnosis_descriptions": [
+        "Unilateral primary osteoarthritis, right knee"
+      ],
+      "procedure_codes": [
+        "27447",
+        "27410",
+        "27412"
+      ],
+      "procedure_descriptions": [
+        "Total knee arthroplasty",
+        "Unknown procedure",
+        "Unknown procedure"
+      ],
+      "billed_amount": 19038.19,
+      "correct_procedure": [
+        "27447"
+      ],
+      "correct_amount": 16608.55,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $2429.64",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "RX-2024-F100385",
+      "patient_id": "PAT-010258",
+      "prescriber_npi": "FRAUD-RX-039",
+      "pharmacy_npi": "PHARM-6004",
+      "date_of_service": "2024-02-21",
+      "last_fill_date": "2024-01-29",
+      "days_since_last_fill": 23,
+      "ndc_code": "00406-0552-01",
+      "drug_name": "Oxycodone HCL 30mg",
+      "controlled_substance": true,
+      "dea_schedule": "II",
+      "quantity": 120,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "M54.5"
+      ],
+      "billed_amount": 400,
+      "refill_number": 8,
+      "fraud_indicator": true,
+      "fraud_type": "prescription_fraud",
+      "red_flags": [
+        "Early refill (7 days before due)",
+        "Quantity double normal prescription",
+        "Patient has 6 prescribers in last 30 days (doctor shopping)",
+        "Patient has filled at 4 different pharmacies (pharmacy hopping)",
+        "Daily MME 6 exceeds CDC guideline of 90"
+      ],
+      "notes": "Controlled substance abuse pattern - doctor shopping detected"
+    },
+    {
+      "claim_id": "CLM-2024-100267",
+      "patient_id": "PAT-010415",
+      "provider_id": "PRV-005058",
+      "provider_npi": "1234692447",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-02-01",
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "diagnosis_descriptions": [
+        "Essential (primary) hypertension"
+      ],
+      "procedure_codes": [
+        "93000",
+        "36415"
+      ],
+      "procedure_descriptions": [
+        "Electrocardiogram (EKG), complete",
+        "Collection of venous blood by venipuncture"
+      ],
+      "billed_amount": 89.22,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100207",
+      "patient_id": "PAT-010833",
+      "provider_id": "PRV-005041",
+      "provider_npi": "2234705748",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-02-10",
+      "diagnosis_codes": [
+        "N18.3"
+      ],
+      "diagnosis_descriptions": [
+        "Chronic kidney disease, stage 3"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 221.42,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100205",
+      "patient_id": "PAT-010353",
+      "provider_id": "PRV-005051",
+      "provider_npi": "2234237118",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-02-17",
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "diagnosis_descriptions": [
+        "Essential (primary) hypertension"
+      ],
+      "procedure_codes": [
+        "36415"
+      ],
+      "procedure_descriptions": [
+        "Collection of venous blood by venipuncture"
+      ],
+      "billed_amount": 5.27,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100341",
+      "patient_id": "PAT-GHOST-124",
+      "provider_id": "PRV-FRAUD-035",
+      "provider_npi": "9999475691",
+      "date_of_service": "2024-02-24",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "diagnosis_descriptions": [
+        "Essential (primary) hypertension"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 92.27,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "RX-2024-100200",
+      "patient_id": "PAT-010866",
+      "prescriber_npi": "1557362778",
+      "pharmacy_npi": "9876543301",
+      "date_of_service": "2024-03-22",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J01.90"
+      ],
+      "billed_amount": 24.35,
+      "refill_number": 2,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
+    },
+    {
+      "claim_id": "CLM-2024-100299",
+      "patient_id": "PAT-010688",
+      "provider_id": "PRV-005017",
+      "provider_npi": "3234428399",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-01-16",
+      "diagnosis_codes": [
+        "S06.0X0A"
+      ],
+      "diagnosis_descriptions": [
+        "Concussion without loss of consciousness, initial"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 796.59,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100310",
+      "patient_id": "PAT-010958",
+      "provider_id": "PRV-FRAUD-024",
+      "provider_npi": "9999576782",
+      "date_of_service": "2024-03-03",
+      "diagnosis_codes": [
+        "K59.00"
+      ],
+      "diagnosis_descriptions": [
+        "Constipation, unspecified"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 734.65,
+      "actual_service": "99212",
+      "actual_amount": 68.46,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 10.7x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Constipation, unspecified upcoded to high complexity"
+    },
+    {
+      "claim_id": "RX-2024-100230",
+      "patient_id": "PAT-010897",
+      "prescriber_npi": "1387109717",
+      "pharmacy_npi": "9876543405",
+      "date_of_service": "2024-03-13",
+      "ndc_code": "00002-3214-30",
+      "drug_name": "Metformin HCL 1000mg",
+      "quantity": 60,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "E11.65"
+      ],
+      "billed_amount": 36.1,
+      "refill_number": 2,
+      "fraud_indicator": false,
+      "notes": "Regular metformin prescription"
+    },
+    {
+      "claim_id": "CLM-2024-100244",
+      "patient_id": "PAT-010228",
+      "provider_id": "PRV-005000",
+      "provider_npi": "2234892911",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-01-03",
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes without complications"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 142.6,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100269",
+      "patient_id": "PAT-010084",
+      "provider_id": "PRV-005063",
+      "provider_npi": "2234986392",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-02-25",
+      "diagnosis_codes": [
+        "N18.3"
+      ],
+      "diagnosis_descriptions": [
+        "Chronic kidney disease, stage 3"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 123.95,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100231",
+      "patient_id": "PAT-010516",
+      "provider_id": "PRV-005059",
+      "provider_npi": "3234386090",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-01-25",
+      "diagnosis_codes": [
+        "S06.0X0A"
+      ],
+      "diagnosis_descriptions": [
+        "Concussion without loss of consciousness, initial"
+      ],
+      "procedure_codes": [
+        "71046"
+      ],
+      "procedure_descriptions": [
+        "Chest X-ray, 2 views"
+      ],
+      "billed_amount": 126.14,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "RX-2024-F100397",
+      "patient_id": "PAT-010599",
+      "prescriber_npi": "FRAUD-RX-019",
+      "pharmacy_npi": "PHARM-8598",
+      "date_of_service": "2024-02-26",
+      "last_fill_date": "2024-02-03",
+      "days_since_last_fill": 23,
+      "ndc_code": "00406-0365-01",
+      "drug_name": "Hydrocodone-Acetaminophen 10-325mg",
+      "controlled_substance": true,
+      "dea_schedule": "II",
+      "quantity": 120,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "M54.5"
+      ],
+      "billed_amount": 240,
+      "refill_number": 3,
+      "fraud_indicator": true,
+      "fraud_type": "prescription_fraud",
+      "red_flags": [
+        "Early refill (7 days before due)",
+        "Quantity double normal prescription",
+        "Patient has 6 prescribers in last 30 days (doctor shopping)",
+        "Patient has filled at 4 different pharmacies (pharmacy hopping)",
+        "Daily MME 4 exceeds CDC guideline of 90"
+      ],
+      "notes": "Controlled substance abuse pattern - doctor shopping detected"
+    },
+    {
+      "claim_id": "CLM-2024-F100307",
+      "patient_id": "PAT-010720",
+      "provider_id": "PRV-FRAUD-019",
+      "provider_npi": "9999403387",
+      "date_of_service": "2024-03-14",
+      "diagnosis_codes": [
+        "R05"
+      ],
+      "diagnosis_descriptions": [
+        "Cough"
+      ],
+      "procedure_codes": [
+        "99215"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high"
+      ],
+      "billed_amount": 265.96,
+      "actual_service": "99213",
+      "actual_amount": 95.81,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 2.8x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Cough upcoded to high complexity"
+    },
+    {
+      "claim_id": "RX-2024-100210",
+      "patient_id": "PAT-010903",
+      "prescriber_npi": "2317862847",
+      "pharmacy_npi": "9876543474",
+      "date_of_service": "2024-02-21",
+      "ndc_code": "00006-0749-61",
+      "drug_name": "Lisinopril 10mg",
+      "quantity": 30,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "billed_amount": 17.32,
+      "refill_number": 3,
+      "fraud_indicator": false,
+      "notes": "Regular lisinopril prescription"
+    },
+    {
+      "claim_id": "CLM-2024-100218",
+      "patient_id": "PAT-010195",
+      "provider_id": "PRV-005002",
+      "provider_npi": "3234562462",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-02-10",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 712.18,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100300",
+      "patient_id": "PAT-010190",
+      "provider_id": "PRV-FRAUD-032",
+      "provider_npi": "9999766371",
+      "date_of_service": "2024-03-09",
+      "diagnosis_codes": [
+        "R05"
+      ],
+      "diagnosis_descriptions": [
+        "Cough"
+      ],
+      "procedure_codes": [
+        "99215",
+        "94060"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Bronchodilation responsiveness, spirometry"
+      ],
+      "billed_amount": 379.66,
+      "actual_service": "99211",
+      "actual_amount": 31.29,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 12.1x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Cough upcoded to high complexity"
+    },
+    {
+      "claim_id": "RX-2024-F100389",
+      "patient_id": "PAT-010344",
+      "prescriber_npi": "FRAUD-RX-018",
+      "pharmacy_npi": "PHARM-6327",
+      "date_of_service": "2024-02-01",
+      "last_fill_date": "2024-01-09",
+      "days_since_last_fill": 23,
+      "ndc_code": "00406-0552-01",
+      "drug_name": "Oxycodone HCL 30mg",
+      "controlled_substance": true,
+      "dea_schedule": "II",
+      "quantity": 120,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "M79.3"
+      ],
+      "billed_amount": 400,
+      "refill_number": 5,
+      "fraud_indicator": true,
+      "fraud_type": "prescription_fraud",
+      "red_flags": [
+        "Early refill (7 days before due)",
+        "Quantity double normal prescription",
+        "Patient has 6 prescribers in last 30 days (doctor shopping)",
+        "Patient has filled at 4 different pharmacies (pharmacy hopping)",
+        "Daily MME 6 exceeds CDC guideline of 90"
+      ],
+      "notes": "Controlled substance abuse pattern - doctor shopping detected"
+    },
+    {
+      "claim_id": "CLM-2024-F100371",
+      "patient_id": "PAT-010428",
+      "provider_id": "PRV-FRAUD-035",
+      "provider_npi": "9999820442",
+      "accident_date": "2024-03-07",
+      "date_of_service": "2024-03-07",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 468.78,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-100261",
+      "patient_id": "PAT-010235",
+      "provider_id": "PRV-005048",
+      "provider_npi": "3234697467",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-02-01",
+      "diagnosis_codes": [
+        "S06.0X0A"
+      ],
+      "diagnosis_descriptions": [
+        "Concussion without loss of consciousness, initial"
+      ],
+      "procedure_codes": [
+        "71046"
+      ],
+      "procedure_descriptions": [
+        "Chest X-ray, 2 views"
+      ],
+      "billed_amount": 88.29,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100346",
+      "patient_id": "PAT-GHOST-961",
+      "provider_id": "PRV-FRAUD-042",
+      "provider_npi": "9999188121",
+      "date_of_service": "2024-03-23",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "M79.3"
+      ],
+      "diagnosis_descriptions": [
+        "Panniculitis, unspecified (Myalgia)"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 121.35,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-100271",
+      "patient_id": "PAT-010016",
+      "provider_id": "PRV-005026",
+      "provider_npi": "1234715551",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-01-19",
+      "diagnosis_codes": [
+        "J00"
+      ],
+      "diagnosis_descriptions": [
+        "Acute nasopharyngitis (common cold)"
+      ],
+      "procedure_codes": [
+        "99211"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, minimal"
+      ],
+      "billed_amount": 32.58,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "RX-2024-F100386",
+      "patient_id": "PAT-010872",
+      "prescriber_npi": "FRAUD-RX-023",
+      "pharmacy_npi": "PHARM-8520",
+      "date_of_service": "2024-03-12",
+      "last_fill_date": "2024-02-18",
+      "days_since_last_fill": 23,
+      "ndc_code": "00406-0365-01",
+      "drug_name": "Hydrocodone-Acetaminophen 10-325mg",
+      "controlled_substance": true,
+      "dea_schedule": "II",
+      "quantity": 120,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "M54.5"
+      ],
+      "billed_amount": 240,
+      "refill_number": 5,
+      "fraud_indicator": true,
+      "fraud_type": "prescription_fraud",
+      "red_flags": [
+        "Early refill (7 days before due)",
+        "Quantity double normal prescription",
+        "Patient has 6 prescribers in last 30 days (doctor shopping)",
+        "Patient has filled at 4 different pharmacies (pharmacy hopping)",
+        "Daily MME 4 exceeds CDC guideline of 90"
+      ],
+      "notes": "Controlled substance abuse pattern - doctor shopping detected"
+    },
+    {
+      "claim_id": "RX-2024-100249",
+      "patient_id": "PAT-010591",
+      "prescriber_npi": "3683910065",
+      "pharmacy_npi": "9876543788",
+      "date_of_service": "2024-02-11",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J01.90"
+      ],
+      "billed_amount": 13.55,
+      "refill_number": 1,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
+    },
+    {
+      "claim_id": "CLM-2024-F100312",
+      "patient_id": "PAT-010560",
+      "provider_id": "PRV-FRAUD-037",
+      "provider_npi": "9999236937",
+      "date_of_service": "2024-03-13",
+      "diagnosis_codes": [
+        "Z00.00"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for general adult medical examination without abnormal findings"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 558.11,
+      "actual_service": "99212",
+      "actual_amount": 78.74,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 7.1x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Encounter for general adult medical examination without abnormal findings upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-100277",
+      "patient_id": "PAT-010109",
+      "provider_id": "PRV-005011",
+      "provider_npi": "1234105447",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-02-09",
+      "diagnosis_codes": [
+        "N39.0"
+      ],
+      "diagnosis_descriptions": [
+        "Urinary tract infection, site not specified"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 115.27,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100225",
+      "patient_id": "PAT-010600",
+      "provider_id": "PRV-005030",
+      "provider_npi": "3234354235",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-01-07",
+      "diagnosis_codes": [
+        "S06.0X0A"
+      ],
+      "diagnosis_descriptions": [
+        "Concussion without loss of consciousness, initial"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 559.96,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100350",
+      "patient_id": "PAT-010662",
+      "provider_id": "PRV-FRAUD-019",
+      "provider_npi": "9999623125",
+      "date_of_service": "2024-02-22",
+      "diagnosis_codes": [
+        "M17.11"
+      ],
+      "diagnosis_descriptions": [
+        "Unilateral primary osteoarthritis, right knee"
+      ],
+      "procedure_codes": [
+        "27447",
+        "27410",
+        "27412"
+      ],
+      "procedure_descriptions": [
+        "Total knee arthroplasty",
+        "Unknown procedure",
+        "Unknown procedure"
+      ],
+      "billed_amount": 19603.8,
+      "correct_procedure": [
+        "27447"
+      ],
+      "correct_amount": 25061.26,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $-5457.46",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-100292",
+      "patient_id": "PAT-010211",
+      "provider_id": "PRV-005066",
+      "provider_npi": "3234606384",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-02-14",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "71046"
+      ],
+      "procedure_descriptions": [
+        "Chest X-ray, 2 views"
+      ],
+      "billed_amount": 97.07,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "RX-2024-100289",
+      "patient_id": "PAT-010673",
+      "prescriber_npi": "3956472253",
+      "pharmacy_npi": "9876543270",
+      "date_of_service": "2024-03-23",
+      "ndc_code": "00002-3214-30",
+      "drug_name": "Metformin HCL 1000mg",
+      "quantity": 60,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "billed_amount": 36.44,
+      "refill_number": 3,
+      "fraud_indicator": false,
+      "notes": "Regular metformin prescription"
+    },
+    {
+      "claim_id": "RX-2024-F100391",
+      "patient_id": "PAT-010143",
+      "prescriber_npi": "FRAUD-RX-047",
+      "pharmacy_npi": "PHARM-1417",
+      "date_of_service": "2024-04-20",
+      "last_fill_date": "2024-03-28",
+      "days_since_last_fill": 23,
+      "ndc_code": "00406-0365-01",
+      "drug_name": "Hydrocodone-Acetaminophen 10-325mg",
+      "controlled_substance": true,
+      "dea_schedule": "II",
+      "quantity": 120,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "M54.5"
+      ],
+      "billed_amount": 240,
+      "refill_number": 8,
+      "fraud_indicator": true,
+      "fraud_type": "prescription_fraud",
+      "red_flags": [
+        "Early refill (7 days before due)",
+        "Quantity double normal prescription",
+        "Patient has 6 prescribers in last 30 days (doctor shopping)",
+        "Patient has filled at 4 different pharmacies (pharmacy hopping)",
+        "Daily MME 4 exceeds CDC guideline of 90"
+      ],
+      "notes": "Controlled substance abuse pattern - doctor shopping detected"
+    },
+    {
+      "claim_id": "CLM-2024-100294",
+      "patient_id": "PAT-010163",
+      "provider_id": "PRV-005042",
+      "provider_npi": "3234687044",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-02-24",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "85025"
+      ],
+      "procedure_descriptions": [
+        "Blood count, complete (CBC)"
+      ],
+      "billed_amount": 21.35,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "RX-2024-100265",
+      "patient_id": "PAT-010016",
+      "prescriber_npi": "1261658065",
+      "pharmacy_npi": "9876543664",
+      "date_of_service": "2024-02-22",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J01.90"
+      ],
+      "billed_amount": 10.18,
+      "refill_number": 2,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
+    },
+    {
+      "claim_id": "CLM-2024-F100314",
+      "patient_id": "PAT-010897",
+      "provider_id": "PRV-FRAUD-018",
+      "provider_npi": "9999197874",
+      "date_of_service": "2024-03-24",
+      "diagnosis_codes": [
+        "Z00.00"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for general adult medical examination without abnormal findings"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 656.9,
+      "actual_service": "99213",
+      "actual_amount": 145.43,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 4.5x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Encounter for general adult medical examination without abnormal findings upcoded to high complexity"
+    },
+    {
+      "claim_id": "RX-2024-100296",
+      "patient_id": "PAT-010606",
+      "prescriber_npi": "2993507723",
+      "pharmacy_npi": "9876543104",
+      "date_of_service": "2024-03-31",
+      "ndc_code": "00002-3214-30",
+      "drug_name": "Metformin HCL 1000mg",
+      "quantity": 60,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "E11.65"
+      ],
+      "billed_amount": 22.52,
+      "refill_number": 2,
+      "fraud_indicator": false,
+      "notes": "Regular metformin prescription"
+    },
+    {
+      "claim_id": "CLM-2024-100217",
+      "patient_id": "PAT-010738",
+      "provider_id": "PRV-005079",
+      "provider_npi": "3234912233",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-02-18",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "85025"
+      ],
+      "procedure_descriptions": [
+        "Blood count, complete (CBC)"
+      ],
+      "billed_amount": 27.4,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100331",
+      "patient_id": "PAT-GHOST-278",
+      "provider_id": "PRV-FRAUD-005",
+      "provider_npi": "9999699298",
+      "date_of_service": "2024-02-10",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "Z00.00"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for general adult medical examination without abnormal findings"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 169.99,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-100266",
+      "patient_id": "PAT-010931",
+      "provider_id": "PRV-005022",
+      "provider_npi": "2234212214",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-01-13",
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes without complications"
+      ],
+      "procedure_codes": [
+        "83036"
+      ],
+      "procedure_descriptions": [
+        "Hemoglobin A1C"
+      ],
+      "billed_amount": 42.02,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100212",
+      "patient_id": "PAT-010382",
+      "provider_id": "PRV-005043",
+      "provider_npi": "3234684929",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-02-16",
+      "diagnosis_codes": [
+        "S06.0X0A"
+      ],
+      "diagnosis_descriptions": [
+        "Concussion without loss of consciousness, initial"
+      ],
+      "procedure_codes": [
+        "99283"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, moderate severity"
+      ],
+      "billed_amount": 231.06,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100330",
+      "patient_id": "PAT-GHOST-184",
+      "provider_id": "PRV-FRAUD-003",
+      "provider_npi": "9999679720",
+      "date_of_service": "2024-01-20",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes without complications"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 104.78,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "RX-2024-F100398",
+      "patient_id": "PAT-010597",
+      "prescriber_npi": "FRAUD-RX-038",
+      "pharmacy_npi": "PHARM-2166",
+      "date_of_service": "2024-04-14",
+      "last_fill_date": "2024-03-22",
+      "days_since_last_fill": 23,
+      "ndc_code": "00406-0365-01",
+      "drug_name": "Hydrocodone-Acetaminophen 10-325mg",
+      "controlled_substance": true,
+      "dea_schedule": "II",
+      "quantity": 120,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "M54.5"
+      ],
+      "billed_amount": 240,
+      "refill_number": 6,
+      "fraud_indicator": true,
+      "fraud_type": "prescription_fraud",
+      "red_flags": [
+        "Early refill (7 days before due)",
+        "Quantity double normal prescription",
+        "Patient has 6 prescribers in last 30 days (doctor shopping)",
+        "Patient has filled at 4 different pharmacies (pharmacy hopping)",
+        "Daily MME 4 exceeds CDC guideline of 90"
+      ],
+      "notes": "Controlled substance abuse pattern - doctor shopping detected"
+    },
+    {
+      "claim_id": "CLM-2024-F100351",
+      "patient_id": "PAT-010905",
+      "provider_id": "PRV-FRAUD-034",
+      "provider_npi": "9999361250",
+      "date_of_service": "2024-03-21",
+      "diagnosis_codes": [
+        "M17.11"
+      ],
+      "diagnosis_descriptions": [
+        "Unilateral primary osteoarthritis, right knee"
+      ],
+      "procedure_codes": [
+        "27447",
+        "27410",
+        "27412"
+      ],
+      "procedure_descriptions": [
+        "Total knee arthroplasty",
+        "Unknown procedure",
+        "Unknown procedure"
+      ],
+      "billed_amount": 15063.25,
+      "correct_procedure": [
+        "27447"
+      ],
+      "correct_amount": 15520.5,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $-457.25",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "RX-2024-F100393",
+      "patient_id": "PAT-010743",
+      "prescriber_npi": "FRAUD-RX-046",
+      "pharmacy_npi": "PHARM-4643",
+      "date_of_service": "2024-03-07",
+      "last_fill_date": "2024-02-13",
+      "days_since_last_fill": 23,
+      "ndc_code": "00406-0552-01",
+      "drug_name": "Oxycodone HCL 30mg",
+      "controlled_substance": true,
+      "dea_schedule": "II",
+      "quantity": 120,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "M54.5"
+      ],
+      "billed_amount": 400,
+      "refill_number": 8,
+      "fraud_indicator": true,
+      "fraud_type": "prescription_fraud",
+      "red_flags": [
+        "Early refill (7 days before due)",
+        "Quantity double normal prescription",
+        "Patient has 6 prescribers in last 30 days (doctor shopping)",
+        "Patient has filled at 4 different pharmacies (pharmacy hopping)",
+        "Daily MME 6 exceeds CDC guideline of 90"
+      ],
+      "notes": "Controlled substance abuse pattern - doctor shopping detected"
+    },
+    {
+      "claim_id": "CLM-2024-100219",
+      "patient_id": "PAT-010722",
+      "provider_id": "PRV-005017",
+      "provider_npi": "2234643878",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-01-27",
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "diagnosis_descriptions": [
+        "Essential (primary) hypertension"
+      ],
+      "procedure_codes": [
+        "80053",
+        "36415"
+      ],
+      "procedure_descriptions": [
+        "Comprehensive metabolic panel",
+        "Collection of venous blood by venipuncture"
+      ],
+      "billed_amount": 59.52,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "RX-2024-100260",
+      "patient_id": "PAT-010423",
+      "prescriber_npi": "1421689849",
+      "pharmacy_npi": "9876543984",
+      "date_of_service": "2024-01-29",
+      "ndc_code": "00006-0749-61",
+      "drug_name": "Lisinopril 10mg",
+      "quantity": 30,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "billed_amount": 24.83,
+      "refill_number": 0,
+      "fraud_indicator": false,
+      "notes": "Regular lisinopril prescription"
+    },
+    {
+      "claim_id": "CLM-2024-F100305",
+      "patient_id": "PAT-010882",
+      "provider_id": "PRV-FRAUD-006",
+      "provider_npi": "9999560398",
+      "date_of_service": "2024-01-16",
+      "diagnosis_codes": [
+        "R05"
+      ],
+      "diagnosis_descriptions": [
+        "Cough"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 551.59,
+      "actual_service": "99211",
+      "actual_amount": 45.4,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 12.1x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Cough upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100377",
+      "patient_id": "PAT-010405",
+      "provider_id": "PRV-FRAUD-022",
+      "provider_npi": "9999824056",
+      "accident_date": "2024-01-05",
+      "date_of_service": "2024-01-05",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 432.33,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-F100364",
+      "patient_id": "PAT-010490",
+      "provider_id": "PRV-FRAUD-037",
+      "provider_npi": "9999782591",
+      "date_of_service": "2024-03-28",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 20914.58,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 10408.57,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $10506.01",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100363",
+      "patient_id": "PAT-010805",
+      "provider_id": "PRV-FRAUD-007",
+      "provider_npi": "9999855408",
+      "date_of_service": "2024-01-01",
+      "diagnosis_codes": [
+        "M17.11"
+      ],
+      "diagnosis_descriptions": [
+        "Unilateral primary osteoarthritis, right knee"
+      ],
+      "procedure_codes": [
+        "27447",
+        "27410",
+        "27412"
+      ],
+      "procedure_descriptions": [
+        "Total knee arthroplasty",
+        "Unknown procedure",
+        "Unknown procedure"
+      ],
+      "billed_amount": 14049.63,
+      "correct_procedure": [
+        "27447"
+      ],
+      "correct_amount": 24258.41,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $-10208.78",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-100256",
+      "patient_id": "PAT-010340",
+      "provider_id": "PRV-005038",
+      "provider_npi": "3234116078",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-01-28",
+      "diagnosis_codes": [
+        "S06.0X0A"
+      ],
+      "diagnosis_descriptions": [
+        "Concussion without loss of consciousness, initial"
+      ],
+      "procedure_codes": [
+        "99284"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, high severity"
+      ],
+      "billed_amount": 468.67,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100376",
+      "patient_id": "PAT-010898",
+      "provider_id": "PRV-FRAUD-027",
+      "provider_npi": "9999376967",
+      "accident_date": "2024-02-14",
+      "date_of_service": "2024-02-14",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 507.55,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-F100380",
+      "patient_id": "PAT-010726",
+      "provider_id": "PRV-FRAUD-033",
+      "provider_npi": "9999522979",
+      "accident_date": "2024-02-09",
+      "date_of_service": "2024-02-09",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 463.12,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-F100348",
+      "patient_id": "PAT-GHOST-444",
+      "provider_id": "PRV-FRAUD-047",
+      "provider_npi": "9999514186",
+      "date_of_service": "2024-03-16",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "N39.0"
+      ],
+      "diagnosis_descriptions": [
+        "Urinary tract infection, site not specified"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 114.3,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100369",
+      "patient_id": "PAT-010093",
+      "provider_id": "PRV-FRAUD-042",
+      "provider_npi": "9999670557",
+      "date_of_service": "2024-02-19",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 14738.26,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 11975.58,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $2762.68",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100313",
+      "patient_id": "PAT-010161",
+      "provider_id": "PRV-FRAUD-029",
+      "provider_npi": "9999578693",
+      "date_of_service": "2024-01-01",
+      "diagnosis_codes": [
+        "Z00.00"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for general adult medical examination without abnormal findings"
+      ],
+      "procedure_codes": [
+        "99215",
+        "94060"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Bronchodilation responsiveness, spirometry"
+      ],
+      "billed_amount": 438.34,
+      "actual_service": "99213",
+      "actual_amount": 106.34,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 4.1x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Encounter for general adult medical examination without abnormal findings upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100306",
+      "patient_id": "PAT-010169",
+      "provider_id": "PRV-FRAUD-040",
+      "provider_npi": "9999245998",
+      "date_of_service": "2024-01-27",
+      "diagnosis_codes": [
+        "R05"
+      ],
+      "diagnosis_descriptions": [
+        "Cough"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 741.63,
+      "actual_service": "99213",
+      "actual_amount": 109.27,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 6.8x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Cough upcoded to high complexity"
+    },
+    {
+      "claim_id": "RX-2024-F100399",
+      "patient_id": "PAT-010390",
+      "prescriber_npi": "FRAUD-RX-034",
+      "pharmacy_npi": "PHARM-5888",
+      "date_of_service": "2024-04-20",
+      "last_fill_date": "2024-03-28",
+      "days_since_last_fill": 23,
+      "ndc_code": "00406-0552-01",
+      "drug_name": "Oxycodone HCL 30mg",
+      "controlled_substance": true,
+      "dea_schedule": "II",
+      "quantity": 120,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "M54.5"
+      ],
+      "billed_amount": 400,
+      "refill_number": 6,
+      "fraud_indicator": true,
+      "fraud_type": "prescription_fraud",
+      "red_flags": [
+        "Early refill (7 days before due)",
+        "Quantity double normal prescription",
+        "Patient has 6 prescribers in last 30 days (doctor shopping)",
+        "Patient has filled at 4 different pharmacies (pharmacy hopping)",
+        "Daily MME 6 exceeds CDC guideline of 90"
+      ],
+      "notes": "Controlled substance abuse pattern - doctor shopping detected"
+    },
+    {
+      "claim_id": "CLM-2024-100284",
+      "patient_id": "PAT-010402",
+      "provider_id": "PRV-005046",
+      "provider_npi": "3234219420",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-03-13",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "71046"
+      ],
+      "procedure_descriptions": [
+        "Chest X-ray, 2 views"
+      ],
+      "billed_amount": 113.0,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "RX-2024-100297",
+      "patient_id": "PAT-010818",
+      "prescriber_npi": "3433296041",
+      "pharmacy_npi": "9876543474",
+      "date_of_service": "2024-02-11",
+      "ndc_code": "00002-3214-30",
+      "drug_name": "Metformin HCL 1000mg",
+      "quantity": 60,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "billed_amount": 21.9,
+      "refill_number": 0,
+      "fraud_indicator": false,
+      "notes": "Regular metformin prescription"
+    },
+    {
+      "claim_id": "CLM-2024-F100338",
+      "patient_id": "PAT-GHOST-098",
+      "provider_id": "PRV-FRAUD-033",
+      "provider_npi": "9999239999",
+      "date_of_service": "2024-03-16",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes without complications"
+      ],
+      "procedure_codes": [
+        "97110",
+        "97140"
+      ],
+      "procedure_descriptions": [
+        "Therapeutic exercises",
+        "Manual therapy techniques"
+      ],
+      "billed_amount": 133.52,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-100206",
+      "patient_id": "PAT-010253",
+      "provider_id": "PRV-005018",
+      "provider_npi": "1234201514",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-01-07",
+      "diagnosis_codes": [
+        "J00"
+      ],
+      "diagnosis_descriptions": [
+        "Acute nasopharyngitis (common cold)"
+      ],
+      "procedure_codes": [
+        "99211"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, minimal"
+      ],
+      "billed_amount": 34.1,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100374",
+      "patient_id": "PAT-010569",
+      "provider_id": "PRV-FRAUD-026",
+      "provider_npi": "9999678870",
+      "accident_date": "2024-02-19",
+      "date_of_service": "2024-02-19",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 503.94,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "RX-2024-100268",
+      "patient_id": "PAT-010700",
+      "prescriber_npi": "1564785491",
+      "pharmacy_npi": "9876543978",
+      "date_of_service": "2024-03-24",
+      "ndc_code": "00002-3214-30",
+      "drug_name": "Metformin HCL 1000mg",
+      "quantity": 60,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "E11.65"
+      ],
+      "billed_amount": 41.59,
+      "refill_number": 0,
+      "fraud_indicator": false,
+      "notes": "Regular metformin prescription"
+    },
+    {
+      "claim_id": "CLM-2024-F100344",
+      "patient_id": "PAT-GHOST-570",
+      "provider_id": "PRV-FRAUD-048",
+      "provider_npi": "9999676843",
+      "date_of_service": "2024-03-02",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "K59.00"
+      ],
+      "diagnosis_descriptions": [
+        "Constipation, unspecified"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 84.07,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "RX-2024-100232",
+      "patient_id": "PAT-010748",
+      "prescriber_npi": "3113779776",
+      "pharmacy_npi": "9876543363",
+      "date_of_service": "2024-01-24",
+      "ndc_code": "00006-0749-61",
+      "drug_name": "Lisinopril 10mg",
+      "quantity": 30,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "billed_amount": 10.28,
+      "refill_number": 2,
+      "fraud_indicator": false,
+      "notes": "Regular lisinopril prescription"
+    },
+    {
+      "claim_id": "CLM-2024-100281",
+      "patient_id": "PAT-010006",
+      "provider_id": "PRV-005050",
+      "provider_npi": "1234448354",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-03-20",
+      "diagnosis_codes": [
+        "N39.0"
+      ],
+      "diagnosis_descriptions": [
+        "Urinary tract infection, site not specified"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 96.09,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100327",
+      "patient_id": "PAT-010275",
+      "provider_id": "PRV-FRAUD-047",
+      "provider_npi": "9999223791",
+      "date_of_service": "2024-01-04",
+      "diagnosis_codes": [
+        "R05"
+      ],
+      "diagnosis_descriptions": [
+        "Cough"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 652.47,
+      "actual_service": "99212",
+      "actual_amount": 74.1,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 8.8x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Cough upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100352",
+      "patient_id": "PAT-010184",
+      "provider_id": "PRV-FRAUD-002",
+      "provider_npi": "9999434367",
+      "date_of_service": "2024-03-17",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 23656.93,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 11131.11,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $12525.82",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100301",
+      "patient_id": "PAT-010886",
+      "provider_id": "PRV-FRAUD-023",
+      "provider_npi": "9999110048",
+      "date_of_service": "2024-03-03",
+      "diagnosis_codes": [
+        "R05"
+      ],
+      "diagnosis_descriptions": [
+        "Cough"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 779.56,
+      "actual_service": "99212",
+      "actual_amount": 54.47,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 14.3x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Cough upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-100283",
+      "patient_id": "PAT-010991",
+      "provider_id": "PRV-005040",
+      "provider_npi": "3234405605",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-03-29",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "71046"
+      ],
+      "procedure_descriptions": [
+        "Chest X-ray, 2 views"
+      ],
+      "billed_amount": 112.3,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100343",
+      "patient_id": "PAT-GHOST-406",
+      "provider_id": "PRV-FRAUD-033",
+      "provider_npi": "9999151328",
+      "date_of_service": "2024-02-17",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes without complications"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 153.8,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "RX-2024-F100388",
+      "patient_id": "PAT-010678",
+      "prescriber_npi": "FRAUD-RX-024",
+      "pharmacy_npi": "PHARM-5631",
+      "date_of_service": "2024-03-29",
+      "last_fill_date": "2024-03-06",
+      "days_since_last_fill": 23,
+      "ndc_code": "00406-0552-01",
+      "drug_name": "Oxycodone HCL 30mg",
+      "controlled_substance": true,
+      "dea_schedule": "II",
+      "quantity": 120,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "M54.5"
+      ],
+      "billed_amount": 400,
+      "refill_number": 5,
+      "fraud_indicator": true,
+      "fraud_type": "prescription_fraud",
+      "red_flags": [
+        "Early refill (7 days before due)",
+        "Quantity double normal prescription",
+        "Patient has 6 prescribers in last 30 days (doctor shopping)",
+        "Patient has filled at 4 different pharmacies (pharmacy hopping)",
+        "Daily MME 6 exceeds CDC guideline of 90"
+      ],
+      "notes": "Controlled substance abuse pattern - doctor shopping detected"
+    },
+    {
+      "claim_id": "CLM-2024-100215",
+      "patient_id": "PAT-010835",
+      "provider_id": "PRV-005002",
+      "provider_npi": "3234486251",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-02-12",
+      "diagnosis_codes": [
+        "S06.0X0A"
+      ],
+      "diagnosis_descriptions": [
+        "Concussion without loss of consciousness, initial"
+      ],
+      "procedure_codes": [
+        "71046"
+      ],
+      "procedure_descriptions": [
+        "Chest X-ray, 2 views"
+      ],
+      "billed_amount": 120.46,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100326",
+      "patient_id": "PAT-010724",
+      "provider_id": "PRV-FRAUD-009",
+      "provider_npi": "9999835575",
+      "date_of_service": "2024-01-02",
+      "diagnosis_codes": [
+        "J00"
+      ],
+      "diagnosis_descriptions": [
+        "Acute nasopharyngitis (common cold)"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 783.12,
+      "actual_service": "99211",
+      "actual_amount": 37.52,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 20.9x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Acute nasopharyngitis (common cold) upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-100264",
+      "patient_id": "PAT-010632",
+      "provider_id": "PRV-005081",
+      "provider_npi": "1234799143",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-03-19",
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes without complications"
+      ],
+      "procedure_codes": [
+        "36415",
+        "36415",
+        "80053"
+      ],
+      "procedure_descriptions": [
+        "Collection of venous blood by venipuncture",
+        "Collection of venous blood by venipuncture",
+        "Comprehensive metabolic panel"
+      ],
+      "billed_amount": 60.41,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "RX-2024-100275",
+      "patient_id": "PAT-010649",
+      "prescriber_npi": "2353921609",
+      "pharmacy_npi": "9876543561",
+      "date_of_service": "2024-03-03",
+      "ndc_code": "00006-0749-61",
+      "drug_name": "Lisinopril 10mg",
+      "quantity": 30,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "billed_amount": 14.56,
+      "refill_number": 3,
+      "fraud_indicator": false,
+      "notes": "Regular lisinopril prescription"
+    },
+    {
+      "claim_id": "CLM-2024-F100320",
+      "patient_id": "PAT-010027",
+      "provider_id": "PRV-FRAUD-043",
+      "provider_npi": "9999416302",
+      "date_of_service": "2024-01-27",
+      "diagnosis_codes": [
+        "J00"
+      ],
+      "diagnosis_descriptions": [
+        "Acute nasopharyngitis (common cold)"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 662.98,
+      "actual_service": "99213",
+      "actual_amount": 122.68,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 5.4x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Acute nasopharyngitis (common cold) upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100323",
+      "patient_id": "PAT-010293",
+      "provider_id": "PRV-FRAUD-041",
+      "provider_npi": "9999847245",
+      "date_of_service": "2024-03-05",
+      "diagnosis_codes": [
+        "J00"
+      ],
+      "diagnosis_descriptions": [
+        "Acute nasopharyngitis (common cold)"
+      ],
+      "procedure_codes": [
+        "99215"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high"
+      ],
+      "billed_amount": 331.82,
+      "actual_service": "99212",
+      "actual_amount": 64.85,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 5.1x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Acute nasopharyngitis (common cold) upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-100227",
+      "patient_id": "PAT-010901",
+      "provider_id": "PRV-005060",
+      "provider_npi": "1234600641",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-03-24",
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes without complications"
+      ],
+      "procedure_codes": [
+        "83036"
+      ],
+      "procedure_descriptions": [
+        "Hemoglobin A1C"
+      ],
+      "billed_amount": 29.45,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100340",
+      "patient_id": "PAT-GHOST-799",
+      "provider_id": "PRV-FRAUD-050",
+      "provider_npi": "9999713110",
+      "date_of_service": "2024-01-20",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "Z13.9"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for screening, unspecified"
+      ],
+      "procedure_codes": [
+        "97110",
+        "97140"
+      ],
+      "procedure_descriptions": [
+        "Therapeutic exercises",
+        "Manual therapy techniques"
+      ],
+      "billed_amount": 120.6,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-100293",
+      "patient_id": "PAT-010727",
+      "provider_id": "PRV-005014",
+      "provider_npi": "2234123682",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-02-13",
+      "diagnosis_codes": [
+        "N18.3"
+      ],
+      "diagnosis_descriptions": [
+        "Chronic kidney disease, stage 3"
+      ],
+      "procedure_codes": [
+        "80053"
+      ],
+      "procedure_descriptions": [
+        "Comprehensive metabolic panel"
+      ],
+      "billed_amount": 35.7,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100228",
+      "patient_id": "PAT-010091",
+      "provider_id": "PRV-005083",
+      "provider_npi": "2234702022",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-01-30",
+      "diagnosis_codes": [
+        "E11.21"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes with diabetic neuropathy"
+      ],
+      "procedure_codes": [
+        "80053"
+      ],
+      "procedure_descriptions": [
+        "Comprehensive metabolic panel"
+      ],
+      "billed_amount": 59.39,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100229",
+      "patient_id": "PAT-010956",
+      "provider_id": "PRV-005004",
+      "provider_npi": "3234976822",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-02-20",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 688.7,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100202",
+      "patient_id": "PAT-010789",
+      "provider_id": "PRV-005073",
+      "provider_npi": "3234377511",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-03-24",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 594.93,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100358",
+      "patient_id": "PAT-010964",
+      "provider_id": "PRV-FRAUD-043",
+      "provider_npi": "9999514812",
+      "date_of_service": "2024-03-16",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 18682.87,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 14165.54,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $4517.33",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100365",
+      "patient_id": "PAT-010384",
+      "provider_id": "PRV-FRAUD-011",
+      "provider_npi": "9999867541",
+      "date_of_service": "2024-01-10",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 16161.28,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 7676.25,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $8485.03",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "RX-2024-F100392",
+      "patient_id": "PAT-010928",
+      "prescriber_npi": "FRAUD-RX-027",
+      "pharmacy_npi": "PHARM-7628",
+      "date_of_service": "2024-02-26",
+      "last_fill_date": "2024-02-03",
+      "days_since_last_fill": 23,
+      "ndc_code": "00406-0365-01",
+      "drug_name": "Hydrocodone-Acetaminophen 10-325mg",
+      "controlled_substance": true,
+      "dea_schedule": "II",
+      "quantity": 120,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "M54.5"
+      ],
+      "billed_amount": 240,
+      "refill_number": 6,
+      "fraud_indicator": true,
+      "fraud_type": "prescription_fraud",
+      "red_flags": [
+        "Early refill (7 days before due)",
+        "Quantity double normal prescription",
+        "Patient has 6 prescribers in last 30 days (doctor shopping)",
+        "Patient has filled at 4 different pharmacies (pharmacy hopping)",
+        "Daily MME 4 exceeds CDC guideline of 90"
+      ],
+      "notes": "Controlled substance abuse pattern - doctor shopping detected"
+    },
+    {
+      "claim_id": "CLM-2024-F100359",
+      "patient_id": "PAT-010724",
+      "provider_id": "PRV-FRAUD-036",
+      "provider_npi": "9999827250",
+      "date_of_service": "2024-03-19",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 19139.36,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 10784.94,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $8354.42",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100321",
+      "patient_id": "PAT-010653",
+      "provider_id": "PRV-FRAUD-039",
+      "provider_npi": "9999174461",
+      "date_of_service": "2024-03-08",
+      "diagnosis_codes": [
+        "R05"
+      ],
+      "diagnosis_descriptions": [
+        "Cough"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 683.29,
+      "actual_service": "99212",
+      "actual_amount": 78.8,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 8.7x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Cough upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-100221",
+      "patient_id": "PAT-010252",
+      "provider_id": "PRV-005035",
+      "provider_npi": "3234685196",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-02-08",
+      "diagnosis_codes": [
+        "S06.0X0A"
+      ],
+      "diagnosis_descriptions": [
+        "Concussion without loss of consciousness, initial"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 619.97,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100353",
+      "patient_id": "PAT-010163",
+      "provider_id": "PRV-FRAUD-007",
+      "provider_npi": "9999359896",
+      "date_of_service": "2024-03-25",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 15986.01,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 11118.82,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $4867.19",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-100291",
+      "patient_id": "PAT-010107",
+      "provider_id": "PRV-005037",
+      "provider_npi": "2234536181",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-01-11",
+      "diagnosis_codes": [
+        "N18.3"
+      ],
+      "diagnosis_descriptions": [
+        "Chronic kidney disease, stage 3"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 134.97,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100372",
+      "patient_id": "PAT-010819",
+      "provider_id": "PRV-FRAUD-037",
+      "provider_npi": "9999810446",
+      "accident_date": "2024-03-07",
+      "date_of_service": "2024-03-07",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 525.22,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "RX-2024-F100395",
+      "patient_id": "PAT-010758",
+      "prescriber_npi": "FRAUD-RX-017",
+      "pharmacy_npi": "PHARM-3999",
+      "date_of_service": "2024-02-09",
+      "last_fill_date": "2024-01-17",
+      "days_since_last_fill": 23,
+      "ndc_code": "00406-0552-01",
+      "drug_name": "Oxycodone HCL 30mg",
+      "controlled_substance": true,
+      "dea_schedule": "II",
+      "quantity": 120,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "M79.3"
+      ],
+      "billed_amount": 400,
+      "refill_number": 8,
+      "fraud_indicator": true,
+      "fraud_type": "prescription_fraud",
+      "red_flags": [
+        "Early refill (7 days before due)",
+        "Quantity double normal prescription",
+        "Patient has 6 prescribers in last 30 days (doctor shopping)",
+        "Patient has filled at 4 different pharmacies (pharmacy hopping)",
+        "Daily MME 6 exceeds CDC guideline of 90"
+      ],
+      "notes": "Controlled substance abuse pattern - doctor shopping detected"
+    },
+    {
+      "claim_id": "CLM-2024-100234",
+      "patient_id": "PAT-010958",
+      "provider_id": "PRV-005031",
+      "provider_npi": "3234107161",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-02-03",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 789.13,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100368",
+      "patient_id": "PAT-010491",
+      "provider_id": "PRV-FRAUD-013",
+      "provider_npi": "9999201698",
+      "date_of_service": "2024-01-04",
+      "diagnosis_codes": [
+        "M17.11"
+      ],
+      "diagnosis_descriptions": [
+        "Unilateral primary osteoarthritis, right knee"
+      ],
+      "procedure_codes": [
+        "27447",
+        "27410",
+        "27412"
+      ],
+      "procedure_descriptions": [
+        "Total knee arthroplasty",
+        "Unknown procedure",
+        "Unknown procedure"
+      ],
+      "billed_amount": 13394.48,
+      "correct_procedure": [
+        "27447"
+      ],
+      "correct_amount": 28385.15,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $-14990.67",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-100286",
+      "patient_id": "PAT-010142",
+      "provider_id": "PRV-005081",
+      "provider_npi": "2234417543",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-01-31",
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes without complications"
+      ],
+      "procedure_codes": [
+        "36415"
+      ],
+      "procedure_descriptions": [
+        "Collection of venous blood by venipuncture"
+      ],
+      "billed_amount": 7.34,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100334",
+      "patient_id": "PAT-GHOST-751",
+      "provider_id": "PRV-FRAUD-035",
+      "provider_npi": "9999897423",
+      "date_of_service": "2024-01-27",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "97110",
+        "97140"
+      ],
+      "procedure_descriptions": [
+        "Therapeutic exercises",
+        "Manual therapy techniques"
+      ],
+      "billed_amount": 139.24,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100333",
+      "patient_id": "PAT-GHOST-378",
+      "provider_id": "PRV-FRAUD-013",
+      "provider_npi": "9999405759",
+      "date_of_service": "2024-01-06",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "F32.9"
+      ],
+      "diagnosis_descriptions": [
+        "Major depressive disorder, single episode, unspecified"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 158.76,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100316",
+      "patient_id": "PAT-010009",
+      "provider_id": "PRV-FRAUD-001",
+      "provider_npi": "9999829386",
+      "date_of_service": "2024-02-13",
+      "diagnosis_codes": [
+        "J00"
+      ],
+      "diagnosis_descriptions": [
+        "Acute nasopharyngitis (common cold)"
+      ],
+      "procedure_codes": [
+        "99215"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high"
+      ],
+      "billed_amount": 246.56,
+      "actual_service": "99211",
+      "actual_amount": 32.85,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 7.5x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Acute nasopharyngitis (common cold) upcoded to high complexity"
+    },
+    {
+      "claim_id": "RX-2024-100274",
+      "patient_id": "PAT-010100",
+      "prescriber_npi": "3024343420",
+      "pharmacy_npi": "9876543958",
+      "date_of_service": "2024-01-10",
+      "ndc_code": "00006-0749-61",
+      "drug_name": "Lisinopril 10mg",
+      "quantity": 30,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "billed_amount": 16.81,
+      "refill_number": 3,
+      "fraud_indicator": false,
+      "notes": "Regular lisinopril prescription"
+    },
+    {
+      "claim_id": "CLM-2024-100276",
+      "patient_id": "PAT-010817",
+      "provider_id": "PRV-005031",
+      "provider_npi": "3234847748",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-01-10",
+      "diagnosis_codes": [
+        "S06.0X0A"
+      ],
+      "diagnosis_descriptions": [
+        "Concussion without loss of consciousness, initial"
+      ],
+      "procedure_codes": [
+        "71046"
+      ],
+      "procedure_descriptions": [
+        "Chest X-ray, 2 views"
+      ],
+      "billed_amount": 84.32,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100211",
+      "patient_id": "PAT-010516",
+      "provider_id": "PRV-005057",
+      "provider_npi": "3234901535",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-03-11",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "71046"
+      ],
+      "procedure_descriptions": [
+        "Chest X-ray, 2 views"
+      ],
+      "billed_amount": 101.59,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100216",
+      "patient_id": "PAT-010671",
+      "provider_id": "PRV-005100",
+      "provider_npi": "2234913864",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-03-15",
+      "diagnosis_codes": [
+        "E11.21"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes with diabetic neuropathy"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 106.77,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100242",
+      "patient_id": "PAT-010957",
+      "provider_id": "PRV-005008",
+      "provider_npi": "2234595002",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-01-05",
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes without complications"
+      ],
+      "procedure_codes": [
+        "82947",
+        "36415",
+        "80053"
+      ],
+      "procedure_descriptions": [
+        "Glucose, blood, quantitative",
+        "Collection of venous blood by venipuncture",
+        "Comprehensive metabolic panel"
+      ],
+      "billed_amount": 68.34,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100278",
+      "patient_id": "PAT-010612",
+      "provider_id": "PRV-005100",
+      "provider_npi": "2234440189",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-02-19",
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes without complications"
+      ],
+      "procedure_codes": [
+        "99214",
+        "36415",
+        "83036"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "Collection of venous blood by venipuncture",
+        "Hemoglobin A1C"
+      ],
+      "billed_amount": 199.35,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100328",
+      "patient_id": "PAT-010056",
+      "provider_id": "PRV-FRAUD-032",
+      "provider_npi": "9999694423",
+      "date_of_service": "2024-01-22",
+      "diagnosis_codes": [
+        "K59.00"
+      ],
+      "diagnosis_descriptions": [
+        "Constipation, unspecified"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 806.36,
+      "actual_service": "99212",
+      "actual_amount": 63.48,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 12.7x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Constipation, unspecified upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100367",
+      "patient_id": "PAT-010562",
+      "provider_id": "PRV-FRAUD-032",
+      "provider_npi": "9999261050",
+      "date_of_service": "2024-01-07",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 20006.93,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 8392.8,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $11614.13",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-100226",
+      "patient_id": "PAT-010338",
+      "provider_id": "PRV-005091",
+      "provider_npi": "3234595351",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-01-13",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "85025"
+      ],
+      "procedure_descriptions": [
+        "Blood count, complete (CBC)"
+      ],
+      "billed_amount": 20.67,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100370",
+      "patient_id": "PAT-010154",
+      "provider_id": "PRV-FRAUD-049",
+      "provider_npi": "9999830302",
+      "accident_date": "2024-01-08",
+      "date_of_service": "2024-01-08",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 420.12,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-100279",
+      "patient_id": "PAT-010248",
+      "provider_id": "PRV-005073",
+      "provider_npi": "2234646417",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-01-22",
+      "diagnosis_codes": [
+        "N18.3"
+      ],
+      "diagnosis_descriptions": [
+        "Chronic kidney disease, stage 3"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 123.41,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100288",
+      "patient_id": "PAT-010916",
+      "provider_id": "PRV-005068",
+      "provider_npi": "3234722665",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-03-22",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99283"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, moderate severity"
+      ],
+      "billed_amount": 315.2,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "RX-2024-100257",
+      "patient_id": "PAT-010764",
+      "prescriber_npi": "3195354377",
+      "pharmacy_npi": "9876543812",
+      "date_of_service": "2024-03-18",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "billed_amount": 20.56,
+      "refill_number": 3,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
+    },
+    {
+      "claim_id": "CLM-2024-100263",
+      "patient_id": "PAT-010188",
+      "provider_id": "PRV-005069",
+      "provider_npi": "3234772985",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-01-08",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99284"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, high severity"
+      ],
+      "billed_amount": 376.17,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100384",
+      "patient_id": "PAT-010933",
+      "provider_id": "PRV-FRAUD-009",
+      "provider_npi": "9999778818",
+      "accident_date": "2024-03-01",
+      "date_of_service": "2024-03-01",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 419.59,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-100204",
+      "patient_id": "PAT-010161",
+      "provider_id": "PRV-005056",
+      "provider_npi": "3234535810",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-03-02",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 672.05,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100248",
+      "patient_id": "PAT-010143",
+      "provider_id": "PRV-005064",
+      "provider_npi": "1234403314",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-01-30",
+      "diagnosis_codes": [
+        "Z00.00"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for general adult medical examination without abnormal findings"
+      ],
+      "procedure_codes": [
+        "99201"
+      ],
+      "procedure_descriptions": [
+        "Office visit, new patient, minimal"
+      ],
+      "billed_amount": 74.56,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100335",
+      "patient_id": "PAT-GHOST-355",
+      "provider_id": "PRV-FRAUD-041",
+      "provider_npi": "9999980357",
+      "date_of_service": "2024-03-10",
+      "day_of_week": "Sunday",
+      "diagnosis_codes": [
+        "M79.3"
+      ],
+      "diagnosis_descriptions": [
+        "Panniculitis, unspecified (Myalgia)"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 112.82,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Sunday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-100282",
+      "patient_id": "PAT-010666",
+      "provider_id": "PRV-005076",
+      "provider_npi": "2234242736",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-02-08",
+      "diagnosis_codes": [
+        "N18.3"
+      ],
+      "diagnosis_descriptions": [
+        "Chronic kidney disease, stage 3"
+      ],
+      "procedure_codes": [
+        "80053"
+      ],
+      "procedure_descriptions": [
+        "Comprehensive metabolic panel"
+      ],
+      "billed_amount": 53.33,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100203",
+      "patient_id": "PAT-010296",
+      "provider_id": "PRV-005082",
+      "provider_npi": "3234416768",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-03-02",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99283"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, moderate severity"
+      ],
+      "billed_amount": 311.24,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "RX-2024-100295",
+      "patient_id": "PAT-010644",
+      "prescriber_npi": "1989295440",
+      "pharmacy_npi": "9876543755",
+      "date_of_service": "2024-03-25",
+      "ndc_code": "00002-3214-30",
+      "drug_name": "Metformin HCL 1000mg",
+      "quantity": 60,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "E11.65"
+      ],
+      "billed_amount": 30.12,
+      "refill_number": 0,
+      "fraud_indicator": false,
+      "notes": "Regular metformin prescription"
+    },
+    {
+      "claim_id": "RX-2024-F100396",
+      "patient_id": "PAT-010363",
+      "prescriber_npi": "FRAUD-RX-015",
+      "pharmacy_npi": "PHARM-6031",
+      "date_of_service": "2024-02-21",
+      "last_fill_date": "2024-01-29",
+      "days_since_last_fill": 23,
+      "ndc_code": "00406-0365-01",
+      "drug_name": "Hydrocodone-Acetaminophen 10-325mg",
+      "controlled_substance": true,
+      "dea_schedule": "II",
+      "quantity": 120,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "M54.5"
+      ],
+      "billed_amount": 240,
+      "refill_number": 6,
+      "fraud_indicator": true,
+      "fraud_type": "prescription_fraud",
+      "red_flags": [
+        "Early refill (7 days before due)",
+        "Quantity double normal prescription",
+        "Patient has 6 prescribers in last 30 days (doctor shopping)",
+        "Patient has filled at 4 different pharmacies (pharmacy hopping)",
+        "Daily MME 4 exceeds CDC guideline of 90"
+      ],
+      "notes": "Controlled substance abuse pattern - doctor shopping detected"
+    },
+    {
+      "claim_id": "CLM-2024-F100336",
+      "patient_id": "PAT-GHOST-107",
+      "provider_id": "PRV-FRAUD-014",
+      "provider_npi": "9999655550",
+      "date_of_service": "2024-02-10",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "E11.21"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes with diabetic neuropathy"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 118.38,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-100209",
+      "patient_id": "PAT-010481",
+      "provider_id": "PRV-005036",
+      "provider_npi": "1234662761",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-01-02",
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "diagnosis_descriptions": [
+        "Essential (primary) hypertension"
+      ],
+      "procedure_codes": [
+        "93000",
+        "36415"
+      ],
+      "procedure_descriptions": [
+        "Electrocardiogram (EKG), complete",
+        "Collection of venous blood by venipuncture"
+      ],
+      "billed_amount": 60.2,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100379",
+      "patient_id": "PAT-010091",
+      "provider_id": "PRV-FRAUD-013",
+      "provider_npi": "9999563173",
+      "accident_date": "2024-03-23",
+      "date_of_service": "2024-03-23",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 421.82,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-100298",
+      "patient_id": "PAT-010356",
+      "provider_id": "PRV-005045",
+      "provider_npi": "2234986589",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-02-28",
+      "diagnosis_codes": [
+        "E11.21"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes with diabetic neuropathy"
+      ],
+      "procedure_codes": [
+        "83036"
+      ],
+      "procedure_descriptions": [
+        "Hemoglobin A1C"
+      ],
+      "billed_amount": 38.2,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100322",
+      "patient_id": "PAT-010977",
+      "provider_id": "PRV-FRAUD-050",
+      "provider_npi": "9999176537",
+      "date_of_service": "2024-01-03",
+      "diagnosis_codes": [
+        "J00"
+      ],
+      "diagnosis_descriptions": [
+        "Acute nasopharyngitis (common cold)"
+      ],
+      "procedure_codes": [
+        "99215",
+        "94060"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Bronchodilation responsiveness, spirometry"
+      ],
+      "billed_amount": 455.3,
+      "actual_service": "99212",
+      "actual_amount": 60.53,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 7.5x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Acute nasopharyngitis (common cold) upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100366",
+      "patient_id": "PAT-010054",
+      "provider_id": "PRV-FRAUD-007",
+      "provider_npi": "9999447177",
+      "date_of_service": "2024-01-27",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 20897.44,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 12009.39,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $8888.05",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-F100303",
+      "patient_id": "PAT-010230",
+      "provider_id": "PRV-FRAUD-035",
+      "provider_npi": "9999402692",
+      "date_of_service": "2024-01-22",
+      "diagnosis_codes": [
+        "Z00.00"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for general adult medical examination without abnormal findings"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 486.79,
+      "actual_service": "99211",
+      "actual_amount": 42.61,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 11.4x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Encounter for general adult medical examination without abnormal findings upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100309",
+      "patient_id": "PAT-010501",
+      "provider_id": "PRV-FRAUD-010",
+      "provider_npi": "9999705474",
+      "date_of_service": "2024-03-21",
+      "diagnosis_codes": [
+        "R05"
+      ],
+      "diagnosis_descriptions": [
+        "Cough"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 766.96,
+      "actual_service": "99211",
+      "actual_amount": 47.0,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 16.3x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Cough upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100381",
+      "patient_id": "PAT-010051",
+      "provider_id": "PRV-FRAUD-024",
+      "provider_npi": "9999838862",
+      "accident_date": "2024-02-28",
+      "date_of_service": "2024-02-28",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 431.26,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-F100311",
+      "patient_id": "PAT-010870",
+      "provider_id": "PRV-FRAUD-005",
+      "provider_npi": "9999934328",
+      "date_of_service": "2024-03-09",
+      "diagnosis_codes": [
+        "K59.00"
+      ],
+      "diagnosis_descriptions": [
+        "Constipation, unspecified"
+      ],
+      "procedure_codes": [
+        "99215"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high"
+      ],
+      "billed_amount": 312.7,
+      "actual_service": "99213",
+      "actual_amount": 102.36,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 3.1x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Constipation, unspecified upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100357",
+      "patient_id": "PAT-010734",
+      "provider_id": "PRV-FRAUD-012",
+      "provider_npi": "9999941403",
+      "date_of_service": "2024-02-11",
+      "diagnosis_codes": [
+        "M17.11"
+      ],
+      "diagnosis_descriptions": [
+        "Unilateral primary osteoarthritis, right knee"
+      ],
+      "procedure_codes": [
+        "27447",
+        "27410",
+        "27412"
+      ],
+      "procedure_descriptions": [
+        "Total knee arthroplasty",
+        "Unknown procedure",
+        "Unknown procedure"
+      ],
+      "billed_amount": 17092.07,
+      "correct_procedure": [
+        "27447"
+      ],
+      "correct_amount": 16024.17,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $1067.9",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "RX-2024-100233",
+      "patient_id": "PAT-010179",
+      "prescriber_npi": "3736997734",
+      "pharmacy_npi": "9876543754",
+      "date_of_service": "2024-02-21",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "billed_amount": 22.4,
+      "refill_number": 2,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
+    },
+    {
+      "claim_id": "CLM-2024-100222",
+      "patient_id": "PAT-010491",
+      "provider_id": "PRV-005044",
+      "provider_npi": "2234687713",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-02-05",
+      "diagnosis_codes": [
+        "E11.21"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes with diabetic neuropathy"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 179.27,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100325",
+      "patient_id": "PAT-010866",
+      "provider_id": "PRV-FRAUD-016",
+      "provider_npi": "9999160718",
+      "date_of_service": "2024-02-01",
+      "diagnosis_codes": [
+        "K59.00"
+      ],
+      "diagnosis_descriptions": [
+        "Constipation, unspecified"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 882.28,
+      "actual_service": "99213",
+      "actual_amount": 128.43,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 6.9x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Constipation, unspecified upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-100240",
+      "patient_id": "PAT-010734",
+      "provider_id": "PRV-005074",
+      "provider_npi": "1234612573",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-01-12",
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "diagnosis_descriptions": [
+        "Essential (primary) hypertension"
+      ],
+      "procedure_codes": [
+        "36415"
+      ],
+      "procedure_descriptions": [
+        "Collection of venous blood by venipuncture"
+      ],
+      "billed_amount": 5.49,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100347",
+      "patient_id": "PAT-GHOST-455",
+      "provider_id": "PRV-FRAUD-009",
+      "provider_npi": "9999196446",
+      "date_of_service": "2024-03-23",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "K21.9"
+      ],
+      "diagnosis_descriptions": [
+        "Gastro-esophageal reflux disease without esophagitis"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 122.63,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-100243",
+      "patient_id": "PAT-010082",
+      "provider_id": "PRV-005087",
+      "provider_npi": "1234793939",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-03-10",
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "diagnosis_descriptions": [
+        "Essential (primary) hypertension"
+      ],
+      "procedure_codes": [
+        "80053",
+        "36415"
+      ],
+      "procedure_descriptions": [
+        "Comprehensive metabolic panel",
+        "Collection of venous blood by venipuncture"
+      ],
+      "billed_amount": 64.24,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100253",
+      "patient_id": "PAT-010991",
+      "provider_id": "PRV-005053",
+      "provider_npi": "3234684357",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-03-08",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "71046"
+      ],
+      "procedure_descriptions": [
+        "Chest X-ray, 2 views"
+      ],
+      "billed_amount": 146.29,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100270",
+      "patient_id": "PAT-010708",
+      "provider_id": "PRV-005072",
+      "provider_npi": "2234598598",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-02-04",
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes without complications"
+      ],
+      "procedure_codes": [
+        "83036"
+      ],
+      "procedure_descriptions": [
+        "Hemoglobin A1C"
+      ],
+      "billed_amount": 33.16,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100315",
+      "patient_id": "PAT-010239",
+      "provider_id": "PRV-FRAUD-028",
+      "provider_npi": "9999787326",
+      "date_of_service": "2024-01-12",
+      "diagnosis_codes": [
+        "K59.00"
+      ],
+      "diagnosis_descriptions": [
+        "Constipation, unspecified"
+      ],
+      "procedure_codes": [
+        "99215",
+        "94060"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Bronchodilation responsiveness, spirometry"
+      ],
+      "billed_amount": 356.2,
+      "actual_service": "99211",
+      "actual_amount": 38.45,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 9.3x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Constipation, unspecified upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-100201",
+      "patient_id": "PAT-010175",
+      "provider_id": "PRV-005084",
+      "provider_npi": "2234754813",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-03-18",
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes without complications"
+      ],
+      "procedure_codes": [
+        "83036"
+      ],
+      "procedure_descriptions": [
+        "Hemoglobin A1C"
+      ],
+      "billed_amount": 37.73,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100214",
+      "patient_id": "PAT-010166",
+      "provider_id": "PRV-005050",
+      "provider_npi": "1234746447",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-02-08",
+      "diagnosis_codes": [
+        "Z00.00"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for general adult medical examination without abnormal findings"
+      ],
+      "procedure_codes": [
+        "99201"
+      ],
+      "procedure_descriptions": [
+        "Office visit, new patient, minimal"
+      ],
+      "billed_amount": 60.17,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100362",
+      "patient_id": "PAT-010725",
+      "provider_id": "PRV-FRAUD-043",
+      "provider_npi": "9999770147",
+      "date_of_service": "2024-02-12",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 21381.7,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 12445.55,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $8936.15",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "RX-2024-F100390",
+      "patient_id": "PAT-010153",
+      "prescriber_npi": "FRAUD-RX-034",
+      "pharmacy_npi": "PHARM-4937",
+      "date_of_service": "2024-02-17",
+      "last_fill_date": "2024-01-25",
+      "days_since_last_fill": 23,
+      "ndc_code": "00406-0365-01",
+      "drug_name": "Hydrocodone-Acetaminophen 10-325mg",
+      "controlled_substance": true,
+      "dea_schedule": "II",
+      "quantity": 120,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "M54.5"
+      ],
+      "billed_amount": 240,
+      "refill_number": 3,
+      "fraud_indicator": true,
+      "fraud_type": "prescription_fraud",
+      "red_flags": [
+        "Early refill (7 days before due)",
+        "Quantity double normal prescription",
+        "Patient has 6 prescribers in last 30 days (doctor shopping)",
+        "Patient has filled at 4 different pharmacies (pharmacy hopping)",
+        "Daily MME 4 exceeds CDC guideline of 90"
+      ],
+      "notes": "Controlled substance abuse pattern - doctor shopping detected"
+    },
+    {
+      "claim_id": "RX-2024-100245",
+      "patient_id": "PAT-010544",
+      "prescriber_npi": "2787963355",
+      "pharmacy_npi": "9876543335",
+      "date_of_service": "2024-02-01",
+      "ndc_code": "00006-0749-61",
+      "drug_name": "Lisinopril 10mg",
+      "quantity": 30,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "billed_amount": 19.21,
+      "refill_number": 1,
+      "fraud_indicator": false,
+      "notes": "Regular lisinopril prescription"
+    },
+    {
+      "claim_id": "CLM-2024-F100361",
+      "patient_id": "PAT-010990",
+      "provider_id": "PRV-FRAUD-040",
+      "provider_npi": "9999331625",
+      "date_of_service": "2024-03-22",
+      "diagnosis_codes": [
+        "K80.10"
+      ],
+      "diagnosis_descriptions": [
+        "Calculus of gallbladder with chronic cholecystitis"
+      ],
+      "procedure_codes": [
+        "47563",
+        "49320",
+        "49322"
+      ],
+      "procedure_descriptions": [
+        "Laparoscopic cholecystectomy",
+        "Laparoscopy, abdomen, peritoneum, and omentum",
+        "Laparoscopy, aspiration of cavity/cyst"
+      ],
+      "billed_amount": 24785.26,
+      "correct_procedure": [
+        "47563"
+      ],
+      "correct_amount": 13759.83,
+      "service_location": "22",
+      "service_location_desc": "Outpatient Hospital",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "unbundling",
+      "red_flags": [
+        "Component procedures billed separately",
+        "Violates NCCI bundling rules",
+        "Overbilled by $11025.43",
+        "No modifier 59 to justify separate billing"
+      ],
+      "notes": "Surgical procedure unbundled into component codes"
+    },
+    {
+      "claim_id": "CLM-2024-100285",
+      "patient_id": "PAT-010744",
+      "provider_id": "PRV-005059",
+      "provider_npi": "3234842776",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-01-27",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "85025"
+      ],
+      "procedure_descriptions": [
+        "Blood count, complete (CBC)"
+      ],
+      "billed_amount": 27.04,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100324",
+      "patient_id": "PAT-010943",
+      "provider_id": "PRV-FRAUD-014",
+      "provider_npi": "9999947312",
+      "date_of_service": "2024-01-20",
+      "diagnosis_codes": [
+        "Z00.00"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for general adult medical examination without abnormal findings"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 530.94,
+      "actual_service": "99213",
+      "actual_amount": 109.55,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 4.8x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Encounter for general adult medical examination without abnormal findings upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-100220",
+      "patient_id": "PAT-010934",
+      "provider_id": "PRV-005068",
+      "provider_npi": "3234458955",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-03-10",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "71046"
+      ],
+      "procedure_descriptions": [
+        "Chest X-ray, 2 views"
+      ],
+      "billed_amount": 88.87,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100246",
+      "patient_id": "PAT-010784",
+      "provider_id": "PRV-005002",
+      "provider_npi": "3234352356",
+      "provider_specialty": "emergency_medicine",
+      "date_of_service": "2024-01-27",
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "diagnosis_descriptions": [
+        "Pneumonia, unspecified organism"
+      ],
+      "procedure_codes": [
+        "99285"
+      ],
+      "procedure_descriptions": [
+        "Emergency dept visit, very high severity"
+      ],
+      "billed_amount": 724.85,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine emergency medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100383",
+      "patient_id": "PAT-010798",
+      "provider_id": "PRV-FRAUD-014",
+      "provider_npi": "9999998746",
+      "accident_date": "2024-03-14",
+      "date_of_service": "2024-03-14",
+      "diagnosis_codes": [
+        "S13.4XXA"
+      ],
+      "diagnosis_descriptions": [
+        "Sprain of ligaments of cervical spine, initial encounter"
+      ],
+      "procedure_codes": [
+        "99215",
+        "97110",
+        "97140",
+        "97112"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, very high",
+        "Therapeutic exercises",
+        "Manual therapy techniques",
+        "Neuromuscular reeducation"
+      ],
+      "billed_amount": 441.22,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "staged_accident",
+      "red_flags": [
+        "Same-day accident and treatment",
+        "Provider has 50+ similar whiplash claims",
+        "All patients from same referral source",
+        "Excessive therapy sessions (20+)",
+        "Cookie-cutter diagnosis pattern"
+      ],
+      "notes": "Fabricated auto accident - staged crash ring"
+    },
+    {
+      "claim_id": "CLM-2024-100280",
+      "patient_id": "PAT-010495",
+      "provider_id": "PRV-005100",
+      "provider_npi": "1234180657",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-02-16",
+      "diagnosis_codes": [
+        "I10"
+      ],
+      "diagnosis_descriptions": [
+        "Essential (primary) hypertension"
+      ],
+      "procedure_codes": [
+        "36415",
+        "36415"
+      ],
+      "procedure_descriptions": [
+        "Collection of venous blood by venipuncture",
+        "Collection of venous blood by venipuncture"
+      ],
+      "billed_amount": 9.8,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100236",
+      "patient_id": "PAT-010963",
+      "provider_id": "PRV-005037",
+      "provider_npi": "1234485397",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-03-19",
+      "diagnosis_codes": [
+        "E11.9"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes without complications"
+      ],
+      "procedure_codes": [
+        "82947",
+        "36415",
+        "83036"
+      ],
+      "procedure_descriptions": [
+        "Glucose, blood, quantitative",
+        "Collection of venous blood by venipuncture",
+        "Hemoglobin A1C"
+      ],
+      "billed_amount": 67.46,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-F100317",
+      "patient_id": "PAT-010902",
+      "provider_id": "PRV-FRAUD-020",
+      "provider_npi": "9999243790",
+      "date_of_service": "2024-02-18",
+      "diagnosis_codes": [
+        "J00"
+      ],
+      "diagnosis_descriptions": [
+        "Acute nasopharyngitis (common cold)"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 587.25,
+      "actual_service": "99213",
+      "actual_amount": 79.81,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 7.4x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Acute nasopharyngitis (common cold) upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-F100345",
+      "patient_id": "PAT-GHOST-013",
+      "provider_id": "PRV-FRAUD-004",
+      "provider_npi": "9999970708",
+      "date_of_service": "2024-01-20",
+      "day_of_week": "Saturday",
+      "diagnosis_codes": [
+        "M54.5"
+      ],
+      "diagnosis_descriptions": [
+        "Low back pain"
+      ],
+      "procedure_codes": [
+        "99214"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high"
+      ],
+      "billed_amount": 154.11,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "phantom_billing",
+      "red_flags": [
+        "Professional service on Saturday",
+        "Office typically closed on weekends",
+        "No appointment record found",
+        "Patient address validation failed"
+      ],
+      "notes": "Service billed but never rendered - office closed"
+    },
+    {
+      "claim_id": "CLM-2024-F100304",
+      "patient_id": "PAT-010774",
+      "provider_id": "PRV-FRAUD-003",
+      "provider_npi": "9999896922",
+      "date_of_service": "2024-02-26",
+      "diagnosis_codes": [
+        "Z00.00"
+      ],
+      "diagnosis_descriptions": [
+        "Encounter for general adult medical examination without abnormal findings"
+      ],
+      "procedure_codes": [
+        "99214",
+        "70450"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, high",
+        "CT head/brain without contrast"
+      ],
+      "billed_amount": 960.78,
+      "actual_service": "99213",
+      "actual_amount": 112.95,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": true,
+      "fraud_type": "upcoding",
+      "red_flags": [
+        "Simple diagnosis with high complexity procedure",
+        "Billed amount 8.5x normal",
+        "Provider bills >60% of visits at highest complexity"
+      ],
+      "notes": "Encounter for general adult medical examination without abnormal findings upcoded to high complexity"
+    },
+    {
+      "claim_id": "CLM-2024-100287",
+      "patient_id": "PAT-010490",
+      "provider_id": "PRV-005074",
+      "provider_npi": "1234520274",
+      "provider_specialty": "family_medicine",
+      "date_of_service": "2024-03-09",
+      "diagnosis_codes": [
+        "N39.0"
+      ],
+      "diagnosis_descriptions": [
+        "Urinary tract infection, site not specified"
+      ],
+      "procedure_codes": [
+        "81001"
+      ],
+      "procedure_descriptions": [
+        "Urinalysis, automated, with microscopy"
+      ],
+      "billed_amount": 18.06,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine family medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100251",
+      "patient_id": "PAT-010687",
+      "provider_id": "PRV-005048",
+      "provider_npi": "2234923975",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-03-08",
+      "diagnosis_codes": [
+        "N18.3"
+      ],
+      "diagnosis_descriptions": [
+        "Chronic kidney disease, stage 3"
+      ],
+      "procedure_codes": [
+        "99213"
+      ],
+      "procedure_descriptions": [
+        "Office visit, established patient, moderate"
+      ],
+      "billed_amount": 151.32,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "CLM-2024-100235",
+      "patient_id": "PAT-010011",
+      "provider_id": "PRV-005033",
+      "provider_npi": "2234785436",
+      "provider_specialty": "internal_medicine",
+      "date_of_service": "2024-02-16",
+      "diagnosis_codes": [
+        "E11.21"
+      ],
+      "diagnosis_descriptions": [
+        "Type 2 diabetes with diabetic neuropathy"
+      ],
+      "procedure_codes": [
+        "80053"
+      ],
+      "procedure_descriptions": [
+        "Comprehensive metabolic panel"
+      ],
+      "billed_amount": 49.12,
+      "service_location": "11",
+      "service_location_desc": "Office",
+      "claim_type": "professional",
+      "fraud_indicator": false,
+      "notes": "Routine internal medicine visit"
+    },
+    {
+      "claim_id": "RX-2024-100238",
+      "patient_id": "PAT-010780",
+      "prescriber_npi": "2247813390",
+      "pharmacy_npi": "9876543872",
+      "date_of_service": "2024-03-17",
+      "ndc_code": "00093-0058-56",
+      "drug_name": "Amoxicillin 500mg",
+      "quantity": 21,
+      "days_supply": 7,
+      "diagnosis_codes": [
+        "J18.9"
+      ],
+      "billed_amount": 23.1,
+      "refill_number": 0,
+      "fraud_indicator": false,
+      "notes": "Regular amoxicillin prescription"
+    },
+    {
+      "claim_id": "RX-2024-100213",
+      "patient_id": "PAT-010512",
+      "prescriber_npi": "1398147504",
+      "pharmacy_npi": "9876543139",
+      "date_of_service": "2024-01-18",
+      "ndc_code": "00002-3214-30",
+      "drug_name": "Metformin HCL 1000mg",
+      "quantity": 60,
+      "days_supply": 30,
+      "diagnosis_codes": [
+        "E11.65"
+      ],
+      "billed_amount": 39.98,
+      "refill_number": 3,
+      "fraud_indicator": false,
+      "notes": "Regular metformin prescription"
     }
   ],
   "metadata": {
     "file_type": "mixed_test_dataset",
-    "generated_date": "2024-03-20",
-    "total_claims": 10,
-    "valid_claims": 5,
-    "fraudulent_claims": 5,
-    "fraud_types": ["upcoding", "phantom_billing", "unbundling", "staged_accident", "prescription_diversion"],
-    "total_billed": 15470.00,
+    "generated_date": "2025-10-28",
+    "total_claims": 200,
+    "valid_claims": 100,
+    "fraudulent_claims": 100,
     "fraud_percentage": 50.0
   }
 }
